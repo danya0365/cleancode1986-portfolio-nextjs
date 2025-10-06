@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { getFeaturedProjects } from "@/src/data/mock/projects.mock";
+import type { Project } from "@/src/data/mock/projects.mock";
 
-export function FeaturedProjects() {
-  const projects = getFeaturedProjects().slice(0, 3);
+interface FeaturedProjectsProps {
+  projects: Project[];
+}
+
+export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">

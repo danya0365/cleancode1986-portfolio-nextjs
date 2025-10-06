@@ -1,20 +1,42 @@
-import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
-import { HeroSection } from "@/src/presentation/components/home/HeroSection";
-import { StatsSection } from "@/src/presentation/components/home/StatsSection";
-import { FeaturedProjects } from "@/src/presentation/components/home/FeaturedProjects";
-import { ServicesPreview } from "@/src/presentation/components/home/ServicesPreview";
-import { TestimonialsSection } from "@/src/presentation/components/home/TestimonialsSection";
-import { CTASection } from "@/src/presentation/components/home/CTASection";
+import { HomeView } from "@/src/presentation/components/home/HomeView";
+import { HomePresenterFactory } from "@/src/presentation/presenters/home/HomePresenter";
+import type { Metadata } from "next";
 
-export default function Home() {
-  return (
-    <MainLayout>
-      <HeroSection />
-      <StatsSection />
-      <FeaturedProjects />
-      <ServicesPreview />
-      <TestimonialsSection />
-      <CTASection />
-    </MainLayout>
-  );
+/**
+ * Generate metadata for the home page
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const presenter = await HomePresenterFactory.createServer();
+
+  try {
+    return await presenter.generateMetadata();
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+
+    // Fallback metadata
+    return {
+      title: "Clean Code 1986 | พัฒนาเว็บไซต์และแอปพลิเคชัน",
+      description: "บริษัทพัฒนาซอฟต์แวร์มืออาชีพ",
+    };
+  }
+}
+
+/**
+ * Home/Landing page - Server Component for SEO optimization
+ * Uses presenter pattern following Clean Architecture
+ */
+export default async function Home() {
+  const presenter = await HomePresenterFactory.createServer();
+
+  try {
+    // Get view model from presenter
+    const viewModel = await presenter.getViewModel();
+
+    return <HomeView initialViewModel={viewModel} />;
+  } catch (error) {
+    console.error("Error fetching home data:", error);
+
+    // Fallback UI - let View component handle error state
+    return <HomeView />;
+  }
 }

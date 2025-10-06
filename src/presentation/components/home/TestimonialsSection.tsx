@@ -1,7 +1,10 @@
-import { MOCK_TESTIMONIALS } from "@/src/data/mock/testimonials.mock";
+import type { Testimonial } from "@/src/data/mock/testimonials.mock";
 
-export function TestimonialsSection() {
-  const testimonials = MOCK_TESTIMONIALS.filter((t) => t.isFeatured);
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[];
+}
+
+export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">

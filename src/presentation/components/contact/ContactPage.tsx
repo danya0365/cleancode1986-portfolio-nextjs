@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useContactPresenter } from "@/src/presentation/presenters/contact/useContactPresenter";
+import type { ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
 
 const contactSchema = z.object({
   name: z.string().min(2, "กรุณากรอกชื่อ (อย่างน้อย 2 ตัวอักษร)"),
@@ -15,6 +16,10 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
+
+interface ContactPageProps {
+  initialViewModel?: ContactViewModel;
+}
 
 const PROJECT_TYPES = [
   "เว็บไซต์",
@@ -34,11 +39,15 @@ const BUDGET_RANGES = [
   "ยังไม่แน่ใจ",
 ];
 
-export function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
-    null
-  );
+export function ContactPage({ initialViewModel }: ContactPageProps) {
+  const {
+    viewModel,
+    loading,
+    error,
+    submitting,
+    submitStatus,
+    submitContactForm,
+  } = useContactPresenter(initialViewModel);
 
   const {
     register,
@@ -50,25 +59,50 @@ export function ContactPage() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      // TODO: Implement API call to send email or save to database
-      console.log("Form data:", data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      setSubmitStatus("success");
+    await submitContactForm(data);
+    if (submitStatus?.success) {
       reset();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
     }
   };
+
+  // Loading state
+  if (loading && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">กำลังโหลด...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="text-red-500 text-6xl mb-4">⚠️</div>
+              <p className="text-red-600 dark:text-red-400 font-medium mb-2">
+                เกิดข้อผิดพลาด
+              </p>
+              <p className="text-gray-600 dark:text-gray-400">{error}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!viewModel) {
+    return null;
+  }
 
   return (
     <div className="py-12 bg-gray-50 dark:bg-gray-900">
@@ -205,21 +239,21 @@ export function ContactPage() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={submitting}
                   className="w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium rounded-lg transition-colors"
                 >
-                  {isSubmitting ? "กำลังส่ง..." : "ส่งข้อความ"}
+                  {submitting ? "กำลังส่ง..." : "ส่งข้อความ"}
                 </button>
 
                 {/* Status Messages */}
-                {submitStatus === "success" && (
+                {submitStatus?.success && (
                   <div className="p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200">
-                    ✓ ส่งข้อความสำเร็จ! เราจะติดต่อกลับไปโดยเร็วที่สุด
+                    ✓ {submitStatus.message}
                   </div>
                 )}
-                {submitStatus === "error" && (
+                {submitStatus && !submitStatus.success && (
                   <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200">
-                    ✕ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง
+                    ✕ {submitStatus.message}
                   </div>
                 )}
               </form>
@@ -241,10 +275,10 @@ export function ContactPage() {
                       อีเมล
                     </div>
                     <a
-                      href="mailto:contact@cleancode1986.com"
+                      href={`mailto:${viewModel.contactEmail}`}
                       className="text-blue-600 dark:text-blue-400 hover:underline"
                     >
-                      contact@cleancode1986.com
+                      {viewModel.contactEmail}
                     </a>
                   </div>
                 </div>
@@ -255,10 +289,10 @@ export function ContactPage() {
                       โทรศัพท์
                     </div>
                     <a
-                      href="tel:02-xxx-xxxx"
+                      href={`tel:${viewModel.contactPhone}`}
                       className="text-blue-600 dark:text-blue-400 hover:underline"
                     >
-                      02-XXX-XXXX
+                      {viewModel.contactPhone}
                     </a>
                   </div>
                 </div>
@@ -269,9 +303,7 @@ export function ContactPage() {
                       ที่อยู่
                     </div>
                     <p className="text-gray-900 dark:text-white">
-                      กรุงเทพมหานคร
-                      <br />
-                      ประเทศไทย
+                      {viewModel.officeAddress}
                     </p>
                   </div>
                 </div>

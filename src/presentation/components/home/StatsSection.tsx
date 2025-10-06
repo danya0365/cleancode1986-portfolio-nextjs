@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { HomeStats } from "@/src/presentation/presenters/home/HomePresenter";
 
-const STATS = [
-  { label: "โปรเจคที่สำเร็จ", value: 50, suffix: "+" },
-  { label: "ลูกค้าพึงพอใจ", value: 40, suffix: "+" },
-  { label: "ปีประสบการณ์", value: 5, suffix: "+" },
-  { label: "ทีมมืออาชีพ", value: 10, suffix: "+" },
-];
+interface StatsSectionProps {
+  stats: HomeStats;
+}
 
-export function StatsSection() {
+export function StatsSection({ stats }: StatsSectionProps) {
+  const STATS = [
+    { label: "โปรเจคที่สำเร็จ", value: stats.totalProjects, suffix: "+" },
+    { label: "ลูกค้าพึงพอใจ", value: stats.totalClients, suffix: "+" },
+    { label: "ปีประสบการณ์", value: stats.yearsExperience, suffix: "+" },
+    { label: "ทีมมืออาชีพ", value: stats.teamMembers, suffix: "+" },
+  ];
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

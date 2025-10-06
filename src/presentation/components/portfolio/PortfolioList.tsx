@@ -2,15 +2,59 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MOCK_PROJECTS, type Project } from "@/src/data/mock/projects.mock";
+import { type Project } from "@/src/data/mock/projects.mock";
+import { usePortfolioPresenter } from "@/src/presentation/presenters/portfolio/usePortfolioPresenter";
+import type { PortfolioViewModel, CategoryFilter } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
 
-const CATEGORIES = ["All", "Web", "Mobile", "UI/UX", "Full-stack"] as const;
+interface PortfolioListProps {
+  initialViewModel?: PortfolioViewModel;
+}
 
-export function PortfolioList() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+export function PortfolioList({ initialViewModel }: PortfolioListProps) {
+  const { viewModel, loading, error } = usePortfolioPresenter(initialViewModel);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProjects = MOCK_PROJECTS.filter((project) => {
+  // Loading state
+  if (loading && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">กำลังโหลด...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="text-red-500 text-6xl mb-4">⚠️</div>
+              <p className="text-red-600 dark:text-red-400 font-medium mb-2">
+                เกิดข้อผิดพลาด
+              </p>
+              <p className="text-gray-600 dark:text-gray-400">{error}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!viewModel) {
+    return null;
+  }
+
+  const filteredProjects = viewModel.projects.filter((project) => {
     const matchesCategory =
       selectedCategory === "All" || project.category === selectedCategory;
     const matchesSearch =
@@ -48,7 +92,7 @@ export function PortfolioList() {
 
           {/* Category Tabs */}
           <div className="flex flex-wrap justify-center gap-2">
-            {CATEGORIES.map((category) => (
+            {viewModel.categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}

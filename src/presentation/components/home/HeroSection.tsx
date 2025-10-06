@@ -1,6 +1,11 @@
 import Link from "next/link";
+import type { Technology } from "@/src/data/mock/technologies.mock";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  technologies: Technology[];
+}
+
+export function HeroSection({ technologies }: HeroSectionProps) {
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,16 +55,14 @@ export function HeroSection() {
               เทคโนโลยีที่เราใช้
             </p>
             <div className="flex flex-wrap justify-center gap-6 items-center">
-              {["⚡ Next.js", "⚛️ React", "📱 React Native", "📘 TypeScript", "🎨 Tailwind", "🐘 PostgreSQL"].map(
-                (tech) => (
-                  <div
-                    key={tech}
-                    className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    {tech}
-                  </div>
-                )
-              )}
+              {technologies.slice(0, 6).map((tech) => (
+                <div
+                  key={tech.id}
+                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
+                  {tech.icon} {tech.name}
+                </div>
+              ))}
             </div>
           </div>
         </div>

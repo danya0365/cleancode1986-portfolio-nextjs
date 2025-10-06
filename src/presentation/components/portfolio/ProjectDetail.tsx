@@ -1,17 +1,63 @@
+"use client";
+
 import Link from "next/link";
-import { type Project, MOCK_PROJECTS } from "@/src/data/mock/projects.mock";
+import { useProjectDetailPresenter } from "@/src/presentation/presenters/portfolio/useProjectDetailPresenter";
+import type { ProjectDetailViewModel } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
 
 interface ProjectDetailProps {
-  project: Project;
+  slug: string;
+  initialViewModel?: ProjectDetailViewModel;
 }
 
-export function ProjectDetail({ project }: ProjectDetailProps) {
-  const relatedProjects = MOCK_PROJECTS.filter(
-    (p) =>
-      p.id !== project.id &&
-      p.category === project.category &&
-      p.status === "published"
-  ).slice(0, 3);
+export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
+  const { viewModel, loading, error } = useProjectDetailPresenter(slug, initialViewModel);
+
+  // Loading state
+  if (loading && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">กำลังโหลด...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error && !viewModel) {
+    return (
+      <div className="py-12 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="text-red-500 text-6xl mb-4">⚠️</div>
+              <p className="text-red-600 dark:text-red-400 font-medium mb-2">
+                เกิดข้อผิดพลาด
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+              <Link
+                href="/portfolio"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                กลับไปหน้าผลงาน
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!viewModel) {
+    return null;
+  }
+
+  const { project, relatedProjects } = viewModel;
 
   return (
     <div className="py-12 bg-gray-50 dark:bg-gray-900">

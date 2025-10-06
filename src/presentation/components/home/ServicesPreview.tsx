@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { getActiveServices } from "@/src/data/mock/services.mock";
+import type { Service } from "@/src/data/mock/services.mock";
 
-export function ServicesPreview() {
-  const services = getActiveServices().slice(0, 6);
+interface ServicesPreviewProps {
+  services: Service[];
+}
+
+export function ServicesPreview({ services }: ServicesPreviewProps) {
 
   return (
     <section className="py-20 bg-white dark:bg-gray-800">
