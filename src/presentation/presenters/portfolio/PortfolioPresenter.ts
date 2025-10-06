@@ -1,4 +1,4 @@
-import { MOCK_PROJECTS, type Project } from "@/src/data/mock/projects.mock";
+import { getAllProjectsSorted, type Project } from "@/src/data/mock/projects.mock";
 
 export type CategoryFilter = "All" | "Web" | "Mobile" | "UI/UX" | "Full-stack";
 
@@ -16,8 +16,8 @@ export class PortfolioPresenter {
    */
   async getViewModel(): Promise<PortfolioViewModel> {
     try {
-      // Get published projects only
-      const projects = MOCK_PROJECTS.filter((p) => p.status === "published");
+      // Get published projects only, sorted by displayOrder
+      const projects = getAllProjectsSorted().filter((p) => p.status === "published");
 
       const categories: readonly CategoryFilter[] = [
         "All",

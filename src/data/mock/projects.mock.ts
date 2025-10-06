@@ -15,6 +15,7 @@ export interface Project {
   isFeatured: boolean;
   status: "draft" | "published" | "archived";
   viewCount: number;
+  displayOrder: number;
 }
 
 export const MOCK_PROJECTS: Project[] = [
@@ -23,6 +24,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "e-commerce-platform",
     title: "E-Commerce Platform สำหรับแบรนด์แฟชั่น",
     category: "Web",
+    displayOrder: 11,
     description:
       "แพลตฟอร์มอีคอมเมิร์ซที่ทันสมัย พร้อมระบบจัดการสินค้า ตะกร้า และชำระเงิน รองรับ SEO และโหลดเร็ว",
     thumbnail: "/images/projects/ecommerce-thumb.jpg",
@@ -58,6 +60,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "food-delivery-app",
     title: "แอปสั่งอาหาร Real-time",
     category: "Mobile",
+    displayOrder: 12,
     description:
       "แอปสั่งอาหารพร้อมระบบ Real-time tracking, Push notification และระบบรีวิว",
     thumbnail: "/images/projects/food-app-thumb.jpg",
@@ -93,6 +96,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "fintech-dashboard",
     title: "แดชบอร์ดจัดการการเงิน Fintech",
     category: "Web",
+    displayOrder: 13,
     description:
       "ระบบแดชบอร์ดสำหรับจัดการการเงิน พร้อมกราฟ Real-time และระบบรายงาน",
     thumbnail: "/images/projects/fintech-thumb.jpg",
@@ -127,6 +131,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "hotel-booking-system",
     title: "ระบบจองโรงแรม",
     category: "Full-stack",
+    displayOrder: 14,
     description:
       "ระบบจองห้องพักโรงแรมออนไลน์ พร้อมระบบจัดการห้อง ราคา และการชำระเงิน",
     thumbnail: "/images/projects/hotel-thumb.jpg",
@@ -165,6 +170,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "fitness-tracking-app",
     title: "แอปติดตามการออกกำลังกาย",
     category: "Mobile",
+    displayOrder: 15,
     description:
       "แอปบันทึกการออกกำลังกาย พร้อมสถิติ กราฟ และระบบ Goal setting",
     thumbnail: "/images/projects/fitness-thumb.jpg",
@@ -198,6 +204,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "learning-management-system",
     title: "ระบบจัดการเรียนการสอนออนไลน์",
     category: "Web",
+    displayOrder: 16,
     description:
       "LMS สำหรับสถาบันการศึกษา พร้อมระบบวิดีโอ แบบทดสอบ และติดตามผลการเรียน",
     thumbnail: "/images/projects/lms-thumb.jpg",
@@ -235,6 +242,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "social-media-analytics",
     title: "แดชบอร์ดวิเคราะห์ Social Media",
     category: "Web",
+    displayOrder: 17,
     description:
       "เครื่องมือวิเคราะห์ Social Media หลายแพลตฟอร์ม พร้อมรายงานและกราฟ",
     thumbnail: "/images/projects/social-analytics-thumb.jpg",
@@ -275,6 +283,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "restaurant-pos-system",
     title: "ระบบ POS สำหรับร้านอาหาร",
     category: "Full-stack",
+    displayOrder: 18,
     description:
       "ระบบขายหน้าร้านสำหรับร้านอาหาร พร้อมระบบออเดอร์ ครัว และรายงาน",
     thumbnail: "/images/projects/pos-thumb.jpg",
@@ -306,6 +315,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "property-listing-app",
     title: "แอปค้นหาอสังหาริมทรัพย์",
     category: "Mobile",
+    displayOrder: 19,
     description:
       "แอปหาบ้าน คอนโด ที่ดิน พร้อม Map, Filter และระบบนัดชมบ้าน",
     thumbnail: "/images/projects/property-thumb.jpg",
@@ -343,6 +353,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "event-management-platform",
     title: "แพลตฟอร์มจัดการอีเว้นท์",
     category: "Web",
+    displayOrder: 20,
     description:
       "ระบบจัดการอีเว้นท์ พร้อมขายตั๋ว Check-in และระบบรายงาน",
     thumbnail: "/images/projects/event-thumb.jpg",
@@ -381,6 +392,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "al-quran-web-app",
     title: "Al-Quran Web Application - แอปอ่านอัลกุรอานออนไลน์",
     category: "Web",
+    displayOrder: 1,
     description:
       "แอปพลิเคชันอ่านอัลกุรอานบนเว็บที่ทันสมัย พร้อมฟีเจอร์ครบครัน รองรับหลายภาษา มี Tajweed และเสียงอ่านจาก Qari ชื่อดัง ออกแบบมาเพื่อประสบการณ์การอ่านที่ดีที่สุด",
     thumbnail: "/images/projects/alquran-thumb.jpg",
@@ -442,6 +454,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "prayer-times-app",
     title: "Prayer Times - แอปเวลาละหมาดอัตโนมัติ",
     category: "Web",
+    displayOrder: 2,
     description:
       "แอปพลิเคชันแสดงเวลาละหมาดอัตโนมัติตามตำแหน่งที่ตั้ง พร้อมการแจ้งเตือน Qibla Direction และปฏิทินอิสลาม ใช้ library Adhan ที่แม่นยำ",
     thumbnail: "/images/projects/prayer-times-thumb.jpg",
@@ -501,6 +514,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "slack-clone",
     title: "Slack Clone - Real-time Team Collaboration",
     category: "Full-stack",
+    displayOrder: 3,
     description:
       "แพลตฟอร์มสื่อสารทีมแบบ Real-time คล้าย Slack พร้อม Workspace, Channels, Direct Messages และการแชร์ไฟล์ ใช้ Supabase สำหรับ Backend",
     thumbnail: "/images/projects/slack-thumb.jpg",
@@ -562,6 +576,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "soc-tact-social-platform",
     title: "Soc-Tact - Social Networking Platform",
     category: "Full-stack",
+    displayOrder: 4,
     description:
       "แพลตฟอร์มโซเชียลเน็ตเวิร์คที่ทันสมัย พร้อมฟีเจอร์โพสต์ แชร์ ไลค์ คอมเมนต์ และระบบเพื่อน รองรับ Real-time updates",
     thumbnail: "/images/projects/soctact-thumb.jpg",
@@ -620,6 +635,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "dragon-quest-interactive-story",
     title: "Dragon Quest XI - Interactive Story Experience",
     category: "Web",
+    displayOrder: 5,
     description:
       "แอปพลิเคชันเล่าเรื่องแบบ Interactive จาก Dragon Quest XI ผู้เล่นสามารถเลือกทางเดินของเรื่องราวได้ พร้อมระบบเซฟความคืบหน้า",
     thumbnail: "/images/projects/dragon-quest-thumb.jpg",
@@ -670,6 +686,7 @@ export const MOCK_PROJECTS: Project[] = [
     slug: "shop-queue-management",
     title: "Shop Queue - ระบบจัดการคิวร้านค้า",
     category: "Full-stack",
+    displayOrder: 6,
     description:
       "ระบบจัดการคิวสำหรับร้านค้า คลินิก ศูนย์บริการ พร้อม QR Code Check-in, Dashboard สำหรับเจ้าหน้าที่ และหน้าจอแสดงคิวสำหรับลูกค้า",
     thumbnail: "/images/projects/shop-queue-thumb.jpg",
@@ -737,7 +754,9 @@ export const MOCK_PROJECTS: Project[] = [
 ];
 
 export const getFeaturedProjects = (): Project[] => {
-  return MOCK_PROJECTS.filter((project) => project.isFeatured);
+  return MOCK_PROJECTS.filter((project) => project.isFeatured).sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
 };
 
 export const getProjectBySlug = (slug: string): Project | undefined => {
@@ -747,5 +766,11 @@ export const getProjectBySlug = (slug: string): Project | undefined => {
 export const getProjectsByCategory = (
   category: Project["category"]
 ): Project[] => {
-  return MOCK_PROJECTS.filter((project) => project.category === category);
+  return MOCK_PROJECTS.filter((project) => project.category === category).sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
+};
+
+export const getAllProjectsSorted = (): Project[] => {
+  return [...MOCK_PROJECTS].sort((a, b) => a.displayOrder - b.displayOrder);
 };
