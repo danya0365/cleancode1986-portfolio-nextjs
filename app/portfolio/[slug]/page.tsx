@@ -1,9 +1,9 @@
+import { MOCK_PROJECTS } from "@/src/data/mock/projects.mock";
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
 import { ProjectDetail } from "@/src/presentation/components/portfolio/ProjectDetail";
 import { ProjectDetailPresenterFactory } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
-import { MOCK_PROJECTS } from "@/src/data/mock/projects.mock";
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;

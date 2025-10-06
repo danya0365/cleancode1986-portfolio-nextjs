@@ -375,6 +375,365 @@ export const MOCK_PROJECTS: Project[] = [
     status: "published",
     viewCount: 567,
   },
+  // Real Projects by Clean Code 1986
+  {
+    id: "11",
+    slug: "al-quran-web-app",
+    title: "Al-Quran Web Application - แอปอ่านอัลกุรอานออนไลน์",
+    category: "Web",
+    description:
+      "แอปพลิเคชันอ่านอัลกุรอานบนเว็บที่ทันสมัย พร้อมฟีเจอร์ครบครัน รองรับหลายภาษา มี Tajweed และเสียงอ่านจาก Qari ชื่อดัง ออกแบบมาเพื่อประสบการณ์การอ่านที่ดีที่สุด",
+    thumbnail: "/images/projects/alquran-thumb.jpg",
+    images: [
+      "/images/projects/alquran-1.jpg",
+      "/images/projects/alquran-2.jpg",
+      "/images/projects/alquran-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Axios",
+      "LocalForage",
+    ],
+    features: [
+      {
+        title: "114 ซูเราะห์ครบถ้วน",
+        description:
+          "รายการซูเราะห์ทั้งหมด 114 บท พร้อมชื่อภาษาอังกฤษ อาหรับ ประเภท และจำนวนอายะห์",
+      },
+      {
+        title: "อ่านสะดวก ปรับแต่งได้",
+        description:
+          "ตัวอักษรอาหรับสวยงาม ปรับฟอนต์และขนาดได้ มี Tajweed และคำแปลหลายภาษา",
+      },
+      {
+        title: "เสียงอ่านคุณภาพสูง",
+        description:
+          "เล่นเสียงอ่านรายอายะห์จาก Qari ชื่อดังหลายท่าน พร้อมระบบควบคุมเสียงที่ลื่นไหล",
+      },
+      {
+        title: "บุ๊กมาร์กและค้นหา",
+        description:
+          "เซฟอายะห์ที่ชอบ ค้นหาซูเราะห์ได้รวดเร็ว พร้อม Dark Mode สบายตา",
+      },
+      {
+        title: "SEO Optimized",
+        description:
+          "ใช้ Server Components ของ Next.js 15 เพื่อ SEO ที่ดีและโหลดเร็ว",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างโค้ดที่เป็นระเบียบ แยก layers ชัดเจน บำรุงรักษาง่าย",
+      },
+    ],
+    projectDate: "2025-01-15",
+    liveUrl: "https://al-quran.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/al-quaran-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1247,
+  },
+  {
+    id: "12",
+    slug: "prayer-times-app",
+    title: "Prayer Times - แอปเวลาละหมาดอัตโนมัติ",
+    category: "Web",
+    description:
+      "แอปพลิเคชันแสดงเวลาละหมาดอัตโนมัติตามตำแหน่งที่ตั้ง พร้อมการแจ้งเตือน Qibla Direction และปฏิทินอิสลาม ใช้ library Adhan ที่แม่นยำ",
+    thumbnail: "/images/projects/prayer-times-thumb.jpg",
+    images: [
+      "/images/projects/prayer-times-1.jpg",
+      "/images/projects/prayer-times-2.jpg",
+      "/images/projects/prayer-times-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Adhan.js",
+      "Zustand",
+      "Tailwind CSS 4",
+      "date-fns",
+      "Lucide Icons",
+      "LocalForage",
+    ],
+    features: [
+      {
+        title: "เวลาละหมาดอัตโนมัติ",
+        description:
+          "คำนวณเวลาละหมาดตามตำแหน่ง GPS แบบอัตโนมัติด้วย Adhan library ที่แม่นยำ",
+      },
+      {
+        title: "หลากหลาย Calculation Methods",
+        description:
+          "รองรับวิธีคำนวณหลายแบบ เช่น Muslim World League, ISNA, Umm al-Qura",
+      },
+      {
+        title: "Qibla Direction",
+        description: "แสดงทิศกิบลัตที่ถูกต้องจากตำแหน่งปัจจุบัน",
+      },
+      {
+        title: "ปฏิทินอิสลาม",
+        description: "แสดงวันที่ฮิจเราะห์พร้อมข้อมูลเดือนรอมฎอน",
+      },
+      {
+        title: "Dark Mode & Responsive",
+        description: "สลับโหมดกลางคืน/กลางวันได้ รองรับทุกขนาดหน้าจอ",
+      },
+      {
+        title: "Offline Support",
+        description: "เก็บข้อมูลไว้ใช้งานแบบ offline ด้วย LocalForage",
+      },
+    ],
+    projectDate: "2025-01-10",
+    liveUrl: "https://prayer-times.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/prayer-times-nextjs15-tailwind",
+    isFeatured: true,
+    status: "published",
+    viewCount: 892,
+  },
+  {
+    id: "13",
+    slug: "slack-clone",
+    title: "Slack Clone - Real-time Team Collaboration",
+    category: "Full-stack",
+    description:
+      "แพลตฟอร์มสื่อสารทีมแบบ Real-time คล้าย Slack พร้อม Workspace, Channels, Direct Messages และการแชร์ไฟล์ ใช้ Supabase สำหรับ Backend",
+    thumbnail: "/images/projects/slack-thumb.jpg",
+    images: [
+      "/images/projects/slack-1.jpg",
+      "/images/projects/slack-2.jpg",
+      "/images/projects/slack-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "Zustand",
+      "Tailwind CSS 4",
+      "SendGrid",
+      "Mailchimp",
+    ],
+    features: [
+      {
+        title: "Workspace & Channels",
+        description:
+          "สร้าง Workspace และ Channels ได้ไม่จำกัด จัดการสมาชิกและสิทธิ์ได้ละเอียด",
+      },
+      {
+        title: "Real-time Messaging",
+        description:
+          "ส่งข้อความแบบ Real-time ด้วย Supabase Realtime พร้อม Typing indicator",
+      },
+      {
+        title: "Direct Messages",
+        description: "ส่งข้อความส่วนตัวระหว่างสมาชิก 1-on-1 หรือกลุ่มเล็ก",
+      },
+      {
+        title: "Authentication & Authorization",
+        description:
+          "ระบบ Auth ที่ปลอดภัยด้วย Supabase Auth พร้อม Role-based access",
+      },
+      {
+        title: "Email Notifications",
+        description: "แจ้งเตือนผ่านอีเมลด้วย SendGrid เมื่อมีข้อความใหม่",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างตาม Clean Architecture และ SOLID principles",
+      },
+    ],
+    client: "Internal Tool",
+    projectDate: "2025-01-05",
+    liveUrl: "https://slack-clone.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/slack-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1563,
+  },
+  {
+    id: "14",
+    slug: "soc-tact-social-platform",
+    title: "Soc-Tact - Social Networking Platform",
+    category: "Full-stack",
+    description:
+      "แพลตฟอร์มโซเชียลเน็ตเวิร์คที่ทันสมัย พร้อมฟีเจอร์โพสต์ แชร์ ไลค์ คอมเมนต์ และระบบเพื่อน รองรับ Real-time updates",
+    thumbnail: "/images/projects/soctact-thumb.jpg",
+    images: [
+      "/images/projects/soctact-1.jpg",
+      "/images/projects/soctact-2.jpg",
+      "/images/projects/soctact-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Axios",
+    ],
+    features: [
+      {
+        title: "Social Feed",
+        description:
+          "โพสต์ข้อความ รูปภาพ แชร์ และโต้ตอบกับโพสต์ของเพื่อน",
+      },
+      {
+        title: "Friend System",
+        description: "ระบบเพื่อน ส่งคำขอเพื่อน ยอมรับ/ปฏิเสธ และดูโปรไฟล์เพื่อน",
+      },
+      {
+        title: "Real-time Notifications",
+        description: "แจ้งเตือนแบบ Real-time เมื่อมีการโต้ตอบ",
+      },
+      {
+        title: "Form Validation",
+        description: "ใช้ React Hook Form + Zod สำหรับ Form ที่แข็งแรงและ Type-safe",
+      },
+      {
+        title: "Print Support",
+        description: "พิมพ์โพสต์หรือข้อมูลได้ด้วย react-to-print",
+      },
+      {
+        title: "Dark Mode",
+        description: "สลับโหมดสีได้ พร้อม Theme persistence",
+      },
+    ],
+    projectDate: "2024-12-20",
+    liveUrl: "https://soc-tact.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/soc-tact-nextjs",
+    isFeatured: false,
+    status: "published",
+    viewCount: 674,
+  },
+  {
+    id: "15",
+    slug: "dragon-quest-interactive-story",
+    title: "Dragon Quest XI - Interactive Story Experience",
+    category: "Web",
+    description:
+      "แอปพลิเคชันเล่าเรื่องแบบ Interactive จาก Dragon Quest XI ผู้เล่นสามารถเลือกทางเดินของเรื่องราวได้ พร้อมระบบเซฟความคืบหน้า",
+    thumbnail: "/images/projects/dragon-quest-thumb.jpg",
+    images: [
+      "/images/projects/dragon-quest-1.jpg",
+      "/images/projects/dragon-quest-2.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "Zustand",
+      "Tailwind CSS 4",
+    ],
+    features: [
+      {
+        title: "Interactive Storytelling",
+        description:
+          "เล่าเรื่องแบบ Interactive ผู้เล่นเลือกทางเดินของเรื่องได้",
+      },
+      {
+        title: "Progress Tracking",
+        description: "ระบบเซฟความคืบหน้า ดูประวัติตัวเลือกที่เคยเลือก",
+      },
+      {
+        title: "Character Profiles",
+        description: "ดูข้อมูลตัวละคร พื้นหลัง และความสัมพันธ์",
+      },
+      {
+        title: "Beautiful UI",
+        description: "ดีไซน์สวยงามสไตล์เกม RPG พร้อมแอนิเมชัน",
+      },
+      {
+        title: "Responsive Design",
+        description: "เล่นได้ทั้งมือถือและคอมพิวเตอร์",
+      },
+    ],
+    projectDate: "2024-12-15",
+    liveUrl: "https://dragon-quest.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/dragon-quest-nextjs",
+    isFeatured: false,
+    status: "published",
+    viewCount: 432,
+  },
+  {
+    id: "16",
+    slug: "shop-queue-management",
+    title: "Shop Queue - ระบบจัดการคิวร้านค้า",
+    category: "Full-stack",
+    description:
+      "ระบบจัดการคิวสำหรับร้านค้า คลินิก ศูนย์บริการ พร้อม QR Code Check-in, Dashboard สำหรับเจ้าหน้าที่ และหน้าจอแสดงคิวสำหรับลูกค้า",
+    thumbnail: "/images/projects/shop-queue-thumb.jpg",
+    images: [
+      "/images/projects/shop-queue-1.jpg",
+      "/images/projects/shop-queue-2.jpg",
+      "/images/projects/shop-queue-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "next-qrcode",
+      "Lucide Icons",
+      "react-to-print",
+      "SendGrid",
+    ],
+    features: [
+      {
+        title: "QR Code Check-in",
+        description:
+          "ลูกค้าสแกน QR Code เพื่อรับคิว พร้อมรับเลขคิวทันที",
+      },
+      {
+        title: "Dashboard สำหรับเจ้าหน้าที่",
+        description:
+          "จัดการคิว เรียกคิว ข้ามคิว ยกเลิกคิว ดูสถิติการให้บริการ",
+      },
+      {
+        title: "หน้าจอแสดงคิว",
+        description:
+          "หน้าจอแสดงคิวปัจจุบันแบบ Real-time สำหรับลูกค้า",
+      },
+      {
+        title: "Email/SMS Notification",
+        description: "แจ้งเตือนลูกค้าผ่านอีเมลหรือ SMS เมื่อถึงคิว",
+      },
+      {
+        title: "พิมพ์บัตรคิว",
+        description: "พิมพ์บัตรคิวให้ลูกค้าด้วย react-to-print",
+      },
+      {
+        title: "รายงานและสถิติ",
+        description:
+          "ดูรายงานจำนวนลูกค้า เวลารอเฉลี่ย และข้อมูลเชิงลึกอื่นๆ",
+      },
+      {
+        title: "Multi-branch Support",
+        description: "รองรับหลายสาขา จัดการแยกกันได้",
+      },
+    ],
+    client: "Various SMEs",
+    projectDate: "2024-12-01",
+    liveUrl: "https://shop-queue.cleancode1986.com",
+    githubUrl: "https://github.com/cleancode1986/shop-queue-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1834,
+  },
 ];
 
 export const getFeaturedProjects = (): Project[] => {
