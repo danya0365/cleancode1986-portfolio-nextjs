@@ -16,8 +16,8 @@ export class PortfolioPresenter {
    */
   async getViewModel(): Promise<PortfolioViewModel> {
     try {
-      // Get published projects only, sorted by displayOrder
-      const projects = getAllProjectsSorted().filter((p) => p.status === "published");
+      // Get all projects, sorted by displayOrder
+      const projects = getAllProjectsSorted();
 
       const categories: readonly CategoryFilter[] = [
         "All",

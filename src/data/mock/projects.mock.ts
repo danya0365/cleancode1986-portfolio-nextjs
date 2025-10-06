@@ -24,11 +24,11 @@ export interface Project {
 // Mock Projects - โปรเจคตัวอย่างที่รับทำ
 const MOCK_PROJECTS: Project[] = [
   {
-    id: "1",
+    id: "1001",
     slug: "e-commerce-platform",
     title: "E-Commerce Platform สำหรับแบรนด์แฟชั่น",
     category: "Web",
-    displayOrder: 11,
+    displayOrder: 1001,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -69,11 +69,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 342,
   },
   {
-    id: "2",
+    id: "1002",
     slug: "food-delivery-app",
     title: "แอปสั่งอาหาร Real-time",
     category: "Mobile",
-    displayOrder: 12,
+    displayOrder: 1002,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -108,11 +108,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 521,
   },
   {
-    id: "3",
+    id: "1003",
     slug: "fintech-dashboard",
     title: "แดชบอร์ดจัดการการเงิน Fintech",
     category: "Web",
-    displayOrder: 13,
+    displayOrder: 1003,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -146,11 +146,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 287,
   },
   {
-    id: "4",
+    id: "1004",
     slug: "hotel-booking-system",
     title: "ระบบจองโรงแรม",
     category: "Full-stack",
-    displayOrder: 14,
+    displayOrder: 1004,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -188,11 +188,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 198,
   },
   {
-    id: "5",
+    id: "1005",
     slug: "fitness-tracking-app",
     title: "แอปติดตามการออกกำลังกาย",
     category: "Mobile",
-    displayOrder: 15,
+    displayOrder: 1005,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -224,11 +224,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 412,
   },
   {
-    id: "6",
+    id: "1006",
     slug: "learning-management-system",
     title: "ระบบจัดการเรียนการสอนออนไลน์",
     category: "Web",
-    displayOrder: 16,
+    displayOrder: 1006,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -259,11 +259,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 634,
   },
   {
-    id: "7",
+    id: "1007",
     slug: "social-media-analytics",
     title: "แดชบอร์ดวิเคราะห์ Social Media",
     category: "Web",
-    displayOrder: 17,
+    displayOrder: 1007,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -303,11 +303,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 156,
   },
   {
-    id: "8",
+    id: "1008",
     slug: "restaurant-pos-system",
     title: "ระบบ POS สำหรับร้านอาหาร",
     category: "Full-stack",
-    displayOrder: 18,
+    displayOrder: 1008,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -338,11 +338,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 243,
   },
   {
-    id: "9",
+    id: "1009",
     slug: "property-listing-app",
     title: "แอปค้นหาอสังหาริมทรัพย์",
     category: "Mobile",
-    displayOrder: 19,
+    displayOrder: 1009,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -373,11 +373,11 @@ const MOCK_PROJECTS: Project[] = [
     viewCount: 389,
   },
   {
-    id: "10",
+    id: "1010",
     slug: "event-management-platform",
     title: "แพลตฟอร์มจัดการอีเว้นท์",
     category: "Web",
-    displayOrder: 20,
+    displayOrder: 1010,
     isCleanCode: false,
     isMock: true,
     isFuture: false,
@@ -411,7 +411,7 @@ const MOCK_PROJECTS: Project[] = [
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
 const CLEAN_CODE_PROJECTS: Project[] = [
   {
-    id: "11",
+    id: "1",
     slug: "al-quran-web-app",
     title: "Al-Quran Web Application - แอปอ่านอัลกุรอานออนไลน์",
     category: "Web",
@@ -476,7 +476,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     viewCount: 1247,
   },
   {
-    id: "12",
+    id: "2",
     slug: "prayer-times-app",
     title: "Prayer Times - แอปเวลาละหมาดอัตโนมัติ",
     category: "Web",
@@ -540,7 +540,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     viewCount: 892,
   },
   {
-    id: "13",
+    id: "3",
     slug: "slack-clone",
     title: "Slack Clone - Real-time Team Collaboration",
     category: "Full-stack",
@@ -604,7 +604,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     viewCount: 1563,
   },
   {
-    id: "14",
+    id: "4",
     slug: "soc-tact-social-platform",
     title: "Soc-Tact - Social Networking Platform",
     category: "Full-stack",
@@ -667,7 +667,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     viewCount: 674,
   },
   {
-    id: "15",
+    id: "5",
     slug: "dragon-quest-interactive-story",
     title: "Dragon Quest XI - Interactive Story Experience",
     category: "Web",
@@ -793,7 +793,204 @@ const CLEAN_CODE_PROJECTS: Project[] = [
 
 // Future Projects - โปรเจคในอนาคต
 const FUTURE_PROJECTS: Project[] = [
-  // เพิ่มโปรเจคในอนาคตได้ที่นี่
+  {
+    id: "101",
+    slug: "smart-school-management-system",
+    title: "Smart School - ระบบบริหารจัดการโรงเรียนครบวงจร",
+    category: "Full-stack",
+    displayOrder: 101,
+    isCleanCode: false,
+    isMock: false,
+    isFuture: true,
+    description:
+      "ระบบบริหารจัดการโรงเรียนแบบครบวงจร ที่ทำให้ทุกกิจกรรมในโรงเรียนสามารถดำเนินการผ่านแอปพลิเคชันได้ทั้งหมด ตั้งแต่การสแกนเช็คชื่อเข้าเรียน ตรวจสอบตารางเรียน-สอน จัดการกิจกรรม ดูผลสอบ จัดการข้อมูลนักเรียนและอาจารย์ พร้อมระบบสิทธิ์การใช้งานตาม Role (นักเรียน, อาจารย์, ผู้บริหาร) ที่ชัดเจน",
+    thumbnail: "/images/projects/smart-school-thumb.jpg",
+    images: [
+      "/images/projects/smart-school-1.jpg",
+      "/images/projects/smart-school-2.jpg",
+      "/images/projects/smart-school-3.jpg",
+      "/images/projects/smart-school-4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "QR Code Scanner",
+      "Socket.io",
+      "SendGrid",
+      "Chart.js",
+      "date-fns",
+    ],
+    features: [
+      {
+        title: "ระบบสแกนเช็คชื่ออัจฉริยะ",
+        description:
+          "สแกน QR Code เช็คชื่อเข้าเรียนตอนเช้า บันทึกเวลามาเรียนอัตโนมัติ พร้อมแจ้งเตือนผู้ปกครองแบบ Real-time",
+      },
+      {
+        title: "ตารางเรียน-สอนอัจฉริยะ",
+        description:
+          "ตรวจสอบตารางเรียนของนักเรียน ตารางสอนของอาจารย์ พร้อมการแจ้งเตือนเมื่อมีการเปลี่ยนแปลง รองรับการจัดตารางอัตโนมัติ",
+      },
+      {
+        title: "ระบบจัดการกิจกรรม",
+        description:
+          "ดูกิจกรรมของโรงเรียน ลงทะเบียนเข้าร่วมกิจกรรม ติดตามชั่วโมงกิจกรรม พร้อมระบบรายงานผลการเข้าร่วม",
+      },
+      {
+        title: "ระบบผลการเรียน",
+        description:
+          "ดูผลสอบ คะแนนเก็บ เกรดเฉลี่ย แยกตามรายวิชา พร้อมกราฟแสดงความก้าวหน้าการเรียน และเปรียบเทียบผลการเรียน",
+      },
+      {
+        title: "ข้อมูลห้องเรียนและอาคาร",
+        description:
+          "ดูข้อมูลห้องเรียน อาคารต่างๆ ตารางการใช้ห้อง จองห้องประชุม พร้อมแผนที่โรงเรียนแบบ Interactive",
+      },
+      {
+        title: "จัดการข้อมูลนักเรียน-อาจารย์",
+        description:
+          "ระบบฐานข้อมูลนักเรียนและอาจารย์ที่ครบถ้วน ค้นหาง่าย อัพเดทข้อมูลได้ทันที พร้อมระบบ Import/Export",
+      },
+      {
+        title: "Role-based Access Control",
+        description:
+          "ระบบสิทธิ์การใช้งานที่ชัดเจน แยกตาม Role (นักเรียน, อาจารย์, ผู้บริหาร, เจ้าหน้าที่) ปลอดภัยและเป็นระเบียบ",
+      },
+      {
+        title: "ระบบแจ้งเตือนอัจฉริยะ",
+        description:
+          "แจ้งเตือนผ่าน Push Notification, Email, SMS สำหรับข่าวสาร ประกาศ การบ้าน และเหตุการณ์สำคัญ",
+      },
+      {
+        title: "Dashboard & Analytics",
+        description:
+          "แดชบอร์ดสำหรับผู้บริหาร แสดงสถิติการเข้าเรียน ผลการเรียน กิจกรรม พร้อมรายงานเชิงลึกและการวิเคราะห์ข้อมูล",
+      },
+      {
+        title: "Mobile & Web Responsive",
+        description:
+          "ใช้งานได้ทั้งบนมือถือและคอมพิวเตอร์ รองรับทุกขนาดหน้าจอ ออกแบบ UX ให้ใช้งานง่าย",
+      },
+    ],
+    projectDate: "2025-06-01",
+    isFeatured: true,
+    status: "draft",
+    viewCount: 0,
+  },
+  {
+    id: "102",
+    slug: "event-organizer-marketplace",
+    title: "EventHub - แพลตฟอร์มหาผู้ให้บริการจัดงานครบวงจร",
+    category: "Full-stack",
+    displayOrder: 102,
+    isCleanCode: false,
+    isMock: false,
+    isFuture: true,
+    description:
+      "แพลตฟอร์ม Marketplace สำหรับเชื่อมต่อลูกค้าที่ต้องการจัดงานสำคัญ (งานแต่ง งานวันเกิด งานสัมมนา ฯลฯ) กับผู้ให้บริการแต่ละหมวดหมู่ เช่น เช่าเต๊นท์ ทำอาหาร ตกแต่งงาน ถ่ายภาพ DJ/วงดนตรี พร้อมระบบจองงาน รีวิว และจัดการโปรเจกต์งานแบบครบวงจร",
+    thumbnail: "/images/projects/eventhub-thumb.jpg",
+    images: [
+      "/images/projects/eventhub-1.jpg",
+      "/images/projects/eventhub-2.jpg",
+      "/images/projects/eventhub-3.jpg",
+      "/images/projects/eventhub-4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "NestJS",
+      "Prisma",
+      "MongoDB",
+      "Supabase Storage",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Stripe",
+      "Google Maps API",
+      "Socket.io",
+      "Nodemailer",
+      "Cloudinary",
+      "date-fns",
+      "Chart.js",
+    ],
+    features: [
+      {
+        title: "Marketplace หลากหลายหมวดหมู่",
+        description:
+          "ค้นหาผู้ให้บริการแยกตามหมวดหมู่ เช่น เช่าเต๊นท์/โต๊ะ, ทำอาหาร/เครื่องดื่ม, ตกแต่งงาน, ถ่ายภาพ/วิดีโอ, DJ/วงดนตรี, MC, แต่งหน้า, ดอกไม้ ฯลฯ",
+      },
+      {
+        title: "โปรไฟล์ผู้ให้บริการ",
+        description:
+          "ดูข้อมูลผู้ให้บริการ พอร์ตโฟลิโอ ราคา แพ็คเกจ รีวิวจากลูกค้าจริง คะแนนความน่าเชื่อถือ และตัวอย่างผลงาน",
+      },
+      {
+        title: "ระบบค้นหาและกรองอัจฉริยะ",
+        description:
+          "ค้นหาตามพื้นที่ ราคา ประเภทงาน วันที่ว่าง และความต้องการเฉพาะ พร้อม AI Recommendation ผู้ให้บริการที่เหมาะสม",
+      },
+      {
+        title: "ระบบจองและจัดการงาน",
+        description:
+          "จองผู้ให้บริการหลายรายในที่เดียว ดูปฏิทินว่าง ส่งข้อความสอบถาม เจรจาราคา และจัดการทุกอย่างในแอปเดียว",
+      },
+      {
+        title: "Event Project Management",
+        description:
+          "จัดการโปรเจกต์งานแบบครบวงจร ติดตามสถานะการจอง Checklist งาน Timeline และประสานงานกับผู้ให้บริการทุกราย",
+      },
+      {
+        title: "ระบบชำระเงินปลอดภัย",
+        description:
+          "ชำระเงินผ่านระบบ Escrow ที่ปลอดภัย รองรับหลายช่องทาง (บัตรเครดิต, QR Code, โอนเงิน) พร้อมใบเสร็จอิเล็กทรอนิกส์",
+      },
+      {
+        title: "ระบบรีวิวและคะแนน",
+        description:
+          "รีวิวและให้คะแนนผู้ให้บริการหลังงานเสร็จ อัพโหลดรูปภาพผลงานจริง สร้างความน่าเชื่อถือให้ระบบ",
+      },
+      {
+        title: "Real-time Chat & Notification",
+        description:
+          "แชทกับผู้ให้บริการแบบ Real-time แจ้งเตือนเมื่อมีข้อความใหม่ การยืนยันงาน หรือการเปลี่ยนแปลงสำคัญ",
+      },
+      {
+        title: "Dashboard สำหรับผู้ให้บริการ",
+        description:
+          "แดชบอร์ดสำหรับผู้ให้บริการจัดการงาน ดูปฏิทิน รับ-ปฏิเสธงาน ดูรายได้ และจัดการพอร์ตโฟลิโอ",
+      },
+      {
+        title: "Package Builder",
+        description:
+          "สร้างแพ็คเกจงานแต่งงาน/งานอีเว้นท์แบบครบวงจร เลือกผู้ให้บริการหลายรายในแพ็คเกจเดียว พร้อมราคาพิเศษ",
+      },
+      {
+        title: "Location-based Services",
+        description:
+          "แสดงผู้ให้บริการบนแผนที่ ค้นหาตามพื้นที่ใกล้เคียง ดูรัศมีการให้บริการ และประมาณค่าเดินทาง",
+      },
+      {
+        title: "Analytics & Insights",
+        description:
+          "รายงานและสถิติสำหรับผู้ให้บริการ วิเคราะห์ยอดจอง รายได้ Conversion Rate และข้อมูลเชิงลึกอื่นๆ",
+      },
+    ],
+    projectDate: "2025-08-01",
+    isFeatured: true,
+    status: "draft",
+    viewCount: 0,
+  },
 ];
 
 // Merge all projects

@@ -90,6 +90,16 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                   ⭐ Featured
                 </span>
               )}
+              {project.status === "draft" && (
+                <span className="px-4 py-2 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 font-medium rounded-full">
+                  📝 Draft
+                </span>
+              )}
+              {project.status === "archived" && (
+                <span className="px-4 py-2 bg-gray-100 dark:bg-gray-900/30 text-gray-600 dark:text-gray-400 font-medium rounded-full">
+                  📦 Archived
+                </span>
+              )}
             </div>
 
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">

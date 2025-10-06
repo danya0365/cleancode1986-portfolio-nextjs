@@ -24,8 +24,7 @@ export class ProjectDetailPresenter {
       const relatedProjects = PROJECTS.filter(
         (p) =>
           p.id !== project.id &&
-          p.category === project.category &&
-          p.status === "published"
+          p.category === project.category
       ).slice(0, 3);
 
       return {

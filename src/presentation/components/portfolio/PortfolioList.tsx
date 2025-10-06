@@ -61,7 +61,7 @@ export function PortfolioList({ initialViewModel }: PortfolioListProps) {
       searchTerm === "" ||
       project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch && project.status === "published";
+    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -155,13 +155,23 @@ function ProjectCard({ project }: { project: Project }) {
             {project.category}
           </span>
         </div>
-        {project.isFeatured && (
-          <div className="absolute top-4 left-4">
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+          {project.isFeatured && (
             <span className="px-3 py-1 bg-yellow-400 text-yellow-900 text-sm font-medium rounded-full">
               ⭐ Featured
             </span>
-          </div>
-        )}
+          )}
+          {project.status === "draft" && (
+            <span className="px-3 py-1 bg-orange-400 text-orange-900 text-sm font-medium rounded-full">
+              📝 Draft
+            </span>
+          )}
+          {project.status === "archived" && (
+            <span className="px-3 py-1 bg-gray-400 text-gray-900 text-sm font-medium rounded-full">
+              📦 Archived
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Content */}
