@@ -597,7 +597,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     ],
     client: "Internal Tool",
     projectDate: "2025-01-05",
-    liveUrl: "https://slack-clone.cleancode1986.com",
+    liveUrl: "https://slack-clone-nextjs-theta.vercel.app/",
     githubUrl: "https://github.com/cleancode1986/slack-nextjs",
     isFeatured: true,
     status: "published",
