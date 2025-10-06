@@ -789,6 +789,74 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 1834,
   },
+  {
+    id: "6",
+    slug: "prayer-for-kids",
+    title: "Prayer for Kids - แอปสอนการละหมาดสำหรับเด็ก",
+    category: "Web",
+    displayOrder: 7,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "เว็บแอปพลิเคชันสอนการละหมาดสำหรับเด็กอย่างสนุกสนาน ด้วยภาพสวยงาม สีสันสดใส เน้นความเข้าใจง่าย มีบทเรียนครบถ้วน ระบบฝึกฝน แบบทดสอบ และรางวัลเพื่อสร้างแรงจูงใจ",
+    thumbnail: "/images/projects/prayer-kids-thumb.jpg",
+    images: [
+      "/images/projects/prayer-kids-1.jpg",
+      "/images/projects/prayer-kids-2.jpg",
+      "/images/projects/prayer-kids-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "LocalForage",
+      "next-themes",
+    ],
+    features: [
+      {
+        title: "บทเรียนครบถ้วน 24 บท",
+        description:
+          "บทเรียนการละหมาดแบ่งเป็น 4 หมวด: พื้นฐาน, ขั้นตอน, ดุอาอ์, และการละหมาดแต่ละเวลา",
+      },
+      {
+        title: "UI เด็กๆ สีสันสดใส",
+        description:
+          "ออกแบบ UI ด้วยสีสันสดใส ภาพการ์ตูนน่ารัก ปุ่มขนาดใหญ่ใช้งานง่าย เหมาะกับเด็ก",
+      },
+      {
+        title: "ระบบฝึกฝนแบบ Interactive",
+        description:
+          "ฝึกท่าละหมาดทีละขั้นตอน มีภาพประกอบและคำอธิบายละเอียด พร้อมเสียงอ่านดุอาอ์",
+      },
+      {
+        title: "แบบทดสอบและรางวัล",
+        description:
+          "ระบบแบบทดสอบหลังเรียน พร้อมระบบรางวัล 16 รางวัล เพื่อสร้างแรงจูงใจ",
+      },
+      {
+        title: "ติดตามความคืบหน้า",
+        description:
+          "บันทึกความคืบหน้าการเรียน ดูสถิติการเรียนรู้ และบทเรียนที่เรียนจบแล้ว",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างโค้ดตาม Clean Architecture และ Atomic Design สะอาด บำรุงรักษาง่าย",
+      },
+    ],
+    projectDate: "2025-01-20",
+    liveUrl: "https://prayer-for-kid-nextjs.vercel.app/",
+    githubUrl: "https://github.com/cleancode1986/prayer-for-kid-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 856,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
