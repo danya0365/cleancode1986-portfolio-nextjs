@@ -660,7 +660,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       },
     ],
     projectDate: "2024-12-20",
-    liveUrl: "https://soc-tact.cleancode1986.com",
+    liveUrl: "https://soc-tact-nextjs.vercel.app/",
     githubUrl: "https://github.com/cleancode1986/soc-tact-nextjs",
     isFeatured: false,
     status: "published",
