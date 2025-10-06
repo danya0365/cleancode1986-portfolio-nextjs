@@ -469,7 +469,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       },
     ],
     projectDate: "2025-01-15",
-    liveUrl: "https://al-quran.cleancode1986.com",
+    liveUrl: "https://al-quaran-nextjs.vercel.app/",
     githubUrl: "https://github.com/cleancode1986/al-quaran-nextjs",
     isFeatured: true,
     status: "published",
@@ -532,7 +532,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       },
     ],
     projectDate: "2025-01-10",
-    liveUrl: "https://prayer-times.cleancode1986.com",
+    liveUrl: "https://prayer-time-nine.vercel.app/",
     githubUrl:
       "https://github.com/cleancode1986/prayer-times-nextjs15-tailwind",
     isFeatured: true,
