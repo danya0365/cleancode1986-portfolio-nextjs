@@ -1,4 +1,4 @@
-import { MOCK_PROJECTS } from "@/src/data/mock/projects.mock";
+import { PROJECTS } from "@/src/data/mock/projects.mock";
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
 import { ProjectDetail } from "@/src/presentation/components/portfolio/ProjectDetail";
 import { ProjectDetailPresenterFactory } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
@@ -33,7 +33,7 @@ export async function generateMetadata({
  * Generate static params for all projects
  */
 export async function generateStaticParams() {
-  return MOCK_PROJECTS.map((project) => ({
+  return PROJECTS.map((project) => ({
     slug: project.slug,
   }));
 }

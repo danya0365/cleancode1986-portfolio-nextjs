@@ -16,15 +16,22 @@ export interface Project {
   status: "draft" | "published" | "archived";
   viewCount: number;
   displayOrder: number;
+  isCleanCode: boolean;
+  isMock: boolean;
+  isFuture: boolean;
 }
 
-export const MOCK_PROJECTS: Project[] = [
+// Mock Projects - โปรเจคตัวอย่างที่รับทำ
+const MOCK_PROJECTS: Project[] = [
   {
     id: "1",
     slug: "e-commerce-platform",
     title: "E-Commerce Platform สำหรับแบรนด์แฟชั่น",
     category: "Web",
     displayOrder: 11,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "แพลตฟอร์มอีคอมเมิร์ซที่ทันสมัย พร้อมระบบจัดการสินค้า ตะกร้า และชำระเงิน รองรับ SEO และโหลดเร็ว",
     thumbnail: "/images/projects/ecommerce-thumb.jpg",
@@ -33,7 +40,13 @@ export const MOCK_PROJECTS: Project[] = [
       "/images/projects/ecommerce-2.jpg",
       "/images/projects/ecommerce-3.jpg",
     ],
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "Supabase"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Stripe",
+      "Supabase",
+    ],
     features: [
       {
         title: "ระบบจัดการสินค้า",
@@ -61,6 +74,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แอปสั่งอาหาร Real-time",
     category: "Mobile",
     displayOrder: 12,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "แอปสั่งอาหารพร้อมระบบ Real-time tracking, Push notification และระบบรีวิว",
     thumbnail: "/images/projects/food-app-thumb.jpg",
@@ -97,6 +113,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แดชบอร์ดจัดการการเงิน Fintech",
     category: "Web",
     displayOrder: 13,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "ระบบแดชบอร์ดสำหรับจัดการการเงิน พร้อมกราฟ Real-time และระบบรายงาน",
     thumbnail: "/images/projects/fintech-thumb.jpg",
@@ -132,6 +151,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "ระบบจองโรงแรม",
     category: "Full-stack",
     displayOrder: 14,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "ระบบจองห้องพักโรงแรมออนไลน์ พร้อมระบบจัดการห้อง ราคา และการชำระเงิน",
     thumbnail: "/images/projects/hotel-thumb.jpg",
@@ -171,8 +193,10 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แอปติดตามการออกกำลังกาย",
     category: "Mobile",
     displayOrder: 15,
-    description:
-      "แอปบันทึกการออกกำลังกาย พร้อมสถิติ กราฟ และระบบ Goal setting",
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
+    description: "แอปบันทึกการออกกำลังกาย พร้อมสถิติ กราฟ และระบบ Goal setting",
     thumbnail: "/images/projects/fitness-thumb.jpg",
     images: [
       "/images/projects/fitness-1.jpg",
@@ -205,17 +229,14 @@ export const MOCK_PROJECTS: Project[] = [
     title: "ระบบจัดการเรียนการสอนออนไลน์",
     category: "Web",
     displayOrder: 16,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "LMS สำหรับสถาบันการศึกษา พร้อมระบบวิดีโอ แบบทดสอบ และติดตามผลการเรียน",
     thumbnail: "/images/projects/lms-thumb.jpg",
     images: ["/images/projects/lms-1.jpg", "/images/projects/lms-2.jpg"],
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "Mux",
-      "Tailwind CSS",
-    ],
+    technologies: ["Next.js", "TypeScript", "Supabase", "Mux", "Tailwind CSS"],
     features: [
       {
         title: "วิดีโอบทเรียน",
@@ -243,6 +264,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แดชบอร์ดวิเคราะห์ Social Media",
     category: "Web",
     displayOrder: 17,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "เครื่องมือวิเคราะห์ Social Media หลายแพลตฟอร์ม พร้อมรายงานและกราฟ",
     thumbnail: "/images/projects/social-analytics-thumb.jpg",
@@ -284,6 +308,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "ระบบ POS สำหรับร้านอาหาร",
     category: "Full-stack",
     displayOrder: 18,
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
     description:
       "ระบบขายหน้าร้านสำหรับร้านอาหาร พร้อมระบบออเดอร์ ครัว และรายงาน",
     thumbnail: "/images/projects/pos-thumb.jpg",
@@ -316,19 +343,16 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แอปค้นหาอสังหาริมทรัพย์",
     category: "Mobile",
     displayOrder: 19,
-    description:
-      "แอปหาบ้าน คอนโด ที่ดิน พร้อม Map, Filter และระบบนัดชมบ้าน",
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
+    description: "แอปหาบ้าน คอนโด ที่ดิน พร้อม Map, Filter และระบบนัดชมบ้าน",
     thumbnail: "/images/projects/property-thumb.jpg",
     images: [
       "/images/projects/property-1.jpg",
       "/images/projects/property-2.jpg",
     ],
-    technologies: [
-      "React Native",
-      "TypeScript",
-      "Supabase",
-      "Google Maps API",
-    ],
+    technologies: ["React Native", "TypeScript", "Supabase", "Google Maps API"],
     features: [
       {
         title: "ค้นหาด้วยแผนที่",
@@ -354,17 +378,13 @@ export const MOCK_PROJECTS: Project[] = [
     title: "แพลตฟอร์มจัดการอีเว้นท์",
     category: "Web",
     displayOrder: 20,
-    description:
-      "ระบบจัดการอีเว้นท์ พร้อมขายตั๋ว Check-in และระบบรายงาน",
+    isCleanCode: false,
+    isMock: true,
+    isFuture: false,
+    description: "ระบบจัดการอีเว้นท์ พร้อมขายตั๋ว Check-in และระบบรายงาน",
     thumbnail: "/images/projects/event-thumb.jpg",
     images: ["/images/projects/event-1.jpg", "/images/projects/event-2.jpg"],
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "QR Code",
-    ],
+    technologies: ["Next.js", "TypeScript", "Supabase", "Stripe", "QR Code"],
     features: [
       {
         title: "ขายตั๋วออนไลน์",
@@ -386,13 +406,19 @@ export const MOCK_PROJECTS: Project[] = [
     status: "published",
     viewCount: 567,
   },
-  // Real Projects by Clean Code 1986
+];
+
+// Clean Code Projects - โปรเจคจริงที่ทำแล้ว
+const CLEAN_CODE_PROJECTS: Project[] = [
   {
     id: "11",
     slug: "al-quran-web-app",
     title: "Al-Quran Web Application - แอปอ่านอัลกุรอานออนไลน์",
     category: "Web",
     displayOrder: 1,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "แอปพลิเคชันอ่านอัลกุรอานบนเว็บที่ทันสมัย พร้อมฟีเจอร์ครบครัน รองรับหลายภาษา มี Tajweed และเสียงอ่านจาก Qari ชื่อดัง ออกแบบมาเพื่อประสบการณ์การอ่านที่ดีที่สุด",
     thumbnail: "/images/projects/alquran-thumb.jpg",
@@ -455,6 +481,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "Prayer Times - แอปเวลาละหมาดอัตโนมัติ",
     category: "Web",
     displayOrder: 2,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "แอปพลิเคชันแสดงเวลาละหมาดอัตโนมัติตามตำแหน่งที่ตั้ง พร้อมการแจ้งเตือน Qibla Direction และปฏิทินอิสลาม ใช้ library Adhan ที่แม่นยำ",
     thumbnail: "/images/projects/prayer-times-thumb.jpg",
@@ -504,7 +533,8 @@ export const MOCK_PROJECTS: Project[] = [
     ],
     projectDate: "2025-01-10",
     liveUrl: "https://prayer-times.cleancode1986.com",
-    githubUrl: "https://github.com/cleancode1986/prayer-times-nextjs15-tailwind",
+    githubUrl:
+      "https://github.com/cleancode1986/prayer-times-nextjs15-tailwind",
     isFeatured: true,
     status: "published",
     viewCount: 892,
@@ -515,6 +545,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "Slack Clone - Real-time Team Collaboration",
     category: "Full-stack",
     displayOrder: 3,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "แพลตฟอร์มสื่อสารทีมแบบ Real-time คล้าย Slack พร้อม Workspace, Channels, Direct Messages และการแชร์ไฟล์ ใช้ Supabase สำหรับ Backend",
     thumbnail: "/images/projects/slack-thumb.jpg",
@@ -559,8 +592,7 @@ export const MOCK_PROJECTS: Project[] = [
       },
       {
         title: "Clean Architecture",
-        description:
-          "โครงสร้างตาม Clean Architecture และ SOLID principles",
+        description: "โครงสร้างตาม Clean Architecture และ SOLID principles",
       },
     ],
     client: "Internal Tool",
@@ -577,6 +609,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "Soc-Tact - Social Networking Platform",
     category: "Full-stack",
     displayOrder: 4,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "แพลตฟอร์มโซเชียลเน็ตเวิร์คที่ทันสมัย พร้อมฟีเจอร์โพสต์ แชร์ ไลค์ คอมเมนต์ และระบบเพื่อน รองรับ Real-time updates",
     thumbnail: "/images/projects/soctact-thumb.jpg",
@@ -599,12 +634,12 @@ export const MOCK_PROJECTS: Project[] = [
     features: [
       {
         title: "Social Feed",
-        description:
-          "โพสต์ข้อความ รูปภาพ แชร์ และโต้ตอบกับโพสต์ของเพื่อน",
+        description: "โพสต์ข้อความ รูปภาพ แชร์ และโต้ตอบกับโพสต์ของเพื่อน",
       },
       {
         title: "Friend System",
-        description: "ระบบเพื่อน ส่งคำขอเพื่อน ยอมรับ/ปฏิเสธ และดูโปรไฟล์เพื่อน",
+        description:
+          "ระบบเพื่อน ส่งคำขอเพื่อน ยอมรับ/ปฏิเสธ และดูโปรไฟล์เพื่อน",
       },
       {
         title: "Real-time Notifications",
@@ -612,7 +647,8 @@ export const MOCK_PROJECTS: Project[] = [
       },
       {
         title: "Form Validation",
-        description: "ใช้ React Hook Form + Zod สำหรับ Form ที่แข็งแรงและ Type-safe",
+        description:
+          "ใช้ React Hook Form + Zod สำหรับ Form ที่แข็งแรงและ Type-safe",
       },
       {
         title: "Print Support",
@@ -636,6 +672,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "Dragon Quest XI - Interactive Story Experience",
     category: "Web",
     displayOrder: 5,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "แอปพลิเคชันเล่าเรื่องแบบ Interactive จาก Dragon Quest XI ผู้เล่นสามารถเลือกทางเดินของเรื่องราวได้ พร้อมระบบเซฟความคืบหน้า",
     thumbnail: "/images/projects/dragon-quest-thumb.jpg",
@@ -687,6 +726,9 @@ export const MOCK_PROJECTS: Project[] = [
     title: "Shop Queue - ระบบจัดการคิวร้านค้า",
     category: "Full-stack",
     displayOrder: 6,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
     description:
       "ระบบจัดการคิวสำหรับร้านค้า คลินิก ศูนย์บริการ พร้อม QR Code Check-in, Dashboard สำหรับเจ้าหน้าที่ และหน้าจอแสดงคิวสำหรับลูกค้า",
     thumbnail: "/images/projects/shop-queue-thumb.jpg",
@@ -712,18 +754,15 @@ export const MOCK_PROJECTS: Project[] = [
     features: [
       {
         title: "QR Code Check-in",
-        description:
-          "ลูกค้าสแกน QR Code เพื่อรับคิว พร้อมรับเลขคิวทันที",
+        description: "ลูกค้าสแกน QR Code เพื่อรับคิว พร้อมรับเลขคิวทันที",
       },
       {
         title: "Dashboard สำหรับเจ้าหน้าที่",
-        description:
-          "จัดการคิว เรียกคิว ข้ามคิว ยกเลิกคิว ดูสถิติการให้บริการ",
+        description: "จัดการคิว เรียกคิว ข้ามคิว ยกเลิกคิว ดูสถิติการให้บริการ",
       },
       {
         title: "หน้าจอแสดงคิว",
-        description:
-          "หน้าจอแสดงคิวปัจจุบันแบบ Real-time สำหรับลูกค้า",
+        description: "หน้าจอแสดงคิวปัจจุบันแบบ Real-time สำหรับลูกค้า",
       },
       {
         title: "Email/SMS Notification",
@@ -735,8 +774,7 @@ export const MOCK_PROJECTS: Project[] = [
       },
       {
         title: "รายงานและสถิติ",
-        description:
-          "ดูรายงานจำนวนลูกค้า เวลารอเฉลี่ย และข้อมูลเชิงลึกอื่นๆ",
+        description: "ดูรายงานจำนวนลูกค้า เวลารอเฉลี่ย และข้อมูลเชิงลึกอื่นๆ",
       },
       {
         title: "Multi-branch Support",
@@ -753,24 +791,59 @@ export const MOCK_PROJECTS: Project[] = [
   },
 ];
 
+// Future Projects - โปรเจคในอนาคต
+const FUTURE_PROJECTS: Project[] = [
+  // เพิ่มโปรเจคในอนาคตได้ที่นี่
+];
+
+// Merge all projects
+export const PROJECTS: Project[] = [
+  ...CLEAN_CODE_PROJECTS,
+  ...MOCK_PROJECTS,
+  ...FUTURE_PROJECTS,
+];
+
+// Helper functions
 export const getFeaturedProjects = (): Project[] => {
-  return MOCK_PROJECTS.filter((project) => project.isFeatured).sort(
+  return PROJECTS.filter((project) => project.isFeatured).sort(
     (a, b) => a.displayOrder - b.displayOrder
   );
 };
 
 export const getProjectBySlug = (slug: string): Project | undefined => {
-  return MOCK_PROJECTS.find((project) => project.slug === slug);
+  return PROJECTS.find((project) => project.slug === slug);
 };
 
 export const getProjectsByCategory = (
   category: Project["category"]
 ): Project[] => {
-  return MOCK_PROJECTS.filter((project) => project.category === category).sort(
+  return PROJECTS.filter((project) => project.category === category).sort(
     (a, b) => a.displayOrder - b.displayOrder
   );
 };
 
 export const getAllProjectsSorted = (): Project[] => {
-  return [...MOCK_PROJECTS].sort((a, b) => a.displayOrder - b.displayOrder);
+  return [...PROJECTS].sort((a, b) => a.displayOrder - b.displayOrder);
 };
+
+// Filter by project type
+export const getCleanCodeProjects = (): Project[] => {
+  return PROJECTS.filter((project) => project.isCleanCode).sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
+};
+
+export const getMockProjects = (): Project[] => {
+  return PROJECTS.filter((project) => project.isMock).sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
+};
+
+export const getFutureProjects = (): Project[] => {
+  return PROJECTS.filter((project) => project.isFuture).sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
+};
+
+// Export individual arrays for specific use cases
+export { CLEAN_CODE_PROJECTS, FUTURE_PROJECTS, MOCK_PROJECTS };

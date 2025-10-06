@@ -1,4 +1,4 @@
-import { getProjectBySlug, MOCK_PROJECTS, type Project } from "@/src/data/mock/projects.mock";
+import { getProjectBySlug, PROJECTS, type Project } from "@/src/data/mock/projects.mock";
 
 export interface ProjectDetailViewModel {
   project: Project;
@@ -17,11 +17,11 @@ export class ProjectDetailPresenter {
       const project = getProjectBySlug(slug);
 
       if (!project) {
-        throw new Error(`Project not found: ${slug}`);
+        throw new Error("Project not found");
       }
 
       // Get related projects (same category, excluding current)
-      const relatedProjects = MOCK_PROJECTS.filter(
+      const relatedProjects = PROJECTS.filter(
         (p) =>
           p.id !== project.id &&
           p.category === project.category &&
