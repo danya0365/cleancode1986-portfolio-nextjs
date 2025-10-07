@@ -543,7 +543,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     slug: "slack-clone",
     title: "Slack Clone - Real-time Team Collaboration",
     category: "Full-stack",
-    displayOrder: 3,
+    displayOrder: 13,
     isCleanCode: true,
     isMock: false,
     isFuture: false,
