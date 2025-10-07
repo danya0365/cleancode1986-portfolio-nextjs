@@ -1312,6 +1312,164 @@ const FUTURE_PROJECTS: Project[] = [
     status: "draft",
     viewCount: 0,
   },
+  {
+    id: "105",
+    slug: "rpg-open-world-adventure",
+    title: "RPG Open World Adventure - เกมผจญภัยโลกเปิดกว้าง",
+    category: "Web",
+    displayOrder: 105,
+    isCleanCode: false,
+    isMock: false,
+    isFuture: true,
+    description:
+      "เกม RPG โลกเปิดกว้างที่ให้คุณสำรวจโลกแฟนตาซีอันกว้างใหญ่ได้อย่างอิสระ ผจญภัยในเนื้อเรื่องหลักที่น่าติดตาม พร้อมเควสย่อยนับร้อย ระบบต่อสู้แบบ Turn-based ที่ลึกซึ้ง สะสมไอเทม อาวุธ เกราะ พัฒนาตัวละคร และสร้างปาร์ตี้ในฝัน ทุกการตัดสินใจส่งผลต่อโลกและเรื่องราว",
+    thumbnail: "/images/projects/rpg-openworld-thumb.jpg",
+    images: [
+      "/images/projects/rpg-openworld-1.jpg",
+      "/images/projects/rpg-openworld-2.jpg",
+      "/images/projects/rpg-openworld-3.jpg",
+      "/images/projects/rpg-openworld-4.jpg",
+      "/images/projects/rpg-openworld-5.jpg",
+      "/images/projects/rpg-openworld-6.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "Prisma",
+      "PostgreSQL",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Three.js",
+      "React Three Fiber",
+      "Framer Motion",
+      "Howler.js",
+      "Phaser 3",
+      "Socket.io",
+      "Zod",
+      "LocalForage",
+      "Canvas API",
+      "WebGL",
+      "date-fns",
+    ],
+    features: [
+      {
+        title: "World Map แบบ Open World",
+        description:
+          "สำรวจโลกแฟนตาซีกว้างใหญ่ได้อย่างอิสระ เดินทางระหว่างเมือง หมู่บ้าน ดันเจี้ยน ป่า ภูเขา ทะเลทราย ค้นพบสถานที่ลับ และปลดล็อกพื้นที่ใหม่ๆ",
+      },
+      {
+        title: "Story Event เนื้อเรื่องหลัก",
+        description:
+          "ติดตามเนื้อเรื่องหลักที่น่าติดตาม มีการเลือกทางเดินของเรื่องราว Multiple Endings ตามการตัดสินใจ พร้อม Cutscene และ Dialogue ที่มีชีวิตชีวา",
+      },
+      {
+        title: "Event Quest & Side Quests",
+        description:
+          "เควสย่อยนับร้อยภารกิจ แต่ละเควสมีเรื่องราวเป็นของตัวเอง รางวัลพิเศษ ไอเทมหายาก และผลกระทบต่อโลก พร้อมระบบ Quest Log ที่ครบถ้วน",
+      },
+      {
+        title: "Interactive World Events",
+        description:
+          "เหตุการณ์สุ่มเกิดขึ้นระหว่างสำรวจ พบ NPC ที่ต้องการความช่วยเหลือ สมบัติซ่อน มอนสเตอร์หายาก และเหตุการณ์พิเศษตามเวลาและสภาพอากาศ",
+      },
+      {
+        title: "Tactical Grid Combat System",
+        description:
+          "ระบบต่อสู้แบบ Turn-based Tactical บนกริด (อิงจาก Dragon Quest Tact) วางตำแหน่งหน่วยบนตาราง 6x6 ใช้กลยุทธ์เคลื่อนที่ ระยะโจมตี ทิศทาง Elemental Weakness และ Combo Attacks พร้อม Formation System และ Terrain Effects",
+      },
+      {
+        title: "Unit Positioning & Movement",
+        description:
+          "วางตำแหน่งหน่วยก่อนต่อสู้ เคลื่อนที่บนกริดตาม Movement Range ใช้กลยุทธ์ล้อมศัตรู โจมตีจากข้างหลัง Flanking Bonus และ High Ground Advantage",
+      },
+      {
+        title: "Skills & Special Abilities",
+        description:
+          "สกิลพิเศษแต่ละตัวละคร มีระยะโจมตี รูปแบบ AOE (Area of Effect) ต่างกัน Buff/Debuff ทีม Healing Zone และ Ultimate Skills ที่เปลี่ยนสถานการณ์การต่อสู้",
+      },
+      {
+        title: "Party Management",
+        description:
+          "สร้างปาร์ตี้สูงสุด 4 คน เลือกตัวละครจากเพื่อนร่วมทาง แต่ละคนมีสกิลเฉพาะ บุคลิก และเรื่องราวส่วนตัว พร้อมระบบ Friendship & Romance",
+      },
+      {
+        title: "Character Progression",
+        description:
+          "ระบบเลเวลและสกิลทรี ปลดล็อกความสามารถใหม่ๆ เลือก Class (Warrior, Mage, Rogue, Healer, Ranger) พร้อม Multi-class และ Prestige Class",
+      },
+      {
+        title: "Equipment & Crafting",
+        description:
+          "สะสมอาวุธ เกราะ อุปกรณ์นับพัน ระบบ Crafting สร้างไอเทม Enchanting ใส่พลัง Upgrading และ Transmog เปลี่ยนรูปลักษณ์",
+      },
+      {
+        title: "Dungeon Exploration",
+        description:
+          "สำรวจดันเจี้ยนที่มีปริศนา กับดัก มอนสเตอร์ และบอสที่ท้าทาย แต่ละดันเจี้ยนมีธีมและกลไกเฉพาะ พร้อม Procedural Generation",
+      },
+      {
+        title: "Dynamic Weather & Day/Night",
+        description:
+          "ระบบสภาพอากาศและเวลาที่เปลี่ยนแปลง ส่งผลต่อการเล่น บาง Quest เกิดเฉพาะเวลา มอนสเตอร์แตกต่างกลางวัน-กลางคืน",
+      },
+      {
+        title: "NPC & Town System",
+        description:
+          "NPC มีชีวิต มีตารางเดินทาง ร้านค้า Blacksmith Inn Tavern Guild Hall พูดคุยได้ รับเควส และสร้างความสัมพันธ์",
+      },
+      {
+        title: "Skill & Magic System",
+        description:
+          "เรียนรู้สกิลและเวทมนตร์นับร้อย Passive Skills, Active Skills, Ultimate Skills Spell Combinations และ Forbidden Magic",
+      },
+      {
+        title: "Mount & Transportation",
+        description:
+          "ขี่ม้า มังกร หรือยานพาหนะพิเศษ Fast Travel ระหว่างจุด Airship สำหรับบินข้ามทวีป และ Boat สำหรับสำรวจทะเล",
+      },
+      {
+        title: "Treasure Hunting & Secrets",
+        description:
+          "ค้นหาสมบัติซ่อน Secret Areas Hidden Bosses Easter Eggs และ Legendary Items พร้อมระบบ Treasure Map และ Clues",
+      },
+      {
+        title: "Achievement & Collection",
+        description:
+          "ระบบ Achievement ครบถ้วน Monster Bestiary Item Codex Lore Books สะสมทุกอย่างและปลดล็อกรางวัลพิเศษ",
+      },
+      {
+        title: "Save System & Cloud Sync",
+        description:
+          "บันทึกความคืบหน้าหลายสล็อต Auto-save Manual Save Cloud Sync ข้ามอุปกรณ์ และ New Game+ สำหรับเล่นซ้ำ",
+      },
+      {
+        title: "Multiplayer Co-op Mode",
+        description:
+          "เล่นร่วมกับเพื่อนแบบ Online Co-op สูงสุด 4 คน แชร์เควส ต่อสู้บอสร่วมกัน และแลกเปลี่ยนไอเทม",
+      },
+      {
+        title: "Mod Support & Custom Content",
+        description:
+          "รองรับ Mods สร้างเควสเอง Custom Characters, Items, Maps และแชร์กับ Community พร้อม Mod Manager",
+      },
+      {
+        title: "Beautiful Graphics & Sound",
+        description:
+          "กราฟิก 2D/3D สวยงาม Pixel Art หรือ Low-poly Style เพลงประกอบบรรยากาศ Sound Effects คุณภาพสูง และ Voice Acting",
+      },
+      {
+        title: "Accessibility Features",
+        description:
+          "ปรับความยากได้ Colorblind Mode Text-to-Speech Customizable Controls และ Tutorial ที่เข้าใจง่าย",
+      },
+    ],
+    projectDate: "2026-03-01",
+    isFeatured: true,
+    status: "draft",
+    viewCount: 0,
+  },
 ];
 
 // Merge all projects
