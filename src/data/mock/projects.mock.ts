@@ -1057,6 +1057,123 @@ const FUTURE_PROJECTS: Project[] = [
     status: "draft",
     viewCount: 0,
   },
+  {
+    id: "103",
+    slug: "football-manager-game",
+    title: "Football Manager - เกมจัดการทีมฟุตบอลมืออาชีพ",
+    category: "Web",
+    displayOrder: 103,
+    isCleanCode: false,
+    isMock: false,
+    isFuture: true,
+    description:
+      "เกมจัดการทีมฟุตบอลแบบมืออาชีพที่ให้คุณเป็นผู้จัดการทีม ควบคุมทุกด้านของสโมสร ตั้งแต่การซื้อขายนักเตะ วางแผนกลยุทธ์การเล่น ฝึกซ้อมทีม จัดการการเงิน ไปจนถึงการแข่งขันในลีกและทัวร์นาเมนต์ต่างๆ พร้อมระบบ AI ที่ชาญฉลาดและกราฟิกสวยงาม",
+    thumbnail: "/images/projects/football-manager-thumb.jpg",
+    images: [
+      "/images/projects/football-manager-1.jpg",
+      "/images/projects/football-manager-2.jpg",
+      "/images/projects/football-manager-3.jpg",
+      "/images/projects/football-manager-4.jpg",
+      "/images/projects/football-manager-5.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "Three.js",
+      "D3.js",
+      "Chart.js",
+      "Socket.io",
+      "Redis",
+      "WebGL",
+      "Framer Motion",
+      "date-fns",
+    ],
+    features: [
+      {
+        title: "ระบบตลาดซื้อขายนักเตะ",
+        description:
+          "ซื้อ-ขาย-เช่านักเตะจากทั่วโลก ระบบประมูลตัวแบบ Real-time เจรจาสัญญา ค่าเหนื่อย โบนัส พร้อมระบบ Scout ค้นหานักเตะดาวรุ่ง",
+      },
+      {
+        title: "กลยุทธ์และแทคติก",
+        description:
+          "วางแผนการเล่นแบบละเอียด เลือกฟอร์เมชั่น 4-3-3, 4-4-2, 3-5-2 ฯลฯ กำหนดบทบาทผู้เล่น ตั้งค่าการเล่นรุก-รับ และปรับกลยุทธ์ระหว่างแมตช์",
+      },
+      {
+        title: "Match Engine 3D",
+        description:
+          "ดูการแข่งขันแบบ 3D Real-time พร้อมไฮไลท์ประตู สถิติการเล่น Heat Map และการวิเคราะห์เชิงลึกทุกแมตช์",
+      },
+      {
+        title: "ระบบฝึกซ้อมและพัฒนา",
+        description:
+          "ฝึกซ้อมนักเตะเพื่อพัฒนาทักษะ ความแข็งแรง ความเร็ว จัดการสภาพร่างกาย ป้องกันการบาดเจ็บ และพัฒนาเยาวชนในสโมสร",
+      },
+      {
+        title: "จัดการการเงินสโมสร",
+        description:
+          "ควบคุมงบประมาณ ค่าเหนื่อยนักเตะ รายได้จากตั๋ว สปอนเซอร์ สิทธิ์ถ่ายทอด และการลงทุนในสนาม-สิ่งอำนวยความสะดวก",
+      },
+      {
+        title: "Career Mode ระยะยาว",
+        description:
+          "เล่นต่อเนื่องหลายฤดูกาล ดูนักเตะแก่ตัว เกษียณ มีรุ่นใหม่เข้ามา ติดตามสถิติตลอดอาชีพ และสร้างราชวงศ์แชมป์",
+      },
+      {
+        title: "ลีกและทัวร์นาเมนต์จริง",
+        description:
+          "แข่งในลีกชั้นนำทั่วโลก Premier League, La Liga, Serie A, Bundesliga, Champions League, World Cup พร้อมตารางคะแนนแบบ Real-time",
+      },
+      {
+        title: "ระบบ AI ที่ชาญฉลาด",
+        description:
+          "AI ผู้จัดการคู่แข่งที่ฉลาด ปรับกลยุทธ์ตามสถานการณ์ ซื้อขายนักเตะอย่างสมจริง และตอบสนองต่อฟอร์มของทีม",
+      },
+      {
+        title: "สถิติและการวิเคราะห์",
+        description:
+          "ดูสถิติเชิงลึกทุกด้าน ผลงานนักเตะ Heat Map, Pass Map, Shot Map วิเคราะห์จุดแข็ง-จุดอ่อน พร้อมกราฟและชาร์ตแบบ Interactive",
+      },
+      {
+        title: "ห้องแต่งตัวและขวัญกำลังใจ",
+        description:
+          "จัดการความสัมพันธ์กับนักเตะ พูดคุยก่อน-หลังแมตช์ สร้างขวัญกำลังใจ แก้ปัญหาความขัดแย้ง และรักษาบรรยากาศในทีม",
+      },
+      {
+        title: "Multiplayer Online",
+        description:
+          "เล่นกับเพื่อนแบบ Online แข่งขันในลีกเดียวกัน ซื้อขายนักเตะระหว่างกัน และดูว่าใครจะเป็นผู้จัดการที่เก่งที่สุด",
+      },
+      {
+        title: "ระบบข่าวและสื่อ",
+        description:
+          "รับข่าวสารจากสื่อ ตอบคำถามนักข่าว จัดการความคาดหวังของแฟนบอล และสร้างชื่อเสียงให้ตัวเองในวงการ",
+      },
+      {
+        title: "Customization & Mods",
+        description:
+          "ปรับแต่งลีก ทีม ชุดแข่ง โลโก้ และนำเข้าข้อมูลจริงจากภายนอก รองรับ Community Mods และการอัพเดทข้อมูลนักเตะ",
+      },
+      {
+        title: "Mobile & Cross-platform",
+        description:
+          "เล่นได้ทั้งบนเว็บและมือถือ ซิงค์ความคืบหน้าข้ามอุปกรณ์ พร้อม Cloud Save ที่ปลอดภัย",
+      },
+    ],
+    projectDate: "2025-10-01",
+    isFeatured: true,
+    status: "draft",
+    viewCount: 0,
+  },
 ];
 
 // Merge all projects
