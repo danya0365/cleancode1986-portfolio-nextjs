@@ -1,4 +1,5 @@
 import { HomeView } from "@/src/presentation/components/home/HomeView";
+import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
 import { HomePresenterFactory } from "@/src/presentation/presenters/home/HomePresenter";
 import type { Metadata } from "next";
 
@@ -32,11 +33,19 @@ export default async function Home() {
     // Get view model from presenter
     const viewModel = await presenter.getViewModel();
 
-    return <HomeView initialViewModel={viewModel} />;
+    return (
+      <MainLayout>
+        <HomeView initialViewModel={viewModel} />
+      </MainLayout>
+    );
   } catch (error) {
     console.error("Error fetching home data:", error);
 
     // Fallback UI - let View component handle error state
-    return <HomeView />;
+    return (
+      <MainLayout>
+        <HomeView />
+      </MainLayout>
+    );
   }
 }
