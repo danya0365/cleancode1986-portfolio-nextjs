@@ -1174,6 +1174,144 @@ const FUTURE_PROJECTS: Project[] = [
     status: "draft",
     viewCount: 0,
   },
+  {
+    id: "104",
+    slug: "football-fantasy-league",
+    title: "Football Fantasy League - เกมจัดทีมแฟนตาซีฟุตบอล",
+    category: "Full-stack",
+    displayOrder: 104,
+    isCleanCode: false,
+    isMock: false,
+    isFuture: true,
+    description:
+      "เกมจัดทีมแฟนตาซีฟุตบอลแบบ Premier League Fantasy ที่ให้คุณเป็นผู้จัดการทีมในฝัน เลือกนักเตะจริงจากลีกชั้นนำ แข่งขันกับเพื่อนและผู้เล่นทั่วโลก รับคะแนนตามผลงานจริงของนักเตะ พร้อมระบบลีกส่วนตัว การซื้อขายนักเตะ และรางวัลมากมาย",
+    thumbnail: "/images/projects/football-fantasy-thumb.jpg",
+    images: [
+      "/images/projects/football-fantasy-1.jpg",
+      "/images/projects/football-fantasy-2.jpg",
+      "/images/projects/football-fantasy-3.jpg",
+      "/images/projects/football-fantasy-4.jpg",
+      "/images/projects/football-fantasy-5.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "TanStack Query",
+      "Chart.js",
+      "D3.js",
+      "Socket.io",
+      "Redis",
+      "Framer Motion",
+      "date-fns",
+      "Football-Data.org API",
+      "Stripe",
+    ],
+    features: [
+      {
+        title: "จัดทีมแฟนตาซีในฝัน",
+        description:
+          "เลือกนักเตะ 15 คน ภายในงบ 100 ล้าน จากลีกจริง วางฟอร์เมชั่น 3-4-3, 3-5-2, 4-3-3 ฯลฯ เลือกกัปตันและรองกัปตัน พร้อมระบบ Auto-pick อัจฉริยะ",
+      },
+      {
+        title: "คะแนนตามผลงานจริง Real-time",
+        description:
+          "รับคะแนนจากผลงานจริงของนักเตะ ประตู แอสซิสต์ Clean Sheet บันทึกเซฟ อัพเดทแบบ Real-time ทุกนัดการแข่งขัน",
+      },
+      {
+        title: "ตลาดซื้อขายนักเตะ",
+        description:
+          "ซื้อ-ขายนักเตะทุกสัปดาห์ ดูราคาขึ้น-ลง ตามฟอร์มการเล่น วิเคราะห์ Fixture Difficulty Rating และ Ownership %",
+      },
+      {
+        title: "Gameweek Planning",
+        description:
+          "วางแผนทีมล่วงหน้า 5 Gameweeks ใช้ Wildcard, Free Hit, Bench Boost, Triple Captain ในจังหวะที่เหมาะสม",
+      },
+      {
+        title: "ลีกส่วนตัวและ Mini-Leagues",
+        description:
+          "สร้างลีกส่วนตัวกับเพื่อน ครอบครัว เพื่อนร่วมงาน แข่งขันกันในกลุ่มเล็ก พร้อมตารางอันดับและสถิติเปรียบเทียบ",
+      },
+      {
+        title: "Global Leaderboard",
+        description:
+          "แข่งขันกับผู้เล่นทั่วโลก ดูอันดับโลก อันดับประเทศ อันดับภูมิภาค พร้อมรางวัลสำหรับผู้ชนะ",
+      },
+      {
+        title: "สถิติและการวิเคราะห์เชิงลึก",
+        description:
+          "ดูสถิตินักเตะครบถ้วน Form, ICT Index, Expected Goals (xG), Expected Assists (xA), Bonus Points System พร้อมกราฟและชาร์ตแบบ Interactive",
+      },
+      {
+        title: "AI Recommendations",
+        description:
+          "ระบบ AI แนะนำนักเตะที่น่าสนใจ วิเคราะห์ Fixture, Form, Price Changes และคาดการณ์คะแนนในอนาคต",
+      },
+      {
+        title: "Draft Mode",
+        description:
+          "โหมด Draft แบบ Head-to-Head แต่ละคนเลือกนักเตะไม่ซ้ำกัน แข่งขันแบบ Knockout Tournament พร้อมระบบ Waiver Wire",
+      },
+      {
+        title: "Live Match Updates",
+        description:
+          "ติดตามคะแนนแบบ Live ระหว่างแมตช์ ดูไฮไลท์ประตู สถิติการเล่น และการเปลี่ยนตัวแบบ Real-time",
+      },
+      {
+        title: "Price Change Predictor",
+        description:
+          "ทำนายการเปลี่ยนแปลงราคานักเตะ ดู Transfer In/Out Trends วิเคราะห์ว่านักเตะคนไหนจะขึ้น-ลงราคา",
+      },
+      {
+        title: "Fixture Planner & Difficulty",
+        description:
+          "ดูตารางแข่งล่วงหน้า วิเคราะห์ความยากง่ายของคู่แข่ง Double Gameweeks, Blank Gameweeks พร้อมระบบแจ้งเตือน",
+      },
+      {
+        title: "Team Comparison Tool",
+        description:
+          "เปรียบเทียบทีมกับเพื่อน ดูความแตกต่างของนักเตะ คะแนน การใช้ Chip และกลยุทธ์การเล่น",
+      },
+      {
+        title: "History & Season Archives",
+        description:
+          "ดูประวัติทีมย้อนหลัง สถิติทุกฤดูกาล Hall of Fame ผู้เล่นที่ดีที่สุด และความทรงจำแต่ละซีซั่น",
+      },
+      {
+        title: "Social Features",
+        description:
+          "แชทกับสมาชิกในลีก แชร์ทีม โพสต์ผลงาน Banter กับเพื่อน พร้อมระบบ Achievements และ Badges",
+      },
+      {
+        title: "Premium Features",
+        description:
+          "สมัครสมาชิก Premium รับสถิติเพิ่มเติม AI Analysis ขั้นสูง ลบโฆษณา และรางวัลพิเศษ",
+      },
+      {
+        title: "Mobile App & Notifications",
+        description:
+          "แอปมือถือ iOS/Android แจ้งเตือน Deadline, Price Changes, Lineup News และผลการแข่งขันทันที",
+      },
+      {
+        title: "Multi-League Support",
+        description:
+          "รองรับหลายลีก Premier League, La Liga, Serie A, Bundesliga เล่นได้พร้อมกันหลายลีก",
+      },
+    ],
+    projectDate: "2025-12-01",
+    isFeatured: true,
+    status: "draft",
+    viewCount: 0,
+  },
 ];
 
 // Merge all projects
