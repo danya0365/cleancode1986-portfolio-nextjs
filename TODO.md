@@ -1,6 +1,7 @@
 # Clean Code 1986 Portfolio - TODO List
 
 ## 📋 Project Overview
+
 เว็บไซต์ Portfolio สำหรับบริษัท Clean Code 1986 เพื่อแสดงผลงานและบริการ ให้ลูกค้าได้ชมและตัดสินใจจ้างงาน
 
 ---
@@ -8,6 +9,7 @@
 ## 🎯 Phase 1: Foundation & Core Setup ✅ COMPLETED
 
 ### 1.1 Project Architecture ✅
+
 - [x] Setup Next.js 15 with App Router
 - [x] Setup TypeScript
 - [x] Setup Tailwind CSS v4
@@ -22,6 +24,7 @@
   - [x] `/src/presentation` - Components, Presenters, Hooks
 
 ### 1.2 Database & Backend ✅
+
 - [x] Initialize Supabase project
 - [x] Create initial schema migration
 - [x] Setup authentication (Supabase Auth)
@@ -34,6 +37,7 @@
 **Strategy: Build UI first with Mock Data, then integrate real API later**
 
 ### 2.1 Design System & Components
+
 - [ ] **Color Palette**
   - [ ] Primary colors (brand colors)
   - [ ] Secondary colors
@@ -69,7 +73,9 @@
 ### 2.2 Pages & Features
 
 #### 🏠 **Landing Page** (Priority 1)
+
 **Path:** `/`
+
 - [ ] **Hero Section**
   - [ ] Company logo & tagline
   - [ ] Main headline
@@ -113,9 +119,11 @@
   - [ ] Copyright
 
 #### 📁 **Portfolio/Projects Pages** (Priority 2)
+
 **Paths:** `/portfolio`, `/portfolio/[slug]`
 
 **Portfolio List Page (`/portfolio`)**
+
 - [ ] **Filter & Search**
   - [ ] Search by project name
   - [ ] Filter by category (Web, Mobile, UI/UX, etc.)
@@ -131,6 +139,7 @@
 - [ ] **Empty State** (no projects found)
 
 **Project Detail Page (`/portfolio/[slug]`)**
+
 - [ ] **Project Header**
   - [ ] Project title
   - [ ] Category & tags
@@ -161,7 +170,9 @@
   - [ ] "View All Projects" button
 
 #### 🛠️ **Services Page** (Priority 3)
+
 **Path:** `/services`
+
 - [ ] **Hero Section**
   - [ ] Page title
   - [ ] Description
@@ -196,7 +207,9 @@
   - [ ] "Get Started" button
 
 #### 👥 **About/Team Page** (Priority 4)
+
 **Path:** `/about`
+
 - [ ] **Company Story Section**
   - [ ] Company history
   - [ ] Mission & vision
@@ -216,7 +229,9 @@
   - [ ] "We're hiring" message
 
 #### 📞 **Contact Page** (Priority 5)
+
 **Path:** `/contact`
+
 - [ ] **Contact Form**
   - [ ] Name field
   - [ ] Email field
@@ -239,9 +254,11 @@
   - [ ] Expandable answers
 
 #### 📝 **Blog Pages** (Priority 6 - Optional)
+
 **Paths:** `/blog`, `/blog/[slug]`
 
 **Blog List Page (`/blog`)**
+
 - [ ] **Blog Grid**
   - [ ] Blog post cards
   - [ ] Featured image
@@ -253,6 +270,7 @@
 - [ ] **Pagination**
 
 **Blog Detail Page (`/blog/[slug]`)**
+
 - [ ] **Post Header**
   - [ ] Title
   - [ ] Author info
@@ -269,7 +287,9 @@
 - [ ] **Related Posts**
 
 #### 🔐 **Admin/Dashboard Pages** (Priority 7 - Later)
+
 **Protected Routes**
+
 - [ ] `/admin` - Dashboard overview
 - [ ] `/admin/projects` - Manage projects (CRUD)
 - [ ] `/admin/blog` - Manage blog posts (CRUD)
@@ -277,9 +297,11 @@
 - [ ] `/admin/settings` - Site settings
 
 ### 2.3 Mock Data Structure
+
 Create `/src/data/mock/` folder
 
 - [ ] **projects.mock.ts**
+
   ```typescript
   - id, slug, title, category, description
   - thumbnail, images[]
@@ -289,37 +311,45 @@ Create `/src/data/mock/` folder
   ```
 
 - [ ] **services.mock.ts**
+
   ```typescript
   - id, title, icon, description
   - category, features[], pricing
   ```
 
 - [ ] **team.mock.ts**
+
   ```typescript
-  - id, name, role, bio, avatar
-  - socialLinks (linkedin, github, twitter)
+  -id, name, role, bio, avatar - socialLinks(linkedin, github, twitter);
   ```
 
 - [ ] **testimonials.mock.ts**
+
   ```typescript
-  - id, clientName, clientRole, company
-  - avatar, content, rating, projectId
+  -id, clientName, clientRole, company - avatar, content, rating, projectId;
   ```
 
 - [ ] **blog.mock.ts** (Optional)
+
   ```typescript
-  - id, slug, title, excerpt, content
-  - author, publishDate, category, tags
-  - featuredImage, readTime
+  -id,
+    slug,
+    title,
+    excerpt,
+    content - author,
+    publishDate,
+    category,
+    tags - featuredImage,
+    readTime;
   ```
 
 - [ ] **technologies.mock.ts**
   ```typescript
-  - id, name, icon, category
-  - description, proficiencyLevel
+  -id, name, icon, category - description, proficiencyLevel;
   ```
 
 ### 2.4 Global Layout Components
+
 - [ ] **Navbar Component**
   - [ ] Logo
   - [ ] Navigation links (Home, Portfolio, Services, About, Contact, Blog)
@@ -345,6 +375,7 @@ Create `/src/data/mock/` folder
 ### 3.1 Database Tables Design
 
 #### **Projects Table** (`portfolio_projects`)
+
 ```sql
 - id (uuid)
 - slug (text, unique)
@@ -368,6 +399,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Services Table** (`services`)
+
 ```sql
 - id (uuid)
 - title (text)
@@ -382,6 +414,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Team Members Table** (`team_members`)
+
 ```sql
 - id (uuid)
 - name (text)
@@ -397,6 +430,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Testimonials Table** (`testimonials`)
+
 ```sql
 - id (uuid)
 - client_name (text)
@@ -411,6 +445,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Contact Submissions Table** (`contact_submissions`)
+
 ```sql
 - id (uuid)
 - name (text)
@@ -424,6 +459,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Blog Posts Table** (`blog_posts`) - Optional
+
 ```sql
 - id (uuid)
 - slug (text, unique)
@@ -442,6 +478,7 @@ Create `/src/data/mock/` folder
 ```
 
 #### **Technologies Table** (`technologies`)
+
 ```sql
 - id (uuid)
 - name (text)
@@ -455,6 +492,7 @@ Create `/src/data/mock/` folder
 ```
 
 ### 3.2 Row Level Security (RLS) Policies
+
 - [ ] **Public Read Access**
   - [ ] Projects (published only)
   - [ ] Services
@@ -462,16 +500,15 @@ Create `/src/data/mock/` folder
   - [ ] Testimonials
   - [ ] Blog posts (published only)
   - [ ] Technologies
-  
 - [ ] **Admin Write Access**
   - [ ] Admin users can CRUD all tables
   - [ ] Regular users cannot modify data
-  
 - [ ] **Contact Submissions**
   - [ ] Anyone can create (public form)
   - [ ] Only admins can view/update
 
 ### 3.3 API Endpoints / Server Actions
+
 Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 
 - [ ] **Projects**
@@ -479,11 +516,9 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] `getProjectBySlug(slug)` - Get single project
   - [ ] `getFeaturedProjects()` - Get featured projects
   - [ ] `getProjectsByCategory(category)` - Filter by category
-  
 - [ ] **Contact**
   - [ ] `submitContactForm(data)` - Create contact submission
   - [ ] `sendContactEmail(data)` - Send email notification
-  
 - [ ] **Admin (Protected)**
   - [ ] `createProject(data)` - Create new project
   - [ ] `updateProject(id, data)` - Update project
@@ -495,6 +530,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 🚀 Phase 4: Advanced Features
 
 ### 4.1 SEO Optimization
+
 - [ ] **Next.js Metadata**
   - [ ] generateMetadata() for all pages
   - [ ] Dynamic OG images
@@ -509,6 +545,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Product schema for services
 
 ### 4.2 Performance Optimization
+
 - [ ] **Image Optimization**
   - [ ] Next.js Image component
   - [ ] WebP format
@@ -522,6 +559,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] CDN caching
 
 ### 4.3 Analytics & Tracking
+
 - [ ] **Google Analytics**
   - [ ] Setup GA4
   - [ ] Track page views
@@ -531,6 +569,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Track conversion sources
 
 ### 4.4 Email Integration
+
 - [ ] **Email Service Setup**
   - [ ] Choose provider (SendGrid, Resend, Mailgun)
   - [ ] Setup email templates
@@ -544,6 +583,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 🎨 Phase 5: UI Polish & Enhancements
 
 ### 5.1 Animations & Interactions
+
 - [ ] **Scroll Animations**
   - [ ] Fade in on scroll
   - [ ] Slide in from sides
@@ -557,6 +597,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Form input focus states
 
 ### 5.2 Accessibility (A11y)
+
 - [ ] **Keyboard Navigation**
   - [ ] Tab order
   - [ ] Focus indicators
@@ -569,6 +610,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Test with contrast checker
 
 ### 5.3 Internationalization (Optional)
+
 - [ ] **Multi-language Support**
   - [ ] Thai
   - [ ] English
@@ -579,6 +621,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 🧪 Phase 6: Testing & Quality Assurance
 
 ### 6.1 Testing
+
 - [ ] **Unit Tests** (Jest)
   - [ ] Component tests
   - [ ] Utility functions
@@ -591,6 +634,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Navigation
 
 ### 6.2 Cross-browser Testing
+
 - [ ] Chrome
 - [ ] Firefox
 - [ ] Safari
@@ -598,6 +642,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 - [ ] Mobile browsers (iOS Safari, Chrome Android)
 
 ### 6.3 Performance Testing
+
 - [ ] **Lighthouse Audit**
   - [ ] Performance score > 90
   - [ ] Accessibility score > 90
@@ -612,6 +657,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 🚀 Phase 7: Deployment & DevOps
 
 ### 7.1 Deployment Setup
+
 - [ ] **Vercel Deployment**
   - [ ] Connect GitHub repo
   - [ ] Configure environment variables
@@ -624,6 +670,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Setup backups
 
 ### 7.2 CI/CD Pipeline
+
 - [ ] **GitHub Actions**
   - [ ] Run tests on PR
   - [ ] Type checking
@@ -634,6 +681,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Preview deployments for PRs
 
 ### 7.3 Monitoring & Logging
+
 - [ ] **Error Tracking**
   - [ ] Sentry or similar
   - [ ] Error boundaries
@@ -648,6 +696,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 📋 Phase 8: Content & Launch
 
 ### 8.1 Content Creation
+
 - [ ] **Write Copy**
   - [ ] About page content
   - [ ] Services descriptions
@@ -663,6 +712,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Detailed descriptions
 
 ### 8.2 Pre-launch Checklist
+
 - [ ] **Content Review**
   - [ ] Proofread all text
   - [ ] Check for typos
@@ -681,6 +731,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Cookie Policy (if applicable)
 
 ### 8.3 Launch
+
 - [ ] **Soft Launch**
   - [ ] Share with team
   - [ ] Gather feedback
@@ -699,6 +750,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 🔄 Phase 9: Maintenance & Growth
 
 ### 9.1 Regular Maintenance
+
 - [ ] **Content Updates**
   - [ ] Add new projects regularly
   - [ ] Update team info
@@ -713,6 +765,7 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
   - [ ] Add new content for SEO
 
 ### 9.2 Feature Enhancements
+
 - [ ] **Blog Platform** (if not done)
   - [ ] Share industry insights
   - [ ] Technical tutorials
@@ -730,9 +783,11 @@ Create in `/src/application/usecases/` and `/src/infrastructure/repositories/`
 ## 📊 Priority Summary
 
 ### **NOW - Phase 2 (UI Development)**
+
 Focus on building all UI pages with mock data following the CREATE_PAGE_PATTERN.md
 
 **High Priority Pages:**
+
 1. Landing Page (/)
 2. Portfolio List (/portfolio)
 3. Project Detail (/portfolio/[slug])
@@ -743,11 +798,13 @@ Focus on building all UI pages with mock data following the CREATE_PAGE_PATTERN.
 **Timeline:** 2-3 weeks
 
 ### **NEXT - Phase 3 (Backend Integration)**
+
 Connect UI to Supabase and replace mock data
 
 **Timeline:** 1-2 weeks
 
 ### **LATER - Phases 4-9 (Polish, Launch, Growth)**
+
 SEO, performance, deployment, content, and ongoing maintenance
 
 **Timeline:** Ongoing
@@ -757,6 +814,7 @@ SEO, performance, deployment, content, and ongoing maintenance
 ## 🎯 Current Sprint Goals
 
 **Sprint 1: Landing + Portfolio Pages (Week 1-2)**
+
 - [ ] Landing page UI complete
 - [ ] Portfolio list page UI complete
 - [ ] Project detail page UI complete
@@ -764,6 +822,7 @@ SEO, performance, deployment, content, and ongoing maintenance
 - [ ] Responsive design for all pages
 
 **Sprint 2: Contact + Services + About (Week 3)**
+
 - [ ] Contact page with form
 - [ ] Services page UI
 - [ ] About/Team page UI
@@ -771,12 +830,14 @@ SEO, performance, deployment, content, and ongoing maintenance
 - [ ] Mock data complete
 
 **Sprint 3: Backend Integration (Week 4-5)**
+
 - [ ] Database schema created
 - [ ] Supabase integration
 - [ ] Replace all mock data
 - [ ] Admin CRUD operations
 
 **Sprint 4: Polish & Launch (Week 6+)**
+
 - [ ] SEO optimization
 - [ ] Performance optimization
 - [ ] Content creation
@@ -790,7 +851,6 @@ SEO, performance, deployment, content, and ongoing maintenance
 - **Use Clean Architecture** throughout the project
 - **Mobile-first design** approach
 - **Optimize for Core Web Vitals** from the start
-- **Kanit font** for Thai text, modern sans-serif for English
 - **Dark mode support** for better UX
 - **Accessibility first** - WCAG AA compliance minimum
 
