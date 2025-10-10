@@ -940,7 +940,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       },
     ],
     projectDate: "2025-01-25",
-    liveUrl: "https://timeluxe.vercel.app/",
+    liveUrl: "https://timeluxe-ten.vercel.app/",
     githubUrl: "https://github.com/danya0365/timeluxe-nextjs",
     isFeatured: true,
     status: "published",
