@@ -855,6 +855,97 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 856,
   },
+  {
+    id: "7",
+    slug: "timeluxe-luxury-watch-marketplace",
+    title: "TimeLuxe - ตลาดกลางนาฬิกาหรูออนไลน์",
+    category: "Full-stack",
+    displayOrder: 8,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มซื้อขายนาฬิกาหรูออนไลน์ที่ใหญ่ที่สุด มีนาฬิกาแบรนด์เนมระดับโลก Rolex, Patek Philippe, Audemars Piguet พร้อมระบบการันตีความแท้ 100% การชำระเงินปลอดภัย และการจัดส่งที่มีประกัน",
+    thumbnail: "/images/projects/timeluxe-thumb.jpg",
+    images: [
+      "/images/projects/timeluxe-1.jpg",
+      "/images/projects/timeluxe-2.jpg",
+      "/images/projects/timeluxe-3.jpg",
+      "/images/projects/timeluxe-4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Zustand",
+      "Tailwind CSS 4",
+      "LocalForage",
+      "next-themes",
+      "Axios",
+      "Lucide Icons",
+    ],
+    features: [
+      {
+        title: "แบรนด์ชั้นนำระดับโลก",
+        description:
+          "รวมนาฬิกาจากแบรนด์ดังกว่า 50 แบรนด์ เช่น Rolex, Patek Philippe, Audemars Piguet, Omega, Cartier พร้อมข้อมูลรายละเอียดครบถ้วน",
+      },
+      {
+        title: "การันตีความแท้ 100%",
+        description:
+          "นาฬิกาทุกเรือนผ่านการตรวจสอบโดยผู้เชี่ยวชาญ มีใบรับรองความแท้ หากพบว่าเป็นของปลอมคืนเงิน 100%",
+      },
+      {
+        title: "ระบบค้นหาและกรองขั้นสูง",
+        description:
+          "ค้นหานาฬิกาตามแบรนด์ รุ่น ราคา สภาพ ปีที่ผลิต พร้อมตัวกรองที่ละเอียดเพื่อหานาฬิกาที่ใช่",
+      },
+      {
+        title: "Marketplace ซื้อและขาย",
+        description:
+          "ผู้ใช้สามารถซื้อนาฬิกาจากผู้ขายมืออาชีพ หรือวางขายนาฬิกาของตัวเองได้ พร้อมเข้าถึงลูกค้านับพัน",
+      },
+      {
+        title: "ระบบชำระเงินปลอดภัย",
+        description:
+          "ชำระเงินผ่านระบบที่ได้มาตรฐานสากล มีระบบ Escrow ป้องกันการโกง พร้อมเข้ารหัสข้อมูลการชำระเงิน",
+      },
+      {
+        title: "รายการโปรดและเปรียบเทียบ",
+        description:
+          "เก็บนาฬิกาที่สนใจไว้ดูภายหลัง เปรียบเทียบนาฬิกาหลายรุ่น และรับแจ้งเตือนเมื่อราคาลดลง",
+      },
+      {
+        title: "โปรไฟล์ผู้ใช้ครบครัน",
+        description:
+          "จัดการบัญชี ดูประวัติการซื้อขาย ติดตามออเดอร์ และจัดการข้อมูลส่วนตัว",
+      },
+      {
+        title: "Responsive & Dark Mode",
+        description:
+          "รองรับทุกขนาดหน้าจอ จากมือถือถึงเดสก์ท็อป พร้อม Dark Mode สำหรับใช้งานสบายตา",
+      },
+      {
+        title: "SEO Optimized",
+        description:
+          "ใช้ Server Components และ Dynamic Metadata สำหรับ SEO ที่ดี ติดอันดับค้นหาง่าย",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างโค้ดตาม Clean Architecture และ SOLID principles แยก layers ชัดเจน บำรุงรักษาง่าย",
+      },
+    ],
+    projectDate: "2025-01-25",
+    liveUrl: "https://timeluxe.vercel.app/",
+    githubUrl: "https://github.com/danya0365/timeluxe-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1523,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
