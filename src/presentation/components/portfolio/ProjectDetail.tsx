@@ -217,17 +217,27 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
           {/* Hero Image */}
           <div className="relative h-96 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500">
             {project.thumbnail ? (
-              <Image
-                src={project.thumbnail}
-                alt={`${project.title} thumbnail`}
-                fill
-                className="object-cover object-center"
-                priority
-                onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = "none";
-                }}
-              />
+              <>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-9xl opacity-50">
+                    {project.category === "Web" && "💻"}
+                    {project.category === "Mobile" && "📱"}
+                    {project.category === "UI/UX" && "🎨"}
+                    {project.category === "Full-stack" && "🚀"}
+                  </div>
+                </div>
+                <Image
+                  src={project.thumbnail}
+                  alt={`${project.title} thumbnail`}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                />
+              </>
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-9xl opacity-50">
@@ -276,6 +286,9 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                       onClick={() => handleImageClick(index)}
                       className="h-48 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center"
                     >
+                      <div className="absolute inset-0 flex items-center justify-center text-4xl text-white transition-opacity">
+                        <span className="bg-black/50 p-2 rounded-full">📸</span>
+                      </div>
                       <Image
                         src={image}
                         alt={`${project.title} screenshot ${index + 1}`}
@@ -289,11 +302,6 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                           target.style.display = "none";
                         }}
                       />
-                      <div className="absolute inset-0 flex items-center justify-center text-4xl bg-black/30 text-white opacity-0 hover:opacity-100 transition-opacity">
-                        <span className="bg-black bg-opacity-50 p-2 rounded-full">
-                          📸
-                        </span>
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -349,11 +357,41 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                   href={`/portfolio/${relatedProject.slug}`}
                   className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all"
                 >
-                  <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-6xl">
-                    {relatedProject.category === "Web" && "💻"}
-                    {relatedProject.category === "Mobile" && "📱"}
-                    {relatedProject.category === "UI/UX" && "🎨"}
-                    {relatedProject.category === "Full-stack" && "🚀"}
+                  <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-6xl relative">
+                    {relatedProject.thumbnail ? (
+                      <>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-9xl opacity-50">
+                            {relatedProject.category === "Web" && "💻"}
+                            {relatedProject.category === "Mobile" && "📱"}
+                            {relatedProject.category === "UI/UX" && "🎨"}
+                            {relatedProject.category === "Full-stack" && "🚀"}
+                          </div>
+                        </div>
+                        <Image
+                          src={relatedProject.thumbnail}
+                          alt={`${relatedProject.title} thumbnail`}
+                          fill
+                          className="object-cover object-center"
+                          priority
+                          onError={(
+                            e: React.SyntheticEvent<HTMLImageElement>
+                          ) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-9xl opacity-50">
+                          {relatedProject.category === "Web" && "💻"}
+                          {relatedProject.category === "Mobile" && "📱"}
+                          {relatedProject.category === "UI/UX" && "🎨"}
+                          {relatedProject.category === "Full-stack" && "🚀"}
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
