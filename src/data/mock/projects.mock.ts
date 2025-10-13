@@ -480,11 +480,13 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     isFuture: false,
     description:
       "แอปพลิเคชันอ่านอัลกุรอานบนเว็บที่ทันสมัย พร้อมฟีเจอร์ครบครัน รองรับหลายภาษา มี Tajweed และเสียงอ่านจาก Qari ชื่อดัง ออกแบบมาเพื่อประสบการณ์การอ่านที่ดีที่สุด",
-    thumbnail: "/images/projects/alquran-thumb.jpg",
+    thumbnail: "/images/projects/al-quran/1.jpg",
     images: [
-      "/images/projects/alquran-1.jpg",
-      "/images/projects/alquran-2.jpg",
-      "/images/projects/alquran-3.jpg",
+      "/images/projects/al-quran/1.jpg",
+      "/images/projects/al-quran/2.jpg",
+      "/images/projects/al-quran/3.jpg",
+      "/images/projects/al-quran/4.jpg",
+      "/images/projects/al-quran/5.jpg",
     ],
     technologies: [
       "Next.js 15",
