@@ -1,10 +1,14 @@
 "use client";
 
+import { type Project } from "@/src/data/mock/projects.mock";
+import type {
+  CategoryFilter,
+  PortfolioViewModel,
+} from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
+import { usePortfolioPresenter } from "@/src/presentation/presenters/portfolio/usePortfolioPresenter";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { type Project } from "@/src/data/mock/projects.mock";
-import { usePortfolioPresenter } from "@/src/presentation/presenters/portfolio/usePortfolioPresenter";
-import type { PortfolioViewModel, CategoryFilter } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
 
 interface PortfolioListProps {
   initialViewModel?: PortfolioViewModel;
@@ -12,7 +16,8 @@ interface PortfolioListProps {
 
 export function PortfolioList({ initialViewModel }: PortfolioListProps) {
   const { viewModel, loading, error } = usePortfolioPresenter(initialViewModel);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryFilter>("All");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Loading state
@@ -144,12 +149,38 @@ function ProjectCard({ project }: { project: Project }) {
     >
       {/* Image */}
       <div className="relative h-56 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center text-7xl opacity-50">
-          {project.category === "Web" && "💻"}
-          {project.category === "Mobile" && "📱"}
-          {project.category === "UI/UX" && "🎨"}
-          {project.category === "Full-stack" && "🚀"}
-        </div>
+        {project.thumbnail ? (
+          <>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-9xl opacity-50">
+                {project.category === "Web" && "💻"}
+                {project.category === "Mobile" && "📱"}
+                {project.category === "UI/UX" && "🎨"}
+                {project.category === "Full-stack" && "🚀"}
+              </div>
+            </div>
+            <Image
+              src={project.thumbnail}
+              alt={`${project.title} thumbnail`}
+              fill
+              className="object-cover object-center"
+              priority
+              onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = "none";
+              }}
+            />
+          </>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-9xl opacity-50">
+              {project.category === "Web" && "💻"}
+              {project.category === "Mobile" && "📱"}
+              {project.category === "UI/UX" && "🎨"}
+              {project.category === "Full-stack" && "🚀"}
+            </div>
+          </div>
+        )}
         <div className="absolute top-4 right-4">
           <span className="px-3 py-1 bg-white/90 dark:bg-gray-900/90 text-sm font-medium rounded-full">
             {project.category}

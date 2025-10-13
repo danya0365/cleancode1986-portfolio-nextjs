@@ -1,12 +1,12 @@
-import Link from "next/link";
 import type { Project } from "@/src/data/mock/projects.mock";
+import Image from "next/image";
+import Link from "next/link";
 
 interface FeaturedProjectsProps {
   projects: Project[];
 }
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-
   return (
     <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,9 +30,38 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             >
               {/* Image */}
               <div className="relative h-48 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50">
-                  📱
-                </div>
+                {project.thumbnail ? (
+                  <>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-9xl opacity-50">
+                        {project.category === "Web" && "💻"}
+                        {project.category === "Mobile" && "📱"}
+                        {project.category === "UI/UX" && "🎨"}
+                        {project.category === "Full-stack" && "🚀"}
+                      </div>
+                    </div>
+                    <Image
+                      src={project.thumbnail}
+                      alt={`${project.title} thumbnail`}
+                      fill
+                      className="object-cover object-center"
+                      priority
+                      onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                      }}
+                    />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-9xl opacity-50">
+                      {project.category === "Web" && "💻"}
+                      {project.category === "Mobile" && "📱"}
+                      {project.category === "UI/UX" && "🎨"}
+                      {project.category === "Full-stack" && "🚀"}
+                    </div>
+                  </div>
+                )}
                 <div className="absolute top-4 right-4">
                   <span className="px-3 py-1 bg-white/90 dark:bg-gray-900/90 text-sm font-medium rounded-full">
                     {project.category}
