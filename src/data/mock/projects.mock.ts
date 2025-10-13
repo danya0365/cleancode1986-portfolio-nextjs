@@ -946,6 +946,63 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 1523,
   },
+  {
+    id: "17",
+    slug: "triply-travel-platform",
+    title: "Triply - แพลตฟอร์มท่องเที่ยวออนไลน์",
+    category: "Full-stack",
+    description: "แพลตฟอร์มท่องเที่ยวออนไลน์ที่รวบรวมที่พัก กิจกรรม และประสบการณ์การเดินทางไว้ในที่เดียว พร้อมระบบจองที่สะดวกสบาย และการแนะนำจากผู้เชี่ยวชาญ",
+    thumbnail: "/images/projects/triply/thumbnail.jpg",
+    images: [
+      "/images/projects/triply/screen-1.jpg",
+      "/images/projects/triply/screen-2.jpg",
+      "/images/projects/triply/screen-3.jpg"
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "PostgreSQL",
+      "Prisma",
+      "tRPC",
+      "NextAuth.js",
+      "Stripe"
+    ],
+    features: [
+      {
+        title: "ระบบค้นหาและจองที่พัก",
+        description: "ค้นหาที่พักได้อย่างสะดวกด้วยฟิลเตอร์ที่หลากหลาย ดูรายละเอียดที่พัก ภาพถ่ายจริง และรีวิวจากผู้เข้าพักจริง"
+      },
+      {
+        title: "ระบบจัดการทริป",
+        description: "สร้างและจัดการแผนการเดินทาง จองตั๋วเครื่องบิน ที่พัก และกิจกรรมได้ในที่เดียว"
+      },
+      {
+        title: "ระบบแนะนำสถานที่ท่องเที่ยว",
+        description: "แนะนำสถานที่ท่องเที่ยวยอดนิยม กิจกรรมน่าสนใจ และร้านอาหารแนะนำตามความสนใจของผู้ใช้"
+      },
+      {
+        title: "ระบบรีวิวและให้คะแนน",
+        description: "แบ่งปันประสบการณ์การเดินทางและให้คะแนนสถานที่ท่องเที่ยว เพื่อเป็นประโยชน์ต่อผู้ใช้งานท่านอื่น"
+      },
+      {
+        title: "การชำระเงินที่ปลอดภัย",
+        description: "รองรับการชำระเงินผ่านหลายช่องทางด้วยระบบ Stripe ที่ปลอดภัยและน่าเชื่อถือ"
+      }
+    ],
+    client: "Triply Co., Ltd.",
+    projectDate: "2024-09-15",
+    liveUrl: "https://triply-nextjs.vercel.app",
+    githubUrl: "https://github.com/yourusername/triply-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+    displayOrder: 17,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
