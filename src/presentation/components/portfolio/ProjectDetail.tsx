@@ -4,6 +4,8 @@ import type { ProjectDetailViewModel } from "@/src/presentation/presenters/portf
 import { useProjectDetailPresenter } from "@/src/presentation/presenters/portfolio/useProjectDetailPresenter";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Lightbox } from "../ui/Lightbox";
 
 interface ProjectDetailProps {
   slug: string;
@@ -15,6 +17,33 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
     slug,
     initialViewModel
   );
+
+  // Lightbox state
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(-1);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  const handleImageClick = (index: number) => {
+    setLightboxImageIndex(index);
+    setIsLightboxOpen(true);
+  };
+
+  const handleCloseLightbox = () => {
+    setIsLightboxOpen(false);
+  };
+
+  // Render lightbox if open
+  const renderLightbox = () => {
+    if (isLightboxOpen && viewModel?.project?.images) {
+      return (
+        <Lightbox
+          images={viewModel.project.images}
+          currentIndex={lightboxImageIndex}
+          onClose={handleCloseLightbox}
+        />
+      );
+    }
+    return null;
+  };
 
   // Loading state
   if (loading && !viewModel) {
@@ -196,7 +225,7 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                 priority
                 onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                   const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
+                  target.style.display = "none";
                 }}
               />
             ) : (
@@ -244,13 +273,14 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                   {project.images.map((image, index) => (
                     <div
                       key={index}
+                      onClick={() => handleImageClick(index)}
                       className="h-48 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center"
                     >
                       <Image
                         src={image}
                         alt={`${project.title} screenshot ${index + 1}`}
                         fill
-                        className="object-cover transition-opacity duration-300 hover:opacity-90"
+                        className="object-cover w-full h-full rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-zoom-in hover:opacity-90"
                         sizes="(max-width: 768px) 100vw, 50vw"
                         onError={(
                           e: React.SyntheticEvent<HTMLImageElement>
@@ -339,6 +369,7 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
           </div>
         )}
       </div>
+      {renderLightbox()}
     </div>
   );
 }
