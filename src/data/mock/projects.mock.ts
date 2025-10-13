@@ -411,6 +411,65 @@ const MOCK_PROJECTS: Project[] = [
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
 const CLEAN_CODE_PROJECTS: Project[] = [
   {
+    id: "18",
+    slug: "edux-school-management",
+    title: "EduX School - ระบบจัดการโรงเรียนครบวงจร",
+    category: "Full-stack",
+    displayOrder: 18,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มจัดการโรงเรียนแบบครบวงจรสำหรับนักเรียน ครู ผู้ปกครอง และผู้บริหาร พร้อมระบบการเรียนการสอน การจัดการชั้นเรียน และการติดตามผลการเรียน",
+    thumbnail: "/images/projects/edux-school/1.jpg",
+    images: [
+      "/images/projects/edux-school/1.jpg",
+      "/images/projects/edux-school/2.jpg",
+      "/images/projects/edux-school/3.jpg",
+      "/images/projects/edux-school/4.jpg",
+      "/images/projects/edux-school/5.jpg",
+    ],
+    technologies: [
+      "Next.js 14",
+      "TypeScript",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Supabase",
+      "PostgreSQL",
+      "Zod",
+      "React Query",
+    ],
+    features: [
+      {
+        title: "ระบบจัดการนักเรียนและครู",
+        description: "จัดการข้อมูลนักเรียน ครู และบุคลากรได้อย่างมีประสิทธิภาพ",
+      },
+      {
+        title: "ตารางเรียนและตารางสอน",
+        description: "ระบบจัดการตารางเรียนออนไลน์สำหรับนักเรียนและครู",
+      },
+      {
+        title: "ระบบให้คะแนนและประเมินผล",
+        description: "บันทึกและวิเคราะห์ผลการเรียนของนักเรียน",
+      },
+      {
+        title: "พอร์ทัลผู้ปกครอง",
+        description: "ให้ผู้ปกครองติดตามผลการเรียนและกิจกรรมของบุตรหลาน",
+      },
+      {
+        title: "ระบบแจ้งเตือน",
+        description: "แจ้งเตือนกิจกรรมสำคัญ การบ้าน และการประเมินผล",
+      },
+    ],
+    client: "EduX School",
+    projectDate: "2025-10-13",
+    liveUrl: "https://edux-school-nextjs.vercel.app/",
+    githubUrl: "https://github.com/yourusername/edux-school-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
     id: "1",
     slug: "al-quran-web-app",
     title: "Al-Quran Web Application - แอปอ่านอัลกุรอานออนไลน์",
@@ -951,12 +1010,13 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     slug: "triply-travel-platform",
     title: "Triply - แพลตฟอร์มท่องเที่ยวออนไลน์",
     category: "Full-stack",
-    description: "แพลตฟอร์มท่องเที่ยวออนไลน์ที่รวบรวมที่พัก กิจกรรม และประสบการณ์การเดินทางไว้ในที่เดียว พร้อมระบบจองที่สะดวกสบาย และการแนะนำจากผู้เชี่ยวชาญ",
+    description:
+      "แพลตฟอร์มท่องเที่ยวออนไลน์ที่รวบรวมที่พัก กิจกรรม และประสบการณ์การเดินทางไว้ในที่เดียว พร้อมระบบจองที่สะดวกสบาย และการแนะนำจากผู้เชี่ยวชาญ",
     thumbnail: "/images/projects/triply/thumbnail.jpg",
     images: [
       "/images/projects/triply/screen-1.jpg",
       "/images/projects/triply/screen-2.jpg",
-      "/images/projects/triply/screen-3.jpg"
+      "/images/projects/triply/screen-3.jpg",
     ],
     technologies: [
       "Next.js",
@@ -967,29 +1027,34 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       "Prisma",
       "tRPC",
       "NextAuth.js",
-      "Stripe"
+      "Stripe",
     ],
     features: [
       {
         title: "ระบบค้นหาและจองที่พัก",
-        description: "ค้นหาที่พักได้อย่างสะดวกด้วยฟิลเตอร์ที่หลากหลาย ดูรายละเอียดที่พัก ภาพถ่ายจริง และรีวิวจากผู้เข้าพักจริง"
+        description:
+          "ค้นหาที่พักได้อย่างสะดวกด้วยฟิลเตอร์ที่หลากหลาย ดูรายละเอียดที่พัก ภาพถ่ายจริง และรีวิวจากผู้เข้าพักจริง",
       },
       {
         title: "ระบบจัดการทริป",
-        description: "สร้างและจัดการแผนการเดินทาง จองตั๋วเครื่องบิน ที่พัก และกิจกรรมได้ในที่เดียว"
+        description:
+          "สร้างและจัดการแผนการเดินทาง จองตั๋วเครื่องบิน ที่พัก และกิจกรรมได้ในที่เดียว",
       },
       {
         title: "ระบบแนะนำสถานที่ท่องเที่ยว",
-        description: "แนะนำสถานที่ท่องเที่ยวยอดนิยม กิจกรรมน่าสนใจ และร้านอาหารแนะนำตามความสนใจของผู้ใช้"
+        description:
+          "แนะนำสถานที่ท่องเที่ยวยอดนิยม กิจกรรมน่าสนใจ และร้านอาหารแนะนำตามความสนใจของผู้ใช้",
       },
       {
         title: "ระบบรีวิวและให้คะแนน",
-        description: "แบ่งปันประสบการณ์การเดินทางและให้คะแนนสถานที่ท่องเที่ยว เพื่อเป็นประโยชน์ต่อผู้ใช้งานท่านอื่น"
+        description:
+          "แบ่งปันประสบการณ์การเดินทางและให้คะแนนสถานที่ท่องเที่ยว เพื่อเป็นประโยชน์ต่อผู้ใช้งานท่านอื่น",
       },
       {
         title: "การชำระเงินที่ปลอดภัย",
-        description: "รองรับการชำระเงินผ่านหลายช่องทางด้วยระบบ Stripe ที่ปลอดภัยและน่าเชื่อถือ"
-      }
+        description:
+          "รองรับการชำระเงินผ่านหลายช่องทางด้วยระบบ Stripe ที่ปลอดภัยและน่าเชื่อถือ",
+      },
     ],
     client: "Triply Co., Ltd.",
     projectDate: "2024-09-15",
@@ -1001,7 +1066,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     displayOrder: 17,
     isCleanCode: true,
     isMock: false,
-    isFuture: false
+    isFuture: false,
   },
 ];
 

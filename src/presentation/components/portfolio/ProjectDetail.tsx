@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useProjectDetailPresenter } from "@/src/presentation/presenters/portfolio/useProjectDetailPresenter";
 import type { ProjectDetailViewModel } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
+import { useProjectDetailPresenter } from "@/src/presentation/presenters/portfolio/useProjectDetailPresenter";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectDetailProps {
   slug: string;
@@ -10,7 +11,10 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
-  const { viewModel, loading, error } = useProjectDetailPresenter(slug, initialViewModel);
+  const { viewModel, loading, error } = useProjectDetailPresenter(
+    slug,
+    initialViewModel
+  );
 
   // Loading state
   if (loading && !viewModel) {
@@ -64,7 +68,10 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <div className="mb-8 flex items-center text-sm text-gray-600 dark:text-gray-400">
-          <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400">
+          <Link
+            href="/"
+            className="hover:text-blue-600 dark:hover:text-blue-400"
+          >
             หน้าแรก
           </Link>
           <span className="mx-2">/</span>
@@ -179,13 +186,29 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
           </div>
 
           {/* Hero Image */}
-          <div className="h-96 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-            <div className="text-9xl opacity-50">
-              {project.category === "Web" && "💻"}
-              {project.category === "Mobile" && "📱"}
-              {project.category === "UI/UX" && "🎨"}
-              {project.category === "Full-stack" && "🚀"}
-            </div>
+          <div className="relative h-96 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500">
+            {project.thumbnail ? (
+              <Image
+                src={project.thumbnail}
+                alt={`${project.title} thumbnail`}
+                fill
+                className="object-cover object-center"
+                priority
+                onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-9xl opacity-50">
+                  {project.category === "Web" && "💻"}
+                  {project.category === "Mobile" && "📱"}
+                  {project.category === "UI/UX" && "🎨"}
+                  {project.category === "Full-stack" && "🚀"}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -221,9 +244,26 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                   {project.images.map((image, index) => (
                     <div
                       key={index}
-                      className="h-48 bg-gradient-to-br from-blue-300 to-purple-400 rounded-lg flex items-center justify-center text-4xl"
+                      className="h-48 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center"
                     >
-                      📸
+                      <Image
+                        src={image}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        fill
+                        className="object-cover transition-opacity duration-300 hover:opacity-90"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={(
+                          e: React.SyntheticEvent<HTMLImageElement>
+                        ) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                        }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center text-4xl bg-black/30 text-white opacity-0 hover:opacity-100 transition-opacity">
+                        <span className="bg-black bg-opacity-50 p-2 rounded-full">
+                          📸
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -252,9 +292,7 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
 
             {/* CTA */}
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
-              <h3 className="text-xl font-bold mb-4">
-                สนใจทำโปรเจคแบบนี้?
-              </h3>
+              <h3 className="text-xl font-bold mb-4">สนใจทำโปรเจคแบบนี้?</h3>
               <p className="mb-6 text-blue-100">
                 ปรึกษาฟรี! เราพร้อมช่วยคุณสร้างโซลูชันที่ตอบโจทย์
               </p>
