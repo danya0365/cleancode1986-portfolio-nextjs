@@ -1246,6 +1246,72 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "21",
+    slug: "gx-trade",
+    title: "GX Trade - ระบบวิเคราะห์ราคาทองอัจฉริยะ",
+    category: "Full-stack",
+    description:
+      "แพลตฟอร์มวิเคราะห์ราคาทองแบบครบวงจร พร้อมฟีเจอร์ชุมชน Gamification และ Social Trading สำหรับนักลงทุนทองคำ มาพร้อมระบบวิเคราะห์เทรนด์ แจ้งเตือนราคา และเครื่องมือช่วยตัดสินใจ",
+    thumbnail: "/images/projects/gx-trade-thumb.jpg",
+    images: [
+      "/images/projects/gx-trade-1.jpg",
+      "/images/projects/gx-trade-2.jpg",
+      "/images/projects/gx-trade-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Zustand",
+      "Supabase",
+      "PostgreSQL",
+      "Recharts",
+    ],
+    features: [
+      {
+        title: "ระบบแสดงราคาทองเรียลไทม์",
+        description:
+          "ติดตามราคาทองคำแท่งและทองรูปพรรณแบบเรียลไทม์ พร้อมกราฟแสดงประวัติราคาย้อนหลัง ระบบแจ้งเตือนเมื่อราคาเปลี่ยนแปลงตามที่กำหนด",
+      },
+      {
+        title: "เครื่องมือวิเคราะห์ทางเทคนิค",
+        description:
+          "เครื่องมือวิเคราะห์ราคาทองด้วย Indicators ต่างๆ เช่น Moving Averages, RSI, MACD และ Bollinger Bands เพื่อช่วยในการตัดสินใจซื้อ-ขาย",
+      },
+      {
+        title: "ระบบ Gamification",
+        description:
+          "เพิ่มความน่าสนใจด้วยระบบเลเวล ภารกิจ และรางวัล เพื่อกระตุ้นให้ผู้ใช้กลับมาใช้งานบ่อยขึ้นและเรียนรู้การลงทุนทองคำ",
+      },
+      {
+        title: "ชุมชนนักลงทุน",
+        description:
+          "พื้นที่สำหรับแลกเปลี่ยนความคิดเห็น วิเคราะห์แนวโน้มราคา และแบ่งปันประสบการณ์การลงทุนทองคำระหว่างสมาชิก",
+      },
+      {
+        title: "ระบบแจ้งเตือนราคา",
+        description:
+          "ตั้งค่าการแจ้งเตือนเมื่อราคาทองถึงจุดที่กำหนด พร้อมส่งการแจ้งเตือนผ่านช่องทางต่างๆ เช่น Email, Line, และการแจ้งเตือนบนเว็บไซต์",
+      },
+      {
+        title: "แดชบอร์ดส่วนตัว",
+        description:
+          "ติดตามพอร์ตการลงทุน บันทึกการซื้อ-ขาย และวิเคราะห์ผลตอบแทนการลงทุนทองคำของคุณ",
+      },
+    ],
+    projectDate: "2025-10-15",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+    displayOrder: 21,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    liveUrl: "https://gx-trade-nextjs.vercel.app",
+    githubUrl: "https://github.com/danya0365/gx-trade-nextjs",
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
