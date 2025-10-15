@@ -1070,6 +1070,88 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     isMock: false,
     isFuture: false,
   },
+  {
+    id: "19",
+    slug: "next-edu-learning-platform",
+    title: "Next Edu - แพลตฟอร์มการเรียนรู้ออนไลน์สำหรับเด็ก",
+    category: "Full-stack",
+    displayOrder: 19,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มการศึกษาออนไลน์ที่ออกแบบมาเพื่อเด็กและผู้เริ่มต้น มีคอร์สเรียนหลากหลายสาขา ระบบ Gamification และติดตามความก้าวหน้า พร้อมด้วย Achievements, Leaderboard และระบบแดชบอร์ดสำหรับนักเรียนและผู้สอน",
+    thumbnail: "/images/projects/next-edu/1.jpg",
+    images: [
+      "/images/projects/next-edu/1.jpg",
+      "/images/projects/next-edu/2.jpg",
+      "/images/projects/next-edu/3.jpg",
+      "/images/projects/next-edu/4.jpg",
+      "/images/projects/next-edu/5.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "LocalForage",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Lucide Icons",
+      "next-themes",
+      "react-to-print",
+    ],
+    features: [
+      {
+        title: "21 หน้าสมบูรณ์",
+        description:
+          "ครบทุกฟีเจอร์สำหรับแพลตฟอร์มการเรียนรู้ ตั้งแต่หน้าแรก คอร์ส บทเรียน แดชบอร์ด โปรไฟล์ และอื่นๆ",
+      },
+      {
+        title: "ระบบ Gamification",
+        description:
+          "Achievements สำหรับเก็บความสำเร็จ Leaderboard แข่งขันกับเพื่อน ระบบคะแนนและเลเวล สร้างแรงจูงใจให้ผู้เรียน",
+      },
+      {
+        title: "Student Dashboard",
+        description:
+          "แดชบอร์ดสำหรับนักเรียน ติดตามความคืบหน้า คอร์สที่เรียน ใบประกาศนียบัตร รายการโปรด และตั้งค่าต่างๆ",
+      },
+      {
+        title: "Instructor Dashboard",
+        description:
+          "แดชบอร์ดสำหรับผู้สอน จัดการคอร์ส ดูสถิติการเรียน รายได้ และข้อมูลนักเรียน พร้อมกราฟวิเคราะห์",
+      },
+      {
+        title: "Course Player & Quiz",
+        description:
+          "หน้าเล่นวิดีโอพร้อม UI ที่สวยงาม ระบบแบบทดสอบ ติดตามความคืบหน้า และบันทึกประวัติการเรียน",
+      },
+      {
+        title: "Responsive & Dark Mode",
+        description:
+          "รองรับทุกขนาดหน้าจอ จากมือถือถึงเดสก์ท็อป พร้อม Dark Mode สำหรับใช้งานสบายตา",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างโค้ดตาม Clean Architecture และ Atomic Design สะอาด แยก layers ชัดเจน บำรุงรักษาง่าย",
+      },
+      {
+        title: "Type Safety",
+        description:
+          "TypeScript ทั้งหมด Type-safe ทุกส่วน ใช้ Zod สำหรับ validation และ React Hook Form สำหรับฟอร์ม",
+      },
+    ],
+    projectDate: "2025-10-14",
+    liveUrl: "https://next-edu-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/next-edu-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
