@@ -1152,6 +1152,100 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "20",
+    slug: "work-pulse-attendance-system",
+    title: "Work Pulse - ระบบติดตามบันทึกการเข้างานและลาของพนักงาน",
+    category: "Full-stack",
+    displayOrder: 20,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มบริหารจัดการเวลาทำงานและการลาของพนักงานที่ออกแบบมาให้ใช้งานง่าย สนุก และมีความสุข พร้อมระบบ Check-in/Check-out แบบออนไลน์ การจัดการวันลา Dashboard แบบ Real-time รายงานและการวิเคราะห์ที่ครบถ้วน",
+    thumbnail: "/images/projects/work-pulse/1.jpg",
+    images: [
+      "/images/projects/work-pulse/1.jpg",
+      "/images/projects/work-pulse/2.jpg",
+      "/images/projects/work-pulse/3.jpg",
+      "/images/projects/work-pulse/4.jpg",
+      "/images/projects/work-pulse/5.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase",
+      "next-themes",
+      "Lucide Icons",
+      "LocalForage",
+      "React Hook Form",
+      "Zod",
+      "Chart.js",
+      "date-fns",
+    ],
+    features: [
+      {
+        title: "Check-in/Check-out ง่ายๆ",
+        description:
+          "บันทึกเวลาเข้า-ออกงานได้ด้วยคลิกเดียว รองรับการทำงานจากที่ไหนก็ได้ (Office, Remote, Field) พร้อมบันทึกโน้ตและ Break time",
+      },
+      {
+        title: "จัดการวันลาอัตโนมัติ",
+        description:
+          "ขอลาออนไลน์ได้ทุกที่ทุกเวลา ตรวจสอบวันลาคงเหลือได้ทันที ดู Calendar ของการลา พร้อมระบบอนุมัติที่รวดเร็ว",
+      },
+      {
+        title: "Dashboard แบบ Real-time",
+        description:
+          "ดูข้อมูลการทำงานแบบ Real-time สถิติครบถ้วน เข้าใจง่าย พร้อม Quick Actions และ Weekly Overview Chart",
+      },
+      {
+        title: "จัดการทีมได้ง่าย",
+        description:
+          "ดูสถานะทีมได้ในมุมมองเดียว ใครมา ใครลา ใครมาสาย อนุมัติการลาได้รวดเร็ว พร้อม Team Calendar และ Analytics",
+      },
+      {
+        title: "รายงานละเอียด",
+        description:
+          "สร้างรายงานได้หลากหลาย Attendance Report, Leave Utilization, Overtime Report, Punctuality Report พร้อม Export เป็น Excel/PDF",
+      },
+      {
+        title: "Calendar View ครบครัน",
+        description:
+          "ดูข้อมูลการทำงานแบบ Calendar แยกสีตามสถานะ (Work, Leave, Absent, Holiday) พร้อม Day Details และ Quick Actions",
+      },
+      {
+        title: "แจ้งเตือนอัตโนมัติ",
+        description:
+          "แจ้งเตือนเมื่อถึงเวลาเข้า-ออกงาน แจ้งสถานะการอนุมัติ Real-time Notifications พร้อมตั้งค่าการแจ้งเตือนได้",
+      },
+      {
+        title: "UI/UX ที่สวยงามและมีความสุข",
+        description:
+          "ออกแบบด้วยสีสันสดใส Emoji Icons Smooth Animations Gradient Backgrounds เพื่อสร้างความรู้สึกดีในการทำงาน",
+      },
+      {
+        title: "Responsive & Dark Mode",
+        description:
+          "ใช้งานได้ทุกอุปกรณ์ จากมือถือถึงเดสก์ท็อป พร้อม Dark Mode สำหรับใช้งานสบายตา",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างโค้ดตาม Clean Architecture และ SOLID principles แยก layers ชัดเจน บำรุงรักษาง่าย Type-safe ทั้งหมด",
+      },
+    ],
+    client: "Internal HR Tool",
+    projectDate: "2025-10-15",
+    liveUrl: "https://work-pulse-nextjs.vercel.app",
+    githubUrl: "https://github.com/yourusername/work-pulse-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
