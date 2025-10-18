@@ -666,14 +666,14 @@ const CLEAN_CODE_PROJECTS: Project[] = [
   {
     id: "4",
     slug: "soc-tact-social-platform",
-    title: "Soc-Tact - Social Networking Platform",
+    title: "Soc-Tact – Football Tactical Community Platform",
     category: "Full-stack",
     displayOrder: 4,
     isCleanCode: true,
     isMock: false,
     isFuture: false,
     description:
-      "แพลตฟอร์มโซเชียลเน็ตเวิร์คที่ทันสมัย พร้อมฟีเจอร์โพสต์ แชร์ ไลค์ คอมเมนต์ และระบบเพื่อน รองรับ Real-time updates",
+      "แพลตฟอร์มโซเชียลสำหรับวิเคราะห์แทคติกฟุตบอล ครบทั้ง Match Center, League Tables, Tactical Community, Fantasy Football และสถาปัตยกรรม Multi-profile บน Supabase",
     thumbnail: "/images/projects/soctact-thumb.jpg",
     images: [
       "/images/projects/soctact-1.jpg",
@@ -684,47 +684,52 @@ const CLEAN_CODE_PROJECTS: Project[] = [
       "Next.js 15",
       "TypeScript",
       "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "localforage",
       "Supabase",
+      "Axios",
       "React Hook Form",
       "Zod",
-      "Zustand",
-      "Tailwind CSS 4",
-      "Axios",
     ],
     features: [
       {
-        title: "Social Feed",
-        description: "โพสต์ข้อความ รูปภาพ แชร์ และโต้ตอบกับโพสต์ของเพื่อน",
-      },
-      {
-        title: "Friend System",
+        title: "Football Data Hub",
         description:
-          "ระบบเพื่อน ส่งคำขอเพื่อน ยอมรับ/ปฏิเสธ และดูโปรไฟล์เพื่อน",
+          "Match Center, League Tables และ Team Pages ครบด้วยข้อมูลแมตช์ สถิติ รายชื่อนักเตะ และตารางอันดับ",
       },
       {
-        title: "Real-time Notifications",
-        description: "แจ้งเตือนแบบ Real-time เมื่อมีการโต้ตอบ",
-      },
-      {
-        title: "Form Validation",
+        title: "Tactical Analysis Community",
         description:
-          "ใช้ React Hook Form + Zod สำหรับ Form ที่แข็งแรงและ Type-safe",
+          "ฟีดบทวิเคราะห์ ระบบแท็ก ฟอร์เมชัน และหน้าโพสต์รายละเอียด พร้อมเพจสร้างโพสต์แทคติก",
       },
       {
-        title: "Print Support",
-        description: "พิมพ์โพสต์หรือข้อมูลได้ด้วย react-to-print",
+        title: "Fantasy Football Suite",
+        description:
+          "ชุดหน้าฟีเจอร์ Fantasy ครบ 6+ หน้า เช่น Squad Builder, Transfers, Points, Fixtures, Planner และ Leagues",
       },
       {
-        title: "Dark Mode",
-        description: "สลับโหมดสีได้ พร้อม Theme persistence",
+        title: "Multi-profile Architecture",
+        description:
+          "ออกแบบ Supabase schema รองรับหลายโปรไฟล์ต่อผู้ใช้ พร้อม role management และ RPC functions สำหรับ football data cache",
+      },
+      {
+        title: "Clean Architecture & Atomic Design",
+        description:
+          "ยึดตาม Clean Architecture, SOLID principles, presenter pattern และ Atomic Design ในการจัดโครงสร้างโค้ด",
+      },
+      {
+        title: "Localization & Theming",
+        description:
+          "รองรับภาษาไทยเต็มรูปแบบ, Dark Mode, และ responsive layout พร้อม state persistence ผ่าน Zustand + localforage",
       },
     ],
-    projectDate: "2024-12-20",
+    projectDate: "2025-03-15",
     liveUrl: "https://soc-tact-nextjs.vercel.app/",
     githubUrl: "https://github.com/danya0365/soc-tact-nextjs",
-    isFeatured: false,
+    isFeatured: true,
     status: "published",
-    viewCount: 674,
+    viewCount: 2140,
   },
   {
     id: "5",
