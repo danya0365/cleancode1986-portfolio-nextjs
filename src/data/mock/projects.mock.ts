@@ -372,40 +372,6 @@ const MOCK_PROJECTS: Project[] = [
     status: "published",
     viewCount: 389,
   },
-  {
-    id: "1010",
-    slug: "event-management-platform",
-    title: "แพลตฟอร์มจัดการอีเว้นท์",
-    category: "Web",
-    displayOrder: 1010,
-    isCleanCode: false,
-    isMock: true,
-    isFuture: false,
-    description: "ระบบจัดการอีเว้นท์ พร้อมขายตั๋ว Check-in และระบบรายงาน",
-    thumbnail: "/images/projects/event-thumb.jpg",
-    images: ["/images/projects/event-1.jpg", "/images/projects/event-2.jpg"],
-    technologies: ["Next.js", "TypeScript", "Supabase", "Stripe", "QR Code"],
-    features: [
-      {
-        title: "ขายตั๋วออนไลน์",
-        description: "ขายตั๋วและรับเงินได้ทันที",
-      },
-      {
-        title: "QR Code Check-in",
-        description: "สแกน QR เข้างานได้",
-      },
-      {
-        title: "รายงานผู้เข้าร่วม",
-        description: "ดูสถิติผู้เข้าร่วมแบบ Real-time",
-      },
-    ],
-    client: "Event Organizer",
-    projectDate: "2024-03-12",
-    liveUrl: "https://example-events.com",
-    isFeatured: true,
-    status: "published",
-    viewCount: 567,
-  },
 ];
 
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
