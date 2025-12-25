@@ -1283,6 +1283,404 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     liveUrl: "https://gx-trade-nextjs.vercel.app",
     githubUrl: "https://github.com/danya0365/gx-trade-nextjs",
   },
+  {
+    id: "22",
+    slug: "play-game-p2p",
+    title: "Play Game P2P - แพลตฟอร์มเกมออนไลน์เล่นกับเพื่อน",
+    category: "Full-stack",
+    displayOrder: 22,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มเกมออนไลน์แบบ Peer-to-Peer (P2P) ที่ให้คุณสร้างห้อง เล่นเกมกับเพื่อนได้ทันทีมากกว่า 75 เกมทั้งหมวดไพ่ บอร์ด ปาร์ตี้ และเกมลับสมอง โดยไม่ต้องสมัครสมาชิกหรือพึ่งเซิร์ฟเวอร์กลาง ออกแบบด้วย Clean Architecture + Atomic Design เพื่อรองรับการขยายเกมใหม่ได้รวดเร็ว",
+    thumbnail: "/images/projects/play-game/thumbnail.jpg",
+    images: [
+      "/images/projects/play-game/1.jpg",
+      "/images/projects/play-game/2.jpg",
+      "/images/projects/play-game/3.jpg",
+      "/images/projects/play-game/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "LocalForage",
+      "PeerJS",
+      "React Three Fiber",
+      "Rapier",
+      "React Hook Form",
+      "Zod",
+      "next-themes",
+    ],
+    features: [
+      {
+        title: "Instant P2P Rooms",
+        description:
+          "สร้าง/เข้าห้องผ่าน PeerJS ได้ทันที ไม่ต้องสมัครสมาชิกหรือมีบัญชี ทำให้เล่นกับเพื่อนได้ในไม่กี่คลิก",
+      },
+      {
+        title: "75+ Multiplayer Games",
+        description:
+          "รองรับเกมหลากหลายหมวดหมู่ทั้งการ์ด บอร์ด ปาร์ตี้ คาสิโน และเกมลับสมอง พร้อมระบบจัดหมวดหมู่และค้นหา",
+      },
+      {
+        title: "3D Interactive Canvas",
+        description:
+          "เกมหลักสร้างด้วย React Three Fiber + Rapier Physics ให้ภาพสวย ลื่นไหล และรองรับทั้ง 2D/3D",
+      },
+      {
+        title: "State Sync & Reconnect",
+        description:
+          "มีระบบซิงก์สถานะ ระบุการเชื่อมต่อ และรองรับการรีเฟรชหน้าแล้วกลับมาเล่นต่อพร้อมเพื่อนได้",
+      },
+      {
+        title: "Clean Architecture & Atomic Design",
+        description:
+          "โครงสร้างโปรเจคยึด Clean Architecture + SOLID + Atomic Design แยก layers ชัดเจน เพิ่มเกมใหม่ได้ง่าย",
+      },
+    ],
+    projectDate: "2025-02-10",
+    liveUrl: "https://play-game-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/play-game-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
+    id: "23",
+    slug: "game-asset-tool",
+    title: "Game Asset Tool - ชุดเครื่องมือจัดการเกมแอสเซ็ตครบวงจร",
+    category: "Full-stack",
+    displayOrder: 23,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "เว็บแอป Clean Architecture + Atomic Design สำหรับจัดการ Texture, Tilemap, Tileset, Spritesheet และ Animation ในที่เดียว แรงบันดาลใจจาก Aseprite, Tiled Map Editor และ TexturePacker พร้อมระบบ Atlas Packer, Pixel Editor, Tilemap Editor, Spritesheet Timeline, Color Palette, Export หลายแพลตฟอร์ม และ Recent Projects ที่บันทึกในเครื่อง",
+    thumbnail: "/images/projects/game-asset-tool/thumbnail.jpg",
+    images: [
+      "/images/projects/game-asset-tool/1.jpg",
+      "/images/projects/game-asset-tool/2.jpg",
+      "/images/projects/game-asset-tool/3.jpg",
+      "/images/projects/game-asset-tool/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "LocalForage",
+      "react-hook-form",
+      "Zod",
+      "IndexedDB",
+      "JSZip",
+      "HTML5 Canvas",
+    ],
+    features: [
+      {
+        title: "Multi-Editor Workspace",
+        description:
+          "Pixel, Texture, Tilemap, Spritesheet, Atlas และ Color Palette Editor อยู่ในแพลตฟอร์มเดียว พร้อม UI แนว Windows 98",
+      },
+      {
+        title: "Clean Architecture + Atomic Design",
+        description:
+          "โครงสร้าง src/domain, infrastructure, presentation ชัดเจน แยก components ตาม Atomic Design ต่อขยายฟีเจอร์ใหม่ได้ไว",
+      },
+      {
+        title: "Recent Projects & Import/Export",
+        description:
+          "รองรับการสร้าง/เปิดโปรเจค .gat, Import รูป, บันทึก recent projects ใน LocalForage และ export เป็น JSON/JSZip",
+      },
+      {
+        title: "Atlas Packer & Animation Preview",
+        description:
+          "Pack สไปรต์ด้วย MaxRects algorithm พร้อม animation preview, timeline controls และ auto-detect sprite strip",
+      },
+      {
+        title: "Multi-Platform Export Targets",
+        description:
+          "เตรียม export presets สำหรับ Cocos, Phaser, Unity, Godot, LibGDX, GameMaker, CSS Sprites และ JSON",
+      },
+    ],
+    projectDate: "2025-02-28",
+    liveUrl: "https://game-asset-tool-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/game-asset-tool-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
+    id: "24",
+    slug: "retro-pixel-garden",
+    title: "Retro Pixel Garden - Stardew-style Multiplayer Pixel World",
+    category: "Full-stack",
+    displayOrder: 24,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "Open-world pixel garden ที่ผสม Stardew Valley กับ Dragon Quest Tact มาอยู่ในเว็บ Clean Architecture + Atomic Design สไตล์ Windows 98 โดยใช้ Next.js 15 + React Three Fiber + Colyseus ให้ผู้เล่นปลูกผัก สร้างสวน และเดินเล่นในโลก 3D แบบ Real-time Multiplayer (P2P fallback) พร้อม UI อินเทอร์เน็ตยุค 90 ที่พิถีพิถัน",
+    thumbnail: "/images/projects/retro-pixel-garden/thumbnail.jpg",
+    images: [
+      "/images/projects/retro-pixel-garden/1.jpg",
+      "/images/projects/retro-pixel-garden/2.jpg",
+      "/images/projects/retro-pixel-garden/3.jpg",
+      "/images/projects/retro-pixel-garden/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "LocalForage",
+      "Colyseus",
+      "React Three Fiber",
+      "Rapier Physics",
+      "PeerJS",
+      "Supabase (future-ready)",
+      "react-hook-form",
+      "Zod",
+      "next-themes",
+    ],
+    features: [
+      {
+        title: "Retro IE5 Browser UI",
+        description:
+          "จำลอง Internet Explorer 5 + Windows 98 อย่างละเอียด ทั้ง Title Bar, Menu, Toolbar, Status Bar, Retro CSS และ Theme toggle",
+      },
+      {
+        title: "Real-time Multiplayer Garden",
+        description:
+          "เชื่อมต่อ Colyseus game server (พร้อม monitor & playground) ให้ปลูก/รดน้ำ/เก็บเกี่ยว/วางวัตถุร่วมกับเพื่อนแบบ Realtime state sync",
+      },
+      {
+        title: "3D World with React Three Fiber",
+        description:
+          "สร้างโลก Stardew-style ด้วย React Three Fiber + Rapier Physics มี Terrain, Trees, Objects, Lighting, Day/Night cycle และ Particle Effects",
+      },
+      {
+        title: "Persistent Local Player System",
+        description:
+          "Zustand + LocalForage สำหรับ user profile, character stats, hotbar, inventory, notifications และ reconnect-safe state",
+      },
+      {
+        title: "Clean Architecture & Atomic Design",
+        description:
+          "โครงสร้าง project แบ่ง domain/infrastructure/presentation + Atomic Design components, presenter pattern, และ hook-driven layout presets",
+      },
+    ],
+    projectDate: "2025-03-05",
+    liveUrl: "https://retro-pixel-art-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/retro-pixel-art-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
+    id: "25",
+    slug: "converge-omnichannel",
+    title: "Converge - Omnichannel Chat & AI Customer Service Platform",
+    category: "Full-stack",
+    displayOrder: 25,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์ม Omnichannel Chat ที่รวม Facebook, Instagram, LINE, WhatsApp, TikTok, Shopee, Lazada และ Live Chat ไว้ในจอเดียว พร้อม AI Chatbot 24/7, Visual Flow Builder แบบ No-Code, Broadcast Campaign, Analytics และ Team Collaboration ออกแบบด้วย Next.js 15 + Clean Architecture + Atomic Design และ Presenter Pattern",
+    thumbnail: "/images/projects/converge/thumbnail.jpg",
+    images: [
+      "/images/projects/converge/1.jpg",
+      "/images/projects/converge/2.jpg",
+      "/images/projects/converge/3.jpg",
+      "/images/projects/converge/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "LocalForage",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Next Themes",
+      "Axios",
+      "Lucide React",
+    ],
+    features: [
+      {
+        title: "Unified Inbox & Channel Integrations",
+        description:
+          "รวมทุกข้อความจาก Facebook, IG, LINE OA, WhatsApp, TikTok, Shopee, Lazada และ Live Chat ไว้ในอินบ็อกซ์เดียว พร้อม customer profile และ message templates",
+      },
+      {
+        title: "AI Chatbot & Visual Flow Builder",
+        description:
+          "AI Chatbot ตอบอัตโนมัติ 24/7 เรียนรู้จากข้อมูลแบรนด์ พร้อม Flow Builder แบบ Drag & Drop ที่สร้าง workflow และ handoff ได้โดยไม่ต้องเขียนโค้ด",
+      },
+      {
+        title: "Automation & Broadcast Campaigns",
+        description:
+          "Auto-reply, smart routing, segmentation และ broadcast แคมเปญแบบ Rich Message/Schedule พร้อม campaign analytics",
+      },
+      {
+        title: "Analytics Dashboard & Team Collaboration",
+        description:
+          "Real-time dashboard, conversation/agent analytics, leaderboard, internal notes, team inbox, agent status และ role-based access",
+      },
+      {
+        title: "Clean Architecture + Atomic Design",
+        description:
+          "ยึด Clean Architecture, SOLID, Presenter pattern, Atomic Design components แยก domain/infrastructure/presentation พร้อม hooks และ repositories mock-ready",
+      },
+    ],
+    projectDate: "2025-03-20",
+    liveUrl: "https://converge-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/converge-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
+    id: "26",
+    slug: "cinemax-microdrama",
+    title: "CINEMAX - Micro Drama Streaming Platform",
+    category: "Full-stack",
+    displayOrder: 26,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มสตรีมมิ่งซีรีย์ไมโครดราม่าที่ออกแบบมาสำหรับคอนเทนต์แนวตั้งและซีรีย์สั้น ตอนแรกฟรี จ่ายตามตอนหรือสมัครสมาชิก เชื่อม Supabase Auth + Database, Stripe Payments, i18n 3 ภาษา, Clean Architecture + Presenter Pattern + Atomic Design พร้อม Admin Dashboard, Search & Discovery และ Personalized Watchlist",
+    thumbnail: "/images/projects/cinemax/thumbnail.jpg",
+    images: [
+      "/images/projects/cinemax/1.jpg",
+      "/images/projects/cinemax/2.jpg",
+      "/images/projects/cinemax/3.jpg",
+      "/images/projects/cinemax/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase",
+      "Stripe",
+      "React Hook Form",
+      "Zod",
+      "Next Themes",
+      "Axios",
+      "LocalForage",
+      "HTML2Canvas",
+    ],
+    features: [
+      {
+        title: "Episode 1 Free + Hybrid Monetization",
+        description:
+          "ตอนแรกฟรีทุกเรื่อง รองรับ Pay-per-episode และ Membership พร้อมระบบล็อกตอน, continue watching และ my list @TODO.md#5-150",
+      },
+      {
+        title: "Supabase Auth + Profile Hub",
+        description:
+          "Supabase Auth + Google OAuth, Zustand auth store, โปรไฟล์/การตั้งค่า/ประวัติการดู/รายการโปรดในหน้าเดียว @TODO.md#55-117",
+      },
+      {
+        title: "Stripe Payments & Subscription Center",
+        description:
+          "ผสาน Stripe ครบ flow (purchase, history, success/cancel) พร้อม subscription plans และ payment reports @TODO.md#118-134",
+      },
+      {
+        title: "Search, Discovery & Admin Dashboard",
+        description:
+          "Full-text search, daily rating/trending algorithm, analytics dashboard, admin CRUD ซีรีย์/ตอน/หมวดหมู่/ผู้ใช้ครบชุด @TODO.md#154-180",
+      },
+      {
+        title: "i18n + Clean Architecture",
+        description:
+          "รองรับ TH/EN/CHN, translation files + useLocale hook, โครงสร้าง Clean Architecture + Presenter pattern + Atomic Design @TODO.md#136-175",
+      },
+    ],
+    projectDate: "2025-04-05",
+    liveUrl: "https://cinemax-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/cinemax-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
+    id: "27",
+    slug: "nextflix-streaming",
+    title: "Nextflix - Modern Netflix Clone with Dual Layouts",
+    category: "Full-stack",
+    displayOrder: 27,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "Netflix Clone ที่โฟกัส UX ทั้งแนว Modern Glassmorphism และ Retro Windows 98 สร้างบน Next.js 16 + TypeScript + Tailwind CSS 4 + Zustand + Presenter Pattern พร้อม Theme Provider, Main/Retro Layout, Reusable UI Kit, HomePresenter + Mock Repository, Watchlist Rows, Hero, Content Cards และโรดแมพเชื่อม Supabase + Auth + Video Player + Recommendations",
+    thumbnail: "/images/projects/nextflix/thumbnail.jpg",
+    images: [
+      "/images/projects/nextflix/1.jpg",
+      "/images/projects/nextflix/2.jpg",
+      "/images/projects/nextflix/3.jpg",
+      "/images/projects/nextflix/4.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "React Spring",
+      "React Hook Form",
+      "Zod",
+      "Next Themes",
+      "Axios",
+      "LocalForage",
+      "HTML2Canvas",
+    ],
+    features: [
+      {
+        title: "Dual Layout System",
+        description:
+          "MainLayout แบบ glassmorphism + RetroLayout สไตล์ IE5/Windows 98 พร้อม header, toolbar, status bar, scroll bar mock ครบถ้วน @TODO.md#21-52",
+      },
+      {
+        title: "Theme Provider & Animated Toggle",
+        description:
+          "ติดตั้ง next-themes + react-spring สำหรับ ThemeToggle, dark/light persistence, hook-driven provider ใน root layout @TODO.md#23-36",
+      },
+      {
+        title: "Reusable UI Kit",
+        description:
+          "Modal, Button, Input, Select, Popover, Form components รองรับหลาย variant + animation ตาม guideline Atomic Design @TODO.md#47-54",
+      },
+      {
+        title: "Home Presenter + Mock Repository",
+        description:
+          "Clean Architecture แยก Presenter/View/Repository, HeroSection, ContentRow, ContentCard, loading/error states, server metadata สำหรับ SEO @TODO.md#55-67",
+      },
+      {
+        title: "Roadmap: Browse, Auth, Player, Supabase",
+        description:
+          "วางแผน Core Pages, Video Player, Authentication, Continue Watching, Recommendations, Supabase integration + RLS policies @TODO.md#69-224",
+      },
+    ],
+    projectDate: "2025-04-20",
+    liveUrl: "https://nextflix-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/nextflix-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
