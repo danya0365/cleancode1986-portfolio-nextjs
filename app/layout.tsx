@@ -1,3 +1,4 @@
+import { AIChatBubble } from "@/src/presentation/components/chat";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Kanit } from "next/font/google";
@@ -98,8 +99,10 @@ export default function RootLayout({
       <body className={`${kanit.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
+          <AIChatBubble />
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
