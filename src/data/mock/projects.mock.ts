@@ -1748,6 +1748,78 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "29",
+    slug: "neobb-modern-community-platform",
+    title: "NeoBB - Modular Community Platform",
+    category: "Full-stack",
+    displayOrder: 29,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "NeoBB คือแพลตฟอร์ม Web Forum / Community ยุคใหม่ที่ยึดหลัก Clean Architecture + Atomic Design แยก MainLayout สมัยใหม่และ RetroLayout สไตล์ IE5 ให้ปรับธีมและเลย์เอาต์ได้แบบ real-time พร้อมระบบ Portal Widget, Forum C/B/T/P ตามมาตรฐาน, User & Role Management, Theme & Plugin System และเตรียมเชื่อมต่อ Supabase สำหรับฟีเจอร์ realtime/community ecosystem แบบเต็มตัว",
+    thumbnail: "/images/projects/neobb/thumbnail.jpg",
+    images: [
+      "/images/projects/neobb/1.jpg",
+      "/images/projects/neobb/2.jpg",
+      "/images/projects/neobb/3.jpg",
+      "/images/projects/neobb/4.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase-ready",
+      "React Hook Form",
+      "Zod",
+      "Axios",
+      "LocalForage",
+      "React Spring",
+      "next-themes",
+    ],
+    features: [
+      {
+        title: "Portal-first Experience",
+        description:
+          "Landing Portal แบบ Drag & Drop วาง Widget ได้หลายชุด (Latest Threads, Trending Topics, Online Users, Announcements) และสลับ layout ตามบทบาทผู้ใช้",
+      },
+      {
+        title: "Widget & Plugin System",
+        description:
+          "Widget เป็นโมดูลแยก เปิด/ปิด/จัดเรียงง่าย รองรับ community plugin ผ่าน hook/event-based pipeline เพื่อขยาย UI, API และ Permission",
+      },
+      {
+        title: "Forum Core Architecture",
+        description:
+          "Category → Board → Thread → Post ครบถ้วน มี Thread Prefix, Mention, Reaction, Markdown Editor, Pin/Lock/Archive และ search/filter รายละเอียด",
+      },
+      {
+        title: "User, Role & Reputation",
+        description:
+          "ระบบโปรไฟล์สมัยใหม่พร้อม Badge, Reputation, Role-based Permission, Activity Log, Moderation tools และ Team dashboard",
+      },
+      {
+        title: "Dual Layout + Theme Engine",
+        description:
+          "MainLayout Glassmorphism + RetroLayout IE5 พร้อม ThemeProvider (next-themes), Zustand layout switcher, Dark/Light toggle และ Retro CSS assets",
+      },
+      {
+        title: "Clean Architecture & Mock Repository",
+        description:
+          "ยึด SOLID, Clean Architecture, Presenter Pattern, Atomic Design, mock repository เต็มรูปแบบเพื่อเชื่อม Supabase/Postgres ได้รวดเร็วในเฟสต่อไป",
+      },
+    ],
+    client: "Neo Bulletin Board",
+    projectDate: "2025-05-20",
+    liveUrl: "https://neobb-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/neobb-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
