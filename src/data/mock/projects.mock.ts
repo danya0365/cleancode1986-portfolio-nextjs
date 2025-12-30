@@ -1681,6 +1681,73 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "28",
+    slug: "plugpay-payments",
+    title: "PlugPay - Multi-Project Donate & Invoice Platform",
+    category: "Full-stack",
+    displayOrder: 28,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์ม PlugPay สำหรับ Dev/Creator ที่ต้องการรับ Donate, Payment Link และออก Invoice ให้หลายโปรเจคในที่เดียว มี MainLayout + RetroLayout สลับได้ด้วย Zustand, Theme Provider (next-themes), Reusable UI Kit, LandingView ตาม Presenter Pattern รองรับ Stripe + Omise, Webhook, Dashboard, และเตรียม Supabase Repo",
+    thumbnail: "/images/projects/plugpay/thumbnail.jpg",
+    images: [
+      "/images/projects/plugpay/1.jpg",
+      "/images/projects/plugpay/2.jpg",
+      "/images/projects/plugpay/3.jpg",
+      "/images/projects/plugpay/4.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "Next Themes",
+      "React Spring",
+      "Axios",
+      "LocalForage",
+      "HTML2Canvas",
+    ],
+    features: [
+      {
+        title: "Dual Layout + Theme System",
+        description:
+          "MainLayout glassmorphism + RetroLayout IE5 พร้อม Header/Footer/Theme Toggle, React Spring animations และ Zustand layout switcher ตาม Clean Architecture @prompt/INIT_PROJECT.md#1-27 @src/presentation/components/landing/LandingView.tsx#1-50",
+      },
+      {
+        title: "Multi-Project Management",
+        description:
+          "สร้างหลายโปรเจค แยกรายได้ เปิด/ปิด donate ต่อโปรเจค ใช้ project_slug สำหรับฝังลิงก์ รองรับ dev/creator หลายเว็บ @prompt/FEATURES.md#21-40",
+      },
+      {
+        title: "Payment Links & Donate Widgets",
+        description:
+          "ออกลิงก์รับเงินแบบ Donate, Fixed amount, Custom amount พร้อมข้อความผู้ชำระ ฝังในเว็บหรือแชร์ได้ทันที @prompt/FEATURES.md#31-38",
+      },
+      {
+        title: "Invoice, Payer & Billing Workflow",
+        description:
+          "สร้าง invoice หลายรายการต่อใบ ตั้ง due date, draft/sent/paid/expired, เก็บข้อมูล payer และผูก payment อัตโนมัติ @prompt/FEATURES.md#41-75",
+      },
+      {
+        title: "Stripe + Omise + Webhook Dashboard",
+        description:
+          "รองรับ Stripe Card/Online และ Omise QR/PromptPay พร้อม realtime status, webhook idempotent, dashboard สรุปรายได้ตามโปรเจค/ช่องทาง/ช่วงเวลา @prompt/FEATURES.md#54-102",
+      },
+    ],
+    projectDate: "2025-05-05",
+    liveUrl: "https://plugpay-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/plugpay-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
