@@ -1820,6 +1820,79 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "30",
+    slug: "design-kit-component-marketplace",
+    title: "Design Kit - Component Marketplace & Export Engine",
+    category: "Full-stack",
+    displayOrder: 30,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "Design Kit คือแพลตฟอร์ม Component Marketplace ที่รวม UI ชิ้นงานระดับพรีเมียมจากครีเอเตอร์ทั่วโลก ให้ดีไซเนอร์อัปโหลด/ตั้งราคา และให้นักพัฒนา Browse → Preview → Export ไป HTML, React, Next.js ได้ทันที พร้อมระบบ Dual Layout (Modern & Retro), Presenter Pattern, Supabase-ready Data Layer, และ Export Engine ที่ต่อยอดได้หลายสไตล์ชี้ชัดตามหลัก Clean Architecture + Atomic Design",
+    thumbnail: "/images/projects/design-kit/thumbnail.jpg",
+    images: [
+      "/images/projects/design-kit/1.jpg",
+      "/images/projects/design-kit/2.jpg",
+      "/images/projects/design-kit/3.jpg",
+      "/images/projects/design-kit/4.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "next-themes",
+      "React Spring",
+      "LocalForage",
+      "Axios",
+      "HTML2Canvas",
+    ],
+    features: [
+      {
+        title: "Component Marketplace Core",
+        description:
+          "ระบบจัดการ Component เต็มรูปแบบ (metadata, preview, tags, props/variants) พร้อมหมวดหมู่/แท็ก ค้นหา และ featured listing สำหรับทีม dev, designer, startup",
+      },
+      {
+        title: "Design-to-Code Export Engine",
+        description:
+          "เลือก platform (HTML, React, Next.js) + style system (CSS, Tailwind, CSS Module) สร้างโค้ดทันทีจาก template-based generator พร้อมแผนขยาย Vue/Svelte/Flutter",
+      },
+      {
+        title: "Creator Economy Workflow",
+        description:
+          "ครีเอเตอร์สร้าง component, ตั้งราคา/แจกฟรี, ดูสถิติ download, และเตรียมเชื่อม Stripe + Supabase Profiles เพื่อรายได้ recurring ของ community",
+      },
+      {
+        title: "Dual Layout Experience",
+        description:
+          "MainLayout สมัยใหม่ + RetroLayout IE5 ที่สลับได้ real-time ผ่าน Zustand + next-themes, ครบทั้ง Header/Footer/Widget, animation จาก React Spring และ retro CSS assets",
+      },
+      {
+        title: "Marketplace & Licensing",
+        description:
+          "รองรับ Free/One-time/Bundle ราคาพร้อม License (Personal/Commercial), Cart/Checkout flow, Purchase history และระบบ access download/export รายผู้ใช้",
+      },
+      {
+        title: "Clean Architecture + Presenter Pattern",
+        description:
+          "แบ่ง domain / infrastructure / presentation, presenter & mock repository, server/client hooks, Atomic Design components, Supabase SSR client, พร้อม analytics stats (components, creators, downloads)",
+      },
+    ],
+    client: "Design Kit",
+    projectDate: "2025-06-15",
+    liveUrl: "https://design-kit-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/design-kit-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
