@@ -17,7 +17,7 @@ export const SITE = {
     foundedYear: 2020,
   },
   contact: {
-    email: "marosdee.fuzaba@gmail.com",
+    email: "marosdee.fuzana@gmail.com",
     phone: "089-484-7773",
     lineId: "@marosdee7",
     address: "กรุงเทพมหานคร ประเทศไทย",
