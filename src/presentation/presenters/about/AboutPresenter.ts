@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import { getActiveTeamMembers, type TeamMember } from "@/src/data/mock/team.mock";
 
 export interface AboutViewModel {
@@ -29,8 +30,8 @@ export class AboutPresenter {
    */
   async generateMetadata() {
     return {
-      title: "เกี่ยวกับเรา | Clean Code 1986",
-      description: "ทำความรู้จักทีม Clean Code 1986 - นักพัฒนาซอฟต์แวร์มืออาชีพ",
+      title: `เกี่ยวกับเรา | ${SITE.company.name}`,
+      description: `ทำความรู้จักทีม ${SITE.company.name} - นักพัฒนาซอฟต์แวร์มืออาชีพ`,
     };
   }
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useContactPresenter } from "@/src/presentation/presenters/contact/useContactPresenter";
+import { SITE } from "@/src/data/master/site";
 import type { ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
+import { useContactPresenter } from "@/src/presentation/presenters/contact/useContactPresenter";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const contactSchema = z.object({
   name: z.string().min(2, "กรุณากรอกชื่อ (อย่างน้อย 2 ตัวอักษร)"),
@@ -320,22 +321,22 @@ export function ContactPage({ initialViewModel }: ContactPageProps) {
                   {
                     icon: "📘",
                     name: "Facebook",
-                    url: "https://facebook.com/cleancode1986",
+                    url: SITE.social.facebook,
                   },
                   {
                     icon: "🐦",
                     name: "Twitter",
-                    url: "https://twitter.com/cleancode1986",
+                    url: SITE.social.twitter,
                   },
                   {
                     icon: "🐙",
                     name: "GitHub",
-                    url: "https://github.com/cleancode1986",
+                    url: SITE.social.github,
                   },
                   {
                     icon: "💼",
                     name: "LinkedIn",
-                    url: "https://linkedin.com/company/cleancode1986",
+                    url: SITE.social.linkedin,
                   },
                 ].map((social) => (
                   <a

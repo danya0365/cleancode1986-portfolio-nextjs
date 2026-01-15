@@ -1,7 +1,8 @@
+import { SITE } from "@/src/data/master/site";
 import { getFeaturedProjects, type Project } from "@/src/data/mock/projects.mock";
 import { getActiveServices, type Service } from "@/src/data/mock/services.mock";
-import { MOCK_TESTIMONIALS, type Testimonial } from "@/src/data/mock/testimonials.mock";
 import { getAllActiveTechnologies, type Technology } from "@/src/data/mock/technologies.mock";
+import { MOCK_TESTIMONIALS, type Testimonial } from "@/src/data/mock/testimonials.mock";
 
 export interface HomeStats {
   totalProjects: number;
@@ -59,9 +60,9 @@ export class HomePresenter {
    */
   async generateMetadata() {
     return {
-      title: "Clean Code 1986 | พัฒนาเว็บไซต์และแอปพลิเคชันมืออาชีพ",
+      title: `${SITE.company.name} | ${SITE.description}`,
       description:
-        "Clean Code 1986 - บริษัทพัฒนาซอฟต์แวร์มืออาชีพ รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ ด้วย Next.js, React, React Native",
+        `${SITE.company.name} - ${SITE.company.description} รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ ด้วย Next.js, React, React Native`,
       keywords: [
         "พัฒนาเว็บไซต์",
         "รับทำเว็บไซต์",
@@ -69,13 +70,13 @@ export class HomePresenter {
         "Next.js",
         "React",
         "React Native",
-        "Clean Code 1986",
+        SITE.company.name,
       ],
-      authors: [{ name: "Clean Code 1986" }],
+      authors: [{ name: SITE.company.name }],
       openGraph: {
-        title: "Clean Code 1986 | พัฒนาเว็บไซต์และแอปพลิเคชันมืออาชีพ",
+        title: `${SITE.company.name} | ${SITE.description}`,
         description:
-          "บริษัทพัฒนาซอฟต์แวร์มืออาชีพ รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ",
+          `${SITE.company.description} รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ`,
         type: "website",
       },
     };

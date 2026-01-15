@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import { getActiveServices, type Service } from "@/src/data/mock/services.mock";
 
 export interface ServicesViewModel {
@@ -29,9 +30,9 @@ export class ServicesPresenter {
    */
   async generateMetadata() {
     return {
-      title: "บริการ | Clean Code 1986",
+      title: `บริการ | ${SITE.company.name}`,
       description:
-        "บริการพัฒนาเว็บไซต์ แอปมือถือ UI/UX และ Consulting จาก Clean Code 1986",
+        `บริการพัฒนาเว็บไซต์ แอปมือถือ UI/UX และ Consulting จาก ${SITE.company.name}`,
     };
   }
 }

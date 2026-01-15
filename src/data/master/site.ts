@@ -1,30 +1,33 @@
 /**
  * Site-wide content and metadata
+ * Single source of truth for site configuration
  */
 
 export const SITE = {
   title: "Clean Code 1986",
   description: "พัฒนาเว็บไซต์และแอปพลิเคชันมืออาชีพ",
-  baseUrl: "https://cleancode1986.com",
+  baseUrl: "https://cleancode1986-portfolio.vercel.app",
   defaultLocale: "th",
   locales: ["th", "en"],
   company: {
-    name: "Clean Code 1986",
+    name: "CleanCode 1986",
+    nameTH: "คลีนโค้ด 1986",
     description: "บริษัทพัฒนาซอฟต์แวร์มืออาชีพ",
     tagline: "พัฒนาเว็บไซต์และแอปพลิเคชันที่ทรงพลังและทันสมัย",
     foundedYear: 2020,
   },
   contact: {
-    email: "contact@cleancode1986.com",
-    phone: "+66 81 234 5678",
-    address: "123/4 ถนนพัฒนาซอฟต์แวร์ แขวงบางซื่อ เขตบางซื่อ กรุงเทพฯ 10800",
+    email: "marosdee.fuzaba@gmail.com",
+    phone: "089-484-7773",
+    lineId: "@marosdee7",
+    address: "กรุงเทพมหานคร ประเทศไทย",
   },
   social: {
     facebook: "https://facebook.com/cleancode1986",
     twitter: "https://twitter.com/cleancode1986",
     instagram: "https://instagram.com/cleancode1986",
-    linkedin: "https://linkedin.com/company/cleancode1986",
-    github: "https://github.com/cleancode1986",
+    linkedin: "https://linkedin.com/in/marosdee-uma",
+    github: "https://github.com/danya0365",
   },
 } as const;
 

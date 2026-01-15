@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import { getAllProjectsSorted, type Project } from "@/src/data/mock/projects.mock";
 
 export type CategoryFilter = "All" | "Web" | "Mobile" | "UI/UX" | "Full-stack";
@@ -42,8 +43,8 @@ export class PortfolioPresenter {
    */
   async generateMetadata() {
     return {
-      title: "ผลงาน | Clean Code 1986",
-      description: "ผลงานพัฒนาเว็บไซต์และแอปพลิเคชันของ Clean Code 1986",
+      title: `ผลงาน | ${SITE.company.name}`,
+      description: `ผลงานพัฒนาเว็บไซต์และแอปพลิเคชันของ ${SITE.company.name}`,
     };
   }
 }

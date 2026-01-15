@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
 
 export function CTASection() {
@@ -30,11 +31,11 @@ export function CTASection() {
         <div className="mt-12 flex flex-col sm:flex-row justify-center gap-8 text-white">
           <div className="flex items-center justify-center gap-2">
             <span>📧</span>
-            <span>contact@cleancode1986.com</span>
+            <span>{SITE.contact.email}</span>
           </div>
           <div className="flex items-center justify-center gap-2">
             <span>📞</span>
-            <span>02-XXX-XXXX</span>
+            <span>{SITE.contact.phone}</span>
           </div>
         </div>
       </div>

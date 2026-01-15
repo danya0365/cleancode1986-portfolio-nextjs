@@ -1,3 +1,5 @@
+import { SITE } from "@/src/data/master/site";
+
 export interface ContactFormData {
   name: string;
   email: string;
@@ -24,9 +26,9 @@ export class ContactPresenter {
   async getViewModel(): Promise<ContactViewModel> {
     try {
       return {
-        contactEmail: "contact@cleancode1986.com",
-        contactPhone: "02-XXX-XXXX",
-        officeAddress: "กรุงเทพมหานคร, ประเทศไทย",
+        contactEmail: SITE.contact.email,
+        contactPhone: SITE.contact.phone,
+        officeAddress: SITE.contact.address,
       };
     } catch (error) {
       console.error("Error loading contact data:", error);
@@ -63,9 +65,9 @@ export class ContactPresenter {
    */
   async generateMetadata() {
     return {
-      title: "ติดต่อเรา | Clean Code 1986",
+      title: `ติดต่อเรา | ${SITE.company.name}`,
       description:
-        "ติดต่อ Clean Code 1986 - ปรึกษาฟรี! พร้อมให้บริการพัฒนาซอฟต์แวร์",
+        `ติดต่อ ${SITE.company.name} - ปรึกษาฟรี! พร้อมให้บริการพัฒนาซอฟต์แวร์`,
     };
   }
 }

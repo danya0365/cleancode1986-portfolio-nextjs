@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
 
 const QUICK_LINKS = [
@@ -16,10 +17,10 @@ const SERVICES_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { href: "https://facebook.com/cleancode1986", label: "Facebook", icon: "📘" },
-  { href: "https://twitter.com/cleancode1986", label: "Twitter", icon: "🐦" },
-  { href: "https://github.com/cleancode1986", label: "GitHub", icon: "🐙" },
-  { href: "https://linkedin.com/company/cleancode1986", label: "LinkedIn", icon: "💼" },
+  { href: SITE.social.facebook, label: "Facebook", icon: "📘" },
+  { href: SITE.social.twitter, label: "Twitter", icon: "🐦" },
+  { href: SITE.social.github, label: "GitHub", icon: "🐙" },
+  { href: SITE.social.linkedin, label: "LinkedIn", icon: "💼" },
 ];
 
 export function Footer() {
@@ -37,16 +38,16 @@ export function Footer() {
               <span className="text-blue-600 dark:text-blue-400"> 1986</span>
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              บริษัทพัฒนาซอฟต์แวร์มืออาชีพ
+              {SITE.company.description}
               <br />
               รับทำเว็บไซต์ แอปมือถือ
               <br />
               และระบบต่างๆ
             </p>
             <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <p>📧 contact@cleancode1986.com</p>
-              <p>📞 02-XXX-XXXX</p>
-              <p>📍 กรุงเทพมหานคร ประเทศไทย</p>
+              <p>📧 {SITE.contact.email}</p>
+              <p>📞 {SITE.contact.phone}</p>
+              <p>📍 {SITE.contact.address}</p>
             </div>
           </div>
 
@@ -114,7 +115,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © {currentYear} Clean Code 1986. All rights reserved.
+              © {currentYear} {SITE.company.name}. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link
