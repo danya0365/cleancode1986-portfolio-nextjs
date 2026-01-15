@@ -23,9 +23,9 @@ export const SITE = {
     address: "กรุงเทพมหานคร ประเทศไทย",
   },
   social: {
-    facebook: "https://facebook.com/cleancode1986",
-    twitter: "https://twitter.com/cleancode1986",
-    instagram: "https://instagram.com/cleancode1986",
+    facebook: "https://www.facebook.com/marosdee7",
+    twitter: "https://twitter.com/marosdee7",
+    instagram: "https://instagram.com/marosdee7",
     linkedin: "https://linkedin.com/in/marosdee-uma",
     github: "https://github.com/danya0365",
   },
