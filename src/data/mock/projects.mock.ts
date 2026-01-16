@@ -1893,6 +1893,100 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "31",
+    slug: "next-link-social-platform",
+    title: "Next Link - แพลตฟอร์มโซเชียลมีเดียครบวงจร",
+    category: "Full-stack",
+    displayOrder: 31,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มโซเชียลมีเดียแบบครบวงจรที่อิงจาก Facebook พร้อมระบบ News Feed, Profile, Messages, Groups, Events, Marketplace, Watch และ Notifications ออกแบบด้วย Clean Architecture + Presenter Pattern + Atomic Design รองรับ Dark Mode, Responsive Design และ Real-time Updates ผ่าน Zustand + Supabase พร้อมหน้า Landing Page ที่สวยงามและระบบ Authentication ครบถ้วน",
+    thumbnail: "/images/projects/next-link/thumbnail.jpg",
+    images: [
+      "/images/projects/next-link/1.jpg",
+      "/images/projects/next-link/2.jpg",
+      "/images/projects/next-link/3.jpg",
+      "/images/projects/next-link/4.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Supabase",
+      "React Hook Form",
+      "Zod",
+      "next-themes",
+      "LocalForage",
+      "Lucide React",
+      "Axios",
+      "html2canvas",
+      "react-to-print",
+    ],
+    features: [
+      {
+        title: "News Feed & Post System",
+        description:
+          "ฟีดข่าวแบบ Real-time พร้อมระบบสร้างโพสต์ รองรับรูปภาพ/วิดีโอ, Reactions 6 แบบ (Like, Love, Haha, Wow, Sad, Angry), Comments, Shares และ Privacy Settings (Public, Friends, Only Me)",
+      },
+      {
+        title: "Profile & Settings Hub",
+        description:
+          "หน้าโปรไฟล์ครบถ้วน Cover Photo, Avatar, Bio, Timeline, Photos Grid, Friends List และหน้า Settings แยกหมวดหมู่ (General, Privacy, Notification, Security, Account)",
+      },
+      {
+        title: "Messenger & Real-time Chat",
+        description:
+          "ระบบส่งข้อความพร้อม Conversations List, Unread Indicator, Online Status, Typing Indicator และ Message Templates รองรับ Direct Message และ Group Chat",
+      },
+      {
+        title: "Friends Management",
+        description:
+          "จัดการเพื่อน Friend Requests (Received/Sent), Suggestions, Mutual Friends, Send/Accept/Decline Request และ Unfriend ได้ง่าย",
+      },
+      {
+        title: "Groups & Events Platform",
+        description:
+          "สร้างและเข้าร่วม Groups หลายหมวดหมู่ (Public, Private, Secret) พร้อมระบบ Events ที่มี RSVP (Going, Maybe, Can't Go), Location, Price และ Calendar View",
+      },
+      {
+        title: "Marketplace & Watch",
+        description:
+          "Marketplace ซื้อขายสินค้า 11 หมวดหมู่ พร้อม Item Detail, Seller Rating และ Watch สำหรับวิดีโอ Categories, Recommended Videos และ Video Player",
+      },
+      {
+        title: "Global Search & Discovery",
+        description:
+          "ค้นหาทุกอย่างในที่เดียว Posts, People, Photos, Videos, Pages, Groups, Events พร้อม Filters และ Recent Searches",
+      },
+      {
+        title: "Notification Center",
+        description:
+          "แจ้งเตือนทุกประเภท Friend Request, Reactions, Comments, Mentions, Shares พร้อม Real-time Updates และ Mark as Read",
+      },
+      {
+        title: "Authentication & User Management",
+        description:
+          "ระบบ Login/Register ครบถ้วน Social Login Buttons, Remember Me, Forgot Password, Email Verification และ Session Persistence",
+      },
+      {
+        title: "Clean Architecture & Presenter Pattern",
+        description:
+          "โครงสร้างตาม Clean Architecture แยก Domain/Infrastructure/Presentation, Presenter/View Pattern, Mock Repositories พร้อม Supabase-ready และ Atomic Design Components",
+      },
+    ],
+    client: "Next Link Social",
+    projectDate: "2025-07-01",
+    liveUrl: "https://next-link-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/next-link-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
