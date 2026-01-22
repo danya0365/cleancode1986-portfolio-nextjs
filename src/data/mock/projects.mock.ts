@@ -1987,6 +1987,100 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     status: "published",
     viewCount: 0,
   },
+  {
+    id: "32",
+    slug: "racing-simulation-queue-booking",
+    title: "Racing Simulation Queue Booking - ระบบจองคิวรถแข่งจำลอง",
+    category: "Full-stack",
+    displayOrder: 32,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "ระบบจัดการคิวและจองสำหรับศูนย์รถแข่งจำลองแบบครบวงจร พร้อมระบบ Queue Management แบบ Real-time, Booking System ที่ใช้งานง่าย, Leaderboard, Rewards & Achievements, Gift Cards, Membership และ Tournaments รองรับทั้งลูกค้า Walk-in และจองล่วงหน้า พร้อม Admin Dashboard สำหรับจัดการเครื่องและการจอง",
+    thumbnail: "/images/projects/racing-queue-booking/thumbnail.jpg",
+    images: [
+      "/images/projects/racing-queue-booking/1.jpg",
+      "/images/projects/racing-queue-booking/2.jpg",
+      "/images/projects/racing-queue-booking/3.jpg",
+      "/images/projects/racing-queue-booking/4.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "React 19",
+      "Tailwind CSS 4",
+      "Supabase",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+      "React Spring",
+      "Day.js",
+      "LocalForage",
+      "QRCode React",
+      "html2canvas",
+      "react-to-print",
+    ],
+    features: [
+      {
+        title: "Queue Management แบบ Real-time",
+        description:
+          "ระบบจัดการคิวแบบ Real-time ติดตามสถานะคิว อัพเดทอัตโนมัติ รองรับทั้งลูกค้า Walk-in และจองล่วงหน้า",
+      },
+      {
+        title: "Booking System ที่ใช้งานง่าย",
+        description:
+          "จองคิวออนไลน์ได้ง่าย เลือกวัน-เวลา และเครื่องที่ต้องการ พร้อม Quick Booking สำหรับลูกค้าประจำ",
+      },
+      {
+        title: "Leaderboard & Rankings",
+        description:
+          "ติดตามผลการแข่งขันและอันดับของคุณ เปรียบเทียบกับผู้เล่นอื่นๆ",
+      },
+      {
+        title: "Rewards & Achievements",
+        description:
+          "สะสมแต้มและปลดล็อค Achievement จากการเล่น รับของรางวัลพิเศษ",
+      },
+      {
+        title: "Gift Cards & Referral Program",
+        description:
+          "ซื้อและใช้ Gift Cards ได้ง่าย พร้อมโปรแกรมแนะนำเพื่อนรับรางวัล",
+      },
+      {
+        title: "Membership & Packages",
+        description:
+          "สมัครเป็นสมาชิกเพื่อรับสิทธิพิเศษ เลือกแพ็กเกจที่เหมาะกับคุณ",
+      },
+      {
+        title: "Gallery & Tournaments",
+        description:
+          "แชร์ภาพความทรงจำจากการแข่งขัน เข้าร่วมการแข่งขันพิเศษ",
+      },
+      {
+        title: "Admin Dashboard",
+        description:
+          "แดชบอร์ดสำหรับ Admin ดูสถิติ จัดการเครื่อง และบริหารการจองได้ง่าย",
+      },
+      {
+        title: "Machine Management",
+        description:
+          "ติดตามสถานะเครื่องแบบ Real-time ดูว่าเครื่องไหนว่างหรือกำลังใช้งาน",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างตาม Clean Architecture แยก Domain/Infrastructure/Presentation ชัดเจน บำรุงรักษาง่าย",
+      },
+    ],
+    client: "Racing Simulation Center",
+    projectDate: "2026-01-22",
+    liveUrl: "https://racing-simulation-queue-booking-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/racing-simulation-queue-booking-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
 ];
 
 // Future Projects - โปรเจคในอนาคต
