@@ -2075,7 +2075,7 @@ const CLEAN_CODE_PROJECTS: Project[] = [
     ],
     client: "Racing Simulation Center",
     projectDate: "2026-01-22",
-    liveUrl: "https://racing-simulation-queue-booking-nextjs.vercel.app/",
+    liveUrl: "https://racing-simulation-queue-booking-nex.vercel.app/",
     githubUrl: "https://github.com/danya0365/racing-simulation-queue-booking-nextjs",
     isFeatured: true,
     status: "published",
