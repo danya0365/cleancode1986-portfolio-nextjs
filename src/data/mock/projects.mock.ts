@@ -377,6 +377,67 @@ const MOCK_PROJECTS: Project[] = [
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
 const CLEAN_CODE_PROJECTS: Project[] = [
   {
+    id: "34",
+    slug: "haqq-vault",
+    title: "Haqq Vault (BurhanQA) - ระบบฐานข้อมูลความรู้อิสลาม",
+    category: "Full-stack",
+    displayOrder: 34,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แพลตฟอร์มฐานข้อมูลความรู้อิสลามเชิงวิชาการ (Knowledge Base) ที่รวบรวมคำตอบและหลักฐานเพื่อตอบข้อสงสัยอย่างเป็นระบบ พร้อมระบบตรวจสอบความถูกต้องเนื้อหาโดยนักวิชาการ",
+    thumbnail: "/images/projects/haqq-vault-thumb.jpg",
+    images: [
+      "/images/projects/haqq-vault-1.jpg",
+      "/images/projects/haqq-vault-2.jpg",
+      "/images/projects/haqq-vault-3.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Supabase",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+    ],
+    features: [
+      {
+        title: "Structured Knowledge Base",
+        description:
+          "โครงสร้างเนื้อหาเชิงลึก ประกอบด้วย ข้อกล่าวหา, สรุป, คำอธิบาย, หลักฐาน (Qur'an & Hadith)",
+      },
+      {
+        title: "Role-based Access & Verification",
+        description:
+          "แยกระดับสิทธิ์ผู้ใช้ (Editor, Scholar Reviewer, Admin) พร้อมระบบ Badge ยืนยันความถูกต้องเนื้อหาโดย Scholar",
+      },
+      {
+        title: "Full-text Search",
+        description:
+          "ค้นหาเนื้อหาได้อย่างรวดเร็ว รองรับภาษาไทยและอังกฤษ พร้อมระบบ Filter แยกตามความยากง่าย",
+      },
+      {
+        title: "Content Versioning",
+        description:
+          "ระบบบันทึกประวัติการแก้ไขเนื้อหา (Edit History) เพื่อความโปร่งใสและตรวจสอบย้อนหลังได้",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "พัฒนาและต่อเติมอย่างเป็นระบบ มีการแยกเลเยอร์แอปพลิเคชันอย่างชัดเจน",
+      },
+    ],
+    projectDate: "2026-02-21",
+    liveUrl: "https://haqq-vault.vercel.app/",
+    githubUrl: "https://github.com/danya0365/haqq-vault-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1205,
+  },
+  {
     id: "33",
     slug: "promptui",
     title: "PromptUI - AI-Generated UI Design Showcase & Gallery",
