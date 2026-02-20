@@ -377,6 +377,67 @@ const MOCK_PROJECTS: Project[] = [
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
 const CLEAN_CODE_PROJECTS: Project[] = [
   {
+    id: "33",
+    slug: "promptui",
+    title: "PromptUI - AI-Generated UI Design Showcase & Gallery",
+    category: "Web",
+    displayOrder: 33,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "แกลเลอรีรวบรวม UI Design สุดล้ำที่สร้างโดย AI (Gemini 3.1 Pro) ผสานกับ Vanilla CSS, Tailwind CSS 4 และ React 19 พร้อม Clean Architecture อย่างเต็มรูปแบบ",
+    thumbnail: "/images/projects/promptui-thumb.jpg",
+    images: [
+      "/images/projects/promptui-1.jpg",
+      "/images/projects/promptui-2.jpg",
+      "/images/projects/promptui-3.jpg",
+    ],
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Vanilla CSS",
+      "Zustand",
+      "Gemini 3.1 Pro",
+      "Clean Architecture",
+    ],
+    features: [
+      {
+        title: "Interactive Gallery",
+        description:
+          "แกลเลอรีจัดแสดง UI component และหน้าเว็บแบบจัดเต็มที่สร้างด้วย AI",
+      },
+      {
+        title: "Live Preview Engine",
+        description:
+          "ระบบสลับดู Code และการเรนเดอร์ UI จริง (Live Preview) ได้แบบไดนามิก",
+      },
+      {
+        title: "Prompt Engineering as Code",
+        description:
+          "แสดง Prompt ที่ใช้จริงในการสร้าง UI เพื่อเป็นแนวทางในการไปต่อยอด",
+      },
+      {
+        title: "Pure CSS Mastery",
+        description:
+          "โชว์พลังของ Vanilla CSS (Grid, Flexbox, Variables, Animation) โดยไม่พึ่งไลบรารีอื่น",
+      },
+      {
+        title: "Clean Architecture",
+        description:
+          "โครงสร้างแอป Next.js แบบแยกส่วน Domain, Infrastructure และ Presentation",
+      },
+    ],
+    projectDate: "2026-02-20",
+    liveUrl: "https://promptui-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/promptui-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 1850,
+  },
+  {
     id: "18",
     slug: "edux-school-management",
     title: "EduX School - ระบบจัดการโรงเรียนครบวงจร",
