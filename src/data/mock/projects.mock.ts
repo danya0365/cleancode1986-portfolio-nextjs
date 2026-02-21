@@ -377,6 +377,67 @@ const MOCK_PROJECTS: Project[] = [
 // Clean Code Projects - โปรเจคจริงที่ทำแล้ว
 const CLEAN_CODE_PROJECTS: Project[] = [
   {
+    id: "35",
+    slug: "quick-queue",
+    title: "Quick Queue - ระบบจัดการคิวอัจฉริยะ (Queue Management System)",
+    category: "Full-stack",
+    displayOrder: 35,
+    isCleanCode: true,
+    isMock: false,
+    isFuture: false,
+    description:
+      "ระบบจัดการคิวที่ล้ำสมัยและยืดหยุ่นสูง ออกแบบด้วยสถาปัตยกรรม Clean Architecture เพื่อความยั่งยืนของซอฟต์แวร์ รองรับการสลับเทมเพลตดีไซน์ที่หลากหลาย และเทคโนโลยีแบบ Edge-ready",
+    thumbnail: "/images/projects/quick-queue-thumb.jpg",
+    images: [
+      "/images/projects/quick-queue-1.jpg",
+      "/images/projects/quick-queue-2.jpg",
+      "/images/projects/quick-queue-3.jpg",
+    ],
+    technologies: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Zustand",
+      "React Spring",
+      "Turso (libSQL)",
+      "Clean Architecture",
+    ],
+    features: [
+      {
+        title: "Multi-Storefront Template System",
+        description:
+          "ระบบสลับ Layout ทันทีระหว่าง Modern Clean UI และ Retro Tech Magazine Aesthetic",
+      },
+      {
+        title: "Physics-Based UI Animations",
+        description:
+          "ใช้อัลกอริทึมฟิสิกส์ (Springs) แทน Linear CSS Transitions เพื่อประสบการณ์ผู้ใช้ที่พรีเมียม",
+      },
+      {
+        title: "Clean Architecture Strictly Followed",
+        description:
+          "การแยกเลเยอร์ Domain, Application, Infrastructure และ Presentation อย่างละเอียด",
+      },
+      {
+        title: "Edge-Ready Persistence",
+        description:
+          "สถาปัตยกรรมฐานข้อมูลที่ยืดหยุ่น รองรับทั้ง Local SQLite และ Edge Turso Cloud",
+      },
+      {
+        title: "Enterprise Security Layer",
+        description:
+          "Middleware Security และ Cookie-based Authentication ที่ปลอดภัยในระดับ Edge",
+      },
+    ],
+    projectDate: "2026-02-22",
+    liveUrl: "https://quick-queue-nextjs.vercel.app/",
+    githubUrl: "https://github.com/danya0365/quick-queue-nextjs",
+    isFeatured: true,
+    status: "published",
+    viewCount: 0,
+  },
+  {
     id: "34",
     slug: "haqq-vault",
     title: "Haqq Vault (BurhanQA) - ระบบฐานข้อมูลความรู้อิสลาม",
