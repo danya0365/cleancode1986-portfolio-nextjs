@@ -23,6 +23,12 @@ export interface IAuthRepository {
   createMagicLink(userId: string, expiresAtMs: number): Promise<string>;
 
   /**
+   * Retrieve an existing valid Magic Link or create a new one, 
+   * while cleaning up old, expired, or used tokens.
+   */
+  getOrCreateMagicLink(userId: string, expiresAtMs: number): Promise<string>;
+
+  /**
    * Validate and consume a one-time Magic Link token.
    * Returns the associated user if valid, or null if expired/used.
    */

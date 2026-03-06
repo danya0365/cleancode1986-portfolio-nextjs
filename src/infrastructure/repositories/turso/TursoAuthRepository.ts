@@ -55,6 +55,37 @@ export class TursoAuthRepository implements IAuthRepository {
     return tokenSecret;
   }
 
+  async getOrCreateMagicLink(userId: string, expiresAtMs: number): Promise<string> {
+    const nowIso = new Date().toISOString();
+
+    // 1. Garbage Collection: Auto-cleanup used or expired links
+    try {
+      await this.db.execute({
+        sql: `DELETE FROM magic_links WHERE is_used = 1 OR expires_at < ?`,
+        args: [nowIso],
+      });
+    } catch (e) {
+      console.error("[TursoAuthRepository] Failed to cleanup magic links", e);
+    }
+
+    // 2. Try to find an existing active token for this user
+    try {
+      const result = await this.db.execute({
+        sql: `SELECT token FROM magic_links WHERE user_id = ? AND is_used = 0 AND expires_at > ? LIMIT 1`,
+        args: [userId, nowIso],
+      });
+
+      if (result.rows.length > 0) {
+        return result.rows[0].token as string;
+      }
+    } catch (e) {
+      console.error("[TursoAuthRepository] Failed to search for existing magic link", e);
+    }
+
+    // 3. Fallback: Create a new one
+    return this.createMagicLink(userId, expiresAtMs);
+  }
+
   async consumeMagicLink(token: string): Promise<UserData | null> {
     // 1. Fetch the token and join with user
     const result = await this.db.execute({

@@ -41,7 +41,7 @@ export class LineMessagingService {
     try {
       const authRepo = new TursoAuthRepository();
       const expiresAt = Date.now() + 1000 * 60 * 60 * 24 * 14; // 14 days
-      token = await authRepo.createMagicLink("usr-admin-001", expiresAt);
+      token = await authRepo.getOrCreateMagicLink("usr-admin-001", expiresAt);
     } catch (e) {
       console.error("[LINE Service] Failed to generate magic link:", e);
     }
