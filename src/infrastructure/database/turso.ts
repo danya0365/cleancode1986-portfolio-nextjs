@@ -63,6 +63,25 @@ export async function runMigrations(db: Client): Promise<void> {
     CREATE INDEX IF NOT EXISTS idx_chat_sessions_status ON chat_sessions(status);
     CREATE INDEX IF NOT EXISTS idx_chat_messages_session_id ON chat_messages(session_id);
     CREATE INDEX IF NOT EXISTS idx_chat_messages_created_at ON chat_messages(created_at);
+
+    -- Users (Admin)
+    CREATE TABLE IF NOT EXISTS users (
+      id            TEXT PRIMARY KEY,
+      username      TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      role          TEXT NOT NULL DEFAULT 'admin',
+      created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Magic Links (NextAuth)
+    CREATE TABLE IF NOT EXISTS magic_links (
+      id            TEXT PRIMARY KEY,
+      token         TEXT NOT NULL UNIQUE,
+      user_id       TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      expires_at    TEXT NOT NULL,
+      is_used       INTEGER NOT NULL DEFAULT 0,
+      created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
 
   migrationsRun = true;

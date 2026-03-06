@@ -1,5 +1,6 @@
 import { SITE } from "@/src/data/master/site";
 import * as line from "@line/bot-sdk";
+import { TursoAuthRepository } from "../repositories/turso/TursoAuthRepository";
 
 export class LineMessagingService {
   private client: line.messagingApi.MessagingApiClient | null = null;
@@ -35,13 +36,23 @@ export class LineMessagingService {
 
     const shortId = sessionId.slice(0, 4).toUpperCase();
 
+    // Generate a 14-day magic link for the default admin
+    let token = "";
+    try {
+      const authRepo = new TursoAuthRepository();
+      const expiresAt = Date.now() + 1000 * 60 * 60 * 24 * 14; // 14 days
+      token = await authRepo.createMagicLink("usr-admin-001", expiresAt);
+    } catch (e) {
+      console.error("[LINE Service] Failed to generate magic link:", e);
+    }
+
     try {
       await this.client!.pushMessage({
         to: this.adminUserId!,
         messages: [
           {
             type: "text",
-            text: `[💬 ลูกค้าใหม่]\nรหัสห้อง: ${shortId}\nข้อความ: ${message}\n\n👉 คลิกเพื่อตอบกลับ:\n${SITE.baseUrl}/admin/chat?sessionId=${sessionId}`,
+            text: `[💬 ลูกค้าใหม่]\nรหัสห้อง: ${shortId}\nข้อความ: ${message}\n\n👉 คลิกเพื่อตอบกลับ:\n${SITE.baseUrl}/admin/login?token=${token}&sessionId=${sessionId}`,
           },
         ],
       });

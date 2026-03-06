@@ -1,4 +1,5 @@
 import { Client } from "@libsql/client";
+import bcrypt from "bcryptjs";
 
 export async function seedStarter(db: Client): Promise<void> {
   console.log("  ➡️  Running Starter Seed...");
@@ -26,8 +27,16 @@ export async function seedStarter(db: Client): Promise<void> {
         "สวัสดีครับ (จาก Starter Seed)",
       ],
     });
+    
+    // 3. Create default admin
+    const defaultAdminId = "usr-admin-001";
+    const passwordHash = await bcrypt.hash("admin1234", 10);
+    await db.execute({
+      sql: `INSERT OR IGNORE INTO users (id, username, password_hash, role) VALUES (?, ?, ?, ?)`,
+      args: [defaultAdminId, "admin", passwordHash, "admin"],
+    });
 
-    console.log("  ✅  Starter Seed applied (test session created).");
+    console.log("  ✅  Starter Seed applied (test session and default admin created).");
   } catch (error) {
     console.error("  ❌  Starter Seed failed:", error);
     throw error;
