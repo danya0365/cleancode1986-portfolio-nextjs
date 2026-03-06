@@ -1,3 +1,4 @@
+import { SITE } from "@/src/data/master/site";
 import * as line from "@line/bot-sdk";
 
 export class LineMessagingService {
@@ -40,7 +41,7 @@ export class LineMessagingService {
         messages: [
           {
             type: "text",
-            text: `[💬 ลูกค้าใหม่]\nรหัสห้อง: ${shortId}\nข้อความ: ${message}\n\n---\nวิธีตอบกลับ:\nพิมพ์ "ตอบ ข้อความ"\nหรือพิมพ์ "!${shortId} ข้อความ"`,
+            text: `[💬 ลูกค้าใหม่]\nรหัสห้อง: ${shortId}\nข้อความ: ${message}\n\n👉 คลิกเพื่อตอบกลับ:\n${SITE.baseUrl}/admin/chat?sessionId=${sessionId}`,
           },
         ],
       });

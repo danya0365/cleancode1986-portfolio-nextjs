@@ -25,6 +25,16 @@ export interface IChatRepository {
   getSession(sessionId: string): Promise<ChatSessionData | null>;
 
   /**
+   * Fetch all active sessions, including the content of their latest message, sorted by newest first.
+   */
+  getAllSessionsWithLatestMessage(): Promise<(ChatSessionData & { latestMessage?: ChatMessageData })[]>;
+
+  /**
+   * Update the status of a session (e.g. to close it).
+   */
+  updateSessionStatus(sessionId: string, status: "active" | "closed"): Promise<void>;
+
+  /**
    * Find a session by a short ID prefix (e.g. first 4-8 characters).
    */
   getSessionByShortId(shortId: string): Promise<ChatSessionData | null>;
