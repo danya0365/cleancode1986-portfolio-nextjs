@@ -5,29 +5,45 @@
  * Floating chat bubble that appears on all pages
  */
 
-import { useChatStore } from "@/src/presentation/stores/chat-store";
 import { Bot, Loader2, MessageCircle, Phone, Send, UserCircle2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { ChatMessageType } from "../types";
 import { ChatMessage } from "./ChatMessage";
 
-export function AIChatBubble() {
-  // --- STORE ---
-  const {
-    messages,
-    isOpen,
-    isLoading,
-    sessionId,
-    customerInfo,
-    error,
-    toggleChat,
-    sendMessage,
-    syncMessages,
-    registerCustomer,
-    hasMoreHistory,
-    loadMoreHistory,
-    markAsRead
-  } = useChatStore();
+export interface AIChatBubbleProps {
+  // State
+  isOpen: boolean;
+  messages: ChatMessageType[];
+  isLoading: boolean;
+  isRegistered: boolean;
+  hasMoreHistory: boolean;
+  customerName?: string;
+  error: string | null;
+  
+  // Callbacks
+  onToggleChat: () => void;
+  onSendMessage: (message: string) => Promise<void>;
+  onRegister: (name: string, phone: string) => Promise<boolean>;
+  onLoadMoreHistory: () => Promise<void>;
+  onMarkAsRead: () => void;
+  onSyncMessages: () => void;
+}
 
+export function AIChatBubble({
+  isOpen,
+  messages,
+  isLoading,
+  isRegistered,
+  hasMoreHistory,
+  customerName,
+  error,
+  onToggleChat,
+  onSendMessage,
+  onRegister,
+  onLoadMoreHistory,
+  onMarkAsRead,
+  onSyncMessages
+}: AIChatBubbleProps) {
   // --- LOCAL STATE ---
   const [input, setInput] = useState("");
   const [regName, setRegName] = useState("");
@@ -36,21 +52,21 @@ export function AIChatBubble() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Poll for new messages (sync with Turso & LINE)
+  // Poll for new messages (sync with Backend)
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isOpen) {
       // Immediate sync when opened
-      syncMessages();
+      onSyncMessages();
       // Poll every 5 seconds
       interval = setInterval(() => {
-        syncMessages();
+        onSyncMessages();
       }, 5000);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isOpen, syncMessages]);
+  }, [isOpen, onSyncMessages]);
 
   // Scroll to bottom when new messages arrive and mark as read
   useEffect(() => {
@@ -58,10 +74,10 @@ export function AIChatBubble() {
     if (isOpen) {
        const hasUnread = messages.some(m => m.role !== "user" && m.status !== "read");
        if (hasUnread) {
-          markAsRead();
+          onMarkAsRead();
        }
     }
-  }, [messages, isOpen, markAsRead]);
+  }, [messages, isOpen, onMarkAsRead]);
 
   // Focus input when chat opens
   useEffect(() => {
@@ -76,7 +92,7 @@ export function AIChatBubble() {
 
     const message = input.trim();
     setInput("");
-    await sendMessage(message);
+    await onSendMessage(message);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -89,11 +105,8 @@ export function AIChatBubble() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!regName.trim() || !regPhone.trim()) return;
-    await registerCustomer(regName.trim(), regPhone.trim());
+    await onRegister(regName.trim(), regPhone.trim());
   };
-
-  // Condition to check if customer is fully registered
-  const isRegistered = !!sessionId && !!customerInfo;
 
   return (
     <div className="ai-chat">
@@ -114,9 +127,9 @@ export function AIChatBubble() {
               </div>
             </div>
             <button
-              onClick={toggleChat}
+              onClick={onToggleChat}
               className="ai-chat__close-btn"
-              aria-label="ปิดแชท"
+              aria-label="Close Chat"
             >
               <X className="ai-chat__close-icon" />
             </button>
@@ -175,7 +188,7 @@ export function AIChatBubble() {
                 <div className="ai-chat__welcome-avatar">
                   <Bot className="ai-chat__welcome-icon" />
                 </div>
-                <h4 className="ai-chat__welcome-title">สวัสดีคุณ {customerInfo.name}! 👋</h4>
+                <h4 className="ai-chat__welcome-title">สวัสดีคุณ {customerName}! 👋</h4>
                 <p className="ai-chat__welcome-text">
                   ผม Clean Assistant เลขาส่วนตัวของ Clean Code 1986 ครับ
                   <br />
@@ -183,19 +196,19 @@ export function AIChatBubble() {
                 </p>
                 <div className="ai-chat__suggestions">
                   <button
-                    onClick={() => sendMessage("มีบริการอะไรบ้าง?")}
+                    onClick={() => onSendMessage("มีบริการอะไรบ้าง?")}
                     className="ai-chat__suggestion-btn"
                   >
                     🛠️ ดูบริการ
                   </button>
                   <button
-                    onClick={() => sendMessage("ดูผลงานล่าสุด")}
+                    onClick={() => onSendMessage("ดูผลงานล่าสุด")}
                     className="ai-chat__suggestion-btn"
                   >
                     📁 ดูผลงาน
                   </button>
                   <button
-                    onClick={() => sendMessage("ติดต่อได้อย่างไร?")}
+                    onClick={() => onSendMessage("ติดต่อได้อย่างไร?")}
                     className="ai-chat__suggestion-btn"
                   >
                     📞 ติดต่อเรา
@@ -207,7 +220,7 @@ export function AIChatBubble() {
                 {hasMoreHistory && (
                   <div className="flex justify-center my-4">
                     <button 
-                      onClick={() => loadMoreHistory()}
+                      onClick={() => onLoadMoreHistory()}
                       disabled={isLoading}
                       className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-1.5 px-4 rounded-full transition-colors flex items-center gap-2"
                     >
@@ -257,10 +270,10 @@ export function AIChatBubble() {
       )}
 
       {/* Floating Button */}
-      <button
-        onClick={toggleChat}
+      <button 
         className={`ai-chat__bubble ${isOpen ? "ai-chat__bubble--open" : ""}`}
-        aria-label={isOpen ? "ปิดแชท" : "เปิดแชท"}
+        onClick={onToggleChat}
+        aria-label={isOpen ? "Close AI Assistant" : "Open AI Assistant"}
       >
         {isOpen ? (
           <X className="ai-chat__bubble-icon" />

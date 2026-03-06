@@ -4,10 +4,10 @@
  * Chat Message Component
  */
 
-import { ChatMessage as ChatMessageType } from "@/src/presentation/stores/chat-store";
 import { Bot, Check, CheckCheck, ShieldCheck, User } from "lucide-react";
+import { ChatMessageType } from "../types";
 
-interface ChatMessageProps {
+export interface ChatMessageProps {
   message: ChatMessageType;
 }
 

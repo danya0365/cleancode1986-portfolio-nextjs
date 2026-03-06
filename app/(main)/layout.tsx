@@ -1,4 +1,5 @@
-import { AIChatBubble } from "@/src/presentation/components/chat";
+import { FullAIChatWidget } from "@cleancode1986/ai-chat-bubble";
+import "@cleancode1986/ai-chat-bubble/styles.css";
 
 export default function MainLayout({
   children,
@@ -8,7 +9,7 @@ export default function MainLayout({
   return (
     <>
       {children}
-      <AIChatBubble />
+      <FullAIChatWidget apiEndpoint="/api/chat" />
     </>
   );
 }

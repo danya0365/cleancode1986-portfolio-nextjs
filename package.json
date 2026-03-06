@@ -16,6 +16,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@cleancode1986/ai-chat-bubble": "./packages/ai-chat-bubble",
     "@hookform/resolvers": "^5.2.2",
     "@libsql/client": "^0.17.0",
     "@line/bot-sdk": "^10.6.0",
