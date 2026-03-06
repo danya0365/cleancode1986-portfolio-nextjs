@@ -13,13 +13,19 @@ const DB_DIR = path.join(process.cwd(), "data");
 export function getTursoDatabase(): Client {
   if (tursoClient) return tursoClient;
 
-  // Ensure data/ directory exists for local files
-  if (!fs.existsSync(DB_DIR)) {
-    fs.mkdirSync(DB_DIR, { recursive: true });
-  }
-
   const url = process.env.TURSO_DATABASE_URL || "file:data/chat.db";
   const authToken = process.env.TURSO_AUTH_TOKEN;
+
+  // Ensure data/ directory exists ONLY for local files
+  if (url.startsWith("file:")) {
+    try {
+      if (!fs.existsSync(DB_DIR)) {
+        fs.mkdirSync(DB_DIR, { recursive: true });
+      }
+    } catch (error) {
+      console.warn("[Turso] Could not create local DB directory. Ignored if on Vercel.", error);
+    }
+  }
 
   tursoClient = createClient({
     url,
