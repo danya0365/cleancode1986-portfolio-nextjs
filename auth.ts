@@ -1,9 +1,11 @@
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { authConfig } from "./auth.config";
 import { TursoAuthRepository } from "./src/infrastructure/repositories/turso/TursoAuthRepository";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -43,26 +45,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: "/admin/login",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        // user object is only passed on the initial sign-in
-        token.role = (user as any).role;
-        token.id = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token && session.user) {
-        (session.user as any).role = token.role;
-        session.user.id = token.id as string;
-      }
-      return session;
-    },
-  },
-  session: { strategy: "jwt" },
-  secret: process.env.AUTH_SECRET,
 });
