@@ -1,7 +1,7 @@
 import {
-    ChatMessageData,
-    ChatSessionData,
-    IChatRepository,
+  ChatMessageData,
+  ChatSessionData,
+  IChatRepository,
 } from "@/src/application/repositories/IChatRepository";
 import { randomUUID } from "crypto";
 import { getTursoDatabase } from "../../database/turso";
@@ -21,6 +21,43 @@ export class TursoChatRepository implements IChatRepository {
       sql: `SELECT id, status, created_at, updated_at FROM chat_sessions WHERE id = ?`,
       args: [sessionId],
     });
+
+    if (result.rows.length === 0) return null;
+
+    const row = result.rows[0];
+    return {
+      id: row.id as string,
+      status: row.status as "active" | "closed",
+      createdAt: new Date(row.created_at as string + "Z"),
+      updatedAt: new Date(row.updated_at as string + "Z"),
+    };
+  }
+
+  async getSessionByShortId(shortId: string): Promise<ChatSessionData | null> {
+    const result = await this.db.execute({
+      sql: `SELECT id, status, created_at, updated_at FROM chat_sessions 
+            WHERE id LIKE ? AND status = 'active'
+            ORDER BY updated_at DESC LIMIT 1`,
+      args: [`${shortId}%`],
+    });
+
+    if (result.rows.length === 0) return null;
+
+    const row = result.rows[0];
+    return {
+      id: row.id as string,
+      status: row.status as "active" | "closed",
+      createdAt: new Date(row.created_at as string + "Z"),
+      updatedAt: new Date(row.updated_at as string + "Z"),
+    };
+  }
+
+  async getLatestActiveSession(): Promise<ChatSessionData | null> {
+    const result = await this.db.execute(`
+      SELECT id, status, created_at, updated_at FROM chat_sessions 
+      WHERE status = 'active' 
+      ORDER BY updated_at DESC LIMIT 1
+    `);
 
     if (result.rows.length === 0) return null;
 

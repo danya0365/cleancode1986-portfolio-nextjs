@@ -32,18 +32,35 @@ export class LineMessagingService {
       return;
     }
 
+    const shortId = sessionId.slice(0, 4).toUpperCase();
+
     try {
       await this.client!.pushMessage({
         to: this.adminUserId!,
         messages: [
           {
             type: "text",
-            text: `[💬 New Web Chat]\nSession: ${sessionId.slice(0, 8)}...\nUser: ${message}`,
+            text: `[💬 ลูกค้าใหม่]\nรหัสห้อง: ${shortId}\nข้อความ: ${message}\n\n---\nวิธีตอบกลับ:\nพิมพ์ "ตอบ ข้อความ"\nหรือพิมพ์ "!${shortId} ข้อความ"`,
           },
         ],
       });
     } catch (error) {
       console.error("[LINE Service] Failed to notify admin:", error);
+    }
+  }
+
+  /**
+   * Push a generic system message to the Admin
+   */
+  public async pushMessageToAdmin(text: string): Promise<void> {
+    if (!this.isConfigured()) return;
+    try {
+      await this.client!.pushMessage({
+        to: this.adminUserId!,
+        messages: [{ type: "text", text }],
+      });
+    } catch (error) {
+      console.error("[LINE Service] Failed to push message:", error);
     }
   }
 

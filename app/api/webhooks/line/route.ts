@@ -29,32 +29,45 @@ export async function POST(request: NextRequest) {
         const textMessage = event.message as TextEventMessage;
         const replyText = textMessage.text;
 
-        // Parse Session ID: We expect the admin to reply with the Session ID prefix
-        // e.g. "Reply to test-session: Hello there!"
-        // For simplicity in Option 3, if the admin is replying, they could quote the message or we can do a command:
-        // "!reply <sessionId> <message>" 
-        // Let's implement a simple parsing: if message starts with "!r sessionId", treat it as reply.
-        
+        // Parse Session ID & Message
         let sessionId = "";
-        let adminContent = replyText;
+        let adminContent = "";
 
-        const match = replyText.match(/^!r\s+([A-Za-z0-9_-]+)\s+([\s\S]+)$/i);
+        // 1. Check for specific session short ID command (e.g. !8a36 สวัสดีครับ)
+        const specificMatch = replyText.match(/^!([A-Za-z0-9_-]{4,8})\s+([\s\S]+)$/i);
         
-        if (match) {
-           sessionId = match[1];
-           adminContent = match[2];
+        // 2. Check for "reply to latest" command (e.g. ตอบ สวัสดี, > สวัสดี, . สวัสดี)
+        const latestMatch = replyText.match(/^(ตอบ|>|\.|!)\s+([\s\S]+)$/i);
+
+        if (specificMatch) {
+           const shortId = specificMatch[1];
+           adminContent = specificMatch[2];
+           
+           const session = await chatRepo.getSessionByShortId(shortId);
+           if (session) {
+             sessionId = session.id;
+           } else {
+             await lineService.pushMessageToAdmin(`❌ ไม่พบแชทที่ขึ้นต้นด้วยรหัส "${shortId}" หรือแชทถูกปิดไปแล้ว`);
+             continue;
+           }
+        } else if (latestMatch) {
+           adminContent = latestMatch[2];
+           
+           const session = await chatRepo.getLatestActiveSession();
+           if (session) {
+             sessionId = session.id;
+           } else {
+             await lineService.pushMessageToAdmin(`❌ ไม่มีแชทใดที่กำลัง Active อยู่ในขณะนี้`);
+             continue;
+           }
         } else {
-           // If we don't have a specific session ID command, we might fallback to the latest active session.
-           // However, for exactly targeting the user, the !r command is safer. 
-           // In a real production system, quoting the user's message and extracting the ID from it is better,
-           // but requires maintaining mappings. We'll stick to the !r command for now.
-           console.log("[LINE Webhook] Received message without explicit session ID routing:", replyText);
+           console.log("[LINE Webhook] Received message without recognized reply format:", replyText);
            continue; 
         }
 
         // Save Admin reply to DB
         await chatRepo.addMessage(sessionId, "admin", adminContent);
-        console.log(`[LINE Webhook] Saved admin reply for session ${sessionId}`);
+        console.log(`[LINE Webhook] Saved admin reply for session ${sessionId.slice(0, 8)}`);
       }
     }
 

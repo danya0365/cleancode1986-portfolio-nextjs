@@ -25,6 +25,16 @@ export interface IChatRepository {
   getSession(sessionId: string): Promise<ChatSessionData | null>;
 
   /**
+   * Find a session by a short ID prefix (e.g. first 4-8 characters).
+   */
+  getSessionByShortId(shortId: string): Promise<ChatSessionData | null>;
+
+  /**
+   * Get the most recently active session.
+   */
+  getLatestActiveSession(): Promise<ChatSessionData | null>;
+
+  /**
    * Add a new message to the session.
    */
   addMessage(
