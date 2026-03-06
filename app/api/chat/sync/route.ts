@@ -24,7 +24,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ messages: [] });
     }
 
-    const messages = await chatRepo.getMessagesBySession(sessionId);
+    const lastMessageAt = searchParams.get("lastMessageAt");
+    const beforeDate = searchParams.get("before");
+
+    let messages;
+
+    if (lastMessageAt) {
+      // Optimized Polling: Only fetch strictly new messages
+      messages = await chatRepo.getNewMessages(sessionId, new Date(lastMessageAt));
+    } else if (beforeDate) {
+      // Infinite Scroll: Fetch older messages (e.g. limit 50)
+      messages = await chatRepo.getMessagesBySession(sessionId, 50, new Date(beforeDate));
+    } else {
+      // Default: Initial load (latest 50)
+      messages = await chatRepo.getMessagesBySession(sessionId, 50);
+    }
 
     return NextResponse.json({ messages });
   } catch (error) {

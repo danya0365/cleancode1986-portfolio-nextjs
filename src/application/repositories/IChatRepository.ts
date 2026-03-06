@@ -11,13 +11,15 @@ export interface ChatSessionData {
   status: "active" | "closed";
   createdAt: Date;
   updatedAt: Date;
+  customerName?: string;
+  customerPhone?: string;
 }
 
 export interface IChatRepository {
   /**
    * Initialize a new chat session for a user.
    */
-  createSession(sessionId: string): Promise<void>;
+  createSession(sessionId: string, customerName?: string, customerPhone?: string): Promise<void>;
 
   /**
    * Check if a session exists and is active.
@@ -55,6 +57,17 @@ export interface IChatRepository {
 
   /**
    * Retrieve all messages for a given session, sorted chronologically.
+   * Supports cursor pagination through `limit` and `beforeDate`.
    */
-  getMessagesBySession(sessionId: string): Promise<ChatMessageData[]>;
+  getMessagesBySession(sessionId: string, limit?: number, beforeDate?: Date): Promise<ChatMessageData[]>;
+
+  /**
+   * Fetch strictly new messages that arrived after a specific timestamp (Optimized Polling).
+   */
+  getNewMessages(sessionId: string, afterDate: Date): Promise<ChatMessageData[]>;
+
+  /**
+   * Search for messages containing a specific keyword within a session.
+   */
+  searchMessages(sessionId: string, keyword: string): Promise<ChatMessageData[]>;
 }

@@ -6,21 +6,32 @@
  */
 
 import { useChatStore } from "@/src/presentation/stores/chat-store";
-import { Bot, Loader2, MessageCircle, Send, X } from "lucide-react";
+import { Bot, Loader2, MessageCircle, Phone, Send, UserCircle2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ChatMessage } from "./ChatMessage";
 
 export function AIChatBubble() {
+  // --- STORE ---
   const {
     messages,
     isOpen,
     isLoading,
+    sessionId,
+    customerInfo,
+    error,
     toggleChat,
     sendMessage,
     syncMessages,
+    registerCustomer,
+    hasMoreHistory,
+    loadMoreHistory
   } = useChatStore();
 
+  // --- LOCAL STATE ---
   const [input, setInput] = useState("");
+  const [regName, setRegName] = useState("");
+  const [regPhone, setRegPhone] = useState("");
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -68,6 +79,15 @@ export function AIChatBubble() {
     }
   };
 
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!regName.trim() || !regPhone.trim()) return;
+    await registerCustomer(regName.trim(), regPhone.trim());
+  };
+
+  // Condition to check if customer is fully registered
+  const isRegistered = !!sessionId && !!customerInfo;
+
   return (
     <div className="ai-chat">
       {/* Chat Window */}
@@ -95,14 +115,60 @@ export function AIChatBubble() {
             </button>
           </div>
 
-          {/* Messages */}
+          {/* Messages or Registration View */}
           <div className="ai-chat__messages">
-            {messages.length === 0 ? (
+            {!isRegistered ? (
+              <div className="flex flex-col items-center justify-center p-6 h-full text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <Bot className="w-8 h-8 text-blue-600" />
+                </div>
+                <h4 className="text-lg font-bold text-gray-800 mb-2">สวัสดีครับ!</h4>
+                <p className="text-sm text-gray-500 mb-6">กรุณากรอกข้อมูลเพื่อเริ่มสนทนากับเรา หรือพิมพ์เบอร์เดิมเพื่อดึงประวัติแชท</p>
+                
+                <form onSubmit={handleRegister} className="w-full flex flex-col gap-3">
+                  <div className="relative">
+                    <UserCircle2 className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                    <input 
+                      type="text" 
+                      placeholder="ชื่อของคุณ"
+                      value={regName}
+                      onChange={(e) => setRegName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    />
+                  </div>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                    <input 
+                      type="tel" 
+                      placeholder="เบอร์โทรศัพท์"
+                      value={regPhone}
+                      onChange={(e) => setRegPhone(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    />
+                  </div>
+
+                  {error && <p className="text-xs text-red-500 text-left">{error}</p>}
+
+                  <button 
+                    type="submit" 
+                    disabled={isLoading || !regName || !regPhone}
+                    className="w-full mt-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                  >
+                    {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+                    เริ่มคุยกันเลย
+                  </button>
+                </form>
+              </div>
+            ) : messages.length === 0 ? (
               <div className="ai-chat__welcome">
                 <div className="ai-chat__welcome-avatar">
                   <Bot className="ai-chat__welcome-icon" />
                 </div>
-                <h4 className="ai-chat__welcome-title">สวัสดีครับ! 👋</h4>
+                <h4 className="ai-chat__welcome-title">สวัสดีคุณ {customerInfo.name}! 👋</h4>
                 <p className="ai-chat__welcome-text">
                   ผม Clean Assistant เลขาส่วนตัวของ Clean Code 1986 ครับ
                   <br />
@@ -131,6 +197,18 @@ export function AIChatBubble() {
               </div>
             ) : (
               <>
+                {hasMoreHistory && (
+                  <div className="flex justify-center my-4">
+                    <button 
+                      onClick={() => loadMoreHistory()}
+                      disabled={isLoading}
+                      className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-1.5 px-4 rounded-full transition-colors flex items-center gap-2"
+                    >
+                      {isLoading ? <Loader2 className="w-3 h-3 animate-spin"/> : null}
+                      {isLoading ? "กำลังโหลด..." : "โหลดข้อความก่อนหน้า"}
+                    </button>
+                  </div>
+                )}
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -145,27 +223,29 @@ export function AIChatBubble() {
             )}
           </div>
 
-          {/* Input */}
-          <form onSubmit={handleSubmit} className="ai-chat__form">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="พิมพ์ข้อความ..."
-              className="ai-chat__input"
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              className="ai-chat__send-btn"
-              disabled={!input.trim() || isLoading}
-              aria-label="ส่งข้อความ"
-            >
-              <Send className="ai-chat__send-icon" />
-            </button>
-          </form>
+          {/* Input Box (Hidden until Registered) */}
+          {isRegistered && (
+            <form onSubmit={handleSubmit} className="ai-chat__form">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="พิมพ์ข้อความ..."
+                className="ai-chat__input"
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                className="ai-chat__send-btn"
+                disabled={!input.trim() || isLoading}
+                aria-label="ส่งข้อความ"
+              >
+                <Send className="ai-chat__send-icon" />
+              </button>
+            </form>
+          )}
         </div>
       )}
 

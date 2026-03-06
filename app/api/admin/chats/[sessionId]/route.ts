@@ -9,8 +9,19 @@ export async function GET(
     const { sessionId } = await params;
     const chatRepo = new TursoChatRepository();
     
-    // Fetch all messages for the selected session
-    const messages = await chatRepo.getMessagesBySession(sessionId);
+    const searchParams = request.nextUrl.searchParams;
+    const lastMessageAt = searchParams.get("lastMessageAt");
+    const beforeDate = searchParams.get("before");
+
+    let messages;
+
+    if (lastMessageAt) {
+      messages = await chatRepo.getNewMessages(sessionId, new Date(lastMessageAt));
+    } else if (beforeDate) {
+      messages = await chatRepo.getMessagesBySession(sessionId, 50, new Date(beforeDate));
+    } else {
+      messages = await chatRepo.getMessagesBySession(sessionId, 50);
+    }
     
     return NextResponse.json({ messages });
   } catch (error) {

@@ -1,11 +1,12 @@
 "use client";
 
-import { Bot, CheckCircle2, Clock, MessageSquare, Send, ShieldCheck, User } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { Bot, CheckCircle2, Clock, Loader2, MessageSquare, Search, Send, ShieldCheck, User, X } from "lucide-react";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 interface Session {
   id: string;
+  customerName?: string;
+  customerPhone?: string;
   status: "active" | "closed";
   createdAt: string;
   updatedAt: string;
@@ -25,8 +26,8 @@ interface Message {
 }
 
 function AdminChatContent() {
-  const searchParams = useSearchParams();
-  const initialSessionId = searchParams.get("sessionId");
+  const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+  const initialSessionId = searchParams?.get("sessionId") || null;
 
   const [sessions, setSessions] = useState<Session[]>([]);
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(initialSessionId);
@@ -34,8 +35,24 @@ function AdminChatContent() {
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
+  
+  // Pagination & Search States
+  const [hasMoreHistory, setHasMoreHistory] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Message[] | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const latestMessageAtRef = useRef<string | null>(null);
+
+  // Sync latest message ref
+  useEffect(() => {
+    if (messages.length > 0) {
+        latestMessageAtRef.current = messages[messages.length - 1].createdAt;
+    } else {
+        latestMessageAtRef.current = null;
+    }
+  }, [messages]);
 
   // Fetch all sessions
   const fetchSessions = async () => {
@@ -52,38 +69,111 @@ function AdminChatContent() {
     }
   };
 
-  // Fetch messages for selected session
-  const fetchMessages = async (sessionId: string) => {
+  // Fetch initial/older messages for selected session
+  const fetchMessages = async (sessionId: string, before?: string) => {
     try {
-      const res = await fetch(`/api/admin/chats/${sessionId}`);
+      if (before) setIsLoadingHistory(true);
+      const url = new URL(`/api/admin/chats/${sessionId}`, window.location.origin);
+      if (before) url.searchParams.set("before", before);
+
+      const res = await fetch(url.toString());
       if (res.ok) {
         const data = await res.json();
-        setMessages(data.messages);
-        scrollToBottom();
+        
+        if (before) {
+          setMessages(prev => [...data.messages, ...prev]);
+        } else {
+          setMessages(data.messages);
+          setTimeout(() => scrollToBottom(), 100);
+        }
+        
+        setHasMoreHistory(data.messages.length >= 50);
       }
     } catch (error) {
       console.error("Failed to fetch messages", error);
+    } finally {
+      if (before) setIsLoadingHistory(false);
     }
   };
 
-  // Polling Effect
+  // Poll strictly new messages
+  const pollNewMessages = async (sessionId: string) => {
+    if (searchResults !== null) return; // Don't poll while viewing search results
+    
+    try {
+      const url = new URL(`/api/admin/chats/${sessionId}`, window.location.origin);
+      if (latestMessageAtRef.current) {
+        url.searchParams.set("lastMessageAt", latestMessageAtRef.current);
+      }
+      
+      const res = await fetch(url.toString());
+      if (res.ok) {
+        const data = await res.json();
+        if (data.messages && data.messages.length > 0) {
+          setMessages(prev => {
+            return latestMessageAtRef.current ? [...prev, ...data.messages] : data.messages;
+          });
+          if (latestMessageAtRef.current) scrollToBottom();
+        }
+      }
+    } catch (e) {
+       console.error(e);
+    }
+  };
+
+  // Polling Effect for Sessions
   useEffect(() => {
     fetchSessions();
     const interval = setInterval(fetchSessions, 5000); // refresh list every 5s
     return () => clearInterval(interval);
   }, []);
 
-  // When selected session changes, fetch its messages
+  // Effect when selected session changes
   useEffect(() => {
     if (selectedSessionId) {
+      setMessages([]);
+      setHasMoreHistory(false);
+      setSearchQuery("");
+      setSearchResults(null);
+      latestMessageAtRef.current = null;
+      
       fetchMessages(selectedSessionId);
-      const messageInterval = setInterval(() => fetchMessages(selectedSessionId), 3000);
-      return () => clearInterval(messageInterval);
     } else {
       setMessages([]);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSessionId]);
+
+  // Polling Effect for Messages
+  useEffect(() => {
+    let messageInterval: NodeJS.Timeout;
+    if (selectedSessionId) {
+      messageInterval = setInterval(() => pollNewMessages(selectedSessionId), 3000);
+    }
+    return () => clearInterval(messageInterval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSessionId, searchResults]);
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim() || !selectedSessionId) return;
+
+    try {
+      const res = await fetch(`/api/admin/chats/${selectedSessionId}/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      if (res.ok) {
+        const data = await res.json();
+        setSearchResults(data.messages);
+      }
+    } catch (error) {
+       console.error("Search failed:", error);
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+    setSearchResults(null);
+    scrollToBottom();
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -171,14 +261,21 @@ function AdminChatContent() {
               }`}
             >
               <div className="flex justify-between items-start mb-1">
-                <span className="font-mono text-xs font-semibold text-gray-500 dark:text-gray-400">
-                  #{session.id.slice(0, 8).toUpperCase()}
-                </span>
-                <span className="text-xs text-gray-400">
+                <div className="flex flex-col">
+                  <span className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+                    {session.customerName || `Guest #${session.id.slice(0, 4).toUpperCase()}`}
+                  </span>
+                  {session.customerPhone && (
+                    <span className="font-mono text-[10px] text-gray-500 dark:text-gray-400">
+                      📞 {session.customerPhone}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] text-gray-400 mt-1">
                   {formatTime(session.updatedAt)}
                 </span>
               </div>
-              <p className="text-sm text-gray-800 dark:text-gray-200 truncate">
+              <p className="text-xs text-gray-600 dark:text-gray-400 truncate mt-2">
                 {session.latestMessage?.content || "No messages yet"}
               </p>
             </div>
@@ -196,18 +293,42 @@ function AdminChatContent() {
       <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
         {selectedSessionId ? (
           <>
-            <div className="p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center shadow-sm z-10">
-              <div>
-                <h2 className="font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-                  Session Room
-                  <span className="text-xs font-mono bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 px-2 py-1 rounded">
-                    #{selectedSessionId.slice(0, 8).toUpperCase()}
+            <div className="p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center shadow-sm z-10 gap-4">
+              <div className="flex-1 min-w-0">
+                <h2 className="font-semibold text-gray-800 dark:text-white flex flex-col">
+                  {sessions.find(s => s.id === selectedSessionId)?.customerName || "Session Room"}
+                  <span className="text-[10px] font-mono text-gray-400 dark:text-gray-500 font-normal">
+                    {sessions.find(s => s.id === selectedSessionId)?.customerPhone || `#${selectedSessionId.slice(0, 8).toUpperCase()}`}
                   </span>
                 </h2>
               </div>
+
+               {/* Search Bar */}
+               <form onSubmit={handleSearch} className="flex-1 max-w-sm flex items-center relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search messages..."
+                    className="block w-full pl-10 pr-10 py-1.5 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={clearSearch}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+               </form>
+
               <button
                 onClick={() => handleCloseSession(selectedSessionId)}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-50 text-green-600 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/40 rounded-md transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-50 text-green-600 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/40 rounded-md transition-colors flex-shrink-0"
                 title="Mark this conversation as resolved and closed"
               >
                 <CheckCircle2 className="w-4 h-4" />
@@ -216,7 +337,26 @@ function AdminChatContent() {
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.map((message) => {
+              
+              {/* Load More Button or Search Results Header */}
+              {searchResults ? (
+                <div className="text-center py-2 text-sm text-indigo-600 font-medium bg-indigo-50 dark:bg-indigo-900/30 rounded-md">
+                  Showing Search Results for &quot;{searchQuery}&quot; ({searchResults.length})
+                </div>
+              ) : hasMoreHistory ? (
+                <div className="flex justify-center my-2">
+                  <button
+                    onClick={() => fetchMessages(selectedSessionId, messages[0]?.createdAt)}
+                    disabled={isLoadingHistory}
+                    className="text-xs bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium py-1.5 px-4 rounded-full transition-colors flex items-center gap-2"
+                  >
+                    {isLoadingHistory ? <Loader2 className="w-3 h-3 animate-spin"/> : null}
+                    {isLoadingHistory ? "Loading..." : "Load Older Messages"}
+                  </button>
+                </div>
+              ) : null}
+
+              {(searchResults || messages).map((message) => {
                 const isAdmin = message.role === "admin";
                 const isSystem = message.role === "assistant";
                 
@@ -263,7 +403,7 @@ function AdminChatContent() {
                 />
                 <button
                   type="submit"
-                  disabled={isSending || !inputText.trim()}
+                  disabled={isSending || !inputText.trim() || searchResults !== null}
                   className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 flex items-center gap-2 transition-colors"
                 >
                   <Send className="w-4 h-4" />

@@ -18,7 +18,10 @@ export async function POST(request: NextRequest) {
     const lineService = new LineMessagingService();
 
     // Ensure session exists
-    await chatRepo.createSession(sessionId);
+    const existingSession = await chatRepo.getSession(sessionId);
+    if (!existingSession) {
+      await chatRepo.createSession(sessionId);
+    }
 
     // Save user message
     await chatRepo.addMessage(sessionId, "user", message);

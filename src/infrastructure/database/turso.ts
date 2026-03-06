@@ -44,10 +44,12 @@ export async function runMigrations(db: Client): Promise<void> {
   await db.executeMultiple(`
     -- Chat Sessions
     CREATE TABLE IF NOT EXISTS chat_sessions (
-      id            TEXT PRIMARY KEY,
-      status        TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'closed')),
-      created_at    TEXT NOT NULL DEFAULT (datetime('now')),
-      updated_at    TEXT NOT NULL DEFAULT (datetime('now'))
+      id TEXT PRIMARY KEY,
+      customer_name TEXT,
+      customer_phone TEXT,
+      status TEXT DEFAULT 'ACTIVE', -- ACTIVE, CLOSED
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
     -- Chat Messages
