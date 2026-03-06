@@ -1,0 +1,63 @@
+import { Client, createClient } from "@libsql/client";
+import fs from "fs";
+import path from "path";
+
+let tursoClient: Client | null = null;
+let migrationsRun = false;
+
+const DB_DIR = path.join(process.cwd(), "data");
+
+/**
+ * Get the singleton Turso (libsql) database instance.
+ */
+export function getTursoDatabase(): Client {
+  if (tursoClient) return tursoClient;
+
+  // Ensure data/ directory exists for local files
+  if (!fs.existsSync(DB_DIR)) {
+    fs.mkdirSync(DB_DIR, { recursive: true });
+  }
+
+  const url = process.env.TURSO_DATABASE_URL || "file:data/chat.db";
+  const authToken = process.env.TURSO_AUTH_TOKEN;
+
+  tursoClient = createClient({
+    url,
+    authToken,
+  });
+
+  return tursoClient;
+}
+
+/**
+ * Ensure database schema is created via @libsql/client
+ */
+export async function runMigrations(db: Client): Promise<void> {
+  if (migrationsRun) return;
+
+  await db.executeMultiple(`
+    -- Chat Sessions
+    CREATE TABLE IF NOT EXISTS chat_sessions (
+      id            TEXT PRIMARY KEY,
+      status        TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active', 'closed')),
+      created_at    TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Chat Messages
+    CREATE TABLE IF NOT EXISTS chat_messages (
+      id            TEXT PRIMARY KEY,
+      session_id    TEXT NOT NULL REFERENCES chat_sessions(id) ON DELETE CASCADE,
+      role          TEXT NOT NULL CHECK(role IN ('user', 'assistant', 'admin')),
+      content       TEXT NOT NULL,
+      created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Indexes
+    CREATE INDEX IF NOT EXISTS idx_chat_sessions_status ON chat_sessions(status);
+    CREATE INDEX IF NOT EXISTS idx_chat_messages_session_id ON chat_messages(session_id);
+    CREATE INDEX IF NOT EXISTS idx_chat_messages_created_at ON chat_messages(created_at);
+  `);
+
+  migrationsRun = true;
+}

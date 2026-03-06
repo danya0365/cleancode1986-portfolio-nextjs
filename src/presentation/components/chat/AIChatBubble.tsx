@@ -17,11 +17,28 @@ export function AIChatBubble() {
     isLoading,
     toggleChat,
     sendMessage,
+    syncMessages,
   } = useChatStore();
 
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Poll for new messages (sync with Turso & LINE)
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isOpen) {
+      // Immediate sync when opened
+      syncMessages();
+      // Poll every 5 seconds
+      interval = setInterval(() => {
+        syncMessages();
+      }, 5000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isOpen, syncMessages]);
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {

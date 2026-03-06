@@ -1,25 +1,35 @@
-/**
- * Chat API Route
- * Handles chat messages and returns AI responses
- */
-
 import { getKnowledgePrompt, getSimpleResponse } from "@/src/data/knowledge";
+import { TursoChatRepository } from "@/src/infrastructure/repositories/turso/TursoChatRepository";
+import { LineMessagingService } from "@/src/infrastructure/services/LineMessagingService";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { message } = await request.json();
+    const { message, sessionId } = await request.json();
 
-    if (!message || typeof message !== "string") {
+    if (!message || typeof message !== "string" || !sessionId) {
       return NextResponse.json(
-        { error: "Message is required" },
+        { error: "Message and sessionId are required" },
         { status: 400 }
       );
     }
 
+    const chatRepo = new TursoChatRepository();
+    const lineService = new LineMessagingService();
+
+    // Ensure session exists
+    await chatRepo.createSession(sessionId);
+
+    // Save user message
+    await chatRepo.addMessage(sessionId, "user", message);
+
+    // Notify Admin via LINE
+    await lineService.notifyAdmin(sessionId, message);
+
     // Try simple keyword-based response first
     const simpleResponse = getSimpleResponse(message);
     if (simpleResponse) {
+      await chatRepo.addMessage(sessionId, "assistant", simpleResponse);
       return NextResponse.json({ response: simpleResponse });
     }
 
@@ -27,19 +37,23 @@ export async function POST(request: NextRequest) {
     const openaiApiKey = process.env.OPENAI_API_KEY;
     const googleApiKey = process.env.GOOGLE_AI_API_KEY;
 
+    let aiResponseText = "";
+
     if (openaiApiKey) {
       // Use OpenAI
-      const response = await callOpenAI(message, openaiApiKey);
-      return NextResponse.json({ response });
+      aiResponseText = await callOpenAI(message, openaiApiKey);
     } else if (googleApiKey) {
       // Use Google AI
-      const response = await callGoogleAI(message, googleApiKey);
-      return NextResponse.json({ response });
+      aiResponseText = await callGoogleAI(message, googleApiKey);
+    } else {
+      // Fallback
+      aiResponseText = generateFallbackResponse(message);
     }
 
-    // Fallback: generate a generic helpful response
-    const fallbackResponse = generateFallbackResponse(message);
-    return NextResponse.json({ response: fallbackResponse });
+    // Save AI response to database
+    await chatRepo.addMessage(sessionId, "assistant", aiResponseText);
+
+    return NextResponse.json({ response: aiResponseText });
   } catch (error) {
     console.error("Chat API error:", error);
     return NextResponse.json(

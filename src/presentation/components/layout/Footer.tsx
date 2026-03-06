@@ -1,4 +1,5 @@
 import { SITE } from "@/src/data/master/site";
+import { useAppVersion } from "@/src/presentation/hooks/useAppVersion";
 import Link from "next/link";
 
 const QUICK_LINKS = [
@@ -114,9 +115,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © {currentYear} {SITE.company.name}. All rights reserved.
-            </p>
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
+              <span>© {currentYear} {SITE.company.name}. All rights reserved.</span>
+              <span className="hidden sm:inline">•</span>
+              <span className="hidden sm:inline">{useAppVersion().displayVersion}</span>
+            </div>
             <div className="flex space-x-6 text-sm">
               <Link
                 href="/privacy"
