@@ -165,7 +165,7 @@ function generateFallbackResponse(message: string): string {
     return "ยินดีครับ! หากมีคำถามเพิ่มเติม สามารถถามได้เลยครับ 😊";
   }
 
-  if (/bye|ลา|บ๊ายบาย/i.test(lowerMessage)) {
+  if (/bye|ลาก่อน|บ๊ายบาย|ไปแล้วนะ/i.test(lowerMessage)) {
     return "ลาก่อนครับ! หากต้องการความช่วยเหลือ กลับมาได้เสมอครับ 👋";
   }
 

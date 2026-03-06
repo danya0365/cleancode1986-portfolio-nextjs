@@ -178,7 +178,7 @@ export function getSimpleResponse(message: string): string | null {
   }
 
   // Services
-  if (/บริการ|service|ทำอะไร|รับ/i.test(lowerMessage)) {
+  if (/บริการ|service|ทำอะไร|รับทำ|ทำเว็บ|รับเขียน/i.test(lowerMessage)) {
     const serviceList = ctx.services.slice(0, 4).map((s) => s.title).join(", ");
     return `เรามีบริการหลายอย่างครับ เช่น ${serviceList} และอื่นๆ สนใจบริการไหนเป็นพิเศษไหมครับ?`;
   }
@@ -195,7 +195,7 @@ export function getSimpleResponse(message: string): string | null {
   }
 
   // Team
-  if (/ทีม|team|ใครคือ|สมาชิก/i.test(lowerMessage)) {
+  if (/ทีม|team|ใครคือ|สมาชิกทีม/i.test(lowerMessage)) {
     const teamList = ctx.team.slice(0, 3).map((t) => `${t.name} (${t.role})`).join(", ");
     return `ทีมของเรามี ${ctx.team.length} คน ได้แก่ ${teamList} และคนอื่นๆ ครับ`;
   }

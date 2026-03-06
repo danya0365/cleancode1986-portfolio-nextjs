@@ -1,6 +1,8 @@
 import { TursoChatRepository } from "@/src/infrastructure/repositories/turso/TursoChatRepository";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const chatRepo = new TursoChatRepository();

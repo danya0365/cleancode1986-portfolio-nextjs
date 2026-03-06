@@ -135,7 +135,10 @@ export const useChatStore = create<ChatStore>()(
           }
 
           const data = await response.json();
-          addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as unknown as Omit<ChatMessage, "id" | "timestamp">);
+          // If the AI responded but it's a draft (autoReply is off), it returns { ack: true }
+          if (!data.ack && data.response) {
+            addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as unknown as Omit<ChatMessage, "id" | "timestamp">);
+          }
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : "เกิดข้อผิดพลาด กรุณาลองใหม่";
           set({ error: errorMessage });

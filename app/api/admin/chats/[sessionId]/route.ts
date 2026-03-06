@@ -44,6 +44,9 @@ export async function POST(
 
      const chatRepo = new TursoChatRepository();
      
+     // Automatic Handover: Turn off auto-reply when admin replies
+     await chatRepo.toggleAutoReply(sessionId, false);
+     
      // Save admin reply to database
      const newMessage = await chatRepo.addMessage(sessionId, "admin", message);
 
