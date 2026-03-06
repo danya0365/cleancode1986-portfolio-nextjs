@@ -52,7 +52,8 @@ export interface IChatRepository {
   addMessage(
     sessionId: string,
     role: "user" | "assistant" | "admin",
-    content: string
+    content: string,
+    id?: string
   ): Promise<ChatMessageData>;
 
   /**

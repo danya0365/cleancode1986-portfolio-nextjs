@@ -150,9 +150,10 @@ export class TursoChatRepository implements IChatRepository {
   async addMessage(
     sessionId: string,
     role: "user" | "assistant" | "admin",
-    content: string
+    content: string,
+    idOverride?: string
   ): Promise<ChatMessageData> {
-    const id = randomUUID();
+    const id = idOverride || randomUUID();
     
     // Using SQLite CURRENT_TIMESTAMP which defaults to UTC
     await this.db.execute({

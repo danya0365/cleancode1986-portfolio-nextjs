@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, sessionId } = await request.json();
+    const { message, sessionId, messageId } = await request.json();
 
     if (!message || typeof message !== "string" || !sessionId) {
       return NextResponse.json(
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Save user message
-    await chatRepo.addMessage(sessionId, "user", message);
+    await chatRepo.addMessage(sessionId, "user", message, messageId);
 
     // Notify Admin via LINE
     await lineService.notifyAdmin(sessionId, message);
@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
     // Try simple keyword-based response first
     const simpleResponse = getSimpleResponse(message);
     if (simpleResponse) {
-      await chatRepo.addMessage(sessionId, "assistant", simpleResponse);
-      return NextResponse.json({ response: simpleResponse });
+      const responseMsg = await chatRepo.addMessage(sessionId, "assistant", simpleResponse);
+      return NextResponse.json({ response: simpleResponse, responseId: responseMsg.id });
     }
 
     // Check if we have an AI API key configured
@@ -54,13 +54,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Save AI response to database
-    await chatRepo.addMessage(sessionId, "assistant", aiResponseText);
+    const aiMessage = await chatRepo.addMessage(sessionId, "assistant", aiResponseText);
 
-    return NextResponse.json({ response: aiResponseText });
-  } catch (error) {
+    return NextResponse.json({ response: aiResponseText, responseId: aiMessage.id });
+  } catch (error: any) {
     console.error("Chat API error:", error);
     return NextResponse.json(
-      { error: "Failed to process message" },
+      { error: "Failed to process message: " + (error?.message || String(error)) },
       { status: 500 }
     );
   }

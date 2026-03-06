@@ -74,7 +74,7 @@ export const useChatStore = create<ChatStore>()(
             ...state.messages,
             {
               ...message,
-              id: uuidv4(),
+              id: (message as any).id || uuidv4(),
               timestamp: new Date(),
             },
           ],
@@ -118,15 +118,16 @@ export const useChatStore = create<ChatStore>()(
       sendMessage: async (content: string) => {
         const { addMessage, sessionId } = get();
         if (!sessionId) return;
-
-        addMessage({ role: "user", content });
+        
+        const messageId = uuidv4();
+        addMessage({ role: "user", content, id: messageId } as any);
         set({ isLoading: true, error: null });
 
         try {
           const response = await fetch("/api/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: content, sessionId }),
+            body: JSON.stringify({ message: content, sessionId, messageId }),
           });
 
           if (!response.ok) {
@@ -134,14 +135,14 @@ export const useChatStore = create<ChatStore>()(
           }
 
           const data = await response.json();
-          addMessage({ role: "assistant", content: data.response });
+          addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as any);
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : "เกิดข้อผิดพลาด กรุณาลองใหม่";
           set({ error: errorMessage });
           addMessage({
             role: "assistant",
             content: "ขออภัยครับ เกิดข้อผิดพลาด ไม่สามารถส่งข้อความได้",
-          });
+          } as any);
         } finally {
           set({ isLoading: false });
         }
@@ -154,7 +155,13 @@ export const useChatStore = create<ChatStore>()(
         try {
           // Optimized Polling: Only fetch strictly new messages
           const lastMessage = messages.length > 0 ? messages[messages.length - 1] : null;
-          const queryParam = lastMessage ? `?lastMessageAt=${lastMessage.timestamp.toISOString()}` : '';
+          let queryParam = '';
+          if (lastMessage) {
+            const timestamp = lastMessage.timestamp instanceof Date 
+                ? lastMessage.timestamp 
+                : new Date(lastMessage.timestamp);
+            queryParam = `?lastMessageAt=${timestamp.toISOString()}`;
+          }
           
           const response = await fetch(`/api/chat/sync?sessionId=${sessionId}${queryParam ? '&' + queryParam.substring(1) : ''}`);
           if (!response.ok) return;
@@ -169,8 +176,12 @@ export const useChatStore = create<ChatStore>()(
             }));
             
             if (lastMessage) {
-               // Append strictly new messages
-               setMessages([...messages, ...newParsedMessages]);
+               // Deduplicate explicitly
+               const existingIds = new Set(messages.map(m => m.id));
+               const strictlyNewMessages = newParsedMessages.filter((m: any) => !existingIds.has(m.id));
+               if (strictlyNewMessages.length > 0) {
+                 setMessages([...messages, ...strictlyNewMessages]);
+               }
             } else {
                // Initial load sync
                setMessages(newParsedMessages);
@@ -190,7 +201,11 @@ export const useChatStore = create<ChatStore>()(
         
         try {
           const firstMessage = messages[0];
-          const response = await fetch(`/api/chat/sync?sessionId=${sessionId}&before=${firstMessage.timestamp.toISOString()}`);
+          const timestamp = firstMessage.timestamp instanceof Date
+              ? firstMessage.timestamp
+              : new Date(firstMessage.timestamp);
+              
+          const response = await fetch(`/api/chat/sync?sessionId=${sessionId}&before=${timestamp.toISOString()}`);
           
           if (!response.ok) throw new Error("Failed to load history");
 
