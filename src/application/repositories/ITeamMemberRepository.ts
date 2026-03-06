@@ -4,6 +4,8 @@
  * Following Clean Architecture - this is in the Application layer
  */
 
+import { TeamMemberCV } from "@/src/data/static/cv.static";
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -27,4 +29,9 @@ export interface ITeamMemberRepository {
    * Get all team members
    */
   getAll(): Promise<TeamMember[]>;
+
+  /**
+   * Get CV details for a specific team member
+   */
+  getCVByMemberId(id: string): Promise<TeamMemberCV | null>;
 }

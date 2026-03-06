@@ -6,7 +6,7 @@ export const STATIC_TEAM: TeamMember[] = [
     name: "มะรอสดี อุมา",
     role: "Founder, CEO & QA Reviewer",
     bio: "ผู้ก่อตั้งและมนุษย์เพียงหนึ่งเดียว ผู้ทำหน้าที่ตรวจสอบคุณภาพขั้นสุดท้าย (Final Approval), วาง Architecture และขับเคลื่อนวิสัยทัศน์ของบริษัท โดยนำทีม AI ให้สอดประสานกันเพื่อสร้าง Clean Code ตามมาตรฐาน",
-    avatar: "/images/team/member-ceo.png", // or member-1.jpg
+    avatar: "/images/team/member-ceo.jpg", // or member-1.jpg
     linkedinUrl: "https://linkedin.com/in/#",
     githubUrl: "https://github.com/#",
     sortOrder: 1,

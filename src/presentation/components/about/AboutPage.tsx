@@ -244,6 +244,20 @@ export function AboutPage({ initialViewModel }: AboutPageProps) {
                         </a>
                       )}
                     </div>
+
+                    {/* View CV Button */}
+                    <div className="mt-8 flex justify-center md:justify-start">
+                      <Link 
+                        href={`/about/cv/${member.id}`}
+                        className="group flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white text-white hover:text-blue-900 rounded-xl transition-all duration-300 backdrop-blur-sm border border-white/20 hover:shadow-lg hover:shadow-white/20"
+                      >
+                         <svg className="w-5 h-5 transition-transform group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                         </svg>
+                         <span className="font-bold tracking-wide">ดู RESUME / CV</span>
+                      </Link>
+                    </div>
+
                   </div>
                 </div>
               </div>

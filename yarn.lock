@@ -2867,10 +2867,10 @@ react-is@^16.13.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-to-print@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/react-to-print/-/react-to-print-3.1.1.tgz"
-  integrity sha512-N0MUMhpl8nkGri13BjP7zusj3B/j+1eMOTt8N8PYuhBYGzA4PqTXqcihJ9cZw996dvhV6mBdwafIQCg3Ap5bKg==
+react-to-print@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npmjs.org/react-to-print/-/react-to-print-3.3.0.tgz#7c893951b2c621a1c2190cb57a88af40852b129c"
+  integrity sha512-7j9GIeNZA9glZlbv9mIbIHDOOx+WYfRMbJzh04NiSKjdaeGkxJuKjJQrtRuNKtt5AvEVVjrLCPokZ9yJX51Fvg==
 
 react@19.1.2:
   version "19.1.2"
