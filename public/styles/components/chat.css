@@ -451,4 +451,20 @@
   .ai-chat__suggestions {
     flex-direction: column;
   }
+
+  /* Improve Chat Message readability on very narrow screens */
+  .chat-message {
+    max-width: 95%;
+    gap: 0.5rem;
+  }
+  
+  .chat-message__avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .chat-message__text {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
 }

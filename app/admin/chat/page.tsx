@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, CheckCircle2, Clock, Loader2, MessageSquare, Search, Send, ShieldCheck, User, X } from "lucide-react";
+import { ArrowLeft, Bot, CheckCircle2, Clock, Loader2, MessageSquare, Search, Send, ShieldCheck, User, X } from "lucide-react";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 interface Session {
@@ -270,7 +270,7 @@ function AdminChatContent() {
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       {/* Sidebar Layout */}
-      <div className="w-1/3 max-w-sm bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
+      <div className={`w-full md:w-1/3 md:max-w-sm bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex-col ${selectedSessionId ? 'hidden md:flex' : 'flex'}`}>
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-indigo-600">
           <h1 className="text-lg font-bold text-white flex items-center gap-2">
             <ShieldCheck className="w-5 h-5" />
@@ -322,17 +322,26 @@ function AdminChatContent() {
       </div>
 
       {/* Main Chat Area Layout */}
-      <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
+      <div className={`flex-1 flex-col bg-gray-50 dark:bg-gray-900 ${!selectedSessionId ? 'hidden md:flex' : 'flex w-full'}`}>
         {selectedSessionId ? (
           <>
-            <div className="p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center shadow-sm z-10 gap-4">
-              <div className="flex-1 min-w-0">
-                <h2 className="font-semibold text-gray-800 dark:text-white flex flex-col">
+            <div className="p-3 md:p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-start md:items-center shadow-sm z-10 gap-3 md:gap-4 relative">
+              <div className="flex items-center gap-2 w-full md:w-auto">
+                <button
+                  onClick={() => setSelectedSessionId(null)}
+                  className="md:hidden flex items-center justify-center p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                  aria-label="Back to session list"
+                >
+                  <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                </button>
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-semibold text-gray-800 dark:text-white flex flex-col">
                   {sessions.find(s => s.id === selectedSessionId)?.customerName || "Session Room"}
-                  <span className="text-[10px] font-mono text-gray-400 dark:text-gray-500 font-normal">
+                  <span className="text-[10px] font-mono text-gray-500 font-normal">
                     {sessions.find(s => s.id === selectedSessionId)?.customerPhone || `#${selectedSessionId.slice(0, 8).toUpperCase()}`}
                   </span>
                 </h2>
+              </div>
               </div>
 
                {/* Search Bar */}
@@ -358,7 +367,7 @@ function AdminChatContent() {
                   )}
                </form>
 
-              <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3 w-full md:w-auto flex-shrink-0 mt-2 md:mt-0">
                 {/* AI Toggle */}
                 {sessions.find(s => s.id === selectedSessionId) && (
                   <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-600">
@@ -425,7 +434,7 @@ function AdminChatContent() {
                     className={`flex flex-col ${isAdmin ? "items-end" : "items-start"}`}
                   >
                     <div
-                      className={`max-w-[70%] rounded-2xl p-4 shadow-sm ${
+                      className={`max-w-[90%] md:max-w-[70%] rounded-2xl p-3 shadow-sm ${
                         isAdmin
                           ? "bg-indigo-600 text-white rounded-tr-sm"
                           : isDraft
@@ -470,8 +479,8 @@ function AdminChatContent() {
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  placeholder="Type a message to the customer..."
-                  className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                  placeholder="Type a message..."
+                  className="flex-1 px-3 md:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white text-sm"
                 />
                 <button
                   type="submit"
