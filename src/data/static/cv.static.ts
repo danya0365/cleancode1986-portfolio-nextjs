@@ -135,19 +135,19 @@ export const STATIC_CVS: Record<string, TeamMemberCV> = {
     skills: [
       {
         category: "Frontend & UI/UX Magic",
-        items: ["React 19", "Next.js 15+", "React Native", "SwiftUI", "Tailwind CSS 4", "Vanilla CSS", "React Spring", "Zustand"]
+        items: ["React 19", "Next.js 15+", "React Native", "SwiftUI", "Tailwind CSS 4", "Vanilla CSS", "Alpine.js", "Laravel Livewire", "React Spring", "Zustand"]
       },
       {
         category: "Backend & Systems",
-        items: ["Node.js", "NestJS", "PHP / Laravel", "Ruby on Rails", "Java / Spring Boot", "Clean Architecture", "Edge Computing"]
+        items: ["Node.js", "NestJS", "PHP / Laravel (Full-Stack & API)", "Eloquent ORM", "Ruby on Rails", "Java / Spring Boot", "Clean Architecture", "Edge Computing"]
       },
       {
         category: "Database & AI Ecosystem",
         items: ["Turso (libSQL/SQLite)", "Supabase", "PostgreSQL", "Prisma", "AI Agents (Gemini 3.1 Pro)", "Microservices"]
       },
       {
-        category: "Game Development & 3D",
-        items: ["Three.js", "Phaser", "Godot Engine", "WebGL"]
+        category: "Game Development & 3D (Real-time Multiplayer)",
+        items: ["Colyseus", "WebSockets / Socket.io", "Photon (PUN)", "Three.js", "Phaser", "Godot Engine", "WebGL"]
       },
       {
         category: "Enterprise API & Ecosystems",
