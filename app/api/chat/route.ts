@@ -160,25 +160,13 @@ async function callGoogleAI(message: string, apiKey: string): Promise<string> {
 function generateFallbackResponse(message: string): string {
   const lowerMessage = message.toLowerCase();
 
-  // More comprehensive fallback responses
   if (/ขอบคุณ|thank/i.test(lowerMessage)) {
-    return "ยินดีครับ! หากมีคำถามเพิ่มเติม สามารถถามได้เลยครับ 😊";
+    return "ยินดีครับ! แอดมินจะรีบตรวจสอบและตอบกลับให้เร็วที่สุดครับ";
   }
 
   if (/bye|ลาก่อน|บ๊ายบาย|ไปแล้วนะ/i.test(lowerMessage)) {
-    return "ลาก่อนครับ! หากต้องการความช่วยเหลือ กลับมาได้เสมอครับ 👋";
+    return "ขอบคุณที่ติดต่อมาครับ แอดมินจะรีบตอบกลับโดยเร็วที่สุด";
   }
 
-  if (/ช่วย|help/i.test(lowerMessage)) {
-    return "ผมช่วยได้หลายเรื่องครับ เช่น:\n• ข้อมูลบริการของเรา\n• ดูผลงานที่ผ่านมา\n• ข้อมูลติดต่อ\n• ราคาและแพ็คเกจ\n\nลองถามมาได้เลยครับ!";
-  }
-
-  // Default response
-  return `ขอบคุณสำหรับคำถามครับ ผมเข้าใจว่าคุณต้องการทราบเกี่ยวกับ "${message.slice(0, 50)}..." 
-
-สำหรับคำถามนี้ แนะนำให้ติดต่อทีมงานโดยตรงที่:
-📧 contact@cleancode1986.com
-📞 +66 81 234 5678
-
-หรือกรอกฟอร์มที่หน้า Contact ครับ`;
+  return "ได้รับข้อความแล้วครับ แอดมินจะรีบตรวจสอบและตอบกลับให้เร็วที่สุดครับ ⚡";
 }
