@@ -1,13 +1,15 @@
-import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
 import { AboutPage } from "@/src/presentation/components/about/AboutPage";
-import { AboutPresenterFactory } from "@/src/presentation/presenters/about/AboutPresenter";
+import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
+import { createServerAboutPresenter } from "@/src/presentation/presenters/about/AboutPresenterServerFactory";
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 /**
  * Generate metadata for about page
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const presenter = await AboutPresenterFactory.createServer();
+  const presenter = createServerAboutPresenter();
 
   try {
     return await presenter.generateMetadata();
@@ -24,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * About page - Server Component for SEO optimization
  */
 export default async function About() {
-  const presenter = await AboutPresenterFactory.createServer();
+  const presenter = createServerAboutPresenter();
 
   try {
     const viewModel = await presenter.getViewModel();

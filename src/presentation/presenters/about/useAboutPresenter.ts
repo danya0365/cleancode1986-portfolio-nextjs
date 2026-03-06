@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
-import { AboutViewModel, AboutPresenterFactory } from "./AboutPresenter";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AboutPresenter, AboutViewModel } from "./AboutPresenter";
+import { createClientAboutPresenter } from "./AboutPresenterClientFactory";
 
 export interface AboutPresenterHook {
   viewModel: AboutViewModel | null;
@@ -12,13 +13,28 @@ export interface AboutPresenterHook {
  * Custom hook for About presenter
  */
 export function useAboutPresenter(
-  initialViewModel: AboutViewModel | null = null
+  initialViewModel: AboutViewModel | null = null,
+  presenterOverride?: AboutPresenter
 ): AboutPresenterHook {
   const [viewModel, setViewModel] = useState<AboutViewModel | null>(
     initialViewModel
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
+
+  const presenter = useMemo(
+    () => presenterOverride ?? createClientAboutPresenter(),
+    [presenterOverride]
+  );
+
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const loadData = useCallback(async () => {
     if (initialViewModel) {
@@ -29,34 +45,44 @@ export function useAboutPresenter(
     setError(null);
 
     try {
-      const presenter = await AboutPresenterFactory.createClient();
       const data = await presenter.getViewModel();
-      setViewModel(data);
+      if (isMountedRef.current) {
+        setViewModel(data);
+      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      setError(errorMessage);
+      if (isMountedRef.current) {
+        setError(errorMessage);
+      }
       console.error("Error loading about data:", err);
     } finally {
-      setLoading(false);
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
-  }, [initialViewModel]);
+  }, [initialViewModel, presenter]);
 
   const refreshData = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const presenter = await AboutPresenterFactory.createClient();
       const data = await presenter.getViewModel();
-      setViewModel(data);
+      if (isMountedRef.current) {
+        setViewModel(data);
+      }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      setError(errorMessage);
+      if (isMountedRef.current) {
+        setError(errorMessage);
+      }
       console.error("Error refreshing about data:", err);
     } finally {
-      setLoading(false);
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
-  }, []);
+  }, [presenter]);
 
   useEffect(() => {
     loadData();

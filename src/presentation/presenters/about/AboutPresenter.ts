@@ -1,5 +1,5 @@
+import type { ITeamMemberRepository, TeamMember } from "@/src/application/repositories/ITeamMemberRepository";
 import { SITE } from "@/src/data/master/site";
-import { getActiveTeamMembers, type TeamMember } from "@/src/data/mock/team.mock";
 
 export interface AboutViewModel {
   teamMembers: TeamMember[];
@@ -7,14 +7,20 @@ export interface AboutViewModel {
 
 /**
  * Presenter for About page
+ * Handles business logic for About page
+ * Receives repository via dependency injection
  */
 export class AboutPresenter {
+  constructor(
+    private readonly repository: ITeamMemberRepository
+  ) {}
+
   /**
    * Get view model for about page
    */
   async getViewModel(): Promise<AboutViewModel> {
     try {
-      const teamMembers = getActiveTeamMembers();
+      const teamMembers = await this.repository.getActiveMembers();
 
       return {
         teamMembers,
@@ -36,15 +42,3 @@ export class AboutPresenter {
   }
 }
 
-/**
- * Factory for creating AboutPresenter instances
- */
-export class AboutPresenterFactory {
-  static async createServer(): Promise<AboutPresenter> {
-    return new AboutPresenter();
-  }
-
-  static async createClient(): Promise<AboutPresenter> {
-    return new AboutPresenter();
-  }
-}

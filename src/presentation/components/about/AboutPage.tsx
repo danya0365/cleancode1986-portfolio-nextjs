@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useAboutPresenter } from "@/src/presentation/presenters/about/useAboutPresenter";
 import type { AboutViewModel } from "@/src/presentation/presenters/about/AboutPresenter";
+import { useAboutPresenter } from "@/src/presentation/presenters/about/useAboutPresenter";
+import Image from "next/image";
+import Link from "next/link";
 
 interface AboutPageProps {
   initialViewModel?: AboutViewModel;
@@ -189,8 +190,14 @@ export function AboutPage({ initialViewModel }: AboutPageProps) {
                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center hover:shadow-2xl transition-all"
               >
                 {/* Avatar */}
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto mb-4">
-                  {member.name.charAt(0)}
+                <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <Image
+                    src={member.avatar}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    sizes="128px"
+                  />
                 </div>
 
                 {/* Name & Role */}
