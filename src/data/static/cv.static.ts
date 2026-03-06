@@ -122,7 +122,7 @@ export const STATIC_CVS: Record<string, TeamMemberCV> = {
         period: "2005 - 2009",
       },
       {
-        institution: "โรงเรียนดรุณศาสน์วิทยา",
+        institution: "โรงเรียนดารุสสลาม",
         degree: "มัธยมศึกษา - สายวิทย์-คณิต (Comscience)",
         period: "1999 - 2005",
       },
