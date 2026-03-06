@@ -16,6 +16,9 @@ export const SITE = {
     tagline: "พัฒนาเว็บไซต์และแอปพลิเคชันที่ทรงพลังและทันสมัย",
     foundedYear: 2020,
   },
+  hiring: {
+    isHiring: false, // Set to true to show hiring CTAs on the website
+  },
   contact: {
     email: "marosdee.fuzana@gmail.com",
     phone: "089-484-7773",

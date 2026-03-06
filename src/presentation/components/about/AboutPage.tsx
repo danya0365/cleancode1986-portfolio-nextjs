@@ -1,5 +1,6 @@
 "use client";
 
+import { SITE } from "@/src/data/master/site";
 import type { AboutViewModel } from "@/src/presentation/presenters/about/AboutPresenter";
 import { useAboutPresenter } from "@/src/presentation/presenters/about/useAboutPresenter";
 import Image from "next/image";
@@ -252,20 +253,22 @@ export function AboutPage({ initialViewModel }: AboutPageProps) {
         </div>
 
         {/* CTA */}
-        <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg p-8 md:p-12 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">
-            มาร่วมงานกับเราสิ!
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            เรากำลังมองหาคนเก่งๆ มาร่วมทีม
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-medium rounded-lg transition-colors"
-          >
-            ติดต่อเรา
-          </Link>
-        </div>
+        {SITE.hiring.isHiring && (
+          <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg p-8 md:p-12 text-center text-white">
+            <h2 className="text-3xl font-bold mb-4">
+              มาร่วมงานกับเราสิ!
+            </h2>
+            <p className="text-xl text-blue-100 mb-8">
+              เรากำลังมองหาคนเก่งๆ มาร่วมทีม
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-medium rounded-lg transition-colors"
+            >
+              ติดต่อเรา
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
