@@ -9,7 +9,7 @@ export async function POST(
      const { sessionId } = await params;
 
      const chatRepo = new TursoChatRepository();
-     await chatRepo.updateSessionStatus(sessionId, "closed");
+     await chatRepo.updateSessionStatus(sessionId, "resolved");
 
      return NextResponse.json({ success: true });
   } catch (error) {

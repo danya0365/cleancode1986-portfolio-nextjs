@@ -1,13 +1,13 @@
 "use client";
 
-import { ArrowLeft, Bot, CheckCircle2, Clock, Loader2, MessageSquare, Search, Send, ShieldCheck, User, X } from "lucide-react";
+import { ArrowLeft, Bot, Check, CheckCheck, CheckCircle2, Clock, Loader2, MessageSquare, Search, Send, ShieldCheck, User, X } from "lucide-react";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 interface Session {
   id: string;
   customerName?: string;
   customerPhone?: string;
-  status: "active" | "closed";
+  status: "new" | "active" | "follow_up" | "resolved" | "spam";
   autoReply?: boolean;
   createdAt: string;
   updatedAt: string;
@@ -24,6 +24,7 @@ interface Message {
   role: "user" | "assistant" | "admin";
   content: string;
   isDraft?: boolean;
+  status?: "sent" | "delivered" | "read";
   createdAt: string;
 }
 
@@ -43,6 +44,7 @@ function AdminChatContent() {
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Message[] | null>(null);
+  const [activeTab, setActiveTab] = useState("active");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const latestMessageAtRef = useRef<string | null>(null);
@@ -219,6 +221,7 @@ function AdminChatContent() {
       id: "temp-" + Date.now(),
       role: "admin",
       content,
+      status: "sent",
       createdAt: new Date().toISOString(),
     };
     setMessages((prev) => [...prev, tempMsg]);
@@ -252,13 +255,39 @@ function AdminChatContent() {
   const handleCloseSession = async (sessionId: string) => {
     if (!confirm("Are you sure you want to resolve and close this chat?")) return;
     try {
-      await fetch(`/api/admin/chats/${sessionId}/close`, { method: "POST" });
+      await fetch(`/api/admin/chats/${sessionId}/status`, { 
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "resolved" }),
+      });
       setSelectedSessionId(null);
       fetchSessions();
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleUpdateSessionStatus = async (status: string) => {
+    if (!selectedSessionId) return;
+    try {
+      setSessions(prev => prev.map(s => 
+        s.id === selectedSessionId ? { ...s, status: status as Session["status"] } : s
+      ));
+      await fetch(`/api/admin/chats/${selectedSessionId}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const filteredSessions = sessions.filter(s => {
+    if (activeTab === "all") return true;
+    if (activeTab === "active") return s.status === "active" || s.status === "new";
+    return s.status === activeTab;
+  });
 
   const formatTime = (isoString: string) => {
     return new Date(isoString).toLocaleTimeString("th-TH", {
@@ -277,12 +306,39 @@ function AdminChatContent() {
             Admin Chat Console
           </h1>
           <p className="text-xs text-indigo-200 mt-1">
-            {isLoading ? "Loading..." : `${sessions.length} Active Sessions`}
+            {isLoading ? "Loading..." : `${sessions.length} Total Sessions`}
           </p>
         </div>
 
+        {/* Tabs */}
+        <div className="flex overflow-x-auto border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 scrollbar-hide">
+          {[
+            { id: "active", label: "Active" },
+            { id: "follow_up", label: "Follow-up" },
+            { id: "new", label: "New" },
+            { id: "all", label: "All" }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-none px-4 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === tab.id
+                  ? "border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+            >
+              {tab.label}
+              <span className="ml-1.5 px-1.5 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-[10px]">
+                {tab.id === "all" ? sessions.length : 
+                 tab.id === "active" ? sessions.filter(s => s.status === "active" || s.status === "new").length : 
+                 sessions.filter(s => s.status === tab.id).length}
+              </span>
+            </button>
+          ))}
+        </div>
+
         <div className="flex-1 overflow-y-auto">
-          {sessions.map((session) => (
+          {filteredSessions.map((session) => (
             <div
               key={session.id}
               onClick={() => setSelectedSessionId(session.id)}
@@ -368,6 +424,18 @@ function AdminChatContent() {
                </form>
 
               <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3 w-full md:w-auto flex-shrink-0 mt-2 md:mt-0">
+                <select 
+                  value={sessions.find(s => s.id === selectedSessionId)?.status || "active"}
+                  onChange={(e) => handleUpdateSessionStatus(e.target.value)}
+                  className="text-xs md:text-sm font-medium border border-gray-200 dark:border-gray-600 rounded-md py-1.5 pl-2 pr-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:ring-1 focus:ring-indigo-500 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                >
+                  <option value="new">🆕 New</option>
+                  <option value="active">💬 Active</option>
+                  <option value="follow_up">⭐ Follow-up</option>
+                  <option value="resolved">✅ Resolved</option>
+                  <option value="spam">🚫 Spam</option>
+                </select>
+
                 {/* AI Toggle */}
                 {sessions.find(s => s.id === selectedSessionId) && (
                   <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-600">
@@ -452,6 +520,13 @@ function AdminChatContent() {
                          <span className="text-[10px] ml-auto flex items-center gap-1">
                            <Clock className="w-3 h-3" />
                            {formatTime(message.createdAt)}
+                           {isAdmin && (
+                             <span className="ml-1 flex items-center justify-center opacity-80">
+                                {message.status === "sent" && <Check className="w-3 h-3" />}
+                                {message.status === "delivered" && <CheckCheck className="w-3 h-3" />}
+                                {message.status === "read" && <CheckCheck className="w-3 h-3 text-blue-300" />}
+                             </span>
+                           )}
                          </span>
                       </div>
                       <p className="whitespace-pre-wrap text-sm">{message.content}</p>

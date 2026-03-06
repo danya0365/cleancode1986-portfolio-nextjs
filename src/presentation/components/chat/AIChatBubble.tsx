@@ -24,7 +24,8 @@ export function AIChatBubble() {
     syncMessages,
     registerCustomer,
     hasMoreHistory,
-    loadMoreHistory
+    loadMoreHistory,
+    markAsRead
   } = useChatStore();
 
   // --- LOCAL STATE ---
@@ -51,10 +52,16 @@ export function AIChatBubble() {
     };
   }, [isOpen, syncMessages]);
 
-  // Scroll to bottom when new messages arrive
+  // Scroll to bottom when new messages arrive and mark as read
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    if (isOpen) {
+       const hasUnread = messages.some(m => m.role !== "user" && m.status !== "read");
+       if (hasUnread) {
+          markAsRead();
+       }
+    }
+  }, [messages, isOpen, markAsRead]);
 
   // Focus input when chat opens
   useEffect(() => {

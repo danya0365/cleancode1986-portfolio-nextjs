@@ -40,6 +40,23 @@ export async function GET(request: NextRequest) {
       messages = await chatRepo.getMessagesBySession(sessionId, 50, undefined, true);
     }
 
+    // Automatically mark non-user 'sent' messages as 'delivered' to the browser
+    const undeliveredMessageIds = messages
+      .filter((m) => m.role !== "user" && m.status === "sent")
+      .map((m) => m.id);
+
+    if (undeliveredMessageIds.length > 0) {
+      await chatRepo.updateMessageStatus(undeliveredMessageIds, "delivered");
+      
+      // Update the payload so the frontend gets the correct state immediately
+      messages = messages.map((m) => {
+        if (undeliveredMessageIds.includes(m.id)) {
+          return { ...m, status: "delivered" };
+        }
+        return m;
+      });
+    }
+
     return NextResponse.json({ messages });
   } catch (error) {
     console.error("[Sync API Error]", error);

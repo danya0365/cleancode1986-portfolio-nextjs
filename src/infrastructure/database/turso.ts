@@ -47,7 +47,7 @@ export async function runMigrations(db: Client): Promise<void> {
       id TEXT PRIMARY KEY,
       customer_name TEXT,
       customer_phone TEXT,
-      status TEXT DEFAULT 'ACTIVE', -- ACTIVE, CLOSED
+      status TEXT DEFAULT 'new', -- new, active, follow_up, resolved, spam
       auto_reply INTEGER DEFAULT 1, -- 1 = ON, 0 = OFF
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -59,6 +59,7 @@ export async function runMigrations(db: Client): Promise<void> {
       session_id    TEXT NOT NULL REFERENCES chat_sessions(id) ON DELETE CASCADE,
       role          TEXT NOT NULL CHECK(role IN ('user', 'assistant', 'admin')),
       content       TEXT NOT NULL,
+      status        TEXT DEFAULT 'sent', -- sent, delivered, read
       is_draft      INTEGER DEFAULT 0, -- 1 = true, 0 = false (AI Suggestions)
       created_at    TEXT NOT NULL DEFAULT (datetime('now'))
     );

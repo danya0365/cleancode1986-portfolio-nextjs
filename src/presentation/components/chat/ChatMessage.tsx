@@ -5,7 +5,7 @@
  */
 
 import { ChatMessage as ChatMessageType } from "@/src/presentation/stores/chat-store";
-import { Bot, ShieldCheck, User } from "lucide-react";
+import { Bot, Check, CheckCheck, ShieldCheck, User } from "lucide-react";
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -18,11 +18,9 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
   return (
     <div
-      className={`chat-message ${isBotOrAdmin ? "chat-message--assistant" : "chat-message--user"} ${
-        isAdmin ? "border-l-2 border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20" : ""
-      }`}
+      className={`chat-message ${isBotOrAdmin ? "chat-message--assistant" : "chat-message--user"}`}
     >
-      <div className="chat-message__avatar">
+      <div className={`chat-message__avatar ${isAdmin ? "bg-indigo-600 rounded-none rounded-t-xl rounded-l-xl opacity-90" : ""}`}>
         {isAdmin ? (
           <ShieldCheck className="chat-message__icon text-indigo-500" />
         ) : isAssistant ? (
@@ -32,14 +30,26 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
       </div>
       <div className="chat-message__content">
-        {isAdmin && <span className="text-xs font-bold text-indigo-500 mb-1 block">CEO | Human Staff</span>}
-        <p className="chat-message__text">{message.content}</p>
-        <span className="chat-message__time">
-          {new Date(message.timestamp).toLocaleTimeString("th-TH", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </span>
+        <div className={`chat-message__text ${isAdmin ? "!bg-indigo-50 !text-indigo-900 border !border-indigo-100" : ""}`}>
+           {isAdmin && <span className="text-[10px] font-bold text-indigo-500 mb-1 flex items-center gap-1"><ShieldCheck className="w-3 h-3"/> CEO | Human Staff</span>}
+           {message.content}
+        </div>
+        <div className="flex items-center gap-1 justify-end mt-1 text-[10px] text-gray-400">
+          <span className="chat-message__time">
+            {new Date(message.timestamp).toLocaleTimeString("th-TH", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
+          {message.role === "user" && (
+             <span>
+                {message.status === "sending" && <span className="opacity-50">...</span>}
+                {message.status === "sent" && <Check className="w-3 h-3" />}
+                {message.status === "delivered" && <CheckCheck className="w-3 h-3" />}
+                {message.status === "read" && <CheckCheck className="w-3 h-3 text-blue-500" />}
+             </span>
+          )}
+        </div>
       </div>
     </div>
   );

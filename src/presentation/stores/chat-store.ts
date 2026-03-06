@@ -6,6 +6,8 @@ export interface ChatMessage {
   id: string;
   role: "user" | "assistant" | "system" | "admin";
   content: string;
+  status?: "sending" | "sent" | "delivered" | "read";
+  isDraft?: boolean;
   timestamp: Date;
 }
 
@@ -41,6 +43,7 @@ interface ChatActions {
   sendMessage: (content: string) => Promise<void>;
   syncMessages: () => Promise<void>;
   loadMoreHistory: () => Promise<void>;
+  markAsRead: () => Promise<void>;
 }
 
 type ChatStore = ChatState & ChatActions;
@@ -96,7 +99,9 @@ export const useChatStore = create<ChatStore>()(
               id: (m.id as string) || uuidv4(),
               role: m.role as "user" | "assistant" | "system" | "admin",
               content: m.content as string,
-              timestamp: new Date()
+              status: m.status as "sent" | "delivered" | "read",
+              isDraft: m.isDraft as boolean,
+              timestamp: new Date((m.createdAt as string) || Date.now())
           }));
           
           set({
@@ -120,7 +125,7 @@ export const useChatStore = create<ChatStore>()(
         if (!sessionId) return;
         
         const messageId = uuidv4();
-        addMessage({ role: "user", content, id: messageId } as unknown as Omit<ChatMessage, "id" | "timestamp">);
+        addMessage({ role: "user", content, id: messageId, status: "sending" } as unknown as Omit<ChatMessage, "id" | "timestamp">);
         set({ isLoading: true, error: null });
 
         try {
@@ -134,10 +139,15 @@ export const useChatStore = create<ChatStore>()(
             throw new Error("Failed to get response");
           }
 
+          // Mark user message as sent
+          set((state) => ({
+            messages: state.messages.map(m => m.id === messageId ? { ...m, status: "sent" } : m)
+          }));
+
           const data = await response.json();
           // If the AI responded but it's a draft (autoReply is off), it returns { ack: true }
           if (!data.ack && data.response) {
-            addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as unknown as Omit<ChatMessage, "id" | "timestamp">);
+            addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4(), status: "sent" } as unknown as Omit<ChatMessage, "id" | "timestamp">);
           }
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : "เกิดข้อผิดพลาด กรุณาลองใหม่";
@@ -173,8 +183,10 @@ export const useChatStore = create<ChatStore>()(
           if (data.messages && data.messages.length > 0) {
             const newParsedMessages = data.messages.map((m: Record<string, unknown>) => ({
                 id: (m.id as string) || uuidv4(),
-                role: m.role === "admin" ? "assistant" : (m.role as "user" | "assistant" | "system" | "admin"),
+                role: m.role as "user" | "assistant" | "system" | "admin",
                 content: m.content as string,
+                status: m.status as "sent" | "delivered" | "read",
+                isDraft: m.isDraft as boolean,
                 timestamp: new Date((m.createdAt as string) || Date.now()),
             }));
             
@@ -216,8 +228,10 @@ export const useChatStore = create<ChatStore>()(
           if (data.messages && data.messages.length > 0) {
             const olderMessages = data.messages.map((m: Record<string, unknown>) => ({
                 id: (m.id as string) || uuidv4(),
-                role: m.role === "admin" ? "assistant" : (m.role as "user" | "assistant" | "system" | "admin"),
+                role: m.role as "user" | "assistant" | "system" | "admin",
                 content: m.content as string,
+                status: m.status as "sent" | "delivered" | "read",
+                isDraft: m.isDraft as boolean,
                 timestamp: new Date((m.createdAt as string) || Date.now()),
             }));
             
@@ -232,6 +246,24 @@ export const useChatStore = create<ChatStore>()(
           console.error("Failed to load more history:", error);
         } finally {
           set({ isLoading: false });
+        }
+      },
+
+      markAsRead: async () => {
+        const { sessionId } = get();
+        if (!sessionId) return;
+        
+        // Optimistically update UI
+        set((state) => ({
+          messages: state.messages.map(m => m.role !== "user" && m.status !== "read" 
+            ? { ...m, status: "read" } 
+            : m)
+        }));
+
+        try {
+          await fetch(`/api/chat/${sessionId}/read`, { method: "POST" });
+        } catch (error) {
+           console.error("Failed to mark messages as read", error);
         }
       },
     }),

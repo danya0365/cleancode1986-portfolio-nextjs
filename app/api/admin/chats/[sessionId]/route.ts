@@ -23,6 +23,27 @@ export async function GET(
       messages = await chatRepo.getMessagesBySession(sessionId, 50);
     }
     
+    // Auto-mark customer messages as read
+    const unreadMessageIds = messages
+      .filter((m) => m.role === "user" && m.status !== "read")
+      .map((m) => m.id);
+
+    if (unreadMessageIds.length > 0) {
+      await chatRepo.updateMessageStatus(unreadMessageIds, "read");
+      messages = messages.map((m) => {
+        if (unreadMessageIds.includes(m.id)) {
+          return { ...m, status: "read" };
+        }
+        return m;
+      });
+    }
+
+    // Auto-update session status to active if it's currently new
+    const session = await chatRepo.getSession(sessionId);
+    if (session && session.status === "new") {
+       await chatRepo.updateSessionStatus(sessionId, "active");
+    }
+
     return NextResponse.json({ messages });
   } catch (error) {
     console.error(`Admin chat messages error for session:`, error);

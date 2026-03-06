@@ -3,13 +3,14 @@ export interface ChatMessageData {
   sessionId: string;
   role: "user" | "assistant" | "admin";
   content: string;
+  status: "sent" | "delivered" | "read";
   isDraft: boolean;
   createdAt: Date;
 }
 
 export interface ChatSessionData {
   id: string;
-  status: "active" | "closed";
+  status: "new" | "active" | "follow_up" | "resolved" | "spam";
   autoReply: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -34,9 +35,14 @@ export interface IChatRepository {
   getAllSessionsWithLatestMessage(): Promise<(ChatSessionData & { latestMessage?: ChatMessageData })[]>;
 
   /**
-   * Update the status of a session (e.g. to close it).
+   * Update the status of a session.
    */
-  updateSessionStatus(sessionId: string, status: "active" | "closed"): Promise<void>;
+  updateSessionStatus(sessionId: string, status: "new" | "active" | "follow_up" | "resolved" | "spam"): Promise<void>;
+
+  /**
+   * Update the status of specific messages.
+   */
+  updateMessageStatus(messageIds: string[], status: "delivered" | "read"): Promise<void>;
 
   /**
    * Find a session by a short ID prefix (e.g. first 4-8 characters).
@@ -56,7 +62,8 @@ export interface IChatRepository {
     role: "user" | "assistant" | "admin",
     content: string,
     id?: string,
-    isDraft?: boolean
+    isDraft?: boolean,
+    status?: "sent" | "delivered" | "read"
   ): Promise<ChatMessageData>;
 
   /**
