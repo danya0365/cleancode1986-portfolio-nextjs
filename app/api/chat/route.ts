@@ -29,11 +29,22 @@ export async function POST(request: NextRequest) {
     // Notify Admin via LINE
     await lineService.notifyAdmin(sessionId, message);
 
+    // Ensure we have the session state to check for autoReply config
+    const session = await chatRepo.getSession(sessionId);
+    if (!session) {
+      return NextResponse.json({ error: "Session not found" }, { status: 404 });
+    }
+
     // Try simple keyword-based response first
     const simpleResponse = getSimpleResponse(message);
     if (simpleResponse) {
-      const responseMsg = await chatRepo.addMessage(sessionId, "assistant", simpleResponse);
-      return NextResponse.json({ response: simpleResponse, responseId: responseMsg.id });
+      if (session.autoReply) {
+        const responseMsg = await chatRepo.addMessage(sessionId, "assistant", simpleResponse, undefined, false);
+        return NextResponse.json({ response: simpleResponse, responseId: responseMsg.id });
+      } else {
+        await chatRepo.addMessage(sessionId, "assistant", simpleResponse, undefined, true);
+        return NextResponse.json({ ack: true });
+      }
     }
 
     // Check if we have an AI API key configured
@@ -54,13 +65,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Save AI response to database
-    const aiMessage = await chatRepo.addMessage(sessionId, "assistant", aiResponseText);
-
-    return NextResponse.json({ response: aiResponseText, responseId: aiMessage.id });
-  } catch (error: any) {
+    if (session.autoReply) {
+      const aiMessage = await chatRepo.addMessage(sessionId, "assistant", aiResponseText, undefined, false);
+      return NextResponse.json({ response: aiResponseText, responseId: aiMessage.id });
+    } else {
+      // AI Draft Suggestions Mode (Handover)
+      await chatRepo.addMessage(sessionId, "assistant", aiResponseText, undefined, true);
+      // Return empty response so frontend doesn't show it to the customer
+      return NextResponse.json({ ack: true });
+    }
+  } catch (error) {
     console.error("Chat API error:", error);
+    const errMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { error: "Failed to process message: " + (error?.message || String(error)) },
+      { error: "Failed to process message: " + errMessage },
       { status: 500 }
     );
   }

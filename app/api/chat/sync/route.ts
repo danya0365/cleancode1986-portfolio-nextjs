@@ -31,13 +31,13 @@ export async function GET(request: NextRequest) {
 
     if (lastMessageAt) {
       // Optimized Polling: Only fetch strictly new messages
-      messages = await chatRepo.getNewMessages(sessionId, new Date(lastMessageAt));
+      messages = await chatRepo.getNewMessages(sessionId, new Date(lastMessageAt), true);
     } else if (beforeDate) {
       // Infinite Scroll: Fetch older messages (e.g. limit 50)
-      messages = await chatRepo.getMessagesBySession(sessionId, 50, new Date(beforeDate));
+      messages = await chatRepo.getMessagesBySession(sessionId, 50, new Date(beforeDate), true);
     } else {
       // Default: Initial load (latest 50)
-      messages = await chatRepo.getMessagesBySession(sessionId, 50);
+      messages = await chatRepo.getMessagesBySession(sessionId, 50, undefined, true);
     }
 
     return NextResponse.json({ messages });

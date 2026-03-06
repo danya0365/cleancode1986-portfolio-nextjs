@@ -8,6 +8,7 @@ interface Session {
   customerName?: string;
   customerPhone?: string;
   status: "active" | "closed";
+  autoReply?: boolean;
   createdAt: string;
   updatedAt: string;
   latestMessage?: {
@@ -22,6 +23,7 @@ interface Message {
   id: string;
   role: "user" | "assistant" | "admin";
   content: string;
+  isDraft?: boolean;
   createdAt: string;
 }
 
@@ -144,6 +146,31 @@ function AdminChatContent() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSessionId]);
 
+  const toggleAutoReply = async (currentAutoReplyState: boolean) => {
+    if (!selectedSessionId) return;
+    const newState = !currentAutoReplyState;
+    
+    // Optimistic UI update
+    setSessions(prev => prev.map(s => 
+      s.id === selectedSessionId ? { ...s, autoReply: newState } : s
+    ));
+
+    try {
+      const res = await fetch(`/api/admin/chats/${selectedSessionId}/auto-reply`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ autoReply: newState }),
+      });
+      if (!res.ok) throw new Error("Toggle failed");
+    } catch (error) {
+       console.error(error);
+       // Revert UI on failure
+       setSessions(prev => prev.map(s => 
+         s.id === selectedSessionId ? { ...s, autoReply: currentAutoReplyState } : s
+       ));
+    }
+  };
+
   // Polling Effect for Messages
   useEffect(() => {
     let messageInterval: NodeJS.Timeout;
@@ -208,6 +235,11 @@ function AdminChatContent() {
       }
       // Re-fetch to get real ID
       fetchMessages(selectedSessionId);
+      
+      // Automatic Handover Update: Admin replied, so auto-reply was turned off by the backend
+      setSessions(prev => prev.map(s => 
+        s.id === selectedSessionId ? { ...s, autoReply: false } : s
+      ));
     } catch (error) {
       console.error(error);
       // Removed temp msg on fail
@@ -326,14 +358,40 @@ function AdminChatContent() {
                   )}
                </form>
 
-              <button
-                onClick={() => handleCloseSession(selectedSessionId)}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-50 text-green-600 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/40 rounded-md transition-colors flex-shrink-0"
-                title="Mark this conversation as resolved and closed"
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                Resolve Chat
-              </button>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                {/* AI Toggle */}
+                {sessions.find(s => s.id === selectedSessionId) && (
+                  <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700/50 px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-600">
+                    <span className="text-xs font-medium text-gray-600 dark:text-gray-300 flex items-center gap-1">
+                      <Bot className="w-4 h-4" />
+                      Auto-Reply
+                    </span>
+                    <button 
+                      onClick={() => toggleAutoReply(sessions.find(s => s.id === selectedSessionId)?.autoReply ?? true)}
+                      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors ${
+                        (sessions.find(s => s.id === selectedSessionId)?.autoReply !== false) ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-600'
+                      }`}
+                    >
+                      <span className="sr-only">Toggle AI Auto Reply</span>
+                      <span
+                        aria-hidden="true"
+                        className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                          (sessions.find(s => s.id === selectedSessionId)?.autoReply !== false) ? 'translate-x-2' : '-translate-x-2'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                )}
+
+                <button
+                  onClick={() => handleCloseSession(selectedSessionId)}
+                  className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-50 text-green-600 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400 dark:hover:bg-green-900/40 rounded-md transition-colors"
+                  title="Mark this conversation as resolved and closed"
+                >
+                  <CheckCircle2 className="w-4 h-4" />
+                  Resolve Chat
+                </button>
+              </div>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -358,26 +416,29 @@ function AdminChatContent() {
 
               {(searchResults || messages).map((message) => {
                 const isAdmin = message.role === "admin";
-                const isSystem = message.role === "assistant";
+                const isSystem = message.role === "assistant" && !message.isDraft;
+                const isDraft = message.isDraft;
                 
                 return (
                   <div
                     key={message.id}
-                    className={`flex ${isAdmin ? "justify-end" : "justify-start"}`}
+                    className={`flex flex-col ${isAdmin ? "items-end" : "items-start"}`}
                   >
                     <div
                       className={`max-w-[70%] rounded-2xl p-4 shadow-sm ${
                         isAdmin
                           ? "bg-indigo-600 text-white rounded-tr-sm"
+                          : isDraft
+                          ? "bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 text-amber-900 dark:text-amber-100 rounded-tl-sm relative"
                           : isSystem
                           ? "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-sm"
-                          : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-tl-sm"
+                          : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-sm"
                       }`}
                     >
-                      <div className="flex items-center gap-2 mb-1.5 opacity-80">
-                         {isAdmin ? <ShieldCheck className="w-3.5 h-3.5" /> : isSystem ? <Bot className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
+                      <div className={`flex items-center gap-2 mb-1.5 opacity-80 ${isDraft ? 'text-amber-600 dark:text-amber-400' : ''}`}>
+                         {isAdmin ? <ShieldCheck className="w-3.5 h-3.5" /> : isSystem || isDraft ? <Bot className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
                          <span className="text-xs font-medium">
-                           {isAdmin ? "You" : isSystem ? "AI Assistant" : "Customer"}
+                           {isAdmin ? "You" : isDraft ? "✨ AI Draft Suggestion" : isSystem ? "AI Assistant" : "Customer"}
                          </span>
                          <span className="text-[10px] ml-auto flex items-center gap-1">
                            <Clock className="w-3 h-3" />
@@ -386,6 +447,17 @@ function AdminChatContent() {
                       </div>
                       <p className="whitespace-pre-wrap text-sm">{message.content}</p>
                     </div>
+                    
+                    {/* Use Draft Button beneath the message */}
+                    {isDraft && (
+                      <button 
+                        onClick={() => setInputText(message.content)}
+                        className="mt-1 flex items-center gap-1 text-[11px] font-medium text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 transition-colors bg-white dark:bg-gray-800 px-2 py-1 rounded shadow-sm border border-amber-100 dark:border-amber-800"
+                      >
+                        <Send className="w-3 h-3" />
+                        Use Draft
+                      </button>
+                    )}
                   </div>
                 );
               })}

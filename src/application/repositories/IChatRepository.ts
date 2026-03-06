@@ -3,12 +3,14 @@ export interface ChatMessageData {
   sessionId: string;
   role: "user" | "assistant" | "admin";
   content: string;
+  isDraft: boolean;
   createdAt: Date;
 }
 
 export interface ChatSessionData {
   id: string;
   status: "active" | "closed";
+  autoReply: boolean;
   createdAt: Date;
   updatedAt: Date;
   customerName?: string;
@@ -53,22 +55,28 @@ export interface IChatRepository {
     sessionId: string,
     role: "user" | "assistant" | "admin",
     content: string,
-    id?: string
+    id?: string,
+    isDraft?: boolean
   ): Promise<ChatMessageData>;
 
   /**
    * Retrieve all messages for a given session, sorted chronologically.
    * Supports cursor pagination through `limit` and `beforeDate`.
    */
-  getMessagesBySession(sessionId: string, limit?: number, beforeDate?: Date): Promise<ChatMessageData[]>;
+  getMessagesBySession(sessionId: string, limit?: number, beforeDate?: Date, excludeDrafts?: boolean): Promise<ChatMessageData[]>;
 
   /**
    * Fetch strictly new messages that arrived after a specific timestamp (Optimized Polling).
    */
-  getNewMessages(sessionId: string, afterDate: Date): Promise<ChatMessageData[]>;
+  getNewMessages(sessionId: string, afterDate: Date, excludeDrafts?: boolean): Promise<ChatMessageData[]>;
 
   /**
    * Search for messages containing a specific keyword within a session.
    */
   searchMessages(sessionId: string, keyword: string): Promise<ChatMessageData[]>;
+
+  /**
+   * Toggle the AI Auto-Reply state for a session.
+   */
+  toggleAutoReply(sessionId: string, state: boolean): Promise<void>;
 }

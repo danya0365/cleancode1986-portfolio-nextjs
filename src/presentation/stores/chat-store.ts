@@ -74,7 +74,7 @@ export const useChatStore = create<ChatStore>()(
             ...state.messages,
             {
               ...message,
-              id: (message as any).id || uuidv4(),
+              id: ("id" in message && typeof message.id === "string") ? message.id : uuidv4(),
               timestamp: new Date(),
             },
           ],
@@ -120,7 +120,7 @@ export const useChatStore = create<ChatStore>()(
         if (!sessionId) return;
         
         const messageId = uuidv4();
-        addMessage({ role: "user", content, id: messageId } as any);
+        addMessage({ role: "user", content, id: messageId } as unknown as Omit<ChatMessage, "id" | "timestamp">);
         set({ isLoading: true, error: null });
 
         try {
@@ -135,14 +135,14 @@ export const useChatStore = create<ChatStore>()(
           }
 
           const data = await response.json();
-          addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as any);
+          addMessage({ role: "assistant", content: data.response, id: data.responseId || uuidv4() } as unknown as Omit<ChatMessage, "id" | "timestamp">);
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : "เกิดข้อผิดพลาด กรุณาลองใหม่";
           set({ error: errorMessage });
           addMessage({
             role: "assistant",
             content: "ขออภัยครับ เกิดข้อผิดพลาด ไม่สามารถส่งข้อความได้",
-          } as any);
+          } as unknown as Omit<ChatMessage, "id" | "timestamp">);
         } finally {
           set({ isLoading: false });
         }
@@ -178,7 +178,7 @@ export const useChatStore = create<ChatStore>()(
             if (lastMessage) {
                // Deduplicate explicitly
                const existingIds = new Set(messages.map(m => m.id));
-               const strictlyNewMessages = newParsedMessages.filter((m: any) => !existingIds.has(m.id));
+               const strictlyNewMessages = newParsedMessages.filter((m: { id: string }) => !existingIds.has(m.id));
                if (strictlyNewMessages.length > 0) {
                  setMessages([...messages, ...strictlyNewMessages]);
                }

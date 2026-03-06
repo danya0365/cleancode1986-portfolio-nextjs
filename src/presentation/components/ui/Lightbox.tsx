@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface LightboxProps {
   images: string[];
@@ -13,7 +13,35 @@ interface LightboxProps {
 export function Lightbox({ images, currentIndex: initialIndex, onClose }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isOpen, setIsOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+
+
+  // Open the lightbox with the selected image
+  useEffect(() => {
+    if (initialIndex >= 0 && initialIndex < images.length) {
+      setCurrentIndex(initialIndex);
+      setIsOpen(true);
+    }
+  }, [initialIndex, images.length]);
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    // Wait for the animation to complete before calling onClose
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  }, [onClose]);
+
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  }, [images.length]);
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  }, [images.length]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -35,55 +63,12 @@ export function Lightbox({ images, currentIndex: initialIndex, onClose }: Lightb
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, currentIndex]);
-
-  // Prevent body scroll when lightbox is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      // Add a small delay for the animation
-      const timer = setTimeout(() => {
-        setIsAnimating(true);
-      }, 10);
-      return () => clearTimeout(timer);
-    } else {
-      document.body.style.overflow = 'auto';
-      setIsAnimating(false);
-    }
-  }, [isOpen]);
-
-  // Open the lightbox with the selected image
-  useEffect(() => {
-    if (initialIndex >= 0 && initialIndex < images.length) {
-      setCurrentIndex(initialIndex);
-      setIsOpen(true);
-    }
-  }, [initialIndex, images.length]);
-
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-    // Wait for the animation to complete before calling onClose
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
+  }, [isOpen, currentIndex, images.length, handleClose, goToPrevious, goToNext]);
 
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 transition-opacity duration-300 ${isAnimating ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 transition-opacity duration-300 opacity-100`}>
       {/* Close button */}
       <button
         onClick={handleClose}

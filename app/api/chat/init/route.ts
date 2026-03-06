@@ -24,8 +24,8 @@ export async function POST(req: Request) {
     const existingSession = await chatRepo.getLatestSessionByPhone(phone);
 
     if (existingSession) {
-      // Restore previous session (limit early history to 50 for performance)
-      const history = await chatRepo.getMessagesBySession(existingSession.id, 50);
+      // Restore previous session (limit early history to 50 for performance), excluding drafts
+      const history = await chatRepo.getMessagesBySession(existingSession.id, 50, undefined, true);
       
       return NextResponse.json({
         sessionId: existingSession.id,
