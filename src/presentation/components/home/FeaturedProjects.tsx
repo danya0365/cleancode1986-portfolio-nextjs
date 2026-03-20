@@ -6,9 +6,41 @@ interface FeaturedProjectsProps {
   projects: Project[];
 }
 
+import { XRayWrapper } from "../ui/XRayWrapper";
+
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
+  const codeSnippet = `
+// FeaturedProjects.tsx
+export function FeaturedProjects({ projects }: Props) {
   return (
     <section className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl font-black text-transparent bg-clip-text 
+                       bg-gradient-to-r from-gray-900 to-gray-600">
+          ผลงานที่น่าภูมิใจ
+        </h2>
+      </div>
+      
+      {/* 🔮 Dynamic Grid Map */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        {projects.map((project) => (
+          <Link href={\`/portfolio/\${project.slug}\`}>
+            {/* 💎 Pure CSS Premium Glassmorphism Hover Effects */}
+            <div className="group bg-white/70 backdrop-blur-xl 
+                            hover:-translate-y-2 transition-all duration-500">
+                <Image src={project.thumbnail} alt={project.title} fill />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+`.trim();
+
+  return (
+    <XRayWrapper componentName="FeaturedProjects.tsx" codeSnippet={codeSnippet}>
+      <section className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-[1200px] pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 blur-[100px] rounded-full" />
@@ -122,6 +154,7 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </Link>
         </div>
       </div>
-    </section>
+      </section>
+    </XRayWrapper>
   );
 }

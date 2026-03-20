@@ -87,6 +87,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { XRayProvider } from "@/src/presentation/providers/xray-provider";
+import { XRayToggle } from "@/src/presentation/components/ui/XRayToggle";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -96,7 +99,10 @@ export default function RootLayout({
     <html lang="th" className={notoSansThai.variable} suppressHydrationWarning>
       <body className={`${notoSansThai.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          {children}
+          <XRayProvider>
+            {children}
+            <XRayToggle />
+          </XRayProvider>
         </ThemeProvider>
       </body>
     </html>

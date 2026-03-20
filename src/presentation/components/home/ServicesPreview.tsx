@@ -5,9 +5,38 @@ interface ServicesPreviewProps {
   services: Service[];
 }
 
+import { XRayWrapper } from "../ui/XRayWrapper";
+
 export function ServicesPreview({ services }: ServicesPreviewProps) {
+  const codeSnippet = `
+// ServicesPreview.tsx
+export function ServicesPreview({ services }) {
   return (
-    <section className="relative py-24 bg-white dark:bg-black overflow-hidden border-t border-gray-100 dark:border-gray-900">
+    <section className="relative py-24 bg-white dark:bg-black overflow-hidden">
+      {/* 🚀 High-Performance CSS Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        {services.map((service) => (
+          <div className="group relative bg-white/60 dark:bg-gray-900/40 backdrop-blur-xl 
+                          shadow-lg hover:-translate-y-2 transition-all duration-500">
+            {/* Glowing Icon Container */}
+            <div className="relative w-20 h-20 mb-8 rounded-2xl group-hover:scale-110">
+              <div className="absolute inset-0 bg-indigo-500/20 blur-xl opacity-0 
+                              group-hover:opacity-100 transition-opacity" />
+              <span className="text-4xl relative z-10">{service.icon}</span>
+            </div>
+            
+            <h3 className="text-2xl font-bold">{service.title}</h3>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+`.trim();
+
+  return (
+    <XRayWrapper componentName="ServicesPreview.tsx" codeSnippet={codeSnippet}>
+      <section className="relative py-24 bg-white dark:bg-black overflow-hidden border-t border-gray-100 dark:border-gray-900">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-50/50 dark:bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none transform translate-x-1/3 -translate-y-1/3" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-50/50 dark:bg-purple-900/10 blur-[100px] rounded-full pointer-events-none transform -translate-x-1/3 translate-y-1/3" />
@@ -99,6 +128,7 @@ export function ServicesPreview({ services }: ServicesPreviewProps) {
           </Link>
         </div>
       </div>
-    </section>
+      </section>
+    </XRayWrapper>
   );
 }
