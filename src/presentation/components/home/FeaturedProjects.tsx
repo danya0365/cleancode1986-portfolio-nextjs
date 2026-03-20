@@ -8,86 +8,101 @@ interface FeaturedProjectsProps {
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+      {/* Decorative Background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-[1200px] pointer-events-none">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 dark:bg-blue-600/10 blur-[100px] rounded-full" />
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-600/10 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 drop-shadow-sm">
             ผลงานที่น่าภูมิใจ
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            โปรเจคที่เราได้พัฒนาให้กับลูกค้า
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto">
+            โปรเจคระดับ Masterpiece ที่เราตั้งใจพัฒนาเพื่อยกระดับธุรกิจให้ลูกค้า
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 mb-16">
           {projects.map((project) => (
             <Link
               key={project.id}
               href={`/portfolio/${project.slug}`}
-              className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group flex flex-col h-full bg-white/70 dark:bg-gray-900/60 backdrop-blur-xl rounded-[2rem] overflow-hidden border border-gray-200/50 dark:border-gray-800/50 shadow-lg hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.15)] hover:-translate-y-2 transition-all duration-500"
             >
-              {/* Image */}
-              <div className="relative h-48 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden">
-                {project.thumbnail ? (
-                  <>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-9xl opacity-50">
-                        {project.category === "Web" && "💻"}
-                        {project.category === "Mobile" && "📱"}
-                        {project.category === "UI/UX" && "🎨"}
-                        {project.category === "Full-stack" && "🚀"}
-                      </div>
-                    </div>
+              {/* Image Container */}
+              <div className="relative h-64 w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
+                {/* Fallback pattern underneath */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-500/5 to-purple-500/10 transition-transform duration-500 group-hover:scale-105">
+                  <span className="text-7xl mb-4 opacity-40 drop-shadow-md">
+                    {project.category === "Web" && "💻"}
+                    {project.category === "Mobile" && "📱"}
+                    {project.category === "UI/UX" && "🎨"}
+                    {project.category === "Full-stack" && "🚀"}
+                    {!["Web", "Mobile", "UI/UX", "Full-stack"].includes(project.category) && "📁"}
+                  </span>
+                  <div className="px-4 py-1.5 bg-white/60 dark:bg-black/30 backdrop-blur-md rounded-full border border-gray-200/50 dark:border-gray-700/50">
+                    <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Preview Unavailable
+                    </span>
+                  </div>
+                </div>
+
+                {/* Actual Thumbnail (if exists and doesn't error) */}
+                {project.thumbnail && (
+                  <div className="absolute inset-0 z-10 transition-opacity duration-500">
                     <Image
                       src={project.thumbnail}
                       alt={`${project.title} thumbnail`}
                       fill
-                      className="object-cover object-center"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                       priority
                       onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = "none";
                       }}
                     />
-                  </>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-9xl opacity-50">
-                      {project.category === "Web" && "💻"}
-                      {project.category === "Mobile" && "📱"}
-                      {project.category === "UI/UX" && "🎨"}
-                      {project.category === "Full-stack" && "🚀"}
-                    </div>
+                    {/* Dark gradient overlay on hover for better text contrast if we had text over image */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 )}
-                <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-white/90 dark:bg-gray-900/90 text-sm font-medium rounded-full">
+                
+                {/* Badges */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="px-4 py-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md text-xs font-bold uppercase tracking-wider rounded-full text-indigo-600 dark:text-indigo-400 shadow-sm border border-white/20 dark:border-gray-700/50">
                     {project.category}
                   </span>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              {/* Content Container */}
+              <div className="p-8 flex-1 flex flex-col bg-gradient-to-b from-transparent to-white/50 dark:to-gray-900/50">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors drop-shadow-sm">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-2 leading-relaxed font-medium flex-1">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-auto">
                   {project.technologies.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded"
+                      className="px-3 py-1.5 bg-indigo-50/80 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-bold rounded-lg border border-indigo-100/50 dark:border-indigo-800/50"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 3 && (
+                    <span className="px-3 py-1.5 bg-gray-50/80 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 text-xs font-bold rounded-lg border border-gray-100/50 dark:border-gray-700/50">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
             </Link>
@@ -95,13 +110,15 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         </div>
 
         {/* View All Button */}
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Link
             href="/portfolio"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+            className="group inline-flex items-center px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-2xl hover:bg-indigo-600 dark:hover:bg-indigo-500 transition-all duration-300 shadow-xl hover:shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:-translate-y-1"
           >
-            ดูผลงานทั้งหมด
-            <span className="ml-2">→</span>
+            เปิดคลังผลงานทั้งหมด
+            <span className="ml-3 group-hover:translate-x-2 transition-transform duration-300">
+              →
+            </span>
           </Link>
         </div>
       </div>
