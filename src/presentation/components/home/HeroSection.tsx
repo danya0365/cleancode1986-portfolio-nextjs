@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import type { Technology } from "@/src/data/mock/technologies.mock";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { DevTerminal } from "./DevTerminal";
 
 interface HeroSectionProps {
   technologies: Technology[];
 }
 
-const fadeUpVariant = {
+const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };

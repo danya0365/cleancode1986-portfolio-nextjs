@@ -28,7 +28,7 @@ export function DevTerminal() {
     const newHistory = [...history, { text: `> ${cmd}`, type: "user" }];
     
     setTimeout(() => {
-      let response = { text: "", type: "system" };
+      const response = { text: "", type: "system" };
       switch (trimmed) {
         case "help":
           response.text = "Available commands: bio, skills, contact, clear, sudo rm -rf /";
