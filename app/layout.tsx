@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Kanit } from "next/font/google";
+import { Noto_Sans_Thai } from "next/font/google";
 import "../public/styles/index.css";
 
-const kanit = Kanit({
-  weight: ["300", "400", "500", "600", "700"],
+const notoSansThai = Noto_Sans_Thai({
   subsets: ["latin", "thai"],
-  variable: "--font-kanit",
+  variable: "--font-noto-sans-thai",
   display: "swap",
 });
 
@@ -94,8 +93,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" suppressHydrationWarning>
-      <body className={`${kanit.variable} font-sans antialiased`}>
+    <html lang="th" className={notoSansThai.variable} suppressHydrationWarning>
+      <body className={`${notoSansThai.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
         </ThemeProvider>

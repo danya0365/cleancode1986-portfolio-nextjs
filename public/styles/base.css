@@ -22,7 +22,7 @@
     @apply bg-background text-foreground;
   }
 
-  .font-kanit {
-    font-family: var(--font-kanit);
+  .font-noto-sans-thai {
+    font-family: var(--font-noto-sans-thai);
   }
 }

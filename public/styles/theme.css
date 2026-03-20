@@ -1,11 +1,11 @@
 /* 🎨 Theme Tokens */
 @theme {
   /* Custom Font Variables */
-  --font-sans: "MiSans Thai", "MiSans Thai Variable", system-ui, -apple-system,
+  --font-sans: var(--font-noto-sans-thai), system-ui, -apple-system,
     sans-serif;
-  --font-mono: "MiSans Thai", "MiSans Thai Variable", system-ui, -apple-system,
+  --font-mono: system-ui, -apple-system,
     monospace;
-  --font-kanit: var(--font-kanit), system-ui, sans-serif;
+  --font-noto-sans-thai: var(--font-noto-sans-thai), system-ui, sans-serif;
 
   /* Light defaults */
   --color-background: #ffffff;
