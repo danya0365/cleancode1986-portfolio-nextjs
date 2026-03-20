@@ -6,5 +6,12 @@
 
   /* Gradients */
   .bg-primary-gradient { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); }
+}
 
+@layer utilities {
+  /* Fix Webkit background-clip cropping top/bottom Thai accents (e.g. สระอู, ไม้โท) on Gradient Texts */
+  .bg-clip-text {
+    padding-top: 0.15em;
+    padding-bottom: 0.2em;
+  }
 }
