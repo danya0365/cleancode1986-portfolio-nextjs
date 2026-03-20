@@ -1,16 +1,16 @@
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
-import { PortfolioList } from "@/src/presentation/components/portfolio/PortfolioList";
-import { PortfolioPresenterFactory } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
+import { PortfolioView } from "@/src/presentation/components/portfolio/PortfolioView";
+import { createServerPortfolioPresenter } from "@/src/presentation/presenters/portfolio/PortfolioPresenterServerFactory";
 import type { Metadata } from "next";
 
 /**
  * Generate metadata for portfolio page
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const presenter = await PortfolioPresenterFactory.createServer();
+  const presenter = createServerPortfolioPresenter();
 
   try {
-    return await presenter.generateMetadata();
+    return presenter.generateMetadata();
   } catch (error) {
     console.error("Error generating metadata:", error);
     return {
@@ -24,21 +24,21 @@ export async function generateMetadata(): Promise<Metadata> {
  * Portfolio page - Server Component for SEO optimization
  */
 export default async function PortfolioPage() {
-  const presenter = await PortfolioPresenterFactory.createServer();
+  const presenter = createServerPortfolioPresenter();
 
   try {
     const viewModel = await presenter.getViewModel();
 
     return (
       <MainLayout>
-        <PortfolioList initialViewModel={viewModel} />
+        <PortfolioView initialViewModel={viewModel} />
       </MainLayout>
     );
   } catch (error) {
     console.error("Error fetching portfolio data:", error);
     return (
       <MainLayout>
-        <PortfolioList />
+        <PortfolioView />
       </MainLayout>
     );
   }

@@ -12,7 +12,7 @@ export interface PaginatedResult<T> {
 
 export type SortOrder = "asc" | "desc";
 
-export interface QueryParams<FilterType = Record<string, any>> {
+export interface QueryParams<FilterType = Record<string, unknown>> {
   /**
    * Page number (1-indexed)
    */

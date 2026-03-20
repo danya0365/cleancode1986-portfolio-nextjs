@@ -1,29 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import type { CategoryFilter, PortfolioViewModel } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
 import Image from "next/image";
 import Link from "next/link";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
 import { RetroBadge } from "@/src/presentation/components/ui/retro/RetroBadge";
+import type { PortfolioTemplateProps } from "./PortfolioPremiumView";
 
-interface Props {
-  viewModel: PortfolioViewModel;
-}
-
-export function PortfolioRetroTechMagazineView({ viewModel }: Props) {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredProjects = viewModel.projects.filter((project) => {
-    const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesSearch =
-      searchTerm === "" ||
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+export function PortfolioRetroTechMagazineView({ 
+  viewModel,
+  searchTerm,
+  setSearchTerm,
+  selectedCategory,
+  setSelectedCategory
+}: PortfolioTemplateProps) {
+  // Use projects directly from viewModel, as they are now filtered by the Repository
+  const filteredProjects = viewModel.projects;
 
   return (
     <div className="flex flex-col gap-12 p-4 sm:p-8 lg:p-12 pb-32">

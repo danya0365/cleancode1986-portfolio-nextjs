@@ -1,5 +1,5 @@
 import { SITE } from "@/src/data/master/site";
-import { getAllProjectsSorted, type Project } from "@/src/data/mock/projects.mock";
+import { IProjectRepository, Project } from "@/src/application/repositories/IProjectRepository";
 
 export type CategoryFilter = "All" | "Web" | "Mobile" | "UI/UX" | "Full-stack";
 
@@ -12,13 +12,34 @@ export interface PortfolioViewModel {
  * Presenter for Portfolio List page
  */
 export class PortfolioPresenter {
+  constructor(
+    private readonly projectRepository: IProjectRepository
+  ) {}
+
   /**
    * Get view model for portfolio list
    */
-  async getViewModel(): Promise<PortfolioViewModel> {
+  async getViewModel(params: {
+    category?: CategoryFilter;
+    search?: string;
+  } = {}): Promise<PortfolioViewModel> {
     try {
-      // Get all projects, sorted by displayOrder
-      const projects = getAllProjectsSorted();
+      // Build query params
+      const queryParams: Parameters<IProjectRepository["query"]>[0] = {
+        sortBy: "displayOrder",
+        sortOrder: "asc",
+        perPage: 0,
+      };
+
+      if (params.search) {
+        queryParams.search = params.search;
+      }
+
+      if (params.category && params.category !== "All") {
+        queryParams.filters = { category: params.category };
+      }
+
+      const paginatedResult = await this.projectRepository.query(queryParams);
 
       const categories: readonly CategoryFilter[] = [
         "All",
@@ -29,7 +50,7 @@ export class PortfolioPresenter {
       ] as const;
 
       return {
-        projects,
+        projects: paginatedResult.data,
         categories,
       };
     } catch (error) {
@@ -41,23 +62,10 @@ export class PortfolioPresenter {
   /**
    * Generate metadata for portfolio page
    */
-  async generateMetadata() {
+  generateMetadata() {
     return {
       title: `ผลงาน | ${SITE.company.name}`,
       description: `ผลงานพัฒนาเว็บไซต์และแอปพลิเคชันของ ${SITE.company.name}`,
     };
-  }
-}
-
-/**
- * Factory for creating PortfolioPresenter instances
- */
-export class PortfolioPresenterFactory {
-  static async createServer(): Promise<PortfolioPresenter> {
-    return new PortfolioPresenter();
-  }
-
-  static async createClient(): Promise<PortfolioPresenter> {
-    return new PortfolioPresenter();
   }
 }

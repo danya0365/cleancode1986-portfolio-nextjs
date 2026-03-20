@@ -1,18 +1,20 @@
 "use client";
 
+import { useTemplateStore } from "@/src/presentation/store/useTemplateStore";
 import type { PortfolioViewModel } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
 import { usePortfolioPresenter } from "@/src/presentation/presenters/portfolio/usePortfolioPresenter";
-import { useTemplateStore } from "@/src/presentation/store/useTemplateStore";
 import { PortfolioPremiumView } from "./views/PortfolioPremiumView";
 import { PortfolioTerminalView } from "./views/PortfolioTerminalView";
 import { PortfolioRetroTechMagazineView } from "./views/PortfolioRetroTechMagazineView";
 
-interface PortfolioListProps {
+interface PortfolioViewProps {
   initialViewModel?: PortfolioViewModel;
 }
 
-export function PortfolioList({ initialViewModel }: PortfolioListProps) {
-  const { viewModel, loading, error } = usePortfolioPresenter(initialViewModel);
+export function PortfolioView({ initialViewModel }: PortfolioViewProps) {
+  const [state, actions] = usePortfolioPresenter(initialViewModel);
+  const { viewModel, loading, error, searchTerm, selectedCategory } = state;
+  const { setSearchTerm, setSelectedCategory } = actions;
   const { template } = useTemplateStore();
 
   if (loading && !viewModel) {
@@ -37,11 +39,19 @@ export function PortfolioList({ initialViewModel }: PortfolioListProps) {
 
   if (!viewModel) return null;
 
+  const templateProps = {
+    viewModel,
+    searchTerm,
+    setSearchTerm,
+    selectedCategory,
+    setSelectedCategory,
+  };
+
   return (
     <>
-      {template === "premium" && <PortfolioPremiumView viewModel={viewModel} />}
-      {template === "terminal" && <PortfolioTerminalView viewModel={viewModel} />}
-      {template === "retroTechMagazine" && <PortfolioRetroTechMagazineView viewModel={viewModel} />}
+      {template === "premium" && <PortfolioPremiumView {...templateProps} />}
+      {template === "terminal" && <PortfolioTerminalView {...templateProps} />}
+      {template === "retroTechMagazine" && <PortfolioRetroTechMagazineView {...templateProps} />}
     </>
   );
 }

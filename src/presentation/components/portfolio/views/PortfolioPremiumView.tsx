@@ -1,17 +1,20 @@
 "use client";
 
-import { type Project } from "@/src/data/mock/projects.mock";
+import type { Project } from "@/src/application/repositories/IProjectRepository";
 import type {
   CategoryFilter,
   PortfolioViewModel,
 } from "@/src/presentation/presenters/portfolio/PortfolioPresenter";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 
-interface Props {
+export interface PortfolioTemplateProps {
   viewModel: PortfolioViewModel;
+  searchTerm: string;
+  setSearchTerm: (val: string) => void;
+  selectedCategory: CategoryFilter;
+  setSelectedCategory: (val: CategoryFilter) => void;
 }
 
 const containerVariants: Variants = {
@@ -28,18 +31,15 @@ const itemVariants: Variants = {
   exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
 };
 
-export function PortfolioPremiumView({ viewModel }: Props) {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("All");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredProjects = viewModel.projects.filter((project) => {
-    const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesSearch =
-      searchTerm === "" ||
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+export function PortfolioPremiumView({ 
+  viewModel, 
+  searchTerm, 
+  setSearchTerm, 
+  selectedCategory, 
+  setSelectedCategory 
+}: PortfolioTemplateProps) {
+  // Use projects directly from viewModel, as they are now filtered by the Repository
+  const filteredProjects = viewModel.projects;
 
   return (
     <div className="relative py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 min-h-screen overflow-hidden">
