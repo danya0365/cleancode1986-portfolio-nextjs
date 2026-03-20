@@ -1,4 +1,5 @@
 import type { Service } from "@/src/data/mock/services.mock";
+import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 
 interface Props {
   services: Service[];
@@ -12,11 +13,15 @@ export function RetroServicesSection({ services }: Props) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service, i) => (
-          <div key={i} className={`border-4 border-white p-6 sm:p-8 hover:bg-white hover:text-black transition-colors ${i === 1 ? 'bg-[#FF00FF] text-white border-black' : ''}`}>
+          <RetroCard 
+            key={i} 
+            hoverEffect 
+            className={`p-6 sm:p-8 hover:bg-white hover:text-black transition-colors ${i === 1 ? 'bg-[#FF00FF] text-white' : 'bg-transparent text-white border-white'}`}
+          >
             <div className="text-5xl mb-6">{service.icon}</div>
             <h3 className="text-2xl font-black uppercase mb-4">{service.title}</h3>
             <p className="font-bold text-sm opacity-90">{service.description}</p>
-          </div>
+          </RetroCard>
         ))}
       </div>
     </section>

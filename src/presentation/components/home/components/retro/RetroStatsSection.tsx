@@ -1,4 +1,5 @@
 import type { HomeStats } from "@/src/presentation/presenters/home/HomePresenter";
+import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 
 interface Props {
   stats: HomeStats;
@@ -15,14 +16,14 @@ export function RetroStatsSection({ stats }: Props) {
   return (
     <section className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
       {STATS.map((stat, i) => (
-        <div key={i} className="bg-white border-4 border-black p-6 sm:p-8 flex flex-col items-center justify-center shadow-[6px_6px_0_0_rgba(0,0,0,1)] hover:-translate-y-2 transition-transform">
+        <RetroCard hoverEffect key={i} className="p-6 sm:p-8 flex flex-col items-center justify-center">
           <div className={`text-4xl sm:text-5xl font-black mb-2 ${i % 2 === 0 ? 'text-[#FF00FF]' : 'text-[#00FFFF]'}`}>
             {stat.value}{stat.suffix}
           </div>
           <div className="text-sm font-bold uppercase tracking-widest text-center">
             {stat.label}
           </div>
-        </div>
+        </RetroCard>
       ))}
     </section>
   );

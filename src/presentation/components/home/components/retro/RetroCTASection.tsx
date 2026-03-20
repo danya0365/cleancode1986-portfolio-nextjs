@@ -1,20 +1,22 @@
 import { SITE } from "@/src/data/master/site";
+import { RetroButton } from "@/src/presentation/components/ui/retro/RetroButton";
+import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 
 export function RetroCTASection() {
   return (
-    <section className="bg-[#FF00FF] border-8 border-black p-8 sm:p-16 text-center shadow-[16px_16px_0_0_rgba(0,0,0,1)]">
+    <RetroCard borderSize="lg" shadowSize="lg" className="bg-[#FF00FF] p-8 sm:p-16 text-center">
       <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black text-black uppercase tracking-tighter mb-8 leading-none">
         Ready To <br/>
-        <span className="text-white" style={{ WebkitTextStroke: '2px black' }}>Upgrade</span>?
+        <span className="text-white styling-stroke" style={{ WebkitTextStroke: '2px black' }}>Upgrade</span>?
       </h2>
       <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-        <a href={`mailto:${SITE.contact.email}`} className="bg-white border-4 border-black px-8 py-4 font-black uppercase text-xl hover:bg-black hover:text-white transition-colors shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+        <RetroButton href={`mailto:${SITE.contact.email}`} variant="white">
           Email Us Now
-        </a>
-        <a href={`tel:${SITE.contact.phone}`} className="bg-[#00FFFF] border-4 border-black px-8 py-4 font-black uppercase text-xl hover:bg-black hover:text-[#00FFFF] transition-colors shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+        </RetroButton>
+        <RetroButton href={`tel:${SITE.contact.phone}`} variant="secondary">
           Call Direct
-        </a>
+        </RetroButton>
       </div>
-    </section>
+    </RetroCard>
   );
 }
