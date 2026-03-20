@@ -1,71 +1,100 @@
+"use client";
+
 import Link from "next/link";
 import type { Technology } from "@/src/data/mock/technologies.mock";
+import { motion } from "framer-motion";
+import { DevTerminal } from "./DevTerminal";
 
 interface HeroSectionProps {
   technologies: Technology[];
 }
 
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export function HeroSection({ technologies }: HeroSectionProps) {
   return (
-    <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 py-20 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+    <section className="relative bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20 py-20 md:py-32 overflow-hidden">
+      {/* Decorative Blur Orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/20 dark:bg-blue-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-300/20 dark:bg-purple-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          className="text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+        >
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium mb-8">
-            <span className="mr-2">✨</span>
+          <motion.div variants={fadeUpVariant} className="inline-flex items-center px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur border border-blue-100 dark:border-blue-900/50 text-blue-600 dark:text-blue-400 rounded-full text-sm font-bold mb-8 shadow-sm">
+            <span className="mr-2 animate-pulse">✨</span>
             <span>มืออาชีพ เชื่อถือได้ คุณภาพสูง</span>
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+          <motion.h1 variants={fadeUpVariant} className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
             พัฒนา
-            <span className="text-blue-600 dark:text-blue-400"> เว็บไซต์ </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300"> เว็บไซต์ </span>
             และ
-            <span className="text-blue-600 dark:text-blue-400"> แอปพลิเคชัน</span>
-            <br />
-            ที่ทรงพลังและทันสมัย
-          </h1>
+            <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 dark:from-purple-400 dark:to-pink-300"> แอปพลิเคชัน </span>
+            ที่ทรงพลัง
+          </motion.h1>
 
           {/* Description */}
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
+          <motion.p variants={fadeUpVariant} className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Clean Code 1986 - ทีมนักพัฒนามืออาชีพพร้อมสร้างโซลูชันดิจิทัลที่ตอบโจทย์ธุรกิจของคุณ
             <br />
-            ด้วย Next.js, React, React Native และเทคโนโลยีล่าสุด
-          </p>
+            ด้วยสถาปัตยกรรมระดับโลก เกรดเดียวกับบริษัท Tech ชั้นนำ
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <motion.div variants={fadeUpVariant} className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/portfolio"
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="group relative px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all overflow-hidden"
             >
-              ดูผลงานของเรา
+              <div className="absolute inset-0 w-1/4 h-full bg-white/20 dark:bg-black/10 skew-x-[-20deg] group-hover:translate-x-[400%] transition-transform duration-700 ease-out" />
+              <span className="relative">ดูผลงานของเรา</span>
             </Link>
             <Link
               href="/contact"
-              className="px-8 py-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700"
+              className="px-8 py-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur hover:bg-white dark:hover:bg-gray-800 text-gray-900 dark:text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all border border-gray-200/50 dark:border-gray-700/50"
             >
               รับคำปรึกษา
             </Link>
-          </div>
+          </motion.div>
 
           {/* Tech Stack Icons */}
-          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-              เทคโนโลยีที่เราใช้
+          <motion.div variants={fadeUpVariant} className="mt-16 pt-8">
+            <p className="text-sm font-semibold tracking-widest uppercase text-gray-400 dark:text-gray-500 mb-6">
+              ขับเคลื่อนด้วยเทคโนโลยีอนาคต
             </p>
-            <div className="flex flex-wrap justify-center gap-6 items-center">
+            <div className="flex flex-wrap justify-center gap-4 items-center">
               {technologies.slice(0, 6).map((tech) => (
                 <div
                   key={tech.id}
-                  className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300"
+                  className="px-4 py-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-100 dark:border-gray-700/50 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:scale-105 transition-transform cursor-pointer"
                 >
-                  {tech.icon} {tech.name}
+                  <span className="mr-2">{tech.icon}</span> 
+                  {tech.name}
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+
+          {/* Terminal WOW Factor */}
+          <motion.div variants={fadeUpVariant}>
+            <DevTerminal />
+          </motion.div>
+
+        </motion.div>
       </div>
     </section>
   );
