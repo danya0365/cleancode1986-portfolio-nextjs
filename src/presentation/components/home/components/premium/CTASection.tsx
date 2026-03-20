@@ -1,7 +1,7 @@
 import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
 
-import { XRayWrapper } from "../ui/XRayWrapper";
+import { XRayWrapper } from "@/src/presentation/components/ui/XRayWrapper";
 
 export function CTASection() {
   const codeSnippet = `

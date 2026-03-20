@@ -2,12 +2,10 @@
 
 import type { HomeViewModel } from "@/src/presentation/presenters/home/HomePresenter";
 import { useHomePresenter } from "@/src/presentation/presenters/home/useHomePresenter";
-import { CTASection } from "./CTASection";
-import { FeaturedProjects } from "./FeaturedProjects";
-import { HeroSection } from "./HeroSection";
-import { ServicesPreview } from "./ServicesPreview";
-import { StatsSection } from "./StatsSection";
-import { TestimonialsSection } from "./TestimonialsSection";
+import { useTemplateStore } from "@/src/presentation/store/useTemplateStore";
+import { HomePremiumView } from "./views/HomePremiumView";
+import { HomeTerminalView } from "./views/HomeTerminalView";
+import { HomeRetroTechMagazineView } from "./views/HomeRetroTechMagazineView";
 
 interface HomeViewProps {
   initialViewModel?: HomeViewModel;
@@ -15,6 +13,7 @@ interface HomeViewProps {
 
 export function HomeView({ initialViewModel }: HomeViewProps) {
   const { viewModel, loading, error } = useHomePresenter(initialViewModel);
+  const template = useTemplateStore((state) => state.template);
 
   // Show loading state
   if (loading && !viewModel) {
@@ -57,12 +56,9 @@ export function HomeView({ initialViewModel }: HomeViewProps) {
 
   return (
     <>
-      <HeroSection technologies={viewModel.technologies} />
-      <StatsSection stats={viewModel.stats} />
-      <FeaturedProjects projects={viewModel.featuredProjects} />
-      <ServicesPreview services={viewModel.services} />
-      <TestimonialsSection testimonials={viewModel.testimonials} />
-      <CTASection />
+      {template === "retroTechMagazine" && <HomeRetroTechMagazineView viewModel={viewModel} />}
+      {template === "terminal" && <HomeTerminalView viewModel={viewModel} />}
+      {template === "premium" && <HomePremiumView viewModel={viewModel} />}
     </>
   );
 }

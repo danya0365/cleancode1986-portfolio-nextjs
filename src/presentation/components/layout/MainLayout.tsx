@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useTemplateStore } from "../../store/useTemplateStore";
 import { MainPremiumTemplate } from "./templates/MainPremiumTemplate";
 import { MainTerminalTemplate } from "./templates/MainTerminalTemplate";
+import { MainRetroTechMagazineTemplate } from "./templates/MainRetroTechMagazineTemplate";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -28,6 +29,10 @@ export function MainLayout({ children }: MainLayoutProps) {
   }
 
   // Route to the active template
+  if (template === "retroTechMagazine") {
+    return <MainRetroTechMagazineTemplate>{children}</MainRetroTechMagazineTemplate>;
+  }
+
   if (template === "terminal") {
     return <MainTerminalTemplate>{children}</MainTerminalTemplate>;
   }

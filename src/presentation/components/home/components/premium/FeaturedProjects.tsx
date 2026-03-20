@@ -6,7 +6,7 @@ interface FeaturedProjectsProps {
   projects: Project[];
 }
 
-import { XRayWrapper } from "../ui/XRayWrapper";
+import { XRayWrapper } from "@/src/presentation/components/ui/XRayWrapper";
 
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const codeSnippet = `

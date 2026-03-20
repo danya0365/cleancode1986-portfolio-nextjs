@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type TemplateType = "premium" | "terminal";
+export type TemplateType = "premium" | "terminal" | "retroTechMagazine";
 
 interface TemplateState {
   template: TemplateType;

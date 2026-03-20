@@ -14,7 +14,7 @@ const fadeUpVariant: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-import { XRayWrapper } from "../ui/XRayWrapper";
+import { XRayWrapper } from "@/src/presentation/components/ui/XRayWrapper";
 
 export function HeroSection({ technologies }: HeroSectionProps) {
   const codeSnippet = `

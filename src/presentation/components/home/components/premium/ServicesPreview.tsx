@@ -5,7 +5,7 @@ interface ServicesPreviewProps {
   services: Service[];
 }
 
-import { XRayWrapper } from "../ui/XRayWrapper";
+import { XRayWrapper } from "@/src/presentation/components/ui/XRayWrapper";
 
 export function ServicesPreview({ services }: ServicesPreviewProps) {
   const codeSnippet = `

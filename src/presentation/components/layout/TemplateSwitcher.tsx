@@ -52,6 +52,21 @@ export function TemplateSwitcher() {
             <div className={`text-[10px] ${template === "terminal" ? "text-green-600" : "text-gray-500"}`}>Hacker / Neobrutalism</div>
           </div>
         </button>
+
+        <button
+          onClick={() => { setTemplate("retroTechMagazine"); setIsOpen(false); }}
+          className={`px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-md transition-all shadow-lg border
+            ${template === "retroTechMagazine" 
+              ? "bg-[#f4f4f0] border-black border-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] text-black" 
+              : "bg-white/90 dark:bg-gray-900/90 border-gray-200/50 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-black"
+            }`}
+        >
+          <span className="text-xl">📰</span>
+          <div className="text-left">
+            <div className="font-bold font-sans uppercase tracking-tighter text-sm">Retro Mag</div>
+            <div className={`text-[10px] uppercase font-bold ${template === "retroTechMagazine" ? "text-[#FF00FF]" : "text-gray-500"}`}>Brutalist Editorial</div>
+          </div>
+        </button>
       </div>
 
       {/* Floating Toggle Button */}

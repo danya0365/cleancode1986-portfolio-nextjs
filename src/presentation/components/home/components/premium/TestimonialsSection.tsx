@@ -4,7 +4,7 @@ interface TestimonialsSectionProps {
   testimonials: Testimonial[];
 }
 
-import { XRayWrapper } from "../ui/XRayWrapper";
+import { XRayWrapper } from "@/src/presentation/components/ui/XRayWrapper";
 
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   const codeSnippet = `
