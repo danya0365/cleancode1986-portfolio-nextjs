@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/src/presentation/utils/cn";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   hoverEffect?: boolean;
@@ -29,7 +30,7 @@ export function RetroCard({ children, className = "", hoverEffect = false, shado
   const hoverClasses = hoverEffect ? hoverShadowStyles[shadowSize] : "";
   
   return (
-    <div className={`${baseClasses} ${hoverClasses} ${className}`} {...props}>
+    <div className={cn(baseClasses, hoverClasses, className)} {...props}>
       {children}
     </div>
   );
