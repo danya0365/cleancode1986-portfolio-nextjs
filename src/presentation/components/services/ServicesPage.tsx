@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useServicesPresenter } from "@/src/presentation/presenters/services/useServicesPresenter";
 import type { ServicesViewModel } from "@/src/presentation/presenters/services/ServicesPresenter";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 interface ServicesPageProps {
   initialViewModel?: ServicesViewModel;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
@@ -87,7 +87,7 @@ export function ServicesPage({ initialViewModel }: ServicesPageProps) {
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVariants}
         >
-          {services.map((service, idx) => (
+          {services.map((service) => (
             <motion.div
               key={service.id}
               variants={itemVariants}
