@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
+import { Palette, X } from "lucide-react";
 import type { TemplateType } from "../../../../store/useTemplateStore";
 
 interface Props {
@@ -68,13 +69,12 @@ export function TemplateSwitcherPremiumView({ currentTemplate, setTemplate }: Pr
       {/* Floating Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative flex items-center justify-center px-4 h-12 rounded-full border transition-all duration-300 ease-out shadow-xl backdrop-blur-xl bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-800/50 hover:bg-white dark:hover:bg-black text-gray-800 dark:text-gray-200 hover:border-indigo-500/50"
+        className="relative flex items-center justify-center w-12 h-12 rounded-full border transition-all duration-300 ease-out shadow-xl backdrop-blur-xl bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-800/50 hover:bg-white dark:hover:bg-black hover:border-indigo-500/50 grayscale hover:grayscale-0 text-gray-800 dark:text-gray-200"
         aria-label="Toggle Template Selector"
       >
-        <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-        </svg>
-        <span className="font-bold text-sm">Switch UI Template</span>
+        <span className="transition-transform duration-300 hover:scale-110">
+          {isOpen ? <X className="w-6 h-6" /> : <Palette className="w-6 h-6" />}
+        </span>
       </button>
     </div>
   );

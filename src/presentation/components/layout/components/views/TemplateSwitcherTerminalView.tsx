@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Palette, X } from "lucide-react";
 import type { TemplateType } from "../../../../store/useTemplateStore";
 
 interface Props {
@@ -44,13 +45,10 @@ export function TemplateSwitcherTerminalView({ setTemplate }: Props) {
       {/* Hacker Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-6 h-12 border border-[#39FF14] bg-black/80 text-[#39FF14] font-bold hover:bg-[#39FF14]/20 hover:shadow-[0_0_15px_rgba(57,255,20,0.4)] transition-all flex items-center gap-2 backdrop-blur-sm"
+        className="w-12 h-12 flex items-center justify-center border border-[#39FF14] bg-black/80 text-[#39FF14] hover:bg-[#39FF14]/20 hover:shadow-[0_0_15px_rgba(57,255,20,0.4)] transition-all backdrop-blur-sm grayscale hover:grayscale-0"
         aria-label="Toggle Template Selector"
       >
-        <span>[</span>
-        <span className={isOpen ? "text-white" : ""}>SWITCH_THEME</span>
-        <span>]</span>
-        <span className="animate-pulse font-normal ml-1">_</span>
+        {isOpen ? <X className="w-6 h-6" /> : <Palette className="w-6 h-6" />}
       </button>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Palette, X } from "lucide-react";
 import type { TemplateType } from "../../../../store/useTemplateStore";
 
 interface Props {
@@ -56,11 +57,10 @@ export function TemplateSwitcherRetroTechMagazineView({ setTemplate }: Props) {
       {/* Brutalist Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`px-6 h-14 border-4 border-black font-black uppercase tracking-widest text-lg flex items-center justify-center transition-all bg-[#FF00FF] text-white shadow-[8px_8px_0_0_#000] hover:shadow-[4px_4px_0_0_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2`}
+        className={`w-14 h-14 border-4 border-black flex items-center justify-center transition-all bg-[#FF00FF] text-white shadow-[6px_6px_0_0_#000] hover:shadow-[3px_3px_0_0_#000] hover:translate-x-1 hover:translate-y-1 active:shadow-none active:translate-x-2 active:translate-y-2 grayscale hover:grayscale-0`}
         aria-label="Toggle Template Selector"
       >
-        <span className="mr-3 text-2xl">{isOpen ? "×" : "☻"}</span>
-        THEMES
+        {isOpen ? <X className="w-8 h-8" strokeWidth={3} /> : <Palette className="w-8 h-8" strokeWidth={2.5} />}
       </button>
     </div>
   );

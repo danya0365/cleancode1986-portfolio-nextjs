@@ -1,9 +1,9 @@
 import type { Project } from "@/src/application/repositories/IProjectRepository";
-import Image from "next/image";
-import Link from "next/link";
+import { RetroBadge } from "@/src/presentation/components/ui/retro/RetroBadge";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
-import { RetroBadge } from "@/src/presentation/components/ui/retro/RetroBadge";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   projects: Project[];
@@ -16,7 +16,7 @@ export function RetroFeaturedProjects({ projects }: Props) {
         Featured <span className="text-[#FF00FF]">Projects</span>
       </RetroHeading>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {projects.map((project) => (
           <Link href={`/portfolio/${project.slug}`} key={project.id} className="group block">
             <RetroCard borderSize="lg" shadowSize="lg" hoverEffect className="transition-all overflow-hidden h-full flex flex-col">
