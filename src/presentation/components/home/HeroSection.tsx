@@ -14,9 +14,43 @@ const fadeUpVariant: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+import { XRayWrapper } from "../ui/XRayWrapper";
+
 export function HeroSection({ technologies }: HeroSectionProps) {
+  const codeSnippet = `
+// HeroSection.tsx
+export function HeroSection({ technologies }) {
   return (
-    <section className="relative bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20 py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50">
+      {/* Decorative Blur Orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/20 blur-[100px]" />
+      
+      <motion.div initial="hidden" whileInView="visible" variants={variants}>
+        <motion.h1 className="text-4xl md:text-7xl font-extrabold tracking-tight">
+          พัฒนา<span className="text-transparent bg-clip-text">เว็บไซต์</span>
+          และแอปพลิเคชันที่ทรงพลัง
+        </motion.h1>
+
+        {/* 🚀 Tech Stack */}
+        <div className="flex flex-wrap gap-4 items-center">
+          {technologies.map(tech => (
+            <div className="px-4 py-2 backdrop-blur-sm shadow-sm hover:scale-105">
+              {tech.icon} {tech.name}
+            </div>
+          ))}
+        </div>
+        
+        {/* Terminal Component */}
+        <DevTerminal />
+      </motion.div>
+    </section>
+  );
+}
+`.trim();
+
+  return (
+    <XRayWrapper componentName="HeroSection.tsx" codeSnippet={codeSnippet}>
+      <section className="relative bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20 py-20 md:py-32 overflow-hidden">
       {/* Decorative Blur Orbs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/20 dark:bg-blue-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-300/20 dark:bg-purple-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
@@ -96,6 +130,7 @@ export function HeroSection({ technologies }: HeroSectionProps) {
 
         </motion.div>
       </div>
-    </section>
+      </section>
+    </XRayWrapper>
   );
 }

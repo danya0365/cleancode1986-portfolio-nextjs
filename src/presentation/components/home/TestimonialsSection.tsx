@@ -4,9 +4,46 @@ interface TestimonialsSectionProps {
   testimonials: Testimonial[];
 }
 
+import { XRayWrapper } from "../ui/XRayWrapper";
+
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const codeSnippet = `
+// TestimonialsSection.tsx
+export function TestimonialsSection({ testimonials }) {
   return (
     <section className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-10">
+        {testimonials.map((testimonial) => (
+          {/* Glassmorphism Card */}
+          <div className="group bg-white/70 backdrop-blur-xl rounded-[2.5rem] 
+                          hover:-translate-y-2 transition-all duration-500">
+            {/* Dynamic Stars */}
+            <div className="flex gap-1">
+              {Array.from({ length: testimonial.rating }).map(() => "★")}
+            </div>
+
+            <p className="italic leading-relaxed font-medium">
+              "{testimonial.content}"
+            </p>
+
+            {/* Avatar with Animated Gradient */}
+            <div className="relative w-14 h-14 rounded-full p-0.5 
+                            bg-gradient-to-br from-gray-200 to-gray-300">
+              <div className="bg-white rounded-full flex items-center justify-center">
+                {testimonial.clientName.charAt(0)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+`.trim();
+
+  return (
+    <XRayWrapper componentName="TestimonialsSection.tsx" codeSnippet={codeSnippet}>
+      <section className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="absolute top-40 -left-64 w-[500px] h-[500px] bg-pink-500/10 dark:bg-pink-600/10 blur-[120px] rounded-full" />
@@ -80,6 +117,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
           ))}
         </div>
       </div>
-    </section>
+      </section>
+    </XRayWrapper>
   );
 }

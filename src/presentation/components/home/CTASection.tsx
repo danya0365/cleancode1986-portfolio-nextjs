@@ -1,9 +1,42 @@
 import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
 
+import { XRayWrapper } from "../ui/XRayWrapper";
+
+export function CTASection() {
+  const codeSnippet = `
+// CTASection.tsx
 export function CTASection() {
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden">
+    <section className="relative py-24 sm:py-32 overflow-hidden bg-gray-900">
+      {/* Immersive Background */}
+      <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-10" />
+      <div className="absolute w-[800px] h-[800px] bg-indigo-600/30 blur-[150px]" />
+
+      <div className="relative max-w-5xl mx-auto text-center z-10">
+        <h2 className="text-4xl md:text-6xl font-black text-white drop-shadow-xl">
+          ธุรกิจของคุณพร้อมทะยานสู่จุดสูงสุดแล้วหรือยัง?
+        </h2>
+        
+        {/* Modern Interactive Buttons */}
+        <div className="flex gap-5 justify-center mb-16">
+          <Link href="/contact" className="group bg-white text-gray-900 rounded-2xl 
+                                           hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]">
+            เริ่มปรึกษาโปรเจค →
+          </Link>
+          <Link href="/portfolio" className="bg-white/5 backdrop-blur-xl border-white/20">
+            แวะชมผลงานก่อน
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+`.trim();
+
+  return (
+    <XRayWrapper componentName="CTASection.tsx" codeSnippet={codeSnippet}>
+      <section className="relative py-24 sm:py-32 overflow-hidden">
       {/* Immersive Background */}
       <div className="absolute inset-0 bg-gray-900 dark:bg-black">
         {/* Animated Gradient Orbs */}
@@ -83,6 +116,7 @@ export function CTASection() {
           </a>
         </div>
       </div>
-    </section>
+      </section>
+    </XRayWrapper>
   );
 }
