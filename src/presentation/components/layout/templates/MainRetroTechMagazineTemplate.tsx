@@ -1,6 +1,9 @@
+"use client";
+
 import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export interface Props {
   children: React.ReactNode;
@@ -8,6 +11,7 @@ export interface Props {
 
 export function MainRetroTechMagazineTemplate({ children }: Props) {
   const currentYear = new Date().getFullYear();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div
@@ -25,11 +29,12 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
       }}
     >
       {/* ─── Retro Navbar ─── */}
-      <nav className="border-b-8 border-black bg-white flex flex-row justify-between items-center px-4 sm:px-8 py-3 shrink-0 z-50">
-        <Link href="/" className="text-2xl sm:text-3xl font-black uppercase tracking-tighter hover:text-[#FF00FF] transition-colors">
+      <nav className="border-b-8 border-black bg-white flex flex-row justify-between items-center px-4 sm:px-8 py-3 shrink-0 z-50 relative">
+        <Link href="/" className="text-2xl sm:text-3xl font-black uppercase tracking-tighter hover:text-[#FF00FF] transition-colors z-50">
           {SITE.title}
         </Link>
         
+        {/* Desktop Menu */}
         <div className="hidden md:flex font-bold uppercase text-sm border-4 border-black bg-[#00FFFF] shadow-[4px_4px_0_0_rgba(0,0,0,1)] transform -skew-x-6 z-10">
           <Link href="/portfolio" className="px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center">
             <span className="transform skew-x-6 block">PORTFOLIO</span>
@@ -44,6 +49,49 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
             <span className="transform skew-x-6 block">CONTACT</span>
           </Link>
         </div>
+
+        {/* Mobile Hamburger Button */}
+        <button 
+          className="md:hidden flex items-center justify-center border-4 border-black p-2 bg-[#FF00FF] text-white shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:shadow-none active:translate-y-1 active:translate-x-1 z-50 transition-all"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isMobileMenuOpen ? <X size={24} strokeWidth={3} /> : <Menu size={24} strokeWidth={3} />}
+        </button>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white border-b-8 border-black flex flex-col items-stretch md:hidden z-40 shadow-[0_12px_0_0_rgba(0,0,0,1)] animate-in slide-in-from-top-4 duration-200">
+            <Link 
+              href="/portfolio" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#00FFFF] transition-colors flex justify-between items-center"
+            >
+              PORTFOLIO <span>→</span>
+            </Link>
+            <Link 
+              href="/services" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#FF00FF] hover:text-white transition-colors flex justify-between items-center"
+            >
+              SERVICES <span>→</span>
+            </Link>
+            <Link 
+              href="/about" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#39FF14] transition-colors flex justify-between items-center"
+            >
+              ABOUT <span>→</span>
+            </Link>
+            <Link 
+              href="/contact" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl bg-black text-white hover:bg-gray-800 transition-colors flex justify-between items-center"
+            >
+              CONTACT <span>→</span>
+            </Link>
+          </div>
+        )}
       </nav>
 
       {/* ─── Content Area ─── */}
