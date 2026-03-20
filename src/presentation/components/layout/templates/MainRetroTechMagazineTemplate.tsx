@@ -53,16 +53,16 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
       </main>
 
       {/* ─── Retro Footer ─── */}
-      <footer className="border-t-8 border-black bg-black text-white px-6 py-4 font-bold uppercase text-xs sm:text-sm text-center shrink-0 flex flex-col sm:flex-row justify-between items-center gap-2">
-        <p className="tracking-widest opacity-80">© {currentYear} {SITE.title.toUpperCase()} {"//"} SOFTWARE ENGINEERING</p>
-        <div className="flex items-center gap-2">
-          <span>{"//"}</span>
-          <a 
-            href="mailto:cleancode1986@gmail.com" 
-            className="text-[#39FF14] hover:text-[#FF00FF] hover:-translate-y-0.5 transition-all inline-block underline decoration-2 underline-offset-4"
-          >
-            LET&apos;S WORK TOGETHER
-          </a>
+      <footer className="border-t-8 border-black bg-black text-white px-6 py-6 font-bold uppercase text-xs sm:text-sm shrink-0 flex flex-col items-center gap-4">
+        <div className="flex flex-col lg:flex-row w-full justify-between items-center gap-6">
+          <p className="tracking-widest opacity-80 text-center lg:text-left">
+            © {currentYear} {SITE.title.toUpperCase()} {"//"} SOFTWARE ENGINEERING
+          </p>
+          <div className="flex flex-wrap items-center justify-center lg:justify-end gap-3 sm:gap-4">
+            <Link href="/terms" className="hover:text-[#00FFFF] hover:-translate-y-0.5 transition-all">TERMS OF SERVICE</Link>
+            <span className="opacity-50">{"//"}</span>
+            <Link href="/privacy" className="hover:text-[#FF00FF] hover:-translate-y-0.5 transition-all">PRIVACY POLICY</Link>
+          </div>
         </div>
       </footer>
     </div>
