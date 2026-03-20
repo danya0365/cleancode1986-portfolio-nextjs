@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/src/presentation/utils/cn";
 
 interface Props {
   children: React.ReactNode;
@@ -18,14 +19,14 @@ const colorStyles = {
 export function RetroBadge({ children, className = "", variant = "solid", color = "black" }: Props) {
   if (variant === "skew") {
     return (
-      <div className={`font-black px-4 py-2 border-4 transform -rotate-6 text-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] inline-block w-fit ${colorStyles[color]} ${className}`}>
+      <div className={cn("font-black px-4 py-2 border-4 transform -rotate-6 text-xl shadow-[4px_4px_0_0_rgba(0,0,0,1)] inline-block w-fit", colorStyles[color], className)}>
         {children}
       </div>
     );
   }
 
   return (
-    <div className={`font-black px-3 py-1 text-sm border-2 inline-block w-fit uppercase ${colorStyles[color]} ${className}`}>
+    <div className={cn("font-black px-3 py-1 text-sm border-2 inline-block w-fit uppercase", colorStyles[color], className)}>
       {children}
     </div>
   );

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useXRay } from "../../providers/xray-provider";
+import { cn } from "@/src/presentation/utils/cn";
 
 export function XRayToggle() {
   const { isXRayMode, toggleXRayMode } = useXRay();
@@ -46,11 +47,12 @@ export function XRayToggle() {
         {/* Magical Magnetic Button */}
         <button
           onClick={toggleXRayMode}
-          className={`relative flex items-center justify-center w-14 h-14 rounded-2xl border transition-all duration-300 ease-out shadow-xl backdrop-blur-xl
-            ${isXRayMode 
+          className={cn(
+            "relative flex items-center justify-center w-14 h-14 rounded-2xl border transition-all duration-300 ease-out shadow-xl backdrop-blur-xl",
+            isXRayMode 
               ? "bg-indigo-600/90 border-indigo-400/50 shadow-[0_0_30px_rgba(79,70,229,0.5)] text-white" 
               : "bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-800/50 hover:bg-white dark:hover:bg-black text-gray-800 dark:text-gray-200 hover:border-indigo-500/50"
-            }`}
+          )}
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
           }}

@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { cn } from "@/src/presentation/utils/cn";
 
 interface LightboxProps {
   images: string[];
@@ -119,7 +120,10 @@ export function Lightbox({ images, currentIndex: initialIndex, onClose }: Lightb
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded overflow-hidden border-2 transition-all ${currentIndex === index ? 'border-blue-500 scale-110' : 'border-transparent hover:border-white/50'}`}
+              className={cn(
+                "w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded overflow-hidden border-2 transition-all",
+                currentIndex === index ? 'border-blue-500 scale-110' : 'border-transparent hover:border-white/50'
+              )}
               aria-label={`View image ${index + 1}`}
             >
               <Image

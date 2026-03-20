@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useXRay } from "../../providers/xray-provider";
+import { cn } from "@/src/presentation/utils/cn";
 
 interface XRayWrapperProps {
   children: React.ReactNode;
@@ -18,22 +19,24 @@ export function XRayWrapper({ children, codeSnippet, componentName }: XRayWrappe
 
   return (
     <div 
-      className={`relative rounded-3xl transition-all duration-300 z-10 
-        ${isHovered ? "ring-2 ring-indigo-500/50 shadow-[0_0_40px_rgba(79,70,229,0.2)]" : "ring-1 ring-white/10 dark:ring-white/5"}
-      `}
+      className={cn(
+        "relative rounded-3xl transition-all duration-300 z-10",
+        isHovered ? "ring-2 ring-indigo-500/50 shadow-[0_0_40px_rgba(79,70,229,0.2)]" : "ring-1 ring-white/10 dark:ring-white/5"
+      )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* The original component */}
-      <div className={`transition-all duration-500 ${isHovered ? "opacity-10 blur-md grayscale scale-[0.98]" : "opacity-100"}`}>
+      <div className={cn("transition-all duration-500", isHovered ? "opacity-10 blur-md grayscale scale-[0.98]" : "opacity-100")}>
         {children}
       </div>
 
       {/* The X-Ray Code Reveal Overlay */}
       <div 
-        className={`absolute inset-0 m-4 flex items-center justify-center p-6 bg-gray-900/90 dark:bg-black/90 backdrop-blur-xl rounded-[2rem] border border-gray-800 shadow-2xl overflow-hidden transition-all duration-500 
-          ${isHovered ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-4 invisible"}
-        `}
+        className={cn(
+          "absolute inset-0 m-4 flex items-center justify-center p-6 bg-gray-900/90 dark:bg-black/90 backdrop-blur-xl rounded-[2rem] border border-gray-800 shadow-2xl overflow-hidden transition-all duration-500",
+          isHovered ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-4 invisible"
+        )}
       >
         <div className="absolute top-4 left-6 flex items-center space-x-2">
           <div className="w-3 h-3 rounded-full bg-red-500/80"></div>

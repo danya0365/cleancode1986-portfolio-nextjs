@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { cn } from "@/src/presentation/utils/cn";
 
 type ColorVariant = "primary" | "secondary" | "accent" | "white";
 
@@ -17,7 +18,11 @@ const colorStyles: Record<ColorVariant, string> = {
 };
 
 export function RetroButton({ href, variant = "primary", className = "", children, ...props }: Props) {
-  const baseClasses = `border-4 border-black px-8 py-4 font-black uppercase text-xl text-center hover:bg-black transition-colors shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[0px_0px_0_0_rgba(0,0,0,1)] active:scale-95 ${colorStyles[variant]} ${className}`;
+  const baseClasses = cn(
+    "border-4 border-black px-8 py-4 font-black uppercase text-xl text-center hover:bg-black transition-colors shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[0px_0px_0_0_rgba(0,0,0,1)] active:scale-95",
+    colorStyles[variant],
+    className
+  );
   
   if (href) {
     // If it's an external link (tel, mailto, http) use normal <a>

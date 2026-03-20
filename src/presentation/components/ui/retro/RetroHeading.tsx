@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/src/presentation/utils/cn";
 
 type HeadingColor = "white" | "cyan" | "magenta" | "lime" | "transparent";
 
@@ -22,7 +23,13 @@ export function RetroHeading({ children, bg = "white", className = "", withStrok
   
   return (
     <h2 
-      className={`text-4xl md:text-6xl font-black uppercase inline-block w-fit ${bgStyles[bg]} ${borderClasses} ${withStroke ? "text-white styling-stroke" : "text-black"} ${className}`}
+      className={cn(
+        "text-4xl md:text-6xl font-black uppercase inline-block w-fit",
+        bgStyles[bg],
+        borderClasses,
+        withStroke ? "text-white styling-stroke" : "text-black",
+        className
+      )}
       style={withStroke ? { WebkitTextStroke: '2px black' } : undefined}
     >
       {children}
