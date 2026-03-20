@@ -179,7 +179,7 @@ export function AIChatBubble() {
                 <p className="ai-chat__welcome-text">
                   ผม Clean Assistant เลขาส่วนตัวของ Clean Code 1986 ครับ
                   <br />
-                  ยินดีช่วยเหลือเรื่องบริการ โปรเจค หรือข้อมูลอื่นๆ ครับ
+                  ทีมงานจะรีบเข้ามาตอบกลับโดยเร็วที่สุด ระหว่างนี้มีอะไรให้ผมช่วยดูแลเบื้องต้นไหมครับ?
                 </p>
                 <div className="ai-chat__suggestions">
                   <button

@@ -169,7 +169,7 @@ export function getSimpleResponse(message: string): string | null {
 
   // Greetings
   if (/^(สวัสดี|หวัดดี|hi|hello|hey)/i.test(lowerMessage)) {
-    return `สวัสดีครับ! 👋 ผม Clean Assistant เลขาส่วนตัวของ ${ctx.company.name} ครับ ยินดีช่วยเหลือครับ มีอะไรให้ช่วยไหมครับ?`;
+    return `สวัสดีครับ! 👋 ผม Clean Assistant เลขาส่วนตัวของ ${ctx.company.name} ครับ ขณะนี้ผมได้แจ้งทีมงานแล้ว แอดมินจะรีบเข้ามาตอบกลับโดยเร็วที่สุดครับ ระหว่างนี้มีอะไรให้ผมช่วยดูแลเบื้องต้นไหมครับ?`;
   }
 
   // Company info

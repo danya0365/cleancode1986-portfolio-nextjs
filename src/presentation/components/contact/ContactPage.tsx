@@ -52,7 +52,7 @@ export function ContactPage({ initialViewModel }: ContactPageProps) {
     submitContactForm,
   } = useContactPresenter(initialViewModel);
 
-  const { openChat } = useChatStore();
+  const { openChat, registerCustomer, sendMessage } = useChatStore();
 
   const {
     register,
@@ -64,8 +64,24 @@ export function ContactPage({ initialViewModel }: ContactPageProps) {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    // 1. Submit through regular form handler (optional fallback)
     await submitContactForm(data);
-    if (submitStatus?.success) {
+
+    // 2. Register customer seamlessly via chat
+    const contactIdentifier = data.phone || data.email;
+    const registered = await registerCustomer(data.name, contactIdentifier);
+
+    if (registered) {
+      // 3. Draft the combined message from the form fields
+      const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${data.projectType}\n` +
+                          (data.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${data.budget}\n` : '') +
+                          `รายละเอียดเพิ่มเติม:\n${data.message}`;
+
+      // 4. Send the drafted message and open the chat bubble
+      openChat();
+      await sendMessage(chatContext);
+
+      // 5. Clear the form
       reset();
     }
   };
@@ -329,9 +345,10 @@ export function ContactPage({ initialViewModel }: ContactPageProps) {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 disabled:bg-gray-400 dark:disabled:bg-gray-600 font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:from-gray-400 disabled:to-gray-500 font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
                 >
-                  {submitting ? "กำลังส่งข้อมูลเข้าระบบ..." : "ส่งข้อมูลติดต่อ"}
+                  <MessageCircle className="w-5 h-5" />
+                  {submitting ? "กำลังนำข้อมูลเข้าระบบ..." : "ส่งรายละเอียดและเริ่มแชทเลย"}
                 </button>
 
                 {/* Status Messages */}
