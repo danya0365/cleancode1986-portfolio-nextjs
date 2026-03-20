@@ -33,6 +33,9 @@ export interface SiteConfig {
     github?: string;
     youtube?: string;
   };
+  templateSwitch: {
+    onboardingType: "boot" | "spotlight" | "glitch" | "mascot" | "none";
+  };
 }
 
 export const SITE: SiteConfig = {
@@ -59,5 +62,8 @@ export const SITE: SiteConfig = {
   },
   social: {
     facebook: "https://www.facebook.com/people/CleanCode1986/61580733796921/",
+  },
+  templateSwitch: {
+    onboardingType: "mascot", // default to mascot testing
   },
 };

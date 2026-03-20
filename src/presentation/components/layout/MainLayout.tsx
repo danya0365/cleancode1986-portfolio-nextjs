@@ -5,6 +5,7 @@ import { useTemplateStore } from "../../store/useTemplateStore";
 import { MainPremiumTemplate } from "./templates/MainPremiumTemplate";
 import { MainTerminalTemplate } from "./templates/MainTerminalTemplate";
 import { MainRetroTechMagazineTemplate } from "./templates/MainRetroTechMagazineTemplate";
+import { TemplateOnboarding } from "./components/onboarding/TemplateOnboarding";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -28,15 +29,22 @@ export function MainLayout({ children }: MainLayoutProps) {
     return <MainPremiumTemplate>{children}</MainPremiumTemplate>;
   }
 
-  // Route to the active template
-  if (template === "retroTechMagazine") {
-    return <MainRetroTechMagazineTemplate>{children}</MainRetroTechMagazineTemplate>;
-  }
+  const renderTemplate = () => {
+    if (template === "retroTechMagazine") {
+      return <MainRetroTechMagazineTemplate>{children}</MainRetroTechMagazineTemplate>;
+    }
 
-  if (template === "terminal") {
-    return <MainTerminalTemplate>{children}</MainTerminalTemplate>;
-  }
+    if (template === "terminal") {
+      return <MainTerminalTemplate>{children}</MainTerminalTemplate>;
+    }
 
-  // Default to Premium Template
-  return <MainPremiumTemplate>{children}</MainPremiumTemplate>;
+    return <MainPremiumTemplate>{children}</MainPremiumTemplate>;
+  };
+
+  return (
+    <>
+      <TemplateOnboarding />
+      {renderTemplate()}
+    </>
+  );
 }
