@@ -47,7 +47,7 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
       </nav>
 
       {/* ─── Content Area ─── */}
-      <main className="flex-1 overflow-x-hidden relative flex flex-col">
+      <main className="flex-1 overflow-x-hidden relative flex flex-col container mx-auto">
         {/* Pass through children, which will be the route components (e.g. HomeView) */}
         {children}
       </main>
