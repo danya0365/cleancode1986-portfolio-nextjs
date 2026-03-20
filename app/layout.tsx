@@ -89,7 +89,7 @@ export const metadata: Metadata = {
 
 import { XRayProvider } from "@/src/presentation/providers/xray-provider";
 import { XRayToggle } from "@/src/presentation/components/ui/XRayToggle";
-import { TemplateSwitcher } from "@/src/presentation/components/layout/TemplateSwitcher";
+import { TemplateSwitcher } from "@/src/presentation/components/layout/components/TemplateSwitcher";
 
 export default function RootLayout({
   children,

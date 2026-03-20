@@ -1,19 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useTemplateStore } from "../../store/useTemplateStore";
+import React, { useState } from "react";
+import type { TemplateType } from "../../../../store/useTemplateStore";
 
-export function TemplateSwitcher() {
-  const template = useTemplateStore((state) => state.template);
-  const setTemplate = useTemplateStore((state) => state.setTemplate);
-  const [mounted, setMounted] = useState(false);
+interface Props {
+  currentTemplate: TemplateType;
+  setTemplate: (template: TemplateType) => void;
+}
+
+export function TemplateSwitcherPremiumView({ currentTemplate, setTemplate }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <div className="fixed bottom-6 left-6 z-[100] sm:bottom-10 sm:left-10 flex flex-col items-start">
@@ -26,7 +22,7 @@ export function TemplateSwitcher() {
         <button
           onClick={() => { setTemplate("premium"); setIsOpen(false); }}
           className={`px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-md transition-all shadow-lg border
-            ${template === "premium" 
+            ${currentTemplate === "premium" 
               ? "bg-indigo-600 border-indigo-500 text-white" 
               : "bg-white/90 dark:bg-gray-900/90 border-gray-200/50 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-black"
             }`}
@@ -34,14 +30,14 @@ export function TemplateSwitcher() {
           <span className="text-xl">✨</span>
           <div className="text-left">
             <div className="font-bold text-sm">Premium UI</div>
-            <div className={`text-[10px] ${template === "premium" ? "text-indigo-200" : "text-gray-500"}`}>Glassmorphism & Smooth</div>
+            <div className={`text-[10px] ${currentTemplate === "premium" ? "text-indigo-200" : "text-gray-500"}`}>Glassmorphism & Smooth</div>
           </div>
         </button>
 
         <button
           onClick={() => { setTemplate("terminal"); setIsOpen(false); }}
           className={`px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-md transition-all shadow-lg border
-            ${template === "terminal" 
+            ${currentTemplate === "terminal" 
               ? "bg-[#0f0f0f] border-green-500 text-green-400" 
               : "bg-white/90 dark:bg-gray-900/90 border-gray-200/50 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-black"
             }`}
@@ -49,14 +45,14 @@ export function TemplateSwitcher() {
           <span className="text-xl">💻</span>
           <div className="text-left">
             <div className="font-bold font-mono text-sm">Terminal UI</div>
-            <div className={`text-[10px] ${template === "terminal" ? "text-green-600" : "text-gray-500"}`}>Hacker / Neobrutalism</div>
+            <div className={`text-[10px] ${currentTemplate === "terminal" ? "text-green-600" : "text-gray-500"}`}>Hacker / Neobrutalism</div>
           </div>
         </button>
 
         <button
           onClick={() => { setTemplate("retroTechMagazine"); setIsOpen(false); }}
           className={`px-4 py-3 rounded-xl flex items-center gap-3 backdrop-blur-md transition-all shadow-lg border
-            ${template === "retroTechMagazine" 
+            ${currentTemplate === "retroTechMagazine" 
               ? "bg-[#f4f4f0] border-black border-4 shadow-[4px_4px_0_0_rgba(0,0,0,1)] text-black" 
               : "bg-white/90 dark:bg-gray-900/90 border-gray-200/50 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-black"
             }`}
@@ -64,7 +60,7 @@ export function TemplateSwitcher() {
           <span className="text-xl">📰</span>
           <div className="text-left">
             <div className="font-bold font-sans uppercase tracking-tighter text-sm">Retro Mag</div>
-            <div className={`text-[10px] uppercase font-bold ${template === "retroTechMagazine" ? "text-[#FF00FF]" : "text-gray-500"}`}>Brutalist Editorial</div>
+            <div className={`text-[10px] uppercase font-bold ${currentTemplate === "retroTechMagazine" ? "text-[#FF00FF]" : "text-gray-500"}`}>Brutalist Editorial</div>
           </div>
         </button>
       </div>
