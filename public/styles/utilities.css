@@ -14,4 +14,10 @@
     padding-top: 0.15em;
     padding-bottom: 0.2em;
   }
+
+  /* Aggressive CSS filter to turn standard components into Terminal hacker UI */
+  .terminal-content-filter {
+    /* Grayscale it mostly, invert it if we want dark background internally, color it green */
+    filter: invert(1) hue-rotate(180deg) grayscale(0.5) sepia(1) hue-rotate(60deg) saturate(3) brightness(0.9) contrast(1.5);
+  }
 }

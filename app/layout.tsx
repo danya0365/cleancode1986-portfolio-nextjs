@@ -89,6 +89,7 @@ export const metadata: Metadata = {
 
 import { XRayProvider } from "@/src/presentation/providers/xray-provider";
 import { XRayToggle } from "@/src/presentation/components/ui/XRayToggle";
+import { TemplateSwitcher } from "@/src/presentation/components/layout/TemplateSwitcher";
 
 export default function RootLayout({
   children,
@@ -102,6 +103,7 @@ export default function RootLayout({
           <XRayProvider>
             {children}
             <XRayToggle />
+            <TemplateSwitcher />
           </XRayProvider>
         </ThemeProvider>
       </body>
