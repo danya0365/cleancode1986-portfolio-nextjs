@@ -20,7 +20,7 @@ export interface KnowledgeContext {
     email: string;
     phone: string;
     address: string;
-    socialLinks: Record<string, string>;
+    socialLinks?: Record<string, string | undefined>;
   };
   services: Array<{
     title: string;

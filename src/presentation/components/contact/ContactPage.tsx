@@ -312,48 +312,50 @@ export function ContactPage({ initialViewModel }: ContactPageProps) {
             </div>
 
             {/* Social Media */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-                ติดตามเรา
-              </h3>
-              <div className="space-y-3">
-                {[
-                  {
-                    icon: "📘",
-                    name: "Facebook",
-                    url: SITE.social.facebook,
-                  },
-                  {
-                    icon: "🐦",
-                    name: "Twitter",
-                    url: SITE.social.twitter,
-                  },
-                  {
-                    icon: "🐙",
-                    name: "GitHub",
-                    url: SITE.social.github,
-                  },
-                  {
-                    icon: "💼",
-                    name: "LinkedIn",
-                    url: SITE.social.linkedin,
-                  },
-                ].map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                  >
-                    <span className="text-2xl mr-3">{social.icon}</span>
-                    <span className="text-gray-900 dark:text-white">
-                      {social.name}
-                    </span>
-                  </a>
-                ))}
+            {SITE.social && Object.values(SITE.social).some(Boolean) && (
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+                  ติดตามเรา
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    {
+                      icon: "📘",
+                      name: "Facebook",
+                      url: SITE.social.facebook,
+                    },
+                    {
+                      icon: "🐦",
+                      name: "Twitter",
+                      url: SITE.social.twitter,
+                    },
+                    {
+                      icon: "🐙",
+                      name: "GitHub",
+                      url: SITE.social.github,
+                    },
+                    {
+                      icon: "💼",
+                      name: "LinkedIn",
+                      url: SITE.social.linkedin,
+                    },
+                  ].filter((social) => Boolean(social.url)).map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                    >
+                      <span className="text-2xl mr-3">{social.icon}</span>
+                      <span className="text-gray-900 dark:text-white">
+                        {social.name}
+                      </span>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Business Hours */}
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg p-8 text-white">

@@ -18,11 +18,11 @@ const SERVICES_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { href: SITE.social.facebook, label: "Facebook", icon: "📘" },
-  { href: SITE.social.twitter, label: "Twitter", icon: "🐦" },
-  { href: SITE.social.github, label: "GitHub", icon: "🐙" },
-  { href: SITE.social.linkedin, label: "LinkedIn", icon: "💼" },
-];
+  { href: SITE.social?.facebook, label: "Facebook", icon: "📘" },
+  { href: SITE.social?.twitter, label: "Twitter", icon: "🐦" },
+  { href: SITE.social?.github, label: "GitHub", icon: "🐙" },
+  { href: SITE.social?.linkedin, label: "LinkedIn", icon: "💼" },
+].filter((link) => Boolean(link.href));
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -126,28 +126,30 @@ export function Footer() {
           </div>
 
           {/* Social Links */}
-          <div>
-            <h3 className="text-lg text-gray-900 dark:text-white font-bold mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
-              ติดตามเรา
-            </h3>
-            <div className="flex flex-col space-y-3">
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 w-fit"
-                >
-                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm group-hover:border-blue-500 dark:group-hover:border-blue-400 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
-                    <span className="text-lg group-hover:scale-110 transition-transform duration-300">{link.icon}</span>
-                  </span>
-                  <span className="font-medium group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
-                </a>
-              ))}
+          {SOCIAL_LINKS.length > 0 && (
+            <div>
+              <h3 className="text-lg text-gray-900 dark:text-white font-bold mb-6 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
+                ติดตามเรา
+              </h3>
+              <div className="flex flex-col space-y-3">
+                {SOCIAL_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 w-fit"
+                  >
+                    <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm group-hover:border-blue-500 dark:group-hover:border-blue-400 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                      <span className="text-lg group-hover:scale-110 transition-transform duration-300">{link.icon}</span>
+                    </span>
+                    <span className="font-medium group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Bottom Bar */}
