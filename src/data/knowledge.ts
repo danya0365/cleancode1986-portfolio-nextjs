@@ -191,7 +191,7 @@ export function getSimpleResponse(message: string): string | null {
 
   // Contact
   if (/ติดต่อ|contact|อีเมล|email|โทร|phone/i.test(lowerMessage)) {
-    return `สามารถติดต่อเราได้ที่:\n📧 ${ctx.company.email}\n📞 ${ctx.company.phone}\nหรือกรอกฟอร์มที่หน้า Contact ครับ`;
+    return `สามารถรับคำปรึกษาได้ที่:\n📧 ${ctx.company.email}\n📞 ${ctx.company.phone}\nหรือกรอกฟอร์มที่หน้า Contact ครับ`;
   }
 
   // Team
@@ -209,7 +209,7 @@ export function getSimpleResponse(message: string): string | null {
   // Pricing
   if (/ราคา|price|cost|เท่าไหร่/i.test(lowerMessage)) {
     const webPrice = ctx.services.find((s) => s.title.includes("เว็บ"))?.pricing;
-    return `ราคาขึ้นอยู่กับขอบเขตงานครับ เช่น พัฒนาเว็บไซต์ ${webPrice} แนะนำให้ติดต่อเราโดยตรงเพื่อประเมินราคาที่แม่นยำครับ`;
+    return `ราคาขึ้นอยู่กับขอบเขตงานครับ เช่น พัฒนาเว็บไซต์ ${webPrice} แนะนำให้รับคำปรึกษาโดยตรงเพื่อประเมินราคาที่แม่นยำครับ`;
   }
 
   return null;

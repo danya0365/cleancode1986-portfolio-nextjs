@@ -55,7 +55,7 @@ export default function PrivacyPage() {
                 </h2>
                 <p className="mb-2">เราอาจเก็บรวบรวมข้อมูลส่วนบุคคลของคุณ ดังต่อไปนี้:</p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong>ข้อมูลระบุตัวตน:</strong> เช่น ชื่อ นามสกุล อีเมล เบอร์โทรศัพท์ (เมื่อคุณติดต่อเรา)</li>
+                  <li><strong>ข้อมูลระบุตัวตน:</strong> เช่น ชื่อ นามสกุล อีเมล เบอร์โทรศัพท์ (เมื่อคุณรับคำปรึกษา)</li>
                   <li><strong>ข้อมูลทางเทคนิค:</strong> เช่น หมายเลข IP, ชนิดของเบราว์เซอร์, เวลาที่เข้าชมเว็บไซต์ และพฤติกรรมการใช้งาน</li>
                   <li><strong>ข้อมูลการใช้งาน:</strong> เช่น ข้อมูลที่เกี่ยวกับการใช้งานเว็บไซต์และการโต้ตอบต่างๆ กับระบบของเรา</li>
                 </ul>
@@ -97,10 +97,10 @@ export default function PrivacyPage() {
 
               <section className="pt-6 mt-8 border-t border-gray-100 dark:border-gray-800">
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  ติดต่อเรา
+                  รับคำปรึกษา
                 </h2>
                 <p>
-                  หากคุณมีคำถามหรือข้อสงสัยใดๆ เกี่ยวกับนโยบายความเป็นส่วนตัวนี้ สามารถติดต่อเราได้ที่:
+                  หากคุณมีคำถามหรือข้อสงสัยใดๆ เกี่ยวกับนโยบายความเป็นส่วนตัวนี้ สามารถรับคำปรึกษาได้ที่:
                 </p>
                 <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl space-y-2 text-sm md:text-base">
                   <p><strong>อีเมล:</strong> {SITE.contact.email}</p>

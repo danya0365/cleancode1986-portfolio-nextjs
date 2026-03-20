@@ -338,7 +338,7 @@ export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
                 href="/contact"
                 className="block w-full text-center px-6 py-3 bg-white hover:bg-gray-100 text-blue-600 font-medium rounded-lg transition-colors"
               >
-                ติดต่อเรา
+                รับคำปรึกษา
               </Link>
             </div>
           </div>

@@ -193,7 +193,7 @@ export function ServicesPage({ initialViewModel }: ServicesPageProps) {
               href="/contact"
               className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-medium rounded-lg transition-colors"
             >
-              ติดต่อเราเลย
+              รับคำปรึกษาเลย
             </Link>
             <Link
               href="/portfolio"

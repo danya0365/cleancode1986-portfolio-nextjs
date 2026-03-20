@@ -198,7 +198,7 @@ export function AIChatBubble() {
                     onClick={() => sendMessage("ติดต่อได้อย่างไร?")}
                     className="ai-chat__suggestion-btn"
                   >
-                    📞 ติดต่อเรา
+                    📞 รับคำปรึกษา
                   </button>
                 </div>
               </div>

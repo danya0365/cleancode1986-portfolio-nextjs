@@ -317,7 +317,7 @@ export function AboutPage({ initialViewModel }: AboutPageProps) {
               href="/contact"
               className="inline-block px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-medium rounded-lg transition-colors"
             >
-              ติดต่อเรา
+              รับคำปรึกษา
             </Link>
           </div>
         )}

@@ -22,7 +22,7 @@ export const HERO = {
       href: "/portfolio",
     },
     secondary: {
-      text: "ติดต่อเรา",
+      text: "รับคำปรึกษา",
       href: "/contact",
     },
   },

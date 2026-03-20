@@ -7,7 +7,7 @@ const QUICK_LINKS = [
   { href: "/portfolio", label: "ผลงาน" },
   { href: "/services", label: "บริการ" },
   { href: "/about", label: "เกี่ยวกับเรา" },
-  { href: "/contact", label: "ติดต่อเรา" },
+  { href: "/contact", label: "รับคำปรึกษา" },
 ];
 
 const SERVICES_LINKS = [

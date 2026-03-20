@@ -45,7 +45,7 @@ export function HeroSection({ technologies }: HeroSectionProps) {
               href="/contact"
               className="px-8 py-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700"
             >
-              ติดต่อเรา
+              รับคำปรึกษา
             </Link>
           </div>
 

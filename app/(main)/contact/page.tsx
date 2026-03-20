@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch (error) {
     console.error("Error generating metadata:", error);
     return {
-      title: "ติดต่อเรา | Clean Code 1986",
+      title: "รับคำปรึกษา | Clean Code 1986",
       description: "ติดต่อ Clean Code 1986",
     };
   }

@@ -65,7 +65,7 @@ export class ContactPresenter {
    */
   async generateMetadata() {
     return {
-      title: `ติดต่อเรา | ${SITE.company.name}`,
+      title: `รับคำปรึกษา | ${SITE.company.name}`,
       description:
         `ติดต่อ ${SITE.company.name} - ปรึกษาฟรี! พร้อมให้บริการพัฒนาซอฟต์แวร์`,
     };
