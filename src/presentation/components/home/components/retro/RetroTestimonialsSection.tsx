@@ -1,4 +1,4 @@
-import type { Testimonial } from "@/src/data/mock/testimonials.mock";
+import type { Testimonial } from "@/src/application/repositories/ITestimonialRepository";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
 

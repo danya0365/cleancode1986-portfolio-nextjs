@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { Technology } from "@/src/data/mock/technologies.mock";
+import type { Technology } from "@/src/application/repositories/ITechnologyRepository";
 import { motion, type Variants } from "framer-motion";
 import { DevTerminal } from "./DevTerminal";
 

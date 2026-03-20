@@ -1,13 +1,13 @@
 import { HomeView } from "@/src/presentation/components/home/HomeView";
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
-import { HomePresenterFactory } from "@/src/presentation/presenters/home/HomePresenter";
+import { createServerHomePresenter } from "@/src/presentation/presenters/home/HomePresenterServerFactory";
 import type { Metadata } from "next";
 
 /**
  * Generate metadata for the home page
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const presenter = await HomePresenterFactory.createServer();
+  const presenter = createServerHomePresenter();
 
   try {
     return await presenter.generateMetadata();
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * Uses presenter pattern following Clean Architecture
  */
 export default async function Home() {
-  const presenter = await HomePresenterFactory.createServer();
+  const presenter = createServerHomePresenter();
 
   try {
     // Get view model from presenter

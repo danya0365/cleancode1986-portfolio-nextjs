@@ -1,4 +1,4 @@
-import type { Testimonial } from "@/src/data/mock/testimonials.mock";
+import type { Testimonial } from "@/src/application/repositories/ITestimonialRepository";
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];

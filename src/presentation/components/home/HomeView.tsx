@@ -12,8 +12,9 @@ interface HomeViewProps {
 }
 
 export function HomeView({ initialViewModel }: HomeViewProps) {
-  const { viewModel, loading, error } = useHomePresenter(initialViewModel);
-  const template = useTemplateStore((state) => state.template);
+  const [state, actions] = useHomePresenter(initialViewModel);
+  const { viewModel, loading, error } = state;
+  const template = useTemplateStore((globalState) => globalState.template);
 
   // Show loading state
   if (loading && !viewModel) {

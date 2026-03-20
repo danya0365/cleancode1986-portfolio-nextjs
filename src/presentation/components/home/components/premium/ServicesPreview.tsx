@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Service } from "@/src/data/mock/services.mock";
+import type { Service } from "@/src/application/repositories/IServiceRepository";
 
 interface ServicesPreviewProps {
   services: Service[];

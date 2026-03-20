@@ -1,4 +1,4 @@
-import type { Service } from "@/src/data/mock/services.mock";
+import type { Service } from "@/src/application/repositories/IServiceRepository";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 
 interface Props {

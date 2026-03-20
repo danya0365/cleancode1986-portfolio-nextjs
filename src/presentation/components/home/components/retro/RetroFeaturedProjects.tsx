@@ -1,4 +1,4 @@
-import type { Project } from "@/src/data/mock/projects.mock";
+import type { Project } from "@/src/application/repositories/IProjectRepository";
 import Image from "next/image";
 import Link from "next/link";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";

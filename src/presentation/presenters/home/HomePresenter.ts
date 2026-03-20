@@ -1,15 +1,14 @@
 import { SITE } from "@/src/data/master/site";
-import { getFeaturedProjects, type Project } from "@/src/data/mock/projects.mock";
-import { getActiveServices, type Service } from "@/src/data/mock/services.mock";
-import { getAllActiveTechnologies, type Technology } from "@/src/data/mock/technologies.mock";
-import { MOCK_TESTIMONIALS, type Testimonial } from "@/src/data/mock/testimonials.mock";
+import { IProjectRepository, Project } from "@/src/application/repositories/IProjectRepository";
+import { IServiceRepository, Service } from "@/src/application/repositories/IServiceRepository";
+import { ITechnologyRepository, Technology } from "@/src/application/repositories/ITechnologyRepository";
+import { ITestimonialRepository, Testimonial } from "@/src/application/repositories/ITestimonialRepository";
 
-export interface HomeStats {
-  totalProjects: number;
-  totalClients: number;
-  yearsExperience: number;
-  teamMembers: number;
-}
+
+
+import { IHomeStatsRepository, HomeStats } from "@/src/application/repositories/IHomeStatsRepository";
+
+export type { HomeStats };
 
 export interface HomeViewModel {
   stats: HomeStats;
@@ -24,30 +23,40 @@ export interface HomeViewModel {
  * Follows Clean Architecture with proper separation of concerns
  */
 export class HomePresenter {
+  constructor(
+    private readonly projectRepository: IProjectRepository,
+    private readonly serviceRepository: IServiceRepository,
+    private readonly technologyRepository: ITechnologyRepository,
+    private readonly testimonialRepository: ITestimonialRepository,
+    private readonly homeStatsRepository: IHomeStatsRepository
+  ) {}
+
   /**
    * Get view model for the home page
    */
   async getViewModel(): Promise<HomeViewModel> {
     try {
-      // Get data from mock (ในอนาคตจะเปลี่ยนเป็น API calls)
-      const featuredProjects = getFeaturedProjects();
-      const services = getActiveServices().slice(0, 6);
-      const testimonials = MOCK_TESTIMONIALS.filter((t) => t.isFeatured);
-      const technologies = getAllActiveTechnologies();
-
-      const stats: HomeStats = {
-        totalProjects: 50,
-        totalClients: 40,
-        yearsExperience: 5,
-        teamMembers: 10,
-      };
+      // Get data from repositories using full-option queries, moving pagination and filtering to the data access layer
+      const [
+        featuredProjectsResult,
+        servicesResult,
+        testimonialsResult,
+        technologiesResult,
+        stats
+      ] = await Promise.all([
+        this.projectRepository.query({ filters: { isFeatured: true }, perPage: 3 }),
+        this.serviceRepository.query({ filters: { isActive: true }, perPage: 6 }),
+        this.testimonialRepository.query({ filters: { isFeatured: true }, perPage: 0 }), // 0 means unlimited
+        this.technologyRepository.query({ filters: { isActive: true }, perPage: 0 }),
+        this.homeStatsRepository.getStats()
+      ]);
 
       return {
         stats,
-        featuredProjects: featuredProjects.slice(0, 3),
-        services,
-        testimonials,
-        technologies,
+        featuredProjects: featuredProjectsResult.data,
+        services: servicesResult.data,
+        testimonials: testimonialsResult.data,
+        technologies: technologiesResult.data,
       };
     } catch (error) {
       console.error("Error loading home data:", error);
@@ -83,15 +92,3 @@ export class HomePresenter {
   }
 }
 
-/**
- * Factory for creating HomePresenter instances
- */
-export class HomePresenterFactory {
-  static async createServer(): Promise<HomePresenter> {
-    return new HomePresenter();
-  }
-
-  static async createClient(): Promise<HomePresenter> {
-    return new HomePresenter();
-  }
-}

@@ -1,22 +1,44 @@
-import { useEffect, useState, useCallback } from "react";
-import { HomeViewModel, HomePresenterFactory } from "./HomePresenter";
+"use client";
 
-export interface HomePresenterHook {
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { HomeViewModel, HomePresenter } from "./HomePresenter";
+import { createClientHomePresenter } from "./HomePresenterClientFactory";
+
+export interface HomePresenterState {
   viewModel: HomeViewModel | null;
   loading: boolean;
   error: string | null;
-  refreshData: () => Promise<void>;
+}
+
+export interface HomePresenterActions {
+  loadData: () => Promise<void>;
+  setError: (error: string | null) => void;
 }
 
 /**
  * Custom hook for Home presenter
- * Provides state management for home page
+ * Provides state management and actions for the Home page
+ * Follows Clean Architecture Pattern 3A
  */
 export function useHomePresenter(
-  initialViewModel: HomeViewModel | null = null
-): HomePresenterHook {
+  initialViewModel?: HomeViewModel,
+  presenterOverride?: HomePresenter
+): [HomePresenterState, HomePresenterActions] {
+  // ✅ Create presenter inside hook with useMemo
+  // Accept override for easier testing (Dependency Injection)
+  const presenter = useMemo(
+    () => presenterOverride ?? createClientHomePresenter(),
+    [presenterOverride]
+  );
+  
+  // ✅ Track mounted state for memory leak protection
+  const isMountedRef = useRef(true);
+  
+  // ✅ AbortController ref for canceling ongoing requests
+  const abortControllerRef = useRef<AbortController | null>(null);
+
   const [viewModel, setViewModel] = useState<HomeViewModel | null>(
-    initialViewModel
+    initialViewModel || null
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
@@ -25,55 +47,59 @@ export function useHomePresenter(
    * Load data from presenter
    */
   const loadData = useCallback(async () => {
-    if (initialViewModel) {
-      // If we have initial data, don't load again
-      return;
-    }
+    // ✅ Cancel any previous pending request
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
 
     setLoading(true);
     setError(null);
 
     try {
-      const presenter = await HomePresenterFactory.createClient();
-      const data = await presenter.getViewModel();
-      setViewModel(data);
+      const newViewModel = await presenter.getViewModel();
+      if (isMountedRef.current) {
+        setViewModel(newViewModel);
+      }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      setError(errorMessage);
-      console.error("Error loading home data:", err);
+      // ✅ Ignore abort errors
+      if (err instanceof Error && err.name === 'AbortError') return;
+      
+      if (isMountedRef.current) {
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        setError(errorMessage);
+        console.error("Error loading home data:", err);
+      }
     } finally {
-      setLoading(false);
+      if (isMountedRef.current) {
+        setLoading(false);
+      }
     }
-  }, [initialViewModel]);
+  }, [presenter]);
 
-  /**
-   * Refresh data (force reload)
-   */
-  const refreshData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const presenter = await HomePresenterFactory.createClient();
-      const data = await presenter.getViewModel();
-      setViewModel(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error";
-      setError(errorMessage);
-      console.error("Error refreshing home data:", err);
-    } finally {
-      setLoading(false);
+  // Load data on mount if no initial data
+  useEffect(() => {
+    if (!initialViewModel) {
+      loadData();
     }
+  }, [loadData, initialViewModel]);
+
+  // ✅ Cleanup on unmount
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+    };
   }, []);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
-
-  return {
-    viewModel,
-    loading,
-    error,
-    refreshData,
-  };
+  return [
+    {
+      viewModel,
+      loading,
+      error,
+    },
+    {
+      loadData,
+      setError,
+    },
+  ];
 }
