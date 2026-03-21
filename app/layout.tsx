@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Noto_Sans_Thai } from "next/font/google";
+import { Noto_Sans_Thai, JetBrains_Mono } from "next/font/google";
 import "../public/styles/index.css";
 
 const notoSansThai = Noto_Sans_Thai({
   subsets: ["latin", "thai"],
   variable: "--font-noto-sans-thai",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -96,7 +102,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" className={notoSansThai.variable} suppressHydrationWarning>
+    <html lang="th" className={`${notoSansThai.variable} ${jetBrainsMono.variable}`} suppressHydrationWarning>
       <body className={`${notoSansThai.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <XRayProvider>

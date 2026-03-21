@@ -41,7 +41,7 @@ export function MainTerminalTemplate({ children }: Props) {
           <p>Executing primary payload...</p>
         </div>
 
-        <div className="terminal-content-filter pb-20">
+        <div className="pb-20">
           {children}
         </div>
       </main>

@@ -3,7 +3,7 @@
   /* Custom Font Variables */
   --font-sans: var(--font-noto-sans-thai), system-ui, -apple-system,
     sans-serif;
-  --font-mono: system-ui, -apple-system,
+  --font-mono: var(--font-jetbrains-mono), system-ui, -apple-system,
     monospace;
   --font-noto-sans-thai: var(--font-noto-sans-thai), system-ui, sans-serif;
 

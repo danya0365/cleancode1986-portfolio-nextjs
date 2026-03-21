@@ -1,15 +1,51 @@
+"use client";
+
 import type { HomeViewModel } from "@/src/presentation/presenters/home/HomePresenter";
-import { HomePremiumView } from "./HomePremiumView";
+import { TerminalHero } from "./TerminalHero";
+import { TerminalProjects } from "./TerminalProjects";
+import { TerminalServices } from "./TerminalServices";
+import { TerminalSkills } from "./TerminalSkills";
 
 interface Props {
   viewModel: HomeViewModel;
 }
 
-/**
- * For the Terminal view, we re-use the Premium structure but rely on the 
- * MainTerminalTemplate's aggressive CSS filter (.terminal-content-filter)
- * to radically transform the UI into a hacker theme without duplicate code.
- */
 export function HomeTerminalView({ viewModel }: Props) {
-  return <HomePremiumView viewModel={viewModel} />;
+  return (
+    <div className="bg-gray-950 min-h-screen text-green-500 font-mono p-4 sm:p-8 md:p-12 overflow-x-hidden">
+      <div className="max-w-4xl mx-auto flex flex-col gap-8">
+        {/* Boot Sequence / Header */}
+        <div className="mb-8 border-b border-green-900 pb-4">
+          <pre className="text-xs sm:text-sm text-green-600 mb-2 whitespace-pre-wrap">
+{`   _____ _                  _____          _      __  ___  ___  __ 
+  / ____| |                / ____|        | |    /_ |/ _ \\/ _ \\/ / 
+ | |    | | ___  __ _ _ __| |     ___   __| | ___ | | (_) | (_) | '_ \\ 
+ | |    | |/ _ \\/ _\` | '__| |    / _ \\ / _\` |/ _ \\| |\\__, |> _ <| (_) |
+ | |____| |  __/ (_| | |  | |___| (_) | (_| |  __/| |  / /| (_) |\\__, |
+  \\_____|_|\\___|\\__,_|_|   \\_____\\___/ \\__,_|\\___||_| /_/  \\___/  /_/  `}
+          </pre>
+          <p className="text-green-700 text-sm">Clean Code 1986 OS (v1.0.0)</p>
+          <p className="text-green-700 text-sm">Login: {new Date().toLocaleString()}</p>
+        </div>
+
+        {/* Hero Section */}
+        <TerminalHero stats={viewModel.stats} />
+
+        {/* Skills Section */}
+        <TerminalSkills technologies={viewModel.technologies} />
+
+        {/* Projects Section */}
+        <TerminalProjects projects={viewModel.featuredProjects} />
+
+        {/* Services Section */}
+        <TerminalServices services={viewModel.services} />
+        
+        {/* Blinking Cursor at the end */}
+        <div className="flex items-center text-sm sm:text-base mt-8">
+          <span className="text-green-500 font-bold mr-2">guest@cleancode1986:~$</span>
+          <span className="w-3 h-5 bg-green-500 animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
 }
