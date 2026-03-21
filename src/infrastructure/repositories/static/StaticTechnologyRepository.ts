@@ -56,12 +56,7 @@ export class StaticTechnologyRepository implements ITechnologyRepository {
       .sort((a, b) => a.sortOrder - b.sortOrder);
   }
 
-  async getByCategory(category: Technology["category"]): Promise<Technology[]> {
-    await this.delay(100);
-    return this.items
-      .filter((item) => item.category === category && item.isActive)
-      .sort((a, b) => a.sortOrder - b.sortOrder);
-  }
+
 
   async getStats(): Promise<TechnologyStats> {
     await this.delay(100);

@@ -72,15 +72,4 @@ export class ContactPresenter {
   }
 }
 
-/**
- * Factory for creating ContactPresenter instances
- */
-export class ContactPresenterFactory {
-  static async createServer(): Promise<ContactPresenter> {
-    return new ContactPresenter();
-  }
 
-  static async createClient(): Promise<ContactPresenter> {
-    return new ContactPresenter();
-  }
-}

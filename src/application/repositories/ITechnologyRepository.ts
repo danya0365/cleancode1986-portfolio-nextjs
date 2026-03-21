@@ -34,6 +34,6 @@ export interface ITechnologyRepository {
   getAll(): Promise<Technology[]>;
   query(params: QueryParams<TechnologyFilterParams>): Promise<PaginatedResult<Technology>>;
   getActive(): Promise<Technology[]>;
-  getByCategory(category: Technology["category"]): Promise<Technology[]>;
+
   getStats(): Promise<TechnologyStats>;
 }

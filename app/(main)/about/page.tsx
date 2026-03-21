@@ -1,4 +1,4 @@
-import { AboutPage } from "@/src/presentation/components/about/AboutPage";
+import { AboutView } from "@/src/presentation/components/about/AboutView";
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
 import { createServerAboutPresenter } from "@/src/presentation/presenters/about/AboutPresenterServerFactory";
 import type { Metadata } from "next";
@@ -33,14 +33,14 @@ export default async function About() {
 
     return (
       <MainLayout>
-        <AboutPage initialViewModel={viewModel} />
+        <AboutView initialViewModel={viewModel} />
       </MainLayout>
     );
   } catch (error) {
     console.error("Error fetching about data:", error);
     return (
       <MainLayout>
-        <AboutPage />
+        <AboutView />
       </MainLayout>
     );
   }

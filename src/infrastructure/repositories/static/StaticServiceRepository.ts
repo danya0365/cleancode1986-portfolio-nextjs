@@ -57,12 +57,7 @@ export class StaticServiceRepository implements IServiceRepository {
       .sort((a, b) => a.sortOrder - b.sortOrder);
   }
 
-  async getByCategory(category: string): Promise<Service[]> {
-    await this.delay(100);
-    return this.items
-      .filter((item) => item.category === category)
-      .sort((a, b) => a.sortOrder - b.sortOrder);
-  }
+
 
   async getStats(): Promise<ServiceStats> {
     await this.delay(100);

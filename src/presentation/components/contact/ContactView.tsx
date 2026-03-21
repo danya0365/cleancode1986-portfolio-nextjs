@@ -7,20 +7,23 @@ import { ContactPremiumView } from "./views/ContactPremiumView";
 import { ContactTerminalView } from "./views/ContactTerminalView";
 import { ContactRetroTechMagazineView } from "./views/ContactRetroTechMagazineView";
 
-interface ContactPageProps {
+interface ContactViewProps {
   initialViewModel?: ContactViewModel;
 }
 
-export function ContactPage({ initialViewModel }: ContactPageProps) {
+export function ContactView({ initialViewModel }: ContactViewProps) {
+  const [state, actions] = useContactPresenter(initialViewModel);
+  const { template } = useTemplateStore();
+
   const {
     viewModel,
     loading,
     error,
     submitting,
     submitStatus,
-    submitContactForm,
-  } = useContactPresenter(initialViewModel);
-  const { template } = useTemplateStore();
+  } = state;
+
+  const { submitContactForm } = actions;
 
   if (loading && !viewModel) {
     return (

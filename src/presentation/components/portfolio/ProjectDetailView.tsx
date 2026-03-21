@@ -8,17 +8,16 @@ import { ProjectDetailPremiumView } from "./views/ProjectDetailPremiumView";
 import { ProjectDetailTerminalView } from "./views/ProjectDetailTerminalView";
 import { ProjectDetailRetroTechMagazineView } from "./views/ProjectDetailRetroTechMagazineView";
 
-interface ProjectDetailProps {
+interface ProjectDetailViewProps {
   slug: string;
   initialViewModel?: ProjectDetailViewModel;
 }
 
-export function ProjectDetail({ slug, initialViewModel }: ProjectDetailProps) {
-  const { viewModel, loading, error } = useProjectDetailPresenter(
-    slug,
-    initialViewModel
-  );
+export function ProjectDetailView({ slug, initialViewModel }: ProjectDetailViewProps) {
+  const [state, actions] = useProjectDetailPresenter(slug, initialViewModel);
   const { template } = useTemplateStore();
+
+  const { viewModel, loading, error } = state;
 
   // Loading state
   if (loading && !viewModel) {

@@ -7,13 +7,15 @@ import { AboutPremiumView } from "./views/AboutPremiumView";
 import { AboutTerminalView } from "./views/AboutTerminalView";
 import { AboutRetroTechMagazineView } from "./views/AboutRetroTechMagazineView";
 
-interface AboutPageProps {
+interface AboutViewProps {
   initialViewModel?: AboutViewModel;
 }
 
-export function AboutPage({ initialViewModel }: AboutPageProps) {
-  const { viewModel, loading, error } = useAboutPresenter(initialViewModel);
+export function AboutView({ initialViewModel }: AboutViewProps) {
+  const [state, actions] = useAboutPresenter(initialViewModel);
   const { template } = useTemplateStore();
+
+  const { viewModel, loading, error } = state;
 
   if (loading && !viewModel) {
     return (

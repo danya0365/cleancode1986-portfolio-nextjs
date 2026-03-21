@@ -65,12 +65,7 @@ export class StaticProjectRepository implements IProjectRepository {
       .sort((a, b) => a.displayOrder - b.displayOrder);
   }
 
-  async getByCategory(category: Project["category"]): Promise<Project[]> {
-    await this.delay(100);
-    return this.items
-      .filter((item) => item.category === category)
-      .sort((a, b) => a.displayOrder - b.displayOrder);
-  }
+
 
   async getCleanCodeProjects(): Promise<Project[]> {
     await this.delay(100);

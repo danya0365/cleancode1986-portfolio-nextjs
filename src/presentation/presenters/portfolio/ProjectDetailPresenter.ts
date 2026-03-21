@@ -1,4 +1,4 @@
-import { getProjectBySlug, PROJECTS, type Project } from "@/src/data/mock/projects.mock";
+import type { IProjectRepository, Project } from "@/src/application/repositories/IProjectRepository";
 
 export interface ProjectDetailViewModel {
   project: Project;
@@ -7,25 +7,30 @@ export interface ProjectDetailViewModel {
 
 /**
  * Presenter for Project Detail page
+ * Following Clean Architecture Domain pattern
  */
 export class ProjectDetailPresenter {
+  constructor(private readonly repository: IProjectRepository) {}
+
   /**
    * Get view model for project detail
    */
   async getViewModel(slug: string): Promise<ProjectDetailViewModel> {
     try {
-      const project = getProjectBySlug(slug);
+      const project = await this.repository.getBySlug(slug);
 
       if (!project) {
-        throw new Error("Project not found");
+        throw new Error(`Project with slug ${slug} not found`);
       }
 
       // Get related projects (same category, excluding current)
-      const relatedProjects = PROJECTS.filter(
-        (p) =>
-          p.id !== project.id &&
-          p.category === project.category
-      ).slice(0, 3);
+      const queryResult = await this.repository.query({
+        filters: { category: project.category },
+      });
+      
+      const relatedProjects = queryResult.data
+        .filter((p) => p.id !== project.id)
+        .slice(0, 3);
 
       return {
         project,
@@ -42,7 +47,7 @@ export class ProjectDetailPresenter {
    */
   async generateMetadata(slug: string) {
     try {
-      const project = getProjectBySlug(slug);
+      const project = await this.repository.getBySlug(slug);
 
       if (!project) {
         return {
@@ -62,18 +67,5 @@ export class ProjectDetailPresenter {
         description: "รายละเอียดโปรเจค",
       };
     }
-  }
-}
-
-/**
- * Factory for creating ProjectDetailPresenter instances
- */
-export class ProjectDetailPresenterFactory {
-  static async createServer(): Promise<ProjectDetailPresenter> {
-    return new ProjectDetailPresenter();
-  }
-
-  static async createClient(): Promise<ProjectDetailPresenter> {
-    return new ProjectDetailPresenter();
   }
 }

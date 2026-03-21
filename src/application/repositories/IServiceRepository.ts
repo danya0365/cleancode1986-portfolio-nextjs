@@ -35,6 +35,6 @@ export interface IServiceRepository {
   getAll(): Promise<Service[]>;
   query(params: QueryParams<ServiceFilterParams>): Promise<PaginatedResult<Service>>;
   getActive(): Promise<Service[]>;
-  getByCategory(category: string): Promise<Service[]>;
+
   getStats(): Promise<ServiceStats>;
 }

@@ -74,10 +74,7 @@ export interface IProjectRepository {
    */
   getFeatured(): Promise<Project[]>;
 
-  /**
-   * Get projects by category
-   */
-  getByCategory(category: Project["category"]): Promise<Project[]>;
+
 
   /**
    * Get purely clean code projects
