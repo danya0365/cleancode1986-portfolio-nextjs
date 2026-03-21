@@ -1,13 +1,13 @@
 import { MainLayout } from "@/src/presentation/components/layout/MainLayout";
-import { ServicesPage } from "@/src/presentation/components/services/ServicesPage";
-import { ServicesPresenterFactory } from "@/src/presentation/presenters/services/ServicesPresenter";
+import { ServicesView } from "@/src/presentation/components/services/ServicesView";
+import { createServerServicesPresenter } from "@/src/presentation/presenters/services/ServicesPresenterServerFactory";
 import type { Metadata } from "next";
 
 /**
  * Generate metadata for services page
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const presenter = await ServicesPresenterFactory.createServer();
+  const presenter = createServerServicesPresenter();
 
   try {
     return await presenter.generateMetadata();
@@ -24,21 +24,21 @@ export async function generateMetadata(): Promise<Metadata> {
  * Services page - Server Component for SEO optimization
  */
 export default async function Services() {
-  const presenter = await ServicesPresenterFactory.createServer();
+  const presenter = createServerServicesPresenter();
 
   try {
     const viewModel = await presenter.getViewModel();
 
     return (
       <MainLayout>
-        <ServicesPage initialViewModel={viewModel} />
+        <ServicesView initialViewModel={viewModel} />
       </MainLayout>
     );
   } catch (error) {
     console.error("Error fetching services data:", error);
     return (
       <MainLayout>
-        <ServicesPage />
+        <ServicesView />
       </MainLayout>
     );
   }

@@ -7,13 +7,15 @@ import { ServicesPremiumView } from "./views/ServicesPremiumView";
 import { ServicesTerminalView } from "./views/ServicesTerminalView";
 import { ServicesRetroTechMagazineView } from "./views/ServicesRetroTechMagazineView";
 
-interface ServicesPageProps {
+interface ServicesViewProps {
   initialViewModel?: ServicesViewModel;
 }
 
-export function ServicesPage({ initialViewModel }: ServicesPageProps) {
-  const { viewModel, loading, error } = useServicesPresenter(initialViewModel);
+export function ServicesView({ initialViewModel }: ServicesViewProps) {
+  const [state, actions] = useServicesPresenter(initialViewModel);
   const { template } = useTemplateStore();
+
+  const { viewModel, loading, error } = state;
 
   // Loading state
   if (loading && !viewModel) {
