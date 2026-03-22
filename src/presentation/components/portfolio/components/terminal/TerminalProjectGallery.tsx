@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import { TerminalImage } from "@/src/presentation/components/ui/terminal/TerminalImage";
 import { Project } from "@/src/application/repositories/IProjectRepository";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 
@@ -20,11 +20,10 @@ export function TerminalProjectGallery({ project }: Props) {
               <span>[Type: IMAGE]</span>
             </div>
             <div className="relative w-full aspect-video bg-gray-900 border border-green-900/50">
-              <Image
+              <TerminalImage
                 src={imgUrl}
                 alt={`${project.title} screenshot ${index + 1}`}
-                fill
-                className="object-cover opacity-80 mix-blend-screen"
+                fallbackText="IMG_ERR"
               />
             </div>
           </div>

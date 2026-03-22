@@ -55,6 +55,10 @@ export function MainTerminalTemplate({ children }: Props) {
           <span>CPU: 3%</span>
           <span>NET: UP</span>
         </div>
+        <div className="mt-4 flex justify-center gap-6 text-[10px] md:text-xs">
+          <Link href="/terms" className="hover:text-white hover:underline">[TERMS_OF_SERVICE]</Link>
+          <Link href="/privacy" className="hover:text-white hover:underline">[PRIVACY_POLICY]</Link>
+        </div>
       </footer>
     </div>
   );

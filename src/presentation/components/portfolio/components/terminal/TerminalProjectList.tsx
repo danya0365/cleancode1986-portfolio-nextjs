@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { TerminalImage } from "@/src/presentation/components/ui/terminal/TerminalImage";
 import { Project } from "@/src/application/repositories/IProjectRepository";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 
@@ -22,18 +22,12 @@ export function TerminalProjectList({ projects }: Props) {
             return (
               <div key={project.id} className="border border-green-900 bg-black/50 p-4">
                 <div className="flex gap-4 items-start sm:items-center border-b border-green-900/50 pb-4 mb-4">
-                  <div className="shrink-0 w-24 h-20 sm:w-32 sm:h-24 relative border border-green-500 bg-gray-900 overflow-hidden">
-                    {displayImage ? (
-                      <Image 
-                        src={displayImage} 
-                        alt={project.title}
-                        fill
-                        className="object-cover mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-green-700 font-bold text-xs text-center px-2">NO_IMG</div>
-                    )}
-                    <div className="absolute inset-0 bg-green-500/10 pointer-events-none"></div>
+                  <div className="shrink-0 w-24 h-20 sm:w-32 sm:h-24 border border-green-500 relative">
+                    <TerminalImage 
+                      src={displayImage} 
+                      alt={project.title} 
+                      fallbackText={displayImage ? "IMG_ERR" : "NO_IMG"}
+                    />
                   </div>
                   
                   <div className="flex-1">

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ProjectDetailViewModel } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
-import Image from "next/image";
+import { PremiumImage } from "../../ui/premium/PremiumImage";
 import Link from "next/link";
 import { useState } from "react";
 import { Lightbox } from "../../ui/Lightbox";
@@ -164,38 +164,20 @@ export function ProjectDetailPremiumView({ viewModel }: Props) {
 
           {/* Hero Image */}
           <div className="relative h-96 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-blue-400 to-purple-500">
-            {project.thumbnail ? (
-              <>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-9xl opacity-50">
-                    {project.category === "Web" && "💻"}
-                    {project.category === "Mobile" && "📱"}
-                    {project.category === "UI/UX" && "🎨"}
-                    {project.category === "Full-stack" && "🚀"}
-                  </div>
-                </div>
-                <Image
-                  src={project.thumbnail}
-                  alt={`${project.title} thumbnail`}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                  }}
-                />
-              </>
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
+            <PremiumImage 
+              src={project.thumbnail} 
+              alt={`${project.title} thumbnail`} 
+              className="w-full h-full"
+              fallbackIcon={
                 <div className="text-9xl opacity-50">
                   {project.category === "Web" && "💻"}
                   {project.category === "Mobile" && "📱"}
                   {project.category === "UI/UX" && "🎨"}
                   {project.category === "Full-stack" && "🚀"}
+                  {!["Web", "Mobile", "UI/UX", "Full-stack"].includes(project.category) && "📁"}
                 </div>
-              </div>
-            )}
+              }
+            />
           </div>
         </div>
 
@@ -232,23 +214,13 @@ export function ProjectDetailPremiumView({ viewModel }: Props) {
                     <div
                       key={index}
                       onClick={() => handleImageClick(index)}
-                      className="h-48 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center"
+                      className="h-48 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-300 to-purple-400 flex items-center justify-center cursor-zoom-in"
                     >
-                      <div className="absolute inset-0 flex items-center justify-center text-4xl text-white transition-opacity">
-                        <span className="bg-black/50 p-2 rounded-full">📸</span>
-                      </div>
-                      <Image
-                        src={image}
+                      <PremiumImage 
+                        src={image} 
                         alt={`${project.title} screenshot ${index + 1}`}
-                        fill
-                        className="object-cover w-full h-full rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-zoom-in hover:opacity-90"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        onError={(
-                          e: React.SyntheticEvent<HTMLImageElement>
-                        ) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                        }}
+                        fallbackIcon={<span className="bg-black/50 p-2 rounded-full text-white text-4xl">📸</span>}
+                        className="w-full h-full hover:opacity-90"
                       />
                     </div>
                   ))}
@@ -305,41 +277,21 @@ export function ProjectDetailPremiumView({ viewModel }: Props) {
                   href={`/portfolio/${relatedProject.slug}`}
                   className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all"
                 >
-                  <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-6xl relative">
-                    {relatedProject.thumbnail ? (
-                      <>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-9xl opacity-50">
-                            {relatedProject.category === "Web" && "💻"}
-                            {relatedProject.category === "Mobile" && "📱"}
-                            {relatedProject.category === "UI/UX" && "🎨"}
-                            {relatedProject.category === "Full-stack" && "🚀"}
-                          </div>
-                        </div>
-                        <Image
-                          src={relatedProject.thumbnail}
-                          alt={`${relatedProject.title} thumbnail`}
-                          fill
-                          className="object-cover object-center"
-                          priority
-                          onError={(
-                            e: React.SyntheticEvent<HTMLImageElement>
-                          ) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = "none";
-                          }}
-                        />
-                      </>
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 overflow-hidden relative">
+                    <PremiumImage 
+                      src={relatedProject.thumbnail}
+                      alt={`${relatedProject.title} thumbnail`}
+                      className="w-full h-full group-hover:scale-105 transition-transform duration-500"
+                      fallbackIcon={
                         <div className="text-9xl opacity-50">
                           {relatedProject.category === "Web" && "💻"}
                           {relatedProject.category === "Mobile" && "📱"}
                           {relatedProject.category === "UI/UX" && "🎨"}
                           {relatedProject.category === "Full-stack" && "🚀"}
+                          {!["Web", "Mobile", "UI/UX", "Full-stack"].includes(relatedProject.category) && "📁"}
                         </div>
-                      </div>
-                    )}
+                      }
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

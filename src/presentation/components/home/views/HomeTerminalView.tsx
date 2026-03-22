@@ -1,10 +1,10 @@
 "use client";
 
 import type { HomeViewModel } from "@/src/presentation/presenters/home/HomePresenter";
-import { TerminalHero } from "./TerminalHero";
-import { TerminalProjects } from "./TerminalProjects";
-import { TerminalServices } from "./TerminalServices";
-import { TerminalSkills } from "./TerminalSkills";
+import { TerminalHero } from "../components/terminal/TerminalHero";
+import { TerminalProjects } from "../components/terminal/TerminalProjects";
+import { TerminalServices } from "../components/terminal/TerminalServices";
+import { TerminalSkills } from "../components/terminal/TerminalSkills";
 
 interface Props {
   viewModel: HomeViewModel;

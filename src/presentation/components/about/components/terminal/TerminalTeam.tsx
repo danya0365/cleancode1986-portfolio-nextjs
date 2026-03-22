@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { TeamMember } from "@/src/application/repositories/ITeamMemberRepository";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
-import Image from 'next/image';
+import { TerminalImage } from "@/src/presentation/components/ui/terminal/TerminalImage";
 
 interface Props {
   members: TeamMember[];
@@ -17,18 +17,12 @@ export function TerminalTeam({ members }: Props) {
         {members.map((member) => (
           <div key={member.id} className="border border-green-900 bg-black/50 p-4">
             <div className="flex gap-4 items-start sm:items-center border-b border-green-900/50 pb-4 mb-4">
-              <div className="shrink-0 w-16 h-16 sm:w-24 sm:h-24 relative border border-green-500 bg-gray-900 overflow-hidden">
-                {member.avatar ? (
-                  <Image 
-                    src={member.avatar} 
-                    alt={member.name}
-                    fill
-                    className="object-cover mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-green-700 font-bold text-2xl">?</div>
-                )}
-                <div className="absolute inset-0 bg-green-500/10 pointer-events-none"></div>
+              <div className="shrink-0 w-16 h-16 sm:w-24 sm:h-24 border border-green-500 relative">
+                <TerminalImage 
+                  src={member.avatar} 
+                  alt={member.name} 
+                  fallbackText={member.avatar ? "?" : "?"}
+                />
               </div>
               
               <div className="flex-1">

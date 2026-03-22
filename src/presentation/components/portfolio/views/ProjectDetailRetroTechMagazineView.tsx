@@ -1,7 +1,7 @@
 "use client";
 
 import type { ProjectDetailViewModel } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
-import Image from "next/image";
+import { RetroImage } from "../../ui/retro/RetroImage";
 import Link from "next/link";
 import { useState } from "react";
 import { Lightbox } from "../../ui/Lightbox";
@@ -119,25 +119,16 @@ export function ProjectDetailRetroTechMagazineView({ viewModel }: Props) {
 
       {/* HERO IMAGE */}
       <div className="w-full relative border-8 border-black shadow-[16px_16px_0_0_rgba(0,0,0,1)] bg-white h-[60vh] min-h-[400px]">
-        {project.thumbnail ? (
-          <Image
-            src={project.thumbnail}
-            alt={`${project.title} thumbnail`}
-            fill
-            className="object-cover object-center"
-            priority
-            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-              const target = e.target as HTMLImageElement;
-              target.style.display = "none";
-            }}
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]">
-            <span className="text-9xl grayscale opacity-50">
+        <RetroImage 
+          src={project.thumbnail} 
+          alt={`${project.title} thumbnail`} 
+          className="w-full h-full"
+          fallbackIcon={
+            <span className="text-9xl">
               {project.category === "Web" ? "💻" : project.category === "Mobile" ? "📱" : project.category === "UI/UX" ? "🎨" : "🚀"}
             </span>
-          </div>
-        )}
+          }
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-12">
@@ -178,19 +169,14 @@ export function ProjectDetailRetroTechMagazineView({ viewModel }: Props) {
                     onClick={() => handleImageClick(index)}
                     className="relative pb-[75%] border-8 border-black bg-white cursor-pointer hover:shadow-[12px_12px_0_0_#FF00FF] hover:-translate-y-2 hover:-translate-x-2 transition-all duration-300 group overflow-hidden"
                   >
-                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                         <span className="text-6xl text-white transform scale-50 group-hover:scale-100 transition-transform">🔍</span>
                      </div>
-                     <Image
-                        src={image}
+                     <RetroImage 
+                        src={image} 
                         alt={`${project.title} screenshot ${index + 1}`}
-                        fill
-                        className="object-cover absolute inset-0"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                        }}
+                        className="absolute inset-0 w-full h-full"
+                        fallbackIcon={<span className="text-6xl">📸</span>}
                      />
                   </div>
                 ))}
@@ -243,23 +229,17 @@ export function ProjectDetailRetroTechMagazineView({ viewModel }: Props) {
                 >
                   <RetroCard hoverEffect shadowSize="md" className="bg-white flex flex-col h-full border-4 group-hover:bg-yellow-200 transition-colors duration-300">
                      <div className="relative pb-[60%] border-b-4 border-black bg-gray-200 overflow-hidden">
-                       {related.thumbnail ? (
-                         <Image
-                           src={related.thumbnail}
-                           alt={related.title}
-                           fill
-                           className="object-cover group-hover:scale-105 transition-transform duration-500"
-                           onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                             const target = e.target as HTMLImageElement;
-                             target.style.display = "none";
-                           }}
-                         />
-                       ) : (
-                         <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-50 grayscale">
-                           {related.category === "Web" ? "💻" : related.category === "Mobile" ? "📱" : related.category === "UI/UX" ? "🎨" : "🚀"}
-                         </div>
-                       )}
-                       <div className="absolute top-4 left-4">
+                       <RetroImage 
+                          src={related.thumbnail} 
+                          alt={related.title} 
+                          className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500"
+                          fallbackIcon={
+                            <span className="text-6xl">
+                              {related.category === "Web" ? "💻" : related.category === "Mobile" ? "📱" : related.category === "UI/UX" ? "🎨" : "🚀"}
+                            </span>
+                          }
+                       />
+                       <div className="absolute top-4 left-4 z-20">
                          <RetroBadge color="lime" className="text-xs shadow-[2px_2px_0_0_#000]">{related.category}</RetroBadge>
                        </div>
                      </div>
