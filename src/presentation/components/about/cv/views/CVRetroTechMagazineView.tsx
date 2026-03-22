@@ -8,6 +8,13 @@ import { FC, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
 import { RetroBadge } from "@/src/presentation/components/ui/retro/RetroBadge";
+import { Noto_Sans_Thai } from "next/font/google";
+
+const notoSansThaiPrint = Noto_Sans_Thai({
+  subsets: ["latin", "thai"],
+  variable: "--font-noto-print",
+  display: "swap",
+});
 
 interface CVRetroTechMagazineViewProps {
   viewModel: TeamMemberCVViewModel;
@@ -29,9 +36,11 @@ export const CVRetroTechMagazineView: FC<CVRetroTechMagazineViewProps> = ({ view
         body {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+          background-color: white !important;
         }
         * {
           box-shadow: none !important;
+          font-family: var(--font-noto-print), monospace, sans-serif !important;
         }
       }
     `,
@@ -60,7 +69,7 @@ export const CVRetroTechMagazineView: FC<CVRetroTechMagazineViewProps> = ({ view
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 px-4">
-        <div ref={contentRef} className="print-container">
+        <div ref={contentRef} className={`print-container ${notoSansThaiPrint.variable}`}>
           
           {/* Brutalist Header Area */}
           <div className="bg-white border-8 border-black shadow-[16px_16px_0_0_#000] relative overflow-hidden mb-16">

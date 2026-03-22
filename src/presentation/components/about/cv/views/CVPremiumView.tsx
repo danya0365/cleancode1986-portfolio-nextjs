@@ -6,6 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import { Noto_Sans_Thai } from "next/font/google";
+
+const notoSansThaiPrint = Noto_Sans_Thai({
+  subsets: ["latin", "thai"],
+  variable: "--font-noto-print",
+  display: "swap",
+});
 
 interface CVPremiumViewProps {
   viewModel: TeamMemberCVViewModel;
@@ -27,10 +34,12 @@ export const CVPremiumView: FC<CVPremiumViewProps> = ({ viewModel }) => {
         body {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+          background-color: white !important;
         }
         /* Hide shadows and optimize for print */
         * {
           box-shadow: none !important;
+          font-family: var(--font-noto-print), ui-sans-serif, system-ui, sans-serif !important;
         }
       }
     `,
@@ -60,7 +69,7 @@ export const CVPremiumView: FC<CVPremiumViewProps> = ({ viewModel }) => {
         </div>
 
         {/* Printable Content Area */}
-        <div ref={contentRef} className="print-container">
+        <div ref={contentRef} className={`print-container ${notoSansThaiPrint.variable}`}>
           {/* Header Section */}
           <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden mb-8 border border-gray-100 dark:border-gray-700">
           <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-900/40 dark:to-purple-900/40 p-8 md:p-12">
