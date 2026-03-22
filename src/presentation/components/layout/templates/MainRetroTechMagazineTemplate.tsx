@@ -4,6 +4,7 @@ import { SITE } from "@/src/data/master/site";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export interface Props {
   children: React.ReactNode;
@@ -12,6 +13,12 @@ export interface Props {
 export function MainRetroTechMagazineTemplate({ children }: Props) {
   const currentYear = new Date().getFullYear();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === path;
+    return pathname.startsWith(path);
+  };
 
   return (
     <div
@@ -36,16 +43,16 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex font-bold uppercase text-sm border-4 border-black bg-[#00FFFF] shadow-[4px_4px_0_0_rgba(0,0,0,1)] transform -skew-x-6 z-10">
-          <Link href="/portfolio" className="px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center">
+          <Link href="/portfolio" className={`px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center ${isActive('/portfolio') ? 'bg-[#FF00FF] text-white' : ''}`}>
             <span className="transform skew-x-6 block">PORTFOLIO</span>
           </Link>
-          <Link href="/services" className="px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center">
+          <Link href="/services" className={`px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center ${isActive('/services') ? 'bg-[#FF00FF] text-white' : ''}`}>
             <span className="transform skew-x-6 block">SERVICES</span>
           </Link>
-          <Link href="/about" className="px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center">
+          <Link href="/about" className={`px-4 py-2 border-r-4 border-black hover:bg-[#FF00FF] hover:text-white transition-colors flex items-center justify-center ${isActive('/about') ? 'bg-[#FF00FF] text-white' : ''}`}>
             <span className="transform skew-x-6 block">ABOUT</span>
           </Link>
-          <Link href="/contact" className="px-4 py-2 hover:bg-[#39FF14] transition-colors flex items-center justify-center">
+          <Link href="/contact" className={`px-4 py-2 hover:bg-[#39FF14] hover:text-black transition-colors flex items-center justify-center ${isActive('/contact') ? 'bg-[#39FF14] text-black' : ''}`}>
             <span className="transform skew-x-6 block">CONTACT</span>
           </Link>
         </div>
@@ -65,28 +72,28 @@ export function MainRetroTechMagazineTemplate({ children }: Props) {
             <Link 
               href="/portfolio" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#00FFFF] transition-colors flex justify-between items-center"
+              className={`px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#00FFFF] transition-colors flex justify-between items-center ${isActive('/portfolio') ? 'bg-[#FF00FF] text-white' : ''}`}
             >
               PORTFOLIO <span>→</span>
             </Link>
             <Link 
               href="/services" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#FF00FF] hover:text-white transition-colors flex justify-between items-center"
+              className={`px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#FF00FF] hover:text-white transition-colors flex justify-between items-center ${isActive('/services') ? 'bg-[#FF00FF] text-white' : ''}`}
             >
               SERVICES <span>→</span>
             </Link>
             <Link 
               href="/about" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#39FF14] transition-colors flex justify-between items-center"
+              className={`px-6 py-4 border-t-4 border-black font-black uppercase text-xl hover:bg-[#39FF14] transition-colors flex justify-between items-center ${isActive('/about') ? 'bg-[#FF00FF] text-white' : ''}`}
             >
               ABOUT <span>→</span>
             </Link>
             <Link 
               href="/contact" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-6 py-4 border-t-4 border-black font-black uppercase text-xl bg-black text-white hover:bg-gray-800 transition-colors flex justify-between items-center"
+              className={`px-6 py-4 border-t-4 border-black font-black uppercase text-xl transition-colors flex justify-between items-center ${isActive('/contact') ? 'bg-[#39FF14] text-black' : 'bg-black text-white hover:bg-gray-800'}`}
             >
               CONTACT <span>→</span>
             </Link>

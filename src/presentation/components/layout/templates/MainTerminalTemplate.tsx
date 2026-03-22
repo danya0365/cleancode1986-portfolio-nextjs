@@ -3,12 +3,20 @@
 import React from "react";
 import Link from "next/link";
 import { SITE } from "@/src/data/master/site";
+import { usePathname } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export function MainTerminalTemplate({ children }: Props) {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === path;
+    return pathname.startsWith(path);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#050505] text-[#33ff00] font-mono selection:bg-[#33ff00]/30 selection:text-black">
       {/* Intense CRT Scanline Overlay */}
@@ -24,10 +32,10 @@ export function MainTerminalTemplate({ children }: Props) {
             <span className="text-white">&gt;_</span> CLEAN_CODE_<span className="animate-pulse">1986</span>
           </Link>
           <nav className="hidden md:flex gap-6 uppercase text-sm font-bold tracking-widest">
-            <Link href="/portfolio" className="hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border border-transparent hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)]">[PORTFOLIO]</Link>
-            <Link href="/services" className="hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border border-transparent hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)]">[SERVICES]</Link>
-            <Link href="/about" className="hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border border-transparent hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)]">[ABOUT]</Link>
-            <Link href="/contact" className="hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border border-transparent hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)]">[CONTACT]</Link>
+            <Link href="/portfolio" className={`hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)] ${isActive('/portfolio') ? 'bg-[#33ff00] text-black border-[#33ff00] shadow-[0_0_15px_rgba(51,255,0,0.5)]' : 'border-transparent'}`}>[PORTFOLIO]</Link>
+            <Link href="/services" className={`hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)] ${isActive('/services') ? 'bg-[#33ff00] text-black border-[#33ff00] shadow-[0_0_15px_rgba(51,255,0,0.5)]' : 'border-transparent'}`}>[SERVICES]</Link>
+            <Link href="/about" className={`hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)] ${isActive('/about') ? 'bg-[#33ff00] text-black border-[#33ff00] shadow-[0_0_15px_rgba(51,255,0,0.5)]' : 'border-transparent'}`}>[ABOUT]</Link>
+            <Link href="/contact" className={`hover:bg-[#33ff00] hover:text-black transition-colors px-3 py-1 border hover:border-[#33ff00] hover:shadow-[0_0_15px_rgba(51,255,0,0.5)] ${isActive('/contact') ? 'bg-[#33ff00] text-black border-[#33ff00] shadow-[0_0_15px_rgba(51,255,0,0.5)]' : 'border-transparent'}`}>[CONTACT]</Link>
           </nav>
         </div>
       </header>
