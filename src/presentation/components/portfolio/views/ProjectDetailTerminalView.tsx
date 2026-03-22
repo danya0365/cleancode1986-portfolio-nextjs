@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ProjectDetailViewModel } from "@/src/presentation/presenters/portfolio/ProjectDetailPresenter";
 import { TerminalProjectManifest } from "../components/terminal/TerminalProjectManifest";
+import { TerminalProjectThumbnail } from "../components/terminal/TerminalProjectThumbnail";
 import { TerminalProjectGallery } from "../components/terminal/TerminalProjectGallery";
 import { TerminalProjectRelated } from "../components/terminal/TerminalProjectRelated";
 
@@ -27,6 +28,9 @@ export function ProjectDetailTerminalView({ viewModel }: Props) {
             [cd ..]
           </Link>
         </div>
+
+        {/* Primary Thumbnail */}
+        <TerminalProjectThumbnail project={project} />
 
         {/* Project Manifest (JSON style) */}
         <TerminalProjectManifest project={project} />
