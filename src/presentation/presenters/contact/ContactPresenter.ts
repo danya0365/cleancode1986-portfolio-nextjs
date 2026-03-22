@@ -36,29 +36,7 @@ export class ContactPresenter {
     }
   }
 
-  /**
-   * Submit contact form
-   */
-  async submitContactForm(data: ContactFormData): Promise<{ success: boolean; message: string }> {
-    try {
-      // TODO: Implement actual API call to send email or save to database
-      console.log("Contact form submitted:", data);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      return {
-        success: true,
-        message: "ส่งข้อความสำเร็จ! เราจะติดต่อกลับไปโดยเร็วที่สุด",
-      };
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
-      return {
-        success: false,
-        message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง",
-      };
-    }
-  }
 
   /**
    * Generate metadata for contact page

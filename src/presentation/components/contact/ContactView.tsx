@@ -19,11 +19,7 @@ export function ContactView({ initialViewModel }: ContactViewProps) {
     viewModel,
     loading,
     error,
-    submitting,
-    submitStatus,
   } = state;
-
-  const { submitContactForm } = actions;
 
   if (loading && !viewModel) {
     return (
@@ -50,28 +46,13 @@ export function ContactView({ initialViewModel }: ContactViewProps) {
   return (
     <>
       {template === "premium" && (
-        <ContactPremiumView 
-          viewModel={viewModel} 
-          submitting={submitting} 
-          submitStatus={submitStatus} 
-          submitContactForm={submitContactForm} 
-        />
+        <ContactPremiumView viewModel={viewModel} />
       )}
       {template === "terminal" && (
-        <ContactTerminalView 
-          viewModel={viewModel} 
-          submitting={submitting} 
-          submitStatus={submitStatus} 
-          submitContactForm={submitContactForm} 
-        />
+        <ContactTerminalView viewModel={viewModel} />
       )}
       {template === "retroTechMagazine" && (
-        <ContactRetroTechMagazineView 
-          viewModel={viewModel} 
-          submitting={submitting} 
-          submitStatus={submitStatus} 
-          submitContactForm={submitContactForm} 
-        />
+        <ContactRetroTechMagazineView viewModel={viewModel} />
       )}
     </>
   );

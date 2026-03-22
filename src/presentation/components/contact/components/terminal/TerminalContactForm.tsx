@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { ContactFormData } from "@/src/presentation/presenters/contact/ContactPresenter";
+import { useChatStore } from "@/src/presentation/stores/chat-store";
 
 interface Props {
-  submitting: boolean;
-  submitStatus: { success: boolean; message: string } | null;
-  submitContactForm: (data: ContactFormData) => Promise<void>;
 }
 
-export function TerminalContactForm({ submitting, submitStatus, submitContactForm }: Props) {
+export function TerminalContactForm({}: Props) {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -16,6 +14,8 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
     budget: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { openChat, registerCustomer, sendMessage } = useChatStore();
 
   const handleChange = (field: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -23,7 +23,32 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submitContactForm(formData);
+    setIsSubmitting(true);
+
+    try {
+      const contactIdentifier = formData.phone || formData.email;
+      const registered = await registerCustomer(formData.name, contactIdentifier);
+
+      if (registered) {
+        const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${formData.projectType}\n` +
+                            (formData.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${formData.budget}\n` : '') +
+                            `รายละเอียดเพิ่มเติม:\n${formData.message}`;
+
+        openChat();
+        await sendMessage(chatContext);
+        
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          projectType: 'Web Development',
+          budget: '',
+          message: ''
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -38,7 +63,7 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
             type="text" 
             value={formData.name}
             onChange={(e) => handleChange('name', e.target.value)}
-            disabled={submitting}
+            disabled={isSubmitting}
             className="flex-1 bg-transparent border-b border-green-900 focus:border-green-500 outline-none text-green-400 disabled:opacity-50"
           />
           <span className="text-green-600">&quot;</span>
@@ -51,7 +76,7 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
             type="email" 
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
-            disabled={submitting}
+            disabled={isSubmitting}
             className="flex-1 bg-transparent border-b border-green-900 focus:border-green-500 outline-none text-green-400 disabled:opacity-50"
           />
           <span className="text-green-600">&quot;</span>
@@ -63,7 +88,7 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
             type="tel" 
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
-            disabled={submitting}
+            disabled={isSubmitting}
             className="flex-1 bg-transparent border-b border-green-900 focus:border-green-500 outline-none text-green-400 disabled:opacity-50"
           />
           <span className="text-green-600">&quot;</span>
@@ -74,8 +99,8 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
           <select 
             value={formData.projectType}
             onChange={(e) => handleChange('projectType', e.target.value)}
-            disabled={submitting}
-            className="flex-1 bg-transparent border-b border-green-900 focus:border-green-500 outline-none text-green-400 disabled:opacity-50 appearance-none cursor-pointer"
+            disabled={isSubmitting}
+            className="flex-1 bg-transparent border-b border-green-900 focus:border-green-500 outline-none text-green-400 appearance-none cursor-pointer disabled:opacity-50"
           >
             <option className="bg-gray-900" value="Web Development">Web Development</option>
             <option className="bg-gray-900" value="Mobile App">Mobile App</option>
@@ -92,9 +117,9 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
             required
             value={formData.message}
             onChange={(e) => handleChange('message', e.target.value)}
-            disabled={submitting}
+            disabled={isSubmitting}
             rows={4}
-            className="w-full bg-black border border-green-900 focus:border-green-500 p-2 outline-none text-green-400 disabled:opacity-50 resize-y"
+            className="w-full bg-black border border-green-900 focus:border-green-500 p-2 outline-none text-green-400 resize-y disabled:opacity-50"
           />
           <span className="text-green-600">EOF</span>
         </div>
@@ -102,17 +127,11 @@ export function TerminalContactForm({ submitting, submitStatus, submitContactFor
         <div className="mt-6 flex flex-col sm:flex-row items-center gap-4">
           <button 
             type="submit" 
-            disabled={submitting}
+            disabled={isSubmitting}
             className="text-black bg-green-500 hover:bg-green-400 border border-green-500 px-6 py-2 font-bold uppercase transition-colors disabled:opacity-50 disabled:bg-green-800 disabled:text-green-400"
           >
-            {submitting ? 'Transmitting...' : './send.sh'}
+            {isSubmitting ? 'Transmitting...' : './send.sh'}
           </button>
-          
-          {submitStatus && (
-            <div className={`text-sm $\\{submitStatus.success ? 'text-green-400' : 'text-red-400'\\}`}>
-              [{submitStatus.success ? 'OK' : 'ERROR'}] {submitStatus.message}
-            </div>
-          )}
         </div>
       </form>
     </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { SITE } from "@/src/data/master/site";
 import type { ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
 import { useChatStore } from "@/src/presentation/stores/chat-store";
@@ -23,9 +25,6 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 interface Props {
   viewModel: ContactViewModel;
-  submitting: boolean;
-  submitStatus: { success: boolean; message: string; } | null;
-  submitContactForm: (data: ContactFormData) => Promise<void>;
 }
 
 const PROJECT_TYPES = [
@@ -46,7 +45,8 @@ const BUDGET_RANGES = [
   "ยังไม่แน่ใจ",
 ];
 
-export function ContactRetroTechMagazineView({ viewModel, submitting, submitStatus, submitContactForm }: Props) {
+export function ContactRetroTechMagazineView({ viewModel }: Props) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { openChat, registerCustomer, sendMessage } = useChatStore();
 
   const {
@@ -59,19 +59,23 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    await submitContactForm(data);
+    setIsSubmitting(true);
+    
+    try {
+      const contactIdentifier = data.phone || data.email;
+      const registered = await registerCustomer(data.name, contactIdentifier);
 
-    const contactIdentifier = data.phone || data.email;
-    const registered = await registerCustomer(data.name, contactIdentifier);
+      if (registered) {
+        const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${data.projectType}\n` +
+                            (data.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${data.budget}\n` : '') +
+                            `รายละเอียดเพิ่มเติม:\n${data.message}`;
 
-    if (registered) {
-      const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${data.projectType}\n` +
-                          (data.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${data.budget}\n` : '') +
-                          `รายละเอียดเพิ่มเติม:\n${data.message}`;
-
-      openChat();
-      await sendMessage(chatContext);
-      reset();
+        openChat();
+        await sendMessage(chatContext);
+        reset();
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -190,8 +194,9 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                   <input
                     {...register("name")}
                     type="text"
-                    className={inputClass}
+                    className={inputClass + (isSubmitting ? " opacity-50 cursor-not-allowed" : "")}
                     placeholder="JOHN DOE"
+                    disabled={isSubmitting}
                   />
                   {errors.name && <p className="mt-2 text-sm font-black bg-white text-red-600 px-2 border-2 border-red-600 inline-block">{errors.name.message}</p>}
                 </div>
@@ -204,8 +209,9 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                   <input
                     {...register("email")}
                     type="email"
-                    className={inputClass}
+                    className={inputClass + (isSubmitting ? " opacity-50 cursor-not-allowed" : "")}
                     placeholder="YOU@EMAIL.COM"
+                    disabled={isSubmitting}
                   />
                   {errors.email && <p className="mt-2 text-sm font-black bg-white text-red-600 px-2 border-2 border-red-600 inline-block">{errors.email.message}</p>}
                 </div>
@@ -220,8 +226,9 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                   <input
                     {...register("phone")}
                     type="tel"
-                    className={inputClass}
+                    className={inputClass + (isSubmitting ? " opacity-50 cursor-not-allowed" : "")}
                     placeholder="08X-XXX-XXXX"
+                    disabled={isSubmitting}
                   />
                 </div>
                 
@@ -232,7 +239,8 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                   </label>
                   <select
                     {...register("projectType")}
-                    className={inputClass + " appearance-none cursor-pointer rounded-none"}
+                    className={inputClass + " appearance-none rounded-none " + (isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer")}
+                    disabled={isSubmitting}
                   >
                     <option value="">เลือกประเภทโปรเจค ▼</option>
                     {PROJECT_TYPES.map((type) => (
@@ -250,7 +258,8 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                  </label>
                  <select
                    {...register("budget")}
-                   className={inputClass + " appearance-none cursor-pointer rounded-none"}
+                   className={inputClass + " appearance-none rounded-none " + (isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer")}
+                   disabled={isSubmitting}
                  >
                    <option value="">เลือกช่วงงบประมาณ ▼</option>
                    {BUDGET_RANGES.map((range) => (
@@ -267,8 +276,9 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                 <textarea
                   {...register("message")}
                   rows={5}
-                  className={inputClass + " resize-none"}
+                  className={inputClass + " resize-none" + (isSubmitting ? " opacity-50 cursor-not-allowed" : "")}
                   placeholder="อธิบายฟังก์ชันหรือรายละเอียดที่ต้องการ..."
+                  disabled={isSubmitting}
                 />
                 {errors.message && <p className="mt-2 text-sm font-black bg-white text-red-600 px-2 border-2 border-red-600 inline-block">{errors.message.message}</p>}
               </div>
@@ -277,10 +287,10 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
               <div className="pt-8">
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={isSubmitting}
                   className="w-full bg-[#39FF14] text-black border-8 border-black px-8 py-6 font-black uppercase text-3xl text-center hover:bg-white transition-colors shadow-[12px_12px_0_0_#FF00FF] hover:translate-x-2 hover:translate-y-2 hover:shadow-[0px_0px_0_0_#FF00FF] active:scale-95 flex items-center justify-center gap-4 disabled:bg-gray-400 disabled:shadow-none"
                 >
-                  {submitting ? (
+                  {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-8 w-8 border-b-4 border-black" />
                       กำลังส่ง...
@@ -294,25 +304,7 @@ export function ContactRetroTechMagazineView({ viewModel, submitting, submitStat
                 </button>
               </div>
 
-              {/* Status Messages */}
-              {submitStatus?.success && (
-                <div className="p-6 bg-[#39FF14] border-4 border-black text-black font-black uppercase text-xl mt-8 flex items-center gap-4 shadow-[8px_8px_0_0_#000] transform rotate-1">
-                  <span className="text-4xl">✅</span>
-                  <div>
-                    <div className="text-2xl mb-1">สำเร็จ!</div>
-                    <div className="text-sm font-bold bg-white inline-block px-2">{submitStatus.message}</div>
-                  </div>
-                </div>
-              )}
-              {submitStatus && !submitStatus.success && (
-                <div className="p-6 bg-[#FF00FF] border-4 border-black text-white font-black uppercase text-xl mt-8 flex items-center gap-4 shadow-[8px_8px_0_0_#000] transform -rotate-1">
-                  <span className="text-4xl">❌</span>
-                  <div>
-                    <div className="text-2xl mb-1">เกิดข้อผิดพลาด</div>
-                    <div className="text-sm font-bold bg-white text-black inline-block px-2">{submitStatus.message}</div>
-                  </div>
-                </div>
-              )}
+
             </form>
           </RetroCard>
         </div>

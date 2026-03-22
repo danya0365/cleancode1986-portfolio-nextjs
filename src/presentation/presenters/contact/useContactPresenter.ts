@@ -8,13 +8,10 @@ export interface ContactPresenterState {
   viewModel: ContactViewModel | null;
   loading: boolean;
   error: string | null;
-  submitting: boolean;
-  submitStatus: { success: boolean; message: string } | null;
 }
 
 export interface ContactPresenterActions {
   loadData: () => Promise<void>;
-  submitContactForm: (data: ContactFormData) => Promise<void>;
   setError: (error: string | null) => void;
 }
 
@@ -43,12 +40,6 @@ export function useContactPresenter(
   );
   const [loading, setLoading] = useState(!initialViewModel);
   const [error, setError] = useState<string | null>(null);
-  
-  const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
 
   /**
    * Load data from presenter
@@ -81,30 +72,6 @@ export function useContactPresenter(
     }
   }, [presenter]);
 
-  const submitContactForm = useCallback(async (data: ContactFormData) => {
-    setSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const result = await presenter.submitContactForm(data);
-      if (isMountedRef.current) {
-        setSubmitStatus(result);
-      }
-    } catch (err) {
-      if (isMountedRef.current) {
-        const errorMessage = err instanceof Error ? err.message : "Unknown error";
-        setSubmitStatus({
-          success: false,
-          message: errorMessage,
-        });
-        console.error("Error submitting contact form:", err);
-      }
-    } finally {
-      if (isMountedRef.current) {
-        setSubmitting(false);
-      }
-    }
-  }, [presenter]);
 
   // Load data on mount or when dependencies change
   useEffect(() => {
@@ -127,12 +94,9 @@ export function useContactPresenter(
       viewModel,
       loading,
       error,
-      submitting,
-      submitStatus,
     },
     {
       loadData,
-      submitContactForm,
       setError,
     },
   ];

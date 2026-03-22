@@ -3,15 +3,15 @@
 import { ContactFormData, ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 import { TerminalContactForm } from "../components/terminal/TerminalContactForm";
+import { useChatStore } from "@/src/presentation/stores/chat-store";
 
 export interface ContactTerminalProps {
   viewModel: ContactViewModel;
-  submitting: boolean;
-  submitStatus: { success: boolean; message: string } | null;
-  submitContactForm: (data: ContactFormData) => Promise<void>;
 }
 
-export function ContactTerminalView({ viewModel, submitting, submitStatus, submitContactForm }: ContactTerminalProps) {
+export function ContactTerminalView({ viewModel }: ContactTerminalProps) {
+  const { openChat } = useChatStore();
+
   return (
     <div className="bg-gray-950 min-h-screen text-green-500 font-mono p-4 sm:p-8 md:p-12 overflow-x-hidden">
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
@@ -32,13 +32,26 @@ export function ContactTerminalView({ viewModel, submitting, submitStatus, submi
           </div>
         </TerminalBlock>
 
+        {/* Quick Chat AI */}
+        <TerminalBlock command="./ai_assistant --connect" path="~">
+          <div className="flex flex-col sm:flex-row items-center gap-4 p-4 border border-green-900 bg-black/50">
+            <div className="text-4xl animate-pulse drop-shadow-[0_0_8px_rgba(51,255,0,0.8)]">🤖</div>
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-amber-400 mb-1">ต้องการคำตอบตอนนี้?</h2>
+              <p className="text-sm text-green-600 mb-4">คุยกับ AI Assistant หรือทีมงานผ่าน Live Chat เพื่อทราบข้อมูลเบื้องต้นทันที ⚡</p>
+              <button 
+                onClick={openChat}
+                className="bg-green-500 text-black font-bold px-6 py-2 hover:bg-green-400 transition-colors uppercase w-full sm:w-auto text-center"
+              >
+                [ EXECUTE LIVE_CHAT ]
+              </button>
+            </div>
+          </div>
+        </TerminalBlock>
+
         {/* Interactive Form Block */}
         <TerminalBlock command="./init_contact_handshake.sh" path="~">
-          <TerminalContactForm 
-            submitting={submitting} 
-            submitStatus={submitStatus} 
-            submitContactForm={submitContactForm} 
-          />
+          <TerminalContactForm />
         </TerminalBlock>
         
         {/* Interactive CLI End Prompt Block */}

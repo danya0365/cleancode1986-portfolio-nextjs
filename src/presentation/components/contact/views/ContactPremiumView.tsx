@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { SITE } from "@/src/data/master/site";
 import type { ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
 import { useChatStore } from "@/src/presentation/stores/chat-store";
@@ -22,9 +24,6 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 interface Props {
   viewModel: ContactViewModel;
-  submitting: boolean;
-  submitStatus: { success: boolean; message: string; } | null;
-  submitContactForm: (data: ContactFormData) => Promise<void>;
 }
 
 const PROJECT_TYPES = [
@@ -58,7 +57,8 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-export function ContactPremiumView({ viewModel, submitting, submitStatus, submitContactForm }: Props) {
+export function ContactPremiumView({ viewModel }: Props) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { openChat, registerCustomer, sendMessage } = useChatStore();
 
   const {
@@ -71,19 +71,23 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    await submitContactForm(data);
+    setIsSubmitting(true);
+    
+    try {
+      const contactIdentifier = data.phone || data.email;
+      const registered = await registerCustomer(data.name, contactIdentifier);
 
-    const contactIdentifier = data.phone || data.email;
-    const registered = await registerCustomer(data.name, contactIdentifier);
+      if (registered) {
+        const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${data.projectType}\n` +
+                            (data.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${data.budget}\n` : '') +
+                            `รายละเอียดเพิ่มเติม:\n${data.message}`;
 
-    if (registered) {
-      const chatContext = `สวัสดีครับ สนใจทำโปรเจกต์ประเภท ${data.projectType}\n` +
-                          (data.budget ? `งบประมาณที่ตั้งไว้ระดับ: ${data.budget}\n` : '') +
-                          `รายละเอียดเพิ่มเติม:\n${data.message}`;
-
-      openChat();
-      await sendMessage(chatContext);
-      reset();
+        openChat();
+        await sendMessage(chatContext);
+        reset();
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -236,8 +240,9 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                     <input
                       {...register("name")}
                       type="text"
-                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm"
+                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm disabled:opacity-50"
                       placeholder="เช่น สมพร รักสะอาด"
+                      disabled={isSubmitting}
                     />
                     {errors.name && <p className="mt-2 text-sm text-red-500 font-medium">{errors.name.message}</p>}
                   </div>
@@ -250,8 +255,9 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                     <input
                       {...register("email")}
                       type="email"
-                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm"
+                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm disabled:opacity-50"
                       placeholder="your@email.com"
+                      disabled={isSubmitting}
                     />
                     {errors.email && <p className="mt-2 text-sm text-red-500 font-medium">{errors.email.message}</p>}
                   </div>
@@ -266,8 +272,9 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                     <input
                       {...register("phone")}
                       type="tel"
-                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm"
+                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium shadow-sm disabled:opacity-50"
                       placeholder="08X-XXX-XXXX"
+                      disabled={isSubmitting}
                     />
                   </div>
                   
@@ -279,7 +286,8 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                     <div className="relative">
                       <select
                         {...register("projectType")}
-                        className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all appearance-none font-medium shadow-sm"
+                        className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all appearance-none font-medium shadow-sm disabled:opacity-50"
+                        disabled={isSubmitting}
                       >
                         <option value="">เลือกประเภทที่ใกล้เคียงที่สุด</option>
                         {PROJECT_TYPES.map((type) => (
@@ -302,7 +310,8 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                   <div className="relative">
                     <select
                       {...register("budget")}
-                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all appearance-none font-medium shadow-sm"
+                      className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all appearance-none font-medium shadow-sm disabled:opacity-50"
+                      disabled={isSubmitting}
                     >
                       <option value="">เลือกช่วงงบประมาณที่ต้องการ</option>
                       {BUDGET_RANGES.map((range) => (
@@ -323,8 +332,9 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                   <textarea
                     {...register("message")}
                     rows={5}
-                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none font-medium shadow-sm"
+                    className="w-full px-5 py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all resize-none font-medium shadow-sm disabled:opacity-50"
                     placeholder="เล่าเกี่ยวกับไอเดียของคุณ อธิบายฟังก์ชันคร่าวๆ หรือสเปคที่ต้องการ เพื่อให้เราประเมินระบบได้ใกล้เคียงที่สุด..."
+                    disabled={isSubmitting}
                   />
                   {errors.message && <p className="mt-2 text-sm text-red-500 font-medium">{errors.message.message}</p>}
                 </div>
@@ -332,11 +342,11 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="w-full mt-4 px-8 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white disabled:from-gray-400 disabled:to-gray-500 font-black text-lg rounded-2xl transition-all shadow-lg shadow-indigo-500/30 hover:shadow-[0_10px_30px_-10px_rgba(79,70,229,0.5)] hover:-translate-y-1 flex items-center justify-center gap-3 overflow-hidden relative group"
+                  disabled={isSubmitting}
+                  className="w-full mt-4 px-8 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white disabled:from-gray-400 disabled:to-gray-500 font-black text-lg rounded-2xl transition-all shadow-lg shadow-indigo-500/30 hover:shadow-[0_10px_30px_-10px_rgba(79,70,229,0.5)] hover:-translate-y-1 disabled:hover:translate-y-0 disabled:hover:shadow-none flex items-center justify-center gap-3 overflow-hidden relative group"
                 >
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                  {submitting ? (
+                  {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
                       กำลังนำข้อมูลเข้าระบบ...
@@ -349,19 +359,7 @@ export function ContactPremiumView({ viewModel, submitting, submitStatus, submit
                   )}
                 </button>
 
-                {/* Status Messages */}
-                {submitStatus?.success && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-green-50/80 dark:bg-green-900/40 backdrop-blur-sm border border-green-200 dark:border-green-800 rounded-2xl text-green-800 dark:text-green-200 flex items-center gap-3 font-bold shadow-sm mt-6">
-                    <span className="text-2xl">✅</span>
-                    <span>{submitStatus.message}</span>
-                  </motion.div>
-                )}
-                {submitStatus && !submitStatus.success && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-red-50/80 dark:bg-red-900/40 backdrop-blur-sm border border-red-200 dark:border-red-800 rounded-2xl text-red-800 dark:text-red-200 flex items-center gap-3 font-bold shadow-sm mt-6">
-                    <span className="text-2xl">❌</span>
-                    <span>{submitStatus.message}</span>
-                  </motion.div>
-                )}
+
               </form>
             </motion.div>
           </motion.div>
