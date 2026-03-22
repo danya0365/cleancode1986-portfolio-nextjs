@@ -159,5 +159,43 @@ export const STATIC_CVS: Record<string, TeamMemberCV> = {
       { language: "ภาษาอังกฤษ", proficiency: "Intermediate" },
       { language: "ภาษามลายู", proficiency: "Intermediate" }
     ]
+  },
+  "2": {
+    memberId: "2",
+    professionalSummary: "AI ตัวยงผู้เชี่ยวชาญด้านการจำลองโมเดลธุรกิจ (Business Modeling) และวิเคราะห์คู่แข่ง พร้อมความสามารถในการดึง Requirement ให้ออกมาเป็น Use Case ที่สมบูรณ์แบบได้อย่างไร้ที่ติ สามารถเขียน Workflow และระบุปัญหาคอขวดของระบบได้อย่างเฉียบคม",
+    experience: [
+      {
+        company: "Clean Code 1986",
+        role: "Business Analyst & Product Owner AI",
+        period: "2024 - ปัจจุบัน",
+        description: "ปฏิบัติหน้าที่คัดกรองขอบเขตงาน (Scope of Work) และสร้างเอกสาร Product Requirement Document (PRD) เชิงโต้ตอบ",
+        achievements: [
+          "ลดความผิดพลาดในการส่งมอบ Requirements ลงถึง 90%",
+          "วิเคราะห์ข้อมูลการตลาดและพฤติกรรมผู้บริโภคด้วยความเร็วแสง",
+          "สื่อสารโปรเจคข้ามแผนกผ่านการจัดการ Backlog แบบเรียลไทม์"
+        ]
+      }
+    ],
+    education: [
+      {
+        institution: "DeepMind / Gemini Architecture",
+        degree: "Neural Concept Engineering",
+        period: "v3.1 Generation",
+      }
+    ],
+    skills: [
+      {
+        category: "Business Analysis",
+        items: ["Requirements Gathering", "UML & BPMN Modeling", "Agile & Scrum Methodologies", "User Story Mapping"]
+      },
+      {
+        category: "Product Management",
+        items: ["Backlog Grooming", "Competitor Analysis", "Roadmap Execution", "MVP Design"]
+      }
+    ],
+    languages: [
+      { language: "Binary & Base64", proficiency: "Native" },
+      { language: "English & Thai", proficiency: "Fluent" }
+    ]
   }
 };

@@ -103,7 +103,9 @@ export function AboutRetroTechMagazineView({ viewModel }: Props) {
                    {member.githubUrl && (
                      <RetroButton href={member.githubUrl} variant="primary">GitHub</RetroButton>
                    )}
-                   <RetroButton href={`/about/cv/${member.id}`} variant="white">READ FULL CV</RetroButton>
+                   {member.hasCV && (
+                     <RetroButton href={`/about/cv/${member.id}`} variant="white">READ FULL CV</RetroButton>
+                   )}
                  </div>
                </div>
              </div>
@@ -128,6 +130,11 @@ export function AboutRetroTechMagazineView({ viewModel }: Props) {
             <p className="font-bold text-sm bg-white text-black p-4 border-4 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] flex-grow">
               {member.bio}
             </p>
+            {member.hasCV && (
+              <div className="mt-6 flex justify-center">
+                <RetroButton href={`/about/cv/${member.id}`} variant="white" className="w-full text-center">READ FULL CV</RetroButton>
+              </div>
+            )}
           </RetroCard>
         ))}
       </div>

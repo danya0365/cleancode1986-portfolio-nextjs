@@ -12,14 +12,20 @@ export class StaticTeamMemberRepository implements ITeamMemberRepository {
   async getActiveMembers(): Promise<TeamMember[]> {
     // Simulate network delay
     await this.delay(100);
-    return STATIC_TEAM.filter((member) => member.isActive).sort(
+    return STATIC_TEAM.filter((member) => member.isActive).map(member => ({
+      ...member,
+      hasCV: !!STATIC_CVS[member.id]
+    })).sort(
       (a, b) => a.sortOrder - b.sortOrder
     );
   }
 
   async getAll(): Promise<TeamMember[]> {
     await this.delay(100);
-    return [...STATIC_TEAM];
+    return STATIC_TEAM.map(member => ({
+      ...member,
+      hasCV: !!STATIC_CVS[member.id]
+    }));
   }
 
   async getCVByMemberId(id: string): Promise<TeamMemberCV | null> {

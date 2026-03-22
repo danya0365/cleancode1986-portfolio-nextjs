@@ -250,12 +250,14 @@ export function AboutPremiumView({ viewModel }: Props) {
                         </a>
                       )}
                       
-                      <Link 
-                        href={`/about/cv/${member.id}`}
-                        className="group flex items-center gap-3 px-8 py-3 bg-white text-indigo-900 hover:bg-gray-100 rounded-xl font-extrabold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-                      >
-                         Read Full CV
-                      </Link>
+                      {member.hasCV && (
+                        <Link 
+                          href={`/about/cv/${member.id}`}
+                          className="group flex items-center gap-3 px-8 py-3 bg-white text-indigo-900 hover:bg-gray-100 rounded-xl font-extrabold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                        >
+                           Read Full CV
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -304,9 +306,20 @@ export function AboutPremiumView({ viewModel }: Props) {
                     {member.role}
                   </div>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium flex-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium flex-1 mb-6">
                     {member.bio}
                   </p>
+
+                  {member.hasCV && (
+                    <div className="mt-auto">
+                      <Link 
+                        href={`/about/cv/${member.id}`}
+                        className="inline-flex items-center justify-center w-full gap-2 px-6 py-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-xl font-bold transition-colors"
+                      >
+                         Read Full CV
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}

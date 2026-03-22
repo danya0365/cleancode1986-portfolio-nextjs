@@ -26,7 +26,12 @@ export function TerminalTeam({ members }: Props) {
               </div>
               
               <div className="flex-1">
-                <div className="text-amber-400 font-bold text-lg">{member.name.toLowerCase().replace(/\s+/g, '_')}</div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-amber-400 font-bold text-lg">{member.name.toLowerCase().replace(/\s+/g, '_')}</span>
+                  <span className={`px-2 py-0.5 text-xs font-bold ${member.id === '1' ? 'bg-blue-900 text-blue-300 border border-blue-500' : 'bg-purple-900 text-purple-300 border border-purple-500'}`}>
+                    {member.id === "1" ? "HUMAN_OPERATOR" : "AI_DAEMON"}
+                  </span>
+                </div>
                 <div className="text-green-600">uid=1000({member.name}) gid=1000({member.role})</div>
                 <div className="text-gray-500 mt-1">/bin/bash</div>
               </div>
@@ -36,26 +41,37 @@ export function TerminalTeam({ members }: Props) {
               {member.bio}
             </div>
 
-            {(member.githubUrl || member.linkedinUrl || member.twitterUrl) && (
-              <div className="border-t border-green-900/30 pt-3 flex flex-wrap gap-4 text-sm mt-4">
-                <span className="text-gray-500">External nodes:</span>
-                {member.githubUrl && (
-                  <Link href={member.githubUrl} target="_blank" className="text-blue-400 hover:underline">
-                    [GitHub]
-                  </Link>
-                )}
-                {member.linkedinUrl && (
-                  <Link href={member.linkedinUrl} target="_blank" className="text-blue-400 hover:underline">
-                    [LinkedIn]
-                  </Link>
-                )}
-                {member.twitterUrl && (
-                  <Link href={member.twitterUrl} target="_blank" className="text-blue-400 hover:underline">
-                    [Twitter]
-                  </Link>
-                )}
-              </div>
-            )}
+            <div className="border-t border-green-900/30 pt-3 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mt-4">
+              {(member.githubUrl || member.linkedinUrl || member.twitterUrl) ? (
+                <div className="flex flex-wrap gap-4 text-sm mt-4 sm:mt-0">
+                  <span className="text-gray-500">External nodes:</span>
+                  {member.githubUrl && (
+                    <Link href={member.githubUrl} target="_blank" className="text-blue-400 hover:text-blue-300 hover:underline">
+                      [GitHub]
+                    </Link>
+                  )}
+                  {member.linkedinUrl && (
+                    <Link href={member.linkedinUrl} target="_blank" className="text-blue-400 hover:text-blue-300 hover:underline">
+                      [LinkedIn]
+                    </Link>
+                  )}
+                  {member.twitterUrl && (
+                    <Link href={member.twitterUrl} target="_blank" className="text-blue-400 hover:text-blue-300 hover:underline">
+                      [Twitter]
+                    </Link>
+                  )}
+                </div>
+              ) : <div />}
+              
+              {member.hasCV && (
+                <Link 
+                  href={`/about/cv/${member.id}`} 
+                  className="inline-block mt-4 sm:mt-0 bg-green-900/20 text-green-400 font-bold px-4 py-2 text-sm hover:bg-green-500 hover:text-black transition-colors border border-green-500/50"
+                >
+                  [ EXEC ./extract_cv.sh --id={member.id} ]
+                </Link>
+              )}
+            </div>
           </div>
         ))}
       </div>

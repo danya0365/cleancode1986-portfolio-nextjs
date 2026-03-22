@@ -17,6 +17,7 @@ export interface TeamMember {
   twitterUrl?: string;
   sortOrder: number;
   isActive: boolean;
+  hasCV?: boolean;
 }
 
 export interface ITeamMemberRepository {
