@@ -5,6 +5,7 @@ import { TerminalHero } from "../components/terminal/TerminalHero";
 import { TerminalProjects } from "../components/terminal/TerminalProjects";
 import { TerminalServices } from "../components/terminal/TerminalServices";
 import { TerminalSkills } from "../components/terminal/TerminalSkills";
+import { TerminalAsciiLogo } from "../../ui/terminal/TerminalAsciiLogo";
 
 interface Props {
   viewModel: HomeViewModel;
@@ -15,15 +16,11 @@ export function HomeTerminalView({ viewModel }: Props) {
     <div className="bg-gray-950 min-h-screen text-green-500 font-mono p-4 sm:p-8 md:p-12 overflow-x-hidden">
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
         {/* Boot Sequence / Header */}
-        <div className="mb-8 border-b border-green-900 pb-4">
-          <pre className="text-xs sm:text-sm text-green-600 mb-2 whitespace-pre-wrap">
-{`   _____ _                  _____          _      __  ___  ___  __ 
-  / ____| |                / ____|        | |    /_ |/ _ \\/ _ \\/ / 
- | |    | | ___  __ _ _ __| |     ___   __| | ___ | | (_) | (_) | '_ \\ 
- | |    | |/ _ \\/ _\` | '__| |    / _ \\ / _\` |/ _ \\| |\\__, |> _ <| (_) |
- | |____| |  __/ (_| | |  | |___| (_) | (_| |  __/| |  / /| (_) |\\__, |
-  \\_____|_|\\___|\\__,_|_|   \\_____\\___/ \\__,_|\\___||_| /_/  \\___/  /_/  `}
-          </pre>
+        <div className="mb-8 border-b border-green-900 pb-4 overflow-x-auto">
+          <TerminalAsciiLogo 
+            text="CLEAN CODE 1986" 
+            className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+          />
           <p className="text-green-700 text-sm">Clean Code 1986 OS (v1.0.0)</p>
           <p className="text-green-700 text-sm">Login: {new Date().toLocaleString()}</p>
         </div>
