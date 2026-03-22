@@ -14,7 +14,7 @@ export function TerminalHero({ stats }: { stats: HomeStats }) {
         <p>Years Active: {stats.yearsExperience}+</p>
         <p>Team Size: {stats.teamMembers}</p>
         <br />
-        <p className="text-gray-400 italic">"Simplicity is the soul of efficiency."</p>
+        <p className="text-gray-400 italic">&quot;Simplicity is the soul of efficiency.&quot;</p>
       </div>
     </TerminalBlock>
   );

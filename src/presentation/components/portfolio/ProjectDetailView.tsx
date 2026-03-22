@@ -14,7 +14,7 @@ interface ProjectDetailViewProps {
 }
 
 export function ProjectDetailView({ slug, initialViewModel }: ProjectDetailViewProps) {
-  const [state, actions] = useProjectDetailPresenter(slug, initialViewModel);
+  const [state] = useProjectDetailPresenter(slug, initialViewModel);
   const { template } = useTemplateStore();
 
   const { viewModel, loading, error } = state;

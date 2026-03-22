@@ -49,7 +49,7 @@ export function TerminalProjects({ projects }: { projects: Project[] }) {
             })}
           </tbody>
         </table>
-        <p className="mt-2 text-green-600">Type './[filename].exe' (or click) to execute project viewer.</p>
+        <p className="mt-2 text-green-600">Type &apos;./[filename].exe&apos; (or click) to execute project viewer.</p>
     </TerminalBlock>
   );
 }

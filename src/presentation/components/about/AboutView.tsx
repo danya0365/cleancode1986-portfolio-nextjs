@@ -12,7 +12,7 @@ interface AboutViewProps {
 }
 
 export function AboutView({ initialViewModel }: AboutViewProps) {
-  const [state, actions] = useAboutPresenter(initialViewModel);
+  const [state] = useAboutPresenter(initialViewModel);
   const { template } = useTemplateStore();
 
   const { viewModel, loading, error } = state;

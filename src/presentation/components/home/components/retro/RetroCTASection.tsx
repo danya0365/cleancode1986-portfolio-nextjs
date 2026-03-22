@@ -1,6 +1,5 @@
 "use client";
 
-import { SITE } from "@/src/data/master/site";
 import { RetroButton } from "@/src/presentation/components/ui/retro/RetroButton";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
 import { useChatStore } from "@/src/presentation/stores/chat-store";

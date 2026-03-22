@@ -12,7 +12,7 @@ interface ServicesViewProps {
 }
 
 export function ServicesView({ initialViewModel }: ServicesViewProps) {
-  const [state, actions] = useServicesPresenter(initialViewModel);
+  const [state] = useServicesPresenter(initialViewModel);
   const { template } = useTemplateStore();
 
   const { viewModel, loading, error } = state;
