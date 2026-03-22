@@ -7,6 +7,19 @@ import { useReactToPrint } from "react-to-print";
 import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 import { TerminalImage } from "@/src/presentation/components/ui/terminal/TerminalImage";
+import { JetBrains_Mono, Noto_Sans_Thai } from "next/font/google";
+
+const jetBrainsMonoPrint = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jb-print",
+  display: "swap",
+});
+
+const notoSansThaiPrint = Noto_Sans_Thai({
+  subsets: ["latin", "thai"],
+  variable: "--font-noto-print",
+  display: "swap",
+});
 
 interface CVTerminalViewProps {
   viewModel: TeamMemberCVViewModel;
@@ -26,7 +39,7 @@ export const CVTerminalView: FC<CVTerminalViewProps> = ({ viewModel }) => {
         * { 
           -webkit-print-color-adjust: exact !important; 
           print-color-adjust: exact !important; 
-          font-family: "Courier New", Courier, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+          font-family: var(--font-jb-print), var(--font-noto-print), "Courier New", Courier, ui-monospace, SFMono-Regular, monospace !important;
         }
         
         .print-content-wrapper { 
@@ -80,7 +93,7 @@ export const CVTerminalView: FC<CVTerminalViewProps> = ({ viewModel }) => {
           </button>
         </div>
 
-        <div ref={contentRef} className="print-content-wrapper flex flex-col gap-4">
+        <div ref={contentRef} className={`print-content-wrapper flex flex-col gap-4 ${jetBrainsMonoPrint.variable} ${notoSansThaiPrint.variable}`}>
           {/* Header */}
           <div className="mb-2">
             <div className="overflow-x-auto print-hidden">
