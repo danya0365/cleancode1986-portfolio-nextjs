@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Project } from "@/src/application/repositories/IProjectRepository";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 
@@ -13,38 +14,74 @@ export function TerminalProjectList({ projects }: Props) {
       {projects.length === 0 ? (
         <p className="text-red-500">grep: no matching files found. Exit status 1.</p>
       ) : (
-        <div className="flex flex-col gap-6 mt-2">
-          {projects.map((p) => {
-            const date = new Date(p.projectDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        <div className="flex flex-col gap-6 mt-4 font-mono text-sm sm:text-base">
+          {projects.map((project) => {
+            const date = new Date(project.projectDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+            const displayImage = project.images && project.images.length > 0 ? project.images[0] : null;
+
             return (
-              <div key={p.id} className="border-l-2 border-green-800 pl-4 py-2 hover:bg-green-900/20 transition-colors group">
-                <div className="flex items-center gap-2">
-                  <span className="text-green-600">[{p.category}]</span>
-                  <p className="text-amber-400 font-bold text-lg">{p.title.replace(/\\s+/g, '_').toLowerCase()}.sh</p>
+              <div key={project.id} className="border border-green-900 bg-black/50 p-4">
+                <div className="flex gap-4 items-start sm:items-center border-b border-green-900/50 pb-4 mb-4">
+                  <div className="shrink-0 w-24 h-20 sm:w-32 sm:h-24 relative border border-green-500 bg-gray-900 overflow-hidden">
+                    {displayImage ? (
+                      <Image 
+                        src={displayImage} 
+                        alt={project.title}
+                        fill
+                        className="object-cover mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-green-700 font-bold text-xs text-center px-2">NO_IMG</div>
+                    )}
+                    <div className="absolute inset-0 bg-green-500/10 pointer-events-none"></div>
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="text-amber-400 font-bold text-lg">{project.title.toLowerCase().replace(/\s+/g, '_')}</div>
+                    <div className="text-green-600">type={project.category} date={date}</div>
+                    <div className="text-gray-500 mt-1">./execute --slug={project.slug}</div>
+                  </div>
                 </div>
-                
-                <p className="text-green-600 text-xs sm:text-sm mt-1">
-                  Owner: root | Size: {Math.floor(Math.random() * 8000 + 4096)} B | MTime: {date}
-                </p>
-                
-                <p className="text-green-300 mt-3 line-clamp-3 leading-relaxed">
-                  {p.description}
-                </p>
-                
-                <div className="mt-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                  <Link 
-                    href={`/portfolio/${p.slug}`} 
-                    className="text-blue-400 hover:text-blue-300 hover:underline bg-blue-900/20 px-2 py-1 rounded border border-blue-800/50"
-                  >
-                    $ ./execute --slug={p.slug}
+
+                <div className="text-green-300 mb-4 leading-relaxed line-clamp-3">
+                  {project.description}
+                </div>
+
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="mb-4">
+                    <span className="text-gray-500">Dependencies:</span>
+                    <div className="mt-1 flex flex-wrap gap-2 text-green-400">
+                      {project.technologies.map(tech => (
+                        <span key={tech} className="bg-green-900/30 px-2 py-0.5 border border-green-800">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="border-t border-green-900/30 pt-3 flex flex-wrap gap-4 text-sm mt-4">
+                  <span className="text-gray-500">Actions:</span>
+                  <Link href={`/portfolio/${project.slug}`} className="text-blue-400 hover:underline">
+                    [View Detail]
                   </Link>
+                  {project.liveUrl && (
+                    <Link href={project.liveUrl} target="_blank" className="text-blue-400 hover:underline">
+                      [Live Demo]
+                    </Link>
+                  )}
+                  {project.githubUrl && (
+                    <Link href={project.githubUrl} target="_blank" className="text-blue-400 hover:underline">
+                      [Source Code]
+                    </Link>
+                  )}
                 </div>
               </div>
             );
           })}
           
-          <div className="mt-4 pt-4 border-t border-green-900 text-green-600 text-sm">
-            Total files: {projects.length}
+          <div className="mt-2 pt-4 border-t border-green-900 text-green-600 text-sm">
+            Total entries: {projects.length}
           </div>
         </div>
       )}
