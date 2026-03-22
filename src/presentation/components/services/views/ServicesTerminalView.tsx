@@ -2,6 +2,7 @@
 
 import type { ServicesViewModel } from "@/src/presentation/presenters/services/ServicesPresenter";
 import { TerminalServiceStatus } from "../components/terminal/TerminalServiceStatus";
+import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 
 interface Props {
   viewModel: ServicesViewModel;
@@ -16,7 +17,11 @@ export function ServicesTerminalView({ viewModel }: Props) {
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         
         {/* CLI Header */}
-        <div className="mb-6 border-b border-green-900 pb-4">
+        <div className="mb-6 border-b border-green-900 pb-4 overflow-x-auto">
+          <TerminalAsciiLogo 
+            text="SERVICES" 
+            className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+          />
           <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-2">Cleancode Daemon Supervisor</h1>
           <p className="text-green-700 text-sm">Inspecting active service units deployed in production...</p>
         </div>

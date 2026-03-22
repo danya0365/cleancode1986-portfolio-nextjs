@@ -6,6 +6,7 @@ import { TerminalProjectManifest } from "../components/terminal/TerminalProjectM
 import { TerminalProjectThumbnail } from "../components/terminal/TerminalProjectThumbnail";
 import { TerminalProjectGallery } from "../components/terminal/TerminalProjectGallery";
 import { TerminalProjectRelated } from "../components/terminal/TerminalProjectRelated";
+import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 
 interface Props {
   viewModel: ProjectDetailViewModel;
@@ -19,14 +20,22 @@ export function ProjectDetailTerminalView({ viewModel }: Props) {
       <div className="max-w-4xl mx-auto flex flex-col gap-8">
         
         {/* Navigation / Header */}
-        <div className="mb-2 border-b border-green-900 pb-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-1">Module Execution Environment</h1>
-            <p className="text-green-700 text-sm">Target: {project.slug}</p>
+        <div className="mb-2 border-b border-green-900 pb-4">
+          <div className="overflow-x-auto">
+            <TerminalAsciiLogo 
+              text="DETAILS" 
+              className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+            />
           </div>
-          <Link href="/portfolio" className="text-green-600 hover:text-green-400 border border-green-800 px-3 py-1 hover:bg-green-900/30 transition-colors">
-            [cd ..]
-          </Link>
+          <div className="flex justify-between items-center sm:items-end flex-wrap gap-4">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-1">Module Execution Environment</h1>
+              <p className="text-green-700 text-sm">Target: {project.slug}</p>
+            </div>
+            <Link href="/portfolio" className="text-green-600 hover:text-green-400 border border-green-800 px-3 py-1 hover:bg-green-900/30 transition-colors">
+              [cd ..]
+            </Link>
+          </div>
         </div>
 
         {/* Primary Thumbnail */}

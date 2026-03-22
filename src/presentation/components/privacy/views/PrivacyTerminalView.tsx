@@ -2,6 +2,7 @@
 
 import { SITE } from "@/src/data/master/site";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
+import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 
 export function PrivacyTerminalView() {
   const lastUpdated = "20 มีนาคม 2026";
@@ -11,7 +12,11 @@ export function PrivacyTerminalView() {
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         
         {/* CLI Header */}
-        <div className="mb-4 border-b border-green-900 pb-4">
+        <div className="mb-4 border-b border-green-900 pb-4 overflow-x-auto">
+          <TerminalAsciiLogo 
+            text="PRIVACY" 
+            className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+          />
           <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-2">System Protocol EULA</h1>
           <p className="text-green-700 text-sm">Validating privacy telemetry protocols...</p>
         </div>

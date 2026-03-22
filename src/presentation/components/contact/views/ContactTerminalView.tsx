@@ -4,6 +4,7 @@ import { ContactFormData, ContactViewModel } from "@/src/presentation/presenters
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 import { TerminalContactForm } from "../components/terminal/TerminalContactForm";
 import { useChatStore } from "@/src/presentation/stores/chat-store";
+import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 
 export interface ContactTerminalProps {
   viewModel: ContactViewModel;
@@ -17,7 +18,11 @@ export function ContactTerminalView({ viewModel }: ContactTerminalProps) {
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         
         {/* CLI Header */}
-        <div className="mb-4 border-b border-green-900 pb-4">
+        <div className="mb-4 border-b border-green-900 pb-4 overflow-x-auto">
+          <TerminalAsciiLogo 
+            text="CONTACT" 
+            className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+          />
           <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-2">Secure SSH Transmission Channel</h1>
           <p className="text-green-700 text-sm">Establishing encrypted connection to core team...</p>
         </div>

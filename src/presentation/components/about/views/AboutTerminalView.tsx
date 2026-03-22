@@ -2,6 +2,7 @@
 
 import type { AboutViewModel } from "@/src/presentation/presenters/about/AboutPresenter";
 import { TerminalTeam } from "../components/terminal/TerminalTeam";
+import { TerminalAsciiLogo } from "@/src/presentation/components/ui/terminal/TerminalAsciiLogo";
 
 interface Props {
   viewModel: AboutViewModel;
@@ -16,7 +17,11 @@ export function AboutTerminalView({ viewModel }: Props) {
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         
         {/* CLI Header */}
-        <div className="mb-6 border-b border-green-900 pb-4">
+        <div className="mb-6 border-b border-green-900 pb-4 overflow-x-auto">
+          <TerminalAsciiLogo 
+            text="ABOUT" 
+            className="text-[10px] sm:text-[13px] md:text-sm tracking-tighter sm:tracking-normal text-green-600 mb-4" 
+          />
           <h1 className="text-xl sm:text-2xl font-bold text-green-400 mb-2">System Operators Identification</h1>
           <p className="text-green-700 text-sm">Validating core team engineering personnel records...</p>
         </div>
