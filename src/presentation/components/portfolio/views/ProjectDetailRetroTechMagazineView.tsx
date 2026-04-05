@@ -169,7 +169,7 @@ export function ProjectDetailRetroTechMagazineView({ viewModel }: Props) {
                     onClick={() => handleImageClick(index)}
                     className="relative pb-[75%] border-8 border-black bg-white cursor-pointer hover:shadow-[12px_12px_0_0_#FF00FF] hover:-translate-y-2 hover:-translate-x-2 transition-all duration-300 group overflow-hidden"
                   >
-                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                     <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                         <span className="text-6xl text-white transform scale-50 group-hover:scale-100 transition-transform">🔍</span>
                      </div>
                      <RetroImage 
