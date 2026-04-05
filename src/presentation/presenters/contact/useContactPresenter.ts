@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ContactPresenter, ContactViewModel, ContactFormData } from "./ContactPresenter";
+import { ContactPresenter, ContactViewModel } from "./ContactPresenter";
 import { createClientContactPresenter } from "./ContactPresenterClientFactory";
 
 export interface ContactPresenterState {

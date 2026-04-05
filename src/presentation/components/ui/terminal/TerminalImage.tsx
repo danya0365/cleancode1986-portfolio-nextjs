@@ -21,7 +21,7 @@ export function TerminalImage({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className={`relative flex items-center justify-center w-full h-full bg-gray-900 overflow-hidden $\\{!fill ? className : ''\\}`}>
+    <div className={`relative flex items-center justify-center w-full h-full bg-gray-900 overflow-hidden ${!fill ? className : ''}`}>
       {/* Background Fallback Layer */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
         <span className="text-green-700 font-bold text-xs">{fallbackText}</span>
@@ -37,7 +37,7 @@ export function TerminalImage({
             src={src}
             alt={alt}
             fill={fill}
-            className={`object-cover mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity $\\{fill ? className : ''\\}`}
+            className={`object-cover mix-blend-luminosity opacity-80 hover:opacity-100 transition-opacity ${fill ? className : ''}`}
             onError={() => {
               setHasError(true);
             }}

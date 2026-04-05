@@ -12,7 +12,7 @@ interface ContactViewProps {
 }
 
 export function ContactView({ initialViewModel }: ContactViewProps) {
-  const [state, actions] = useContactPresenter(initialViewModel);
+  const [state] = useContactPresenter(initialViewModel);
   const { template } = useTemplateStore();
 
   const {

@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
@@ -61,20 +63,40 @@ export function PortfolioRetroTechMagazineView({
             <Link href={`/portfolio/${project.slug}`} key={project.id} className="group block">
               <RetroCard hoverEffect borderSize="lg" shadowSize="md" className="h-full flex flex-col bg-white overflow-hidden">
                 {/* Image Section */}
-                <div className="relative h-56 sm:h-64 border-b-8 border-black bg-gray-200">
-                  {project.thumbnail ? (
-                    <Image
-                      src={project.thumbnail}
-                      alt={project.title}
-                      fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center font-black text-4xl text-gray-400">
-                      NO DATA
+                <div className="relative h-56 sm:h-64 border-b-8 border-black bg-gray-200 overflow-hidden">
+                  {/* Fallback / Loading UI */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 group-hover:scale-105 transition-transform duration-500">
+                    <span className="text-6xl mb-3 opacity-50 grayscale transition-all duration-500 group-hover:grayscale-0">
+                      {project.category === "Web" && "💻"}
+                      {project.category === "Mobile" && "📱"}
+                      {project.category === "UI/UX" && "🎨"}
+                      {project.category === "Full-stack" && "🚀"}
+                      {!["Web", "Mobile", "UI/UX", "Full-stack"].includes(project.category) && "📁"}
+                    </span>
+                    <div className="px-3 py-1 bg-black text-white text-[10px] font-black uppercase tracking-tighter shadow-[4px_4px_0_rgba(0,0,0,0.2)]">
+                      Preview Unavailable
+                    </div>
+                  </div>
+
+                  {/* Actual Thumbnail */}
+                  {project.thumbnail && (
+                    <div className="absolute inset-0 z-10 transition-opacity duration-500">
+                      <Image
+                        src={project.thumbnail}
+                        alt={project.title}
+                        fill
+                        className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                        }}
+                      />
+                      {/* Retro Overlay Grid Pattern on hover (Subtle) */}
+                      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-0 group-hover:opacity-10 pointer-events-none mix-blend-overlay transition-opacity duration-500" />
                     </div>
                   )}
-                  <RetroBadge color="cyan" className="absolute top-4 right-4">
+
+                  <RetroBadge color="cyan" className="absolute top-4 right-4 z-20">
                     {project.category}
                   </RetroBadge>
                 </div>

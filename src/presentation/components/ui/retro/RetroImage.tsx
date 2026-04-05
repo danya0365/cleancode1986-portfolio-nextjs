@@ -21,7 +21,7 @@ export function RetroImage({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className={`relative w-full h-full overflow-hidden bg-gray-200 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] $\\{className\\}`}>
+    <div className={`relative w-full h-full overflow-hidden bg-gray-200 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] ${className}`}>
       {/* Fallback Layer */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="grayscale opacity-50">{fallbackIcon}</div>
@@ -33,7 +33,7 @@ export function RetroImage({
           src={src}
           alt={alt}
           fill
-          className={`absolute inset-0 $\\{imageClassName\\}`}
+          className={`absolute inset-0 ${imageClassName}`}
           onError={() => setHasError(true)}
         />
       )}

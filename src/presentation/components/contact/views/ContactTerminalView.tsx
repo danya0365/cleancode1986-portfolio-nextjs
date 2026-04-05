@@ -1,6 +1,6 @@
 "use client";
 
-import { ContactFormData, ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
+import { ContactViewModel } from "@/src/presentation/presenters/contact/ContactPresenter";
 import { TerminalBlock } from "@/src/presentation/components/ui/terminal/TerminalBlock";
 import { TerminalContactForm } from "../components/terminal/TerminalContactForm";
 import { useChatStore } from "@/src/presentation/stores/chat-store";

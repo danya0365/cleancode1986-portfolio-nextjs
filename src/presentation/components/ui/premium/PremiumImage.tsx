@@ -21,7 +21,7 @@ export function PremiumImage({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className={`relative w-full h-full overflow-hidden $\\{className\\}`}>
+    <div className={`relative w-full h-full overflow-hidden ${className}`}>
       {/* Fallback Layer */}
       <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
         <div className="opacity-50 drop-shadow-sm">{fallbackIcon}</div>
@@ -33,7 +33,7 @@ export function PremiumImage({
           src={src}
           alt={alt}
           fill
-          className={`absolute inset-0 transition-opacity duration-500 $\\{imageClassName\\}`}
+          className={`absolute inset-0 transition-opacity duration-500 ${imageClassName}`}
           onError={() => setHasError(true)}
         />
       )}

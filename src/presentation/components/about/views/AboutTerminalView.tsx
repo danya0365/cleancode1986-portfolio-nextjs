@@ -81,7 +81,7 @@ export function AboutTerminalView({ viewModel }: Props) {
         {/* Detailed Team Output */}
         <div className="mt-4">
           <div className="mb-4 text-xs font-bold tracking-widest text-green-600 uppercase">
-            // EXECUTING: htop --user=engineering_team
+            {"// EXECUTING: htop --user=engineering_team"}
           </div>
           <TerminalTeam members={viewModel.teamMembers} />
         </div>

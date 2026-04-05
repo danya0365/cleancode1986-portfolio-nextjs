@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { ContactFormData } from "@/src/presentation/presenters/contact/ContactPresenter";
 import { useChatStore } from "@/src/presentation/stores/chat-store";
 
-interface Props {
-}
-
-export function TerminalContactForm({}: Props) {
+export function TerminalContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -112,7 +109,7 @@ export function TerminalContactForm({}: Props) {
         </div>
 
         <div className="flex flex-col gap-2 mt-4">
-          <label className="text-green-600 shrink-0">cat &lt;&lt; 'EOF' &gt; message.txt</label>
+          <label className="text-green-600 shrink-0">cat &lt;&lt; &apos;EOF&apos; &gt; message.txt</label>
           <textarea 
             required
             value={formData.message}
