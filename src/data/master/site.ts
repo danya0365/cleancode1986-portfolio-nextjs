@@ -41,7 +41,7 @@ export interface SiteConfig {
 export const SITE: SiteConfig = {
   title: "Clean Code 1986",
   description: "พัฒนาเว็บไซต์และแอปพลิเคชันมืออาชีพ",
-  baseUrl: "https://cleancode1986-portfolio.vercel.app",
+  baseUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   defaultLocale: "th",
   locales: ["th", "en"],
   company: {
