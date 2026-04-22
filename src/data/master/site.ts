@@ -40,15 +40,15 @@ export interface SiteConfig {
 
 export const SITE: SiteConfig = {
   title: "Clean Code 1986",
-  description: "พัฒนาเว็บไซต์และแอปพลิเคชันมืออาชีพ",
+  description: "จ้างทำเว็บ ราคาถูก คุณภาพสูง ด้วย AI-Powered Development",
   baseUrl: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   defaultLocale: "th",
   locales: ["th", "en"],
   company: {
     name: "CleanCode 1986",
     nameTH: "คลีนโค้ด 1986",
-    description: "บริษัทพัฒนาซอฟต์แวร์มืออาชีพ",
-    tagline: "พัฒนาเว็บไซต์และแอปพลิเคชันที่ทรงพลังและทันสมัย",
+    description: "AI-Powered Software Development",
+    tagline: "ใช้ AI เขียนโค้ด ควบคุมคุณภาพด้วย Clean Architecture",
     foundedYear: 2020,
   },
   hiring: {

@@ -1,12 +1,25 @@
+import {
+  IProjectRepository,
+  Project,
+} from "@/src/application/repositories/IProjectRepository";
+import {
+  IServiceRepository,
+  Service,
+} from "@/src/application/repositories/IServiceRepository";
+import {
+  ITechnologyRepository,
+  Technology,
+} from "@/src/application/repositories/ITechnologyRepository";
+import {
+  ITestimonialRepository,
+  Testimonial,
+} from "@/src/application/repositories/ITestimonialRepository";
 import { SITE } from "@/src/data/master/site";
-import { IProjectRepository, Project } from "@/src/application/repositories/IProjectRepository";
-import { IServiceRepository, Service } from "@/src/application/repositories/IServiceRepository";
-import { ITechnologyRepository, Technology } from "@/src/application/repositories/ITechnologyRepository";
-import { ITestimonialRepository, Testimonial } from "@/src/application/repositories/ITestimonialRepository";
 
-
-
-import { IHomeStatsRepository, HomeStats } from "@/src/application/repositories/IHomeStatsRepository";
+import {
+  HomeStats,
+  IHomeStatsRepository,
+} from "@/src/application/repositories/IHomeStatsRepository";
 
 export type { HomeStats };
 
@@ -28,7 +41,7 @@ export class HomePresenter {
     private readonly serviceRepository: IServiceRepository,
     private readonly technologyRepository: ITechnologyRepository,
     private readonly testimonialRepository: ITestimonialRepository,
-    private readonly homeStatsRepository: IHomeStatsRepository
+    private readonly homeStatsRepository: IHomeStatsRepository,
   ) {}
 
   /**
@@ -42,13 +55,25 @@ export class HomePresenter {
         servicesResult,
         testimonialsResult,
         technologiesResult,
-        stats
+        stats,
       ] = await Promise.all([
-        this.projectRepository.query({ filters: { isFeatured: true }, perPage: 3 }),
-        this.serviceRepository.query({ filters: { isActive: true }, perPage: 6 }),
-        this.testimonialRepository.query({ filters: { isFeatured: true }, perPage: 0 }), // 0 means unlimited
-        this.technologyRepository.query({ filters: { isActive: true }, perPage: 0 }),
-        this.homeStatsRepository.getStats()
+        this.projectRepository.query({
+          filters: { isFeatured: true },
+          perPage: 3,
+        }),
+        this.serviceRepository.query({
+          filters: { isActive: true },
+          perPage: 6,
+        }),
+        this.testimonialRepository.query({
+          filters: { isFeatured: true },
+          perPage: 0,
+        }), // 0 means unlimited
+        this.technologyRepository.query({
+          filters: { isActive: true },
+          perPage: 0,
+        }),
+        this.homeStatsRepository.getStats(),
       ]);
 
       return {
@@ -70,25 +95,23 @@ export class HomePresenter {
   async generateMetadata() {
     return {
       title: `${SITE.company.name} | ${SITE.description}`,
-      description:
-        `${SITE.company.name} - ${SITE.company.description} รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ ด้วย Next.js, React, React Native`,
+      description: `${SITE.company.name} — จ้างทำเว็บ ราคาถูก คุณภาพสูง ด้วย AI-Powered Development + Clean Architecture`,
       keywords: [
-        "พัฒนาเว็บไซต์",
+        "จ้างทำเว็บ",
         "รับทำเว็บไซต์",
-        "รับทำแอพมือถือ",
+        "ทำเว็บราคาถูก",
+        "AI เขียนโค้ด",
+        "Clean Architecture",
         "Next.js",
         "React",
-        "React Native",
         SITE.company.name,
       ],
       authors: [{ name: SITE.company.name }],
       openGraph: {
         title: `${SITE.company.name} | ${SITE.description}`,
-        description:
-          `${SITE.company.description} รับทำเว็บไซต์ แอปมือถือ และระบบต่างๆ`,
+        description: `จ้างทำเว็บ ราคาถูก คุณภาพสูง — AI-Powered Development + Clean Architecture`,
         type: "website",
       },
     };
   }
 }
-

@@ -138,7 +138,7 @@ export const PROMO_CONTENT: PromoContent = {
       {
         label: "ค่าพัฒนาเว็บไซต์",
         hireTeam: "540,000+ บาท (3 เดือน)",
-        hireUs: "เริ่มต้น 30,000 บาท (จ่ายตามงาน)",
+        hireUs: "เริ่มต้น 9,900 บาท (จ่ายตามงาน)",
         highlight: true,
       },
       {
@@ -227,37 +227,37 @@ export const PROMO_CONTENT: PromoContent = {
       {
         icon: "💻",
         title: "เว็บไซต์",
-        price: "30,000",
+        price: "9,900",
         note: "Landing, Corporate, Portfolio",
       },
       {
         icon: "📱",
         title: "แอปมือถือ",
-        price: "50,000",
+        price: "19,900",
         note: "iOS + Android (React Native)",
       },
       {
         icon: "🎨",
         title: "ออกแบบ UI/UX",
-        price: "20,000",
+        price: "5,900",
         note: "Wireframe + Visual Design",
       },
       {
         icon: "⚙️",
         title: "Backend & API",
-        price: "40,000",
+        price: "15,900",
         note: "RESTful API + Database",
       },
       {
         icon: "🛒",
         title: "E-Commerce",
-        price: "60,000",
+        price: "25,900",
         note: "ร้านค้าออนไลน์ครบวงจร",
       },
       {
         icon: "🚀",
         title: "Full-Stack",
-        price: "80,000",
+        price: "35,900",
         note: "ระบบครบวงจร Frontend + Backend",
       },
     ],

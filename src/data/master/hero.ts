@@ -4,30 +4,30 @@
 
 export const HERO = {
   badge: {
-    icon: "✨",
-    text: "มืออาชีพ เชื่อถือได้ คุณภาพสูง",
+    icon: "🤖",
+    text: "AI-Powered Development — ราคาดี คุณภาพสูง",
   },
   headline: {
-    prefix: "พัฒนา",
-    highlight1: "เว็บไซต์",
-    middle: "และ",
-    highlight2: "แอปพลิเคชัน",
-    suffix: "ที่ทรงพลังและทันสมัย",
+    prefix: "จ้างทำเว็บ",
+    highlight1: "ราคาถูกกว่าที่คิด",
+    middle: "",
+    highlight2: "คุณภาพสูงด้วย AI",
+    suffix: "",
   },
   description:
-    "Clean Code 1986 - ทีมนักพัฒนามืออาชีพพร้อมสร้างโซลูชันดิจิทัลที่ตอบโจทย์ธุรกิจของคุณ\nด้วย Next.js, React, React Native และเทคโนโลยีล่าสุด",
+    "ใช้ AI เขียนโค้ด + ควบคุมคุณภาพด้วย AI Skill & Clean Architecture\nส่งมอบเร็ว ราคาดี ทุกโปรเจคได้มาตรฐานระดับสากล",
   cta: {
     primary: {
-      text: "ดูผลงานของเรา",
-      href: "/portfolio",
+      text: "ปรึกษาฟรี",
+      href: "/contact",
     },
     secondary: {
-      text: "รับคำปรึกษา",
-      href: "/contact",
+      text: "ดูผลงาน",
+      href: "/portfolio",
     },
   },
   techSection: {
-    title: "เทคโนโลยีที่เราใช้",
+    title: "ขับเคลื่อนด้วย AI + เทคโนโลยีล่าสุด",
   },
 } as const;
 
