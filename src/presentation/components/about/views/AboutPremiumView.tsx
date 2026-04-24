@@ -2,9 +2,9 @@
 
 import { SITE } from "@/src/data/master/site";
 import type { AboutViewModel } from "@/src/presentation/presenters/about/AboutPresenter";
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 
 interface Props {
   viewModel: AboutViewModel;
@@ -33,29 +33,38 @@ export function AboutPremiumView({ viewModel }: Props) {
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-purple-400/10 dark:bg-purple-600/10 blur-[150px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center px-4 py-2 bg-indigo-100/50 dark:bg-indigo-900/30 backdrop-blur text-indigo-600 dark:text-indigo-400 rounded-full text-sm font-bold mb-6 border border-indigo-200 dark:border-indigo-800/50 shadow-sm">
-            <span className="mr-2 animate-wave inline-block">👋</span>
-            <span>ยินดีที่ได้รู้จัก</span>
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center px-4 py-2 bg-purple-100/50 dark:bg-purple-900/30 backdrop-blur text-purple-600 dark:text-purple-400 rounded-full text-sm font-bold mb-6 border border-purple-200 dark:border-purple-800/50 shadow-sm"
+          >
+            <span className="mr-2 animate-wave inline-block">🤖</span>
+            <span>AI-Powered Development</span>
           </motion.div>
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 tracking-tight">
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 tracking-tight"
+          >
             ทำความรู้จักกับเรา
           </motion.h1>
-          <motion.p variants={itemVariants} className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            เบื้องหลังโค้ดที่ทรงพลัง คือทีมนักพัฒนาที่มุ่งมั่นสร้างสรรค์นวัตกรรมเพื่อความสำเร็จของธุรกิจคุณ
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+          >
+            ใช้ AI เขียนโค้ด + ควบคุมคุณภาพด้วย Clean Architecture — ส่งมอบเร็ว
+            ราคาดี คุณภาพสูง
           </motion.p>
         </motion.div>
 
         {/* Company Story */}
-        <motion.div 
+        <motion.div
           className="relative bg-white/60 dark:bg-gray-800/40 backdrop-blur-xl rounded-[2.5rem] shadow-xl border border-gray-100 dark:border-gray-700/50 p-8 md:p-16 mb-24 overflow-hidden group"
           initial="hidden"
           whileInView="visible"
@@ -63,7 +72,7 @@ export function AboutPremiumView({ viewModel }: Props) {
           variants={containerVariants}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
             <motion.div variants={itemVariants}>
               <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6">
@@ -71,28 +80,52 @@ export function AboutPremiumView({ viewModel }: Props) {
               </h2>
               <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 <p>
-                  <span className="font-bold text-indigo-600 dark:text-indigo-400">Clean Code 1986</span> ก่อตั้งขึ้นจากแพสชันที่อยากเห็นซอฟต์แวร์ไทยก้าวไกลระดับโลก เราเชื่อว่า &quot;โค้ดที่ดี ไม่ใช่แค่ทำงานได้ แต่ต้องดูแลรักษาได้และพัฒนาต่อยอดได้ไม่รู้จบ&quot;
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                    Clean Code 1986
+                  </span>{" "}
+                  ก่อตั้งขึ้นจากแพสชันที่อยากเห็นซอฟต์แวร์ไทยก้าวไกลระดับโลก
+                  เราเชื่อว่า &quot;โค้ดที่ดี ไม่ใช่แค่ทำงานได้
+                  แต่ต้องดูแลรักษาได้และพัฒนาต่อยอดได้ไม่รู้จบ&quot;
                 </p>
                 <p>
-                  ทุกบรรทัดที่เราเขียน ถูกหล่อหลอมด้วยความใส่ใจและสถาปัตยกรรม (Architecture) ที่วางแผนมาอย่างรัดกุม เพื่อรับประกันว่า ไม่ว่าธุรกิจคุณจะสเกลไปไกลแค่ไหน ระบบของเราก็พร้อมรองรับเสมอ
+                  เราผสานพลังของ{" "}
+                  <span className="font-bold text-purple-600 dark:text-purple-400">
+                    AI (Artificial Intelligence)
+                  </span>{" "}
+                  เข้ากับ{" "}
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400">
+                    Clean Architecture
+                  </span>{" "}
+                  ที่วางแผนมาอย่างรัดกุม — AI เขียนโค้ด เราควบคุมคุณภาพ
+                  ประหยัดต้นทุน ส่งมอบเร็วกว่าเดิมหลายเท่า
                 </p>
                 <p>
-                  ด้วยประสบการณ์รวมในวงการกว่า 5 ปี เราไม่ได้เป็นแค่คนรับจ้างเขียนโค้ด แต่เราคือสะพานเชื่อมระหว่างคุณ...และอนาคต
+                  ด้วยประสบการณ์กว่า 5 ปี + AI-Powered Workflow
+                  เราไม่ได้เป็นแค่คนรับจ้างเขียนโค้ด
+                  แต่เราคือสะพานเชื่อมระหว่างคุณ...และอนาคต
                 </p>
               </div>
             </motion.div>
-            
-            <motion.div variants={itemVariants} className="relative flex items-center justify-center">
+
+            <motion.div
+              variants={itemVariants}
+              className="relative flex items-center justify-center"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 blur-3xl opacity-20 dark:opacity-40 animate-pulse" />
               <div className="relative w-full aspect-square max-w-[400px] bg-gradient-to-br from-blue-500 to-indigo-600 rounded-[3rem] rotate-3 hover:rotate-0 transition-all duration-500 shadow-2xl flex items-center justify-center border-8 border-white dark:border-gray-800">
-                <span className="text-9xl filter drop-shadow-xl animate-bounce" style={{ animationDuration: '3s' }}>💻</span>
+                <span
+                  className="text-9xl filter drop-shadow-xl animate-bounce"
+                  style={{ animationDuration: "3s" }}
+                >
+                  💻
+                </span>
               </div>
             </motion.div>
           </div>
         </motion.div>
 
         {/* Mission & Vision & Core Values */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
           initial="hidden"
           whileInView="visible"
@@ -100,12 +133,24 @@ export function AboutPremiumView({ viewModel }: Props) {
           variants={containerVariants}
         >
           {[
-            { icon: "🎯", title: "พันธกิจ (Mission)", desc: "สร้างสรรค์ซอฟต์แวร์คุณภาพระดับ Enterprise ที่ตอบโจทย์การใช้งานจริงและช่วยผลักดันยอดขายให้ลูกค้า" },
-            { icon: "👁️", title: "วิสัยทัศน์ (Vision)", desc: "เป็น Digital Agency อันดับหนึ่งในใจลูกค้า ที่ผู้ประกอบการนึกถึงเมื่อรันโปรเจคยากๆ และต้องการผลลัพธ์ที่จับต้องได้" },
-            { icon: "💎", title: "ค่านิยม (Core Values)", desc: "Code สะอาด, มุ่งเน้น Performance, ซื่อสัตย์โปร่งใส, และเรียนรู้เทคโนโลยีใหม่ๆ อยู่เสมอไม่มีวันหยุด" }
+            {
+              icon: "🎯",
+              title: "พันธกิจ (Mission)",
+              desc: "ใช้ AI พัฒนาซอฟต์แวร์คุณภาพระดับ Enterprise ในราคาที่เข้าถึงได้ ลูกค้าประหยัดต้นทุน 80%+",
+            },
+            {
+              icon: "👁️",
+              title: "วิสัยทัศน์ (Vision)",
+              desc: "เป็น Digital Agency อันดับหนึ่งสำหรับธุรกิจที่ต้องการเว็บคุณภาพสูง ราคาดี — AI-Powered + Human Expertise",
+            },
+            {
+              icon: "💎",
+              title: "ค่านิยม (Core Values)",
+              desc: "AI Code Generation + Clean Architecture Quality Control, ซื่อสัตย์โปร่งใส, ส่งมอบเร็ว ราคาดี",
+            },
           ].map((item, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               variants={itemVariants}
               whileHover={{ y: -8, scale: 1.02 }}
               className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-gray-700/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300"
@@ -124,7 +169,7 @@ export function AboutPremiumView({ viewModel }: Props) {
         </motion.div>
 
         {/* Why Choose Us */}
-        <motion.div 
+        <motion.div
           className="relative bg-black dark:bg-gray-900 rounded-[3rem] shadow-2xl p-8 md:p-16 mb-32 overflow-hidden text-white pattern-dots"
           initial="hidden"
           whileInView="visible"
@@ -134,26 +179,60 @@ export function AboutPremiumView({ viewModel }: Props) {
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-transparent to-purple-900/40" />
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-          <motion.div variants={itemVariants} className="relative z-10 text-center mb-16">
+          <motion.div
+            variants={itemVariants}
+            className="relative z-10 text-center mb-16"
+          >
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6">
               ทำไมเราถึงเหนือกว่า?
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              นี่คือสิ่งที่คุณจะได้รับเมื่อตัดสินใจร่วมงานกับทีม Clean Code 1986
+              AI-Powered Development + Clean Architecture — ประหยัดกว่าจ้างทีม
+              ส่งมอบเร็วกว่าเดิม
             </p>
           </motion.div>
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: "⚡", title: "Modern Tech Stack", description: "เราใช้เทคโนโลยีล้ำสมัยอย่าง Next.js 15, React, และ Supabase ล้ำที่สุดในตลาด" },
-              { icon: "🎨", title: "Premium UI/UX", description: "งานดีไซน์หรูหรา ใช้งานง่าย พร้อม Animation แบบ Micro-interactions ที่ไหลลื่น" },
-              { icon: "🚀", title: "Blazing Fast", description: "รีดแบนด์วิธให้เว็บโหลดไวติดจรวด โกยคะแนน Lighthouse ทะลุ 90+ ทุกหมวดหมู่" },
-              { icon: "🔒", title: "Enterprise Security", description: "ล็อกแน่นหนา ป้องกันการโจมตีทางไซเบอร์ พร้อมระบบจัดการสิทธิ์ขั้นสูง" },
-              { icon: "📱", title: "Fully Responsive", description: "แสดงผลรอดเด่นสวยงามบนทุกอุปกณ์ ตั้งแต่จอมือถือไปจนถึงจอ 4K ใหญ่ยักษ์" },
-              { icon: "💬", title: "Excellent Consulting", description: "มากกว่าคนทำระบบ เราให้คำปรึกษาทางธุรกิจและชี้แจงสถานะชัดเจนทุกสัปดาห์" },
+              {
+                icon: "🤖",
+                title: "AI-Powered Development",
+                description:
+                  "ใช้ AI Code Generation สร้างโค้ดคุณภาพสูง เร็วกว่าเขียนเองหลายเท่า",
+              },
+              {
+                icon: "�️",
+                title: "Clean Architecture",
+                description:
+                  "ทุกโปรเจคใช้ Clean Architecture Pattern — รองรับการขยายตัวในอนาคต",
+              },
+              {
+                icon: "�",
+                title: "Cost-Effective",
+                description:
+                  "ประหยัดต้นทุน 80%+ กว่าจ้างทีม Developer 3 คน เหมาะกับ SME และ Startup",
+              },
+              {
+                icon: "⚡",
+                title: "Blazing Fast Delivery",
+                description:
+                  "ส่งมอบเร็วกว่าเดิม 5 เท่า ด้วย AI Workflow + Human Quality Control",
+              },
+              {
+                icon: "�",
+                title: "Modern Tech Stack",
+                description:
+                  "Next.js 15, React, Supabase — เทคโนโลยีล้ำสมัยที่สุดในตลาด",
+              },
+              {
+                icon: "�",
+                title: "Premium Quality",
+                description:
+                  "AI Code + Human Review ผสานพลัง AI กับความเชี่ยวชาญของเรา",
+              },
             ].map((item, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 variants={itemVariants}
                 className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 backdrop-blur transition-colors"
               >
@@ -162,8 +241,12 @@ export function AboutPremiumView({ viewModel }: Props) {
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                    <h3 className="text-lg font-bold text-white mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -173,119 +256,151 @@ export function AboutPremiumView({ viewModel }: Props) {
 
         {/* Team Section */}
         <div className="mb-24 relative">
-          <motion.div 
+          <motion.div
             className="text-center mb-16 relative z-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
           >
-            <motion.h2 variants={itemVariants} className="text-sm font-bold tracking-widest text-indigo-600 dark:text-indigo-400 uppercase mb-3">
+            <motion.h2
+              variants={itemVariants}
+              className="text-sm font-bold tracking-widest text-indigo-600 dark:text-indigo-400 uppercase mb-3"
+            >
               The Digital Workforce
             </motion.h2>
-            <motion.h3 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 tracking-tight">
+            <motion.h3
+              variants={itemVariants}
+              className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 mb-6 tracking-tight"
+            >
               ขับเคลื่อนความสำเร็จด้วยทีมระดับแนวหน้า
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              เราผสานพลังสมองของ <b className="text-gray-900 dark:text-white">มนุษย์ (Human Expert)</b> เข้ากับความรวดเร็วของ <b className="text-indigo-600 dark:text-indigo-400">ปัญญาประดิษฐ์ (AI Agents)</b> เพื่อทลายทุกข้อจำกัดและเสกงานให้เสร็จสมบูรณ์ระดับเทพ ไวและเนียบกว่าใคร
+            <motion.p
+              variants={itemVariants}
+              className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"
+            >
+              เราผสานพลังสมองของ{" "}
+              <b className="text-gray-900 dark:text-white">
+                มนุษย์ (Human Expert)
+              </b>{" "}
+              เข้ากับความรวดเร็วของ{" "}
+              <b className="text-indigo-600 dark:text-indigo-400">
+                ปัญญาประดิษฐ์ (AI Agents)
+              </b>{" "}
+              เพื่อทลายทุกข้อจำกัดและเสกงานให้เสร็จสมบูรณ์ระดับเทพ
+              ไวและเนียบกว่าใคร
             </motion.p>
           </motion.div>
 
           {/* HUMAN LEADERSHIP */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 gap-8 relative z-10 mb-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
           >
-            {team.filter(m => m.id === "1").map((member) => (
-              <motion.div
-                key={member.id}
-                variants={itemVariants}
-                className="bg-gradient-to-br from-blue-600 to-indigo-900 dark:from-slate-800 dark:to-slate-900 rounded-[3rem] shadow-2xl overflow-hidden transform hover:-translate-y-2 transition-all duration-500 relative group border border-white/10 dark:border-gray-700/50"
-              >
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 to-fuchsia-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                <div className="flex flex-col lg:flex-row items-center p-8 md:p-16 gap-10 md:gap-16 relative z-10">
-                  <div className="flex-shrink-0 relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-8 border-white/10 shadow-2xl group-hover:border-white/30 transition-colors duration-500">
-                    <Image
-                      src={member.avatar}
-                      alt={member.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                      sizes="(max-width: 768px) 224px, 288px"
-                      priority
-                    />
+            {team
+              .filter((m) => m.id === "1")
+              .map((member) => (
+                <motion.div
+                  key={member.id}
+                  variants={itemVariants}
+                  className="bg-gradient-to-br from-blue-600 to-indigo-900 dark:from-slate-800 dark:to-slate-900 rounded-[3rem] shadow-2xl overflow-hidden transform hover:-translate-y-2 transition-all duration-500 relative group border border-white/10 dark:border-gray-700/50"
+                >
+                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 to-fuchsia-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  <div className="flex flex-col lg:flex-row items-center p-8 md:p-16 gap-10 md:gap-16 relative z-10">
+                    <div className="flex-shrink-0 relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-8 border-white/10 shadow-2xl group-hover:border-white/30 transition-colors duration-500">
+                      <Image
+                        src={member.avatar}
+                        alt={member.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                        sizes="(max-width: 768px) 224px, 288px"
+                        priority
+                      />
+                    </div>
+
+                    <div className="flex-1 text-center lg:text-left">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-cyan-200 text-sm font-bold tracking-widest mb-6 backdrop-blur-md border border-white/20">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                        </span>
+                        HUMAN LEADERSHIP
+                      </div>
+                      <h3 className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight">
+                        {member.name}
+                      </h3>
+                      <div className="text-cyan-300 font-semibold text-xl md:text-2xl mb-6">
+                        {member.role}
+                      </div>
+                      <p className="text-blue-100/90 text-lg md:text-xl leading-relaxed max-w-3xl mb-10 font-medium">
+                        {member.bio}
+                      </p>
+
+                      <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+                        {member.linkedinUrl && (
+                          <a
+                            href={member.linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-[#0077b5] rounded-xl text-white font-bold transition-all backdrop-blur hover:shadow-lg hover:shadow-[#0077b5]/30 hover:-translate-y-1"
+                          >
+                            LinkedIn
+                          </a>
+                        )}
+                        {member.githubUrl && (
+                          <a
+                            href={member.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-black rounded-xl text-white font-bold transition-all backdrop-blur hover:shadow-lg hover:shadow-black/30 hover:-translate-y-1"
+                          >
+                            GitHub
+                          </a>
+                        )}
+
+                        {member.hasCV && (
+                          <Link
+                            href={`/about/cv/${member.id}`}
+                            className="group flex items-center gap-3 px-8 py-3 bg-white text-indigo-900 hover:bg-gray-100 rounded-xl font-extrabold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                          >
+                            Read Full CV
+                          </Link>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  
-                  <div className="flex-1 text-center lg:text-left">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-cyan-200 text-sm font-bold tracking-widest mb-6 backdrop-blur-md border border-white/20">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-                      </span>
-                      HUMAN LEADERSHIP 
-                    </div>
-                    <h3 className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight">
-                      {member.name}
-                    </h3>
-                    <div className="text-cyan-300 font-semibold text-xl md:text-2xl mb-6">
-                      {member.role}
-                    </div>
-                    <p className="text-blue-100/90 text-lg md:text-xl leading-relaxed max-w-3xl mb-10 font-medium">
-                      {member.bio}
-                    </p>
-                    
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                      {member.linkedinUrl && (
-                        <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-[#0077b5] rounded-xl text-white font-bold transition-all backdrop-blur hover:shadow-lg hover:shadow-[#0077b5]/30 hover:-translate-y-1">
-                          LinkedIn
-                        </a>
-                      )}
-                      {member.githubUrl && (
-                        <a href={member.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-black rounded-xl text-white font-bold transition-all backdrop-blur hover:shadow-lg hover:shadow-black/30 hover:-translate-y-1">
-                          GitHub
-                        </a>
-                      )}
-                      
-                      {member.hasCV && (
-                        <Link 
-                          href={`/about/cv/${member.id}`}
-                          className="group flex items-center gap-3 px-8 py-3 bg-white text-indigo-900 hover:bg-gray-100 rounded-xl font-extrabold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-                        >
-                           Read Full CV
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
           </motion.div>
 
           {/* AI AGENTS GRID */}
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 relative z-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={containerVariants}
           >
-            {team.filter(m => m.id !== "1").map((member) => (
-              <motion.div
-                key={member.id}
-                variants={itemVariants}
-                whileHover={{ y: -8 }}
-                className="group relative bg-white/70 dark:bg-gray-800/60 backdrop-blur-xl border border-gray-100 dark:border-gray-700/50 rounded-3xl p-8 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.2)] transition-all duration-300 flex flex-col h-full"
-              >
-                {/* Decorative background glow for AI */}
-                <div className="absolute top-0 right-0 -mt-20 -mr-20 w-48 h-48 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
-                
-                <div className="relative z-10 flex-1 flex flex-col">
-                   <div className="flex justify-between items-start mb-6">
-                     <div className="relative w-24 h-24 rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white dark:border-gray-700 transform group-hover:rotate-3 transition-transform duration-300">
+            {team
+              .filter((m) => m.id !== "1")
+              .map((member) => (
+                <motion.div
+                  key={member.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -8 }}
+                  className="group relative bg-white/70 dark:bg-gray-800/60 backdrop-blur-xl border border-gray-100 dark:border-gray-700/50 rounded-3xl p-8 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.2)] transition-all duration-300 flex flex-col h-full"
+                >
+                  {/* Decorative background glow for AI */}
+                  <div className="absolute top-0 right-0 -mt-20 -mr-20 w-48 h-48 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 blur-3xl rounded-full group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
+
+                  <div className="relative z-10 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="relative w-24 h-24 rounded-[1.5rem] overflow-hidden shadow-lg border-2 border-white dark:border-gray-700 transform group-hover:rotate-3 transition-transform duration-300">
                         <Image
                           src={member.avatar}
                           alt={member.name}
@@ -293,42 +408,42 @@ export function AboutPremiumView({ viewModel }: Props) {
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           sizes="96px"
                         />
-                     </div>
-                     <span className="px-3 py-1 text-xs font-black uppercase tracking-wider bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full border border-indigo-200 dark:border-indigo-800/50">
-                       AI AGENT ✨
-                     </span>
-                   </div>
-
-                  <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {member.name}
-                  </h3>
-                  <div className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 mb-4 pb-4 border-b border-gray-100 dark:border-gray-700/50">
-                    {member.role}
-                  </div>
-
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium flex-1 mb-6">
-                    {member.bio}
-                  </p>
-
-                  {member.hasCV && (
-                    <div className="mt-auto">
-                      <Link 
-                        href={`/about/cv/${member.id}`}
-                        className="inline-flex items-center justify-center w-full gap-2 px-6 py-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-xl font-bold transition-colors"
-                      >
-                         Read Full CV
-                      </Link>
+                      </div>
+                      <span className="px-3 py-1 text-xs font-black uppercase tracking-wider bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full border border-indigo-200 dark:border-indigo-800/50">
+                        AI AGENT ✨
+                      </span>
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+
+                    <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                      {member.name}
+                    </h3>
+                    <div className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 mb-4 pb-4 border-b border-gray-100 dark:border-gray-700/50">
+                      {member.role}
+                    </div>
+
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium flex-1 mb-6">
+                      {member.bio}
+                    </p>
+
+                    {member.hasCV && (
+                      <div className="mt-auto">
+                        <Link
+                          href={`/about/cv/${member.id}`}
+                          className="inline-flex items-center justify-center w-full gap-2 px-6 py-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-xl font-bold transition-colors"
+                        >
+                          Read Full CV
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
           </motion.div>
         </div>
 
         {/* Global CTA Highlight */}
         {SITE.hiring.isHiring && (
-          <motion.div 
+          <motion.div
             className="relative rounded-[3rem] shadow-xl overflow-hidden mt-32"
             initial="hidden"
             whileInView="visible"
@@ -337,13 +452,14 @@ export function AboutPremiumView({ viewModel }: Props) {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 animate-gradient-x" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay" />
-            
+
             <div className="relative p-12 md:p-20 text-center text-white">
               <h2 className="text-4xl md:text-5xl font-black mb-6 drop-shadow-lg">
                 อยากเป็นส่วนหนึ่งของการสร้างสุดยอดเทคโนโลยีไหม?
               </h2>
               <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto drop-shadow font-medium">
-                เรากำลังเปิดรับคนเก่งๆ ไฟแรง ที่หลงใหลในการเขียนโค้ดและอยากเติบโตไปพร้อมกับเราแบบก้าวกระโดด
+                เรากำลังเปิดรับคนเก่งๆ ไฟแรง
+                ที่หลงใหลในการเขียนโค้ดและอยากเติบโตไปพร้อมกับเราแบบก้าวกระโดด
               </p>
               <div className="flex justify-center">
                 <Link
