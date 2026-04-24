@@ -1,10 +1,10 @@
 "use client";
 
-import type { ServicesViewModel } from "@/src/presentation/presenters/services/ServicesPresenter";
-import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
-import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
 import { RetroBadge } from "@/src/presentation/components/ui/retro/RetroBadge";
 import { RetroButton } from "@/src/presentation/components/ui/retro/RetroButton";
+import { RetroCard } from "@/src/presentation/components/ui/retro/RetroCard";
+import { RetroHeading } from "@/src/presentation/components/ui/retro/RetroHeading";
+import type { ServicesViewModel } from "@/src/presentation/presenters/services/ServicesPresenter";
 
 interface Props {
   viewModel: ServicesViewModel;
@@ -14,34 +14,52 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
   const { services } = viewModel;
 
   const processSteps = [
-    { step: "01", title: "ปรึกษา & วางแผน", desc: "รับฟังความต้องการและวิเคราะห์โจทย์ธุรกิจอย่างละเอียด" },
-    { step: "02", title: "ออกแบบ & สถาปัตยกรรม", desc: "วางโครงสร้างระบบ (Architecture) และออกแบบ UI/UX" },
-    { step: "03", title: "พัฒนา & ทดสอบ", desc: "เขียนโค้ดด้วยมาตรฐานสูงสุด และทดสอบระบบอย่างเข้มงวด" },
-    { step: "04", title: "ส่งมอบ & สนับสนุน", desc: "เปิดตัวใช้งานจริง พร้อมดูแลรักษาระบบหลังการขาย" },
+    {
+      step: "01",
+      title: "ปรึกษา & วางแผน",
+      desc: "รับฟังความต้องการและออกแบบ AI Prompt Strategy",
+    },
+    {
+      step: "02",
+      title: "AI + สถาปัตยกรรม",
+      desc: "ใช้ AI สร้างโค้ด + ควบคุมคุณภาพด้วย Clean Architecture",
+    },
+    {
+      step: "03",
+      title: "พัฒนา & ทดสอบ",
+      desc: "AI Code Generation + Review ด้วย AI Skill ที่เราสร้างไว้",
+    },
+    {
+      step: "04",
+      title: "ส่งมอบ & สนับสนุน",
+      desc: "ส่งมอบเร็ว ราคาดี พร้อมดูแลหลังการขาย",
+    },
   ];
 
   return (
     <div className="flex flex-col gap-16 p-4 sm:p-8 lg:p-12 pb-32">
-      
       {/* HEADER */}
       <div>
         <RetroHeading bg="magenta" withStroke>
-          SERVICES <span className="text-[#00FFFF] border-y-8 border-black leading-[1.2] pb-2 font-sans">&amp;</span> EXPERTISE
+          AI-POWERED{" "}
+          <span className="text-[#00FFFF] border-y-8 border-black leading-[1.2] pb-2 font-sans">
+            SERVICES
+          </span>
         </RetroHeading>
         <p className="mt-8 text-xl sm:text-2xl font-black uppercase max-w-3xl">
-          เราให้บริการพัฒนาซอฟต์แวร์ครบวงจร ด้วยทีมนักพัฒนามืออาชีพและเทคโนโลยีระดับสากล เพื่อผลลัพธ์ที่สมบูรณ์แบบที่สุด
+          ใช้ AI พัฒนา + Clean Architecture — ส่งมอบเร็ว ราคาดี คุณภาพสูง
         </p>
       </div>
 
       {/* SERVICES GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {services.map((service, i) => (
-          <RetroCard 
-            key={service.id} 
-            hoverEffect 
-            shadowSize="lg" 
-            borderSize="lg" 
-            className={`flex flex-col p-8 sm:p-10 ${i % 2 !== 0 ? 'bg-[#00FFFF]' : 'bg-white'}`}
+          <RetroCard
+            key={service.id}
+            hoverEffect
+            shadowSize="lg"
+            borderSize="lg"
+            className={`flex flex-col p-8 sm:p-10 ${i % 2 !== 0 ? "bg-[#00FFFF]" : "bg-white"}`}
           >
             {/* Header: Icon & Category */}
             <div className="flex items-center justify-between mb-8 pb-4 border-b-8 border-black">
@@ -69,7 +87,9 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
               <ul className="space-y-3 font-bold">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="text-[#39FF14] text-xl mr-3 font-black">▶</span>
+                    <span className="text-[#39FF14] text-xl mr-3 font-black">
+                      ▶
+                    </span>
                     {feature}
                   </li>
                 ))}
@@ -87,7 +107,10 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
                     {service.pricingInfo}
                   </div>
                 </div>
-                <RetroButton href={`/contact?service=${encodeURIComponent(service.title)}`} variant="primary">
+                <RetroButton
+                  href={`/contact?service=${encodeURIComponent(service.title)}`}
+                  variant="primary"
+                >
                   สอบถาม
                 </RetroButton>
               </div>
@@ -99,7 +122,10 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
       {/* PROCESS SECTION */}
       <div className="mt-12 bg-[#39FF14] border-8 border-black p-8 sm:p-16 shadow-[16px_16px_0_0_rgba(0,0,0,1)]">
         <div className="text-center mb-16">
-          <RetroHeading bg="white" className="border-b-8 border-t-8 border-black">
+          <RetroHeading
+            bg="white"
+            className="border-b-8 border-t-8 border-black"
+          >
             ขั้นตอนการทำงาน
           </RetroHeading>
           <p className="mt-8 text-xl font-bold uppercase max-w-2xl mx-auto tracking-widest bg-black text-[#39FF14] px-4 py-2">
@@ -109,7 +135,10 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {processSteps.map((item) => (
-            <div key={item.step} className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex flex-col relative group hover:-translate-y-2 transition-transform">
+            <div
+              key={item.step}
+              className="bg-white border-4 border-black p-8 shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex flex-col relative group hover:-translate-y-2 transition-transform"
+            >
               <div className="absolute -top-6 -right-6 text-5xl font-black text-[#FF00FF] bg-black text-white border-4 border-black px-4 py-2 transform rotate-6 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
                 {item.step}
               </div>
@@ -125,23 +154,27 @@ export function ServicesRetroTechMagazineView({ viewModel }: Props) {
       </div>
 
       {/* CALL TO ACTION */}
-      <RetroCard borderSize="lg" shadowSize="lg" className="bg-black text-white p-8 sm:p-16 text-center mt-12 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]">
+      <RetroCard
+        borderSize="lg"
+        shadowSize="lg"
+        className="bg-black text-white p-8 sm:p-16 text-center mt-12 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"
+      >
         <h2 className="text-4xl sm:text-6xl font-black mb-8 border-y-8 border-[#39FF14] py-8 text-[#00FFFF] uppercase">
-          พร้อมเริ่มต้นความสำเร็จแล้วหรือยัง?
+          พร้อมจ้างทำเว็บ ราคาดีหรือยัง?
         </h2>
         <p className="text-xl font-bold mb-12 max-w-2xl mx-auto uppercase">
-          ปรึกษาฟรี! ไม่มีค่าใช้จ่าย ทีมงานผู้เชี่ยวชาญของเราพร้อมที่จะเปลี่ยนไอเดียของคุณให้กลายเป็นระบบจริงที่ทรงพลัง
+          ปรึกษาฟรี ไม่มีค่าใช้จ่าย — AI-Powered Development ส่งมอบเร็ว
+          คุณภาพสูง
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <RetroButton href="/contact" variant="accent">
-            จองคิวรับคำปรึกษาทันที
+            ปรึกษาฟรีเลย
           </RetroButton>
-          <RetroButton href="/portfolio" variant="white">
-            ดูผลงานที่ผ่านมา
+          <RetroButton href="/promo" variant="white">
+            ดูราคาบริการ
           </RetroButton>
         </div>
       </RetroCard>
-
     </div>
   );
 }

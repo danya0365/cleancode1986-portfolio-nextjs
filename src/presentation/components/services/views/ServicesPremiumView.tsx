@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import type { ServicesViewModel } from "@/src/presentation/presenters/services/ServicesPresenter";
 import { motion, type Variants } from "framer-motion";
+import Link from "next/link";
 
 interface Props {
   viewModel: ServicesViewModel;
@@ -31,29 +31,37 @@ export function ServicesPremiumView({ viewModel }: Props) {
       <div className="absolute bottom-1/3 left-0 w-[600px] h-[600px] bg-purple-400/10 dark:bg-purple-600/10 blur-[150px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center px-4 py-2 bg-blue-100/50 dark:bg-blue-900/30 backdrop-blur text-blue-600 dark:text-blue-400 rounded-full text-sm font-bold mb-6 border border-blue-200 dark:border-blue-800/50 shadow-sm">
-            <span className="mr-2">🚀</span>
-            <span>ยกระดับธุรกิจของคุณ</span>
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center px-4 py-2 bg-purple-100/50 dark:bg-purple-900/30 backdrop-blur text-purple-600 dark:text-purple-400 rounded-full text-sm font-bold mb-6 border border-purple-200 dark:border-purple-800/50 shadow-sm"
+          >
+            <span className="mr-2">🤖</span>
+            <span>AI-Powered Services</span>
           </motion.div>
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-            บริการของเรา
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight"
+          >
+            บริการ AI-Powered
           </motion.h1>
-          <motion.p variants={itemVariants} className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            เราให้บริการพัฒนาซอฟต์แวร์ครบวงจร ด้วยทีมนักพัฒนามืออาชีพและเทคโนโลยีระดับสากล เพื่อผลลัพธ์ที่สมบูรณ์แบบที่สุด
+          <motion.p
+            variants={itemVariants}
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+          >
+            ใช้ AI พัฒนา + Clean Architecture — ส่งมอบเร็ว ราคาดี คุณภาพสูง
           </motion.p>
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24"
           initial="hidden"
           whileInView="visible"
@@ -71,7 +79,7 @@ export function ServicesPremiumView({ viewModel }: Props) {
             >
               {/* Card Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="relative z-10 flex flex-col h-full">
                 {/* Header: Icon & Category */}
                 <div className="flex items-center justify-between mb-8">
@@ -136,7 +144,7 @@ export function ServicesPremiumView({ viewModel }: Props) {
         </motion.div>
 
         {/* Process Section */}
-        <motion.div 
+        <motion.div
           className="relative bg-black dark:bg-gray-900 rounded-[2.5rem] shadow-2xl p-8 md:p-16 mb-24 overflow-hidden text-white"
           initial="hidden"
           whileInView="visible"
@@ -147,7 +155,10 @@ export function ServicesPremiumView({ viewModel }: Props) {
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none mix-blend-overlay"></div>
           <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-transparent to-purple-900/40"></div>
 
-          <motion.div variants={itemVariants} className="relative z-10 text-center mb-16">
+          <motion.div
+            variants={itemVariants}
+            className="relative z-10 text-center mb-16"
+          >
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6">
               ขั้นตอนการทำงานของเรา
             </h2>
@@ -158,13 +169,29 @@ export function ServicesPremiumView({ viewModel }: Props) {
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
             {[
-              { step: "01", title: "ปรึกษา & วางแผน", desc: "รับฟังความต้องการและวิเคราะห์โจทย์ธุรกิจอย่างละเอียด" },
-              { step: "02", title: "ออกแบบ & สถาปัตยกรรม", desc: "วางโครงสร้างระบบ (Architecture) และออกแบบ UI/UX" },
-              { step: "03", title: "พัฒนา & ทดสอบ", desc: "เขียนโค้ดด้วยมาตรฐานสูงสุด และทดสอบระบบอย่างเข้มงวด" },
-              { step: "04", title: "ส่งมอบ & สนับสนุน", desc: "เปิดตัวใช้งานจริง พร้อมดูแลรักษาระบบหลังการขาย" },
+              {
+                step: "01",
+                title: "ปรึกษา & วางแผน",
+                desc: "รับฟังความต้องการและออกแบบ AI Prompt Strategy",
+              },
+              {
+                step: "02",
+                title: "AI + สถาปัตยกรรม",
+                desc: "ใช้ AI สร้างโค้ด + ควบคุมคุณภาพด้วย Clean Architecture",
+              },
+              {
+                step: "03",
+                title: "พัฒนา & ทดสอบ",
+                desc: "AI Code Generation + Review ด้วย AI Skill ที่เราสร้างไว้",
+              },
+              {
+                step: "04",
+                title: "ส่งมอบ & สนับสนุน",
+                desc: "ส่งมอบเร็ว ราคาดี พร้อมดูแลหลังการขาย",
+              },
             ].map((item, index) => (
-              <motion.div 
-                key={item.step} 
+              <motion.div
+                key={item.step}
                 variants={itemVariants}
                 className="relative text-center group"
               >
@@ -172,7 +199,7 @@ export function ServicesPremiumView({ viewModel }: Props) {
                 {index !== 3 && (
                   <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-px bg-gradient-to-r from-blue-500/50 to-transparent" />
                 )}
-                
+
                 <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gray-800/50 backdrop-blur border border-gray-700/50 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600/20 group-hover:border-blue-500/50 transition-all duration-500">
                   <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-purple-400">
                     {item.step}
@@ -190,7 +217,7 @@ export function ServicesPremiumView({ viewModel }: Props) {
         </motion.div>
 
         {/* Powerful CTA */}
-        <motion.div 
+        <motion.div
           className="relative rounded-3xl shadow-xl overflow-hidden"
           initial="hidden"
           whileInView="visible"
@@ -199,31 +226,31 @@ export function ServicesPremiumView({ viewModel }: Props) {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 animate-gradient-x" />
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay" />
-          
+
           <div className="relative p-12 md:p-20 text-center text-white">
             <h2 className="text-4xl md:text-5xl font-black mb-6 drop-shadow-lg">
-              พร้อมเริ่มต้นความสำเร็จแล้วหรือยัง?
+              พร้อมจ้างทำเว็บ ราคาดีหรือยัง?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto drop-shadow">
-              ปรึกษาฟรี! ไม่มีค่าใช้จ่าย ทีมงานผู้เชี่ยวชาญของเราพร้อมที่จะเปลี่ยนไอเดียของคุณให้กลายเป็นระบบจริงที่ทรงพลัง
+              ปรึกษาฟรี ไม่มีค่าใช้จ่าย — AI-Powered Development ส่งมอบเร็ว
+              คุณภาพสูง
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
                 className="px-10 py-5 bg-white text-blue-700 hover:bg-gray-50 font-extrabold rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all hover:-translate-y-1"
               >
-                จองคิวรับคำปรึกษาทันที
+                ปรึกษาฟรีเลย
               </Link>
               <Link
-                href="/portfolio"
+                href="/promo"
                 className="px-10 py-5 bg-black/20 backdrop-blur-md text-white hover:bg-black/30 font-bold rounded-2xl border border-white/20 transition-all hover:border-white/40"
               >
-                ดูผลงานที่ผ่านมา
+                ดูราคาบริการ
               </Link>
             </div>
           </div>
         </motion.div>
-
       </div>
     </div>
   );
